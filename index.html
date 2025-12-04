@@ -52,27 +52,47 @@ header {
     top: 0;
     z-index: 1000;
 }
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
 header h1 {
     margin: 0;
     font-size: 2rem;
     letter-spacing: 2px;
 }
+
 header .controls {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .social-icons {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .social-icons a {
     color: #fff;
     font-size: 1.2rem;
     transition: color 0.3s;
 }
+
 .social-icons a:hover { color: #000; }
+
 .search-bar input {
     padding: 6px 10px;
     border-radius: 4px;
@@ -117,9 +137,7 @@ header .controls {
 }
 .btn-x { background-color: #1DA1F2; }
 .btn-youtube { background-color: #FF0000; }
-.btn-facebook {
-    background-color: #1877F2;
-}
+.btn-facebook { background-color: #1877F2; }
 .social-buttons a:hover { transform: scale(1.1); }
 .youtube-subscribe { margin-top: 15px; }
 
@@ -200,7 +218,12 @@ footer {
 
 <!-- Header -->
 <header>
-    <h1>Tr3vN0x Video Hub</h1>
+    <div class="logo-area">
+        <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=XIwaMHEvv1eAbkWoFnWt7w&oh=00_AflHLc8jtSZHL2A_EtjUjgJUGhzUazmZHyba7GS1p0V7AQ&oe=6937C7C5" 
+             alt="Logo" class="site-logo">
+        <h1>Tr3vN0x Video Hub</h1>
+    </div>
+
     <div class="controls">
         <div class="social-icons">
             <a href="https://x.com/@Tr3vN0x" target="_blank"><i class="fab fa-twitter"></i></a>
