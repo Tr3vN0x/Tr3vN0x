@@ -1,123 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Tr3vN0x - Video Service</title>
 
-<!-- Favicon -->
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg">
+<!-- Favicon (your Facebook image) -->
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=XIwaMHEvv1eAbkWoFnWt7w&oh=00_AflHLc8jtSZHL2A_EtjUjgJUGhzUazmZHyba7GS1p0V7AQ&oe=6937C7C5">
 
-<!-- Font Awesome -->
+<!-- Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
-/* === Base Styles === */
-:root {
-    --red: #e50914;
-    --fbblue: #1877F2;
-    --bg: #141414;
-    --card: #1c1c1c;
-    --muted: #bbb;
-}
-body, html {margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:#fff;height:100%;}
-a{text-decoration:none;color:inherit;}
+/* ===== Base ===== */
+:root { --red: #e50914; --fbblue: #1877F2; --bg: #141414; --card: #1c1c1c; --muted: #bbb; }
+html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff}
 
 /* Loader */
-#loader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;}
-#loader .spinner{border:6px solid #333;border-top:6px solid var(--red);border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;}
+#loader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999}
+#loader .spinner{border:6px solid #333;border-top:6px solid var(--red);border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite}
 @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
 /* Header */
-header{background:var(--red);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:1000;}
-.logo-area{display:flex;align-items:center;gap:12px;}
-.site-logo{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid #fff;}
-header h1{margin:0;font-size:1.6rem;letter-spacing:1px;}
-.controls{display:flex;align-items:center;gap:15px;}
-.social-icons{display:flex;align-items:center;gap:10px;}
-.social-icons a{color:#fff;font-size:1.2rem;transition:color .25s;}
-.social-icons a:hover{color:#000;}
-.search-bar input{padding:6px 10px;border-radius:4px;border:none;font-size:1rem;}
+header{background:var(--red);padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:1000}
+.logo-area{display:flex;align-items:center;gap:12px}
+.site-logo{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+header h1{margin:0;font-size:1.6rem;letter-spacing:1px}
 
-/* Featured Section */
-.featured{position:relative;margin-bottom:20px;}
-.featured img{width:100%;border-radius:10px;max-height:400px;object-fit:cover;}
-.featured h2{position:absolute;bottom:20px;left:30px;font-size:2rem;background:rgba(0,0,0,.45);padding:10px 20px;border-radius:5px;}
+/* Controls */
+.controls{display:flex;align-items:center;gap:15px}
+.social-icons{display:flex;align-items:center;gap:10px}
+.social-icons a{color:#fff;font-size:1.2rem;transition:color .25s}
+.social-icons a:hover{color:#000}
+.search-bar input{padding:6px 10px;border-radius:4px;border:none;font-size:1rem}
 
-/* Follow Section */
-.follow-section{text-align:center;margin:30px 0;}
-.social-buttons a{display:inline-block;margin:0 10px;padding:10px 20px;color:#fff;border-radius:6px;text-decoration:none;transition:transform .2s;}
-.btn-x{background:#1DA1F2;}
-.btn-youtube{background:#FF0000;}
-.btn-facebook{background:var(--fbblue);}
-.social-buttons a:hover{transform:scale(1.05);}
+/* Follow/Subscribe */
+.follow-section{text-align:center;margin:30px 0}
+.social-buttons a{display:inline-block;margin:0 10px;padding:10px 20px;color:#fff;border-radius:6px;text-decoration:none;transition:transform .2s}
+.btn-x{background:#1DA1F2}
+.btn-youtube{background:#FF0000}
+.btn-facebook{background:var(--fbblue)}
+.social-buttons a:hover{transform:scale(1.05)}
 
-/* Categories */
-.category{margin-bottom:40px;}
-.category h2{margin:0 0 10px 20px;font-size:1.25rem;color:var(--red);}
-.video-row{display:flex;gap:15px;overflow-x:auto;padding-left:20px;}
-.video-row::-webkit-scrollbar{height:8px;}
-.video-row::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px;}
+/* Featured */
+.featured{position:relative;margin-bottom:20px}
+.featured img{width:100%;border-radius:10px;max-height:400px;object-fit:cover}
+.featured h2{position:absolute;bottom:20px;left:30px;font-size:2rem;background:rgba(0,0,0,.45);padding:10px 20px;border-radius:5px}
 
-/* Video Cards */
-.video-card{min-width:200px;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s;background:var(--card);flex-shrink:0;}
-.video-card:hover{transform:scale(1.05);box-shadow:0 10px 20px rgba(255,0,0,.25);}
-.thumbnail{width:100%;display:block;border-radius:10px;}
-.video-info{position:absolute;bottom:0;left:0;right:0;background:rgba(20,20,20,.85);padding:10px;text-align:center;opacity:0;transition:opacity .25s;}
-.video-card:hover .video-info{opacity:1;}
-.video-info h3{margin:0;font-size:1rem;color:var(--red);}
-.video-info p{margin:5px 0 0 0;font-size:.85rem;color:#bbb;}
+/* Video rows */
+.category{margin-bottom:40px}
+.category h2{margin:0 0 10px 20px;font-size:1.25rem;color:var(--red)}
+.video-row{display:flex;gap:15px;overflow-x:auto;padding-left:20px}
+.video-row::-webkit-scrollbar{height:8px}
+.video-row::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
+
+/* Cards */
+.video-card{min-width:200px;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s;background:var(--card);flex-shrink:0}
+.video-card:hover{transform:scale(1.05);box-shadow:0 10px 20px rgba(255,0,0,.25)}
+.thumbnail{width:100%;display:block;border-radius:10px}
+.video-info{position:absolute;bottom:0;left:0;right:0;background:rgba(20,20,20,.85);padding:10px;text-align:center;opacity:0;transition:opacity .25s}
+.video-card:hover .video-info{opacity:1}
+.video-info h3{margin:0;font-size:1rem;color:var(--red)}
+.video-info p{margin:5px 0 0 0;font-size:.85rem;color:#bbb}
 
 /* Footer */
-footer{background:var(--card);color:var(--muted);text-align:center;padding:20px;font-size:.9rem;}
+footer{background:var(--card);color:var(--muted);text-align:center;padding:20px;font-size:.9rem}
 
 /* Mobile */
-@media(max-width:768px){.video-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding-left:0;}header h1{font-size:1.2rem;}}
+@media(max-width:768px){.video-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding-left:0}header h1{font-size:1.2rem}}
 
-/* Floating Auth Button */
-#floating-auth{position:fixed;right:18px;top:18px;z-index:6000;background:var(--red);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .15s;}
-#floating-auth:hover{transform:translateY(-3px);}
-#floating-auth .fa-user{font-size:1rem;}
+/* ===== Floating Auth Button (RED) ===== */
+#floating-auth {
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:6000;
+  background:var(--red);
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,.4);
+  transition:transform .15s;
+}
+#floating-auth:hover{transform:translateY(-3px)}
+#floating-auth .fa-user{font-size:1rem}
 
-/* User Bubble */
-#user-bubble{position:fixed;right:18px;top:58px;z-index:6000;background:#222;padding:8px 10px;border-radius:8px;color:#fff;border:1px solid rgba(255,255,255,.04);display:none;}
-#user-bubble.show{display:block;}
-#user-bubble .name{font-weight:600;margin-right:8px;}
-#user-bubble button{background:transparent;border:1px solid rgba(255,255,255,.06);color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer;}
+/* ===== Auth Modal / Forms ===== */
+.auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:7000}
+.auth-box{background:var(--card);padding:22px;width:360px;border-radius:10px;box-shadow:0 0 30px rgba(255,0,0,.12);position:relative;color:#fff}
+.close-btn{position:absolute;right:14px;top:8px;cursor:pointer;font-size:1.6rem}
+.tabs{display:flex;margin-bottom:12px}
+.tab{flex:1;padding:9px;background:#333;border:none;cursor:pointer;color:#fff;border-radius:6px 6px 0 0}
+.tab.active{background:var(--red)}
+.form{display:none}
+.form.active{display:block}
+.form h2{margin:6px 0 12px 0}
+.form label{display:block;margin:8px 0 6px 0;font-size:.9rem;color:#ddd}
+.form input[type="text"], .form input[type="email"], .form input[type="password"]{width:100%;padding:10px;border-radius:6px;border:none;background:#222;color:#fff}
+.password-field{display:flex;align-items:center;background:#333;border-radius:6px;overflow:hidden}
+.password-field input{flex:1;padding:10px;border:none;background:transparent;color:#fff}
+.toggle-pass{padding:10px;cursor:pointer;user-select:none}
+.action-btn{width:100%;margin-top:14px;padding:12px;border:none;border-radius:6px;background:var(--red);color:#fff;font-size:1rem;cursor:pointer}
 
-/* Auth Modal */
-.auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:7000;}
-.auth-box{background:var(--card);padding:22px;width:400px;border-radius:10px;box-shadow:0 0 30px rgba(255,0,0,.12);position:relative;color:#fff;}
-.close-btn{position:absolute;right:14px;top:8px;cursor:pointer;font-size:1.6rem;}
-.tabs{display:flex;margin-bottom:12px;}
-.tab{flex:1;padding:9px;background:#333;border:none;cursor:pointer;color:#fff;border-radius:6px 6px 0 0;}
-.tab.active{background:var(--red);}
-.form{display:none;}
-.form.active{display:block;}
-.form h2{margin:6px 0 12px 0;}
-.form label{display:block;margin:8px 0 6px 0;font-size:.9rem;color:#ddd;}
-.form input[type="text"],.form input[type="email"],.form input[type="password"]{width:100%;padding:10px;border-radius:6px;border:none;background:#222;color:#fff;}
-.password-field{display:flex;align-items:center;background:#333;border-radius:6px;overflow:hidden;}
-.password-field input{flex:1;padding:10px;border:none;background:transparent;color:#fff;}
-.toggle-pass{padding:10px;cursor:pointer;user-select:none;}
-.action-btn{width:100%;margin-top:14px;padding:12px;border:none;border-radius:6px;background:var(--red);color:#fff;font-size:1rem;cursor:pointer;}
-
-/* Profile Tab */
-#profile-pic{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-bottom:10px;}
-#profile-tab-content{display:flex;flex-direction:column;align-items:center;gap:10px;}
-#profile-tab-content input[type=file]{padding:4px;}
-#followers-count{color:#bbb;font-size:.9rem;}
-
-/* Chat Tab */
-#chat-box{background:#222;width:100%;height:250px;border-radius:8px;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px;}
-#chat-input{width:calc(100% - 100px);padding:8px;border-radius:6px;border:none;background:#333;color:#fff;}
-#chat-send{width:80px;padding:8px;border-radius:6px;border:none;background:var(--red);color:#fff;cursor:pointer;}
-.chat-message{display:flex;align-items:center;gap:6px;}
-.chat-message img{width:32px;height:32px;border-radius:50%;object-fit:cover;}
-.chat-message .msg-content{display:flex;flex-direction:column;}
-.chat-message .msg-content .msg-user{font-weight:600;color:var(--red);}
-.chat-message .msg-content .msg-text{font-size:.9rem;color:#bbb;}
-.chat-message .msg-content .msg-time{font-size:.7rem;color:#888;}
+/* small controls for logged-in user */
+#user-bubble{position:fixed;right:18px;top:58px;z-index:6000;background:#222;padding:8px 10px;border-radius:8px;color:#fff;border:1px solid rgba(255,255,255,.04);display:none}
+#user-bubble.show{display:block}
+#user-bubble .name{font-weight:600;margin-right:8px}
+#user-bubble button{background:transparent;border:1px solid rgba(255,255,255,.06);color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -128,114 +122,108 @@ footer{background:var(--card);color:var(--muted);text-align:center;padding:20px;
 <!-- Header -->
 <header>
   <div class="logo-area">
-    <img class="site-logo" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="Logo">
+    <img class="site-logo" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=XIwaMHEvv1eAbkWoFnWt7w&oh=00_AflHLc8jtSZHL2A_EtjUjgJUGhzUazmZHyba7GS1p0V7AQ&oe=6937C7C5" alt="Logo">
     <h1>Tr3vN0x Video Hub</h1>
   </div>
+
   <div class="controls">
     <div class="social-icons">
-      <a href="https://x.com/@Tr3vN0x" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://youtube.com/@Tr3vN0x" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://facebook.com/Tr3vN0x" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://x.com/@Tr3vN0x" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com/@Tr3vN0x" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+      <a href="https://facebook.com/Tr3vN0x" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
     </div>
+
     <div class="search-bar">
       <input id="searchInput" type="text" placeholder="Search videos...">
     </div>
   </div>
 </header>
 
-<!-- Floating Auth Button -->
-<button id="floating-auth" title="Login / Sign up"><i class="fa fa-user"></i><span id="floating-auth-text">Login</span></button>
+<!-- Floating Auth Button (red) -->
+<button id="floating-auth" title="Login / Sign up">
+  <i class="fa fa-user"></i>
+  <span id="floating-auth-text">Login</span>
+</button>
 
-<!-- User Bubble -->
-<div id="user-bubble">
+<!-- small user bubble shown when logged in -->
+<div id="user-bubble" role="status" aria-live="polite">
   <span class="name" id="bubble-name"></span>
   <button id="logout-btn">Logout</button>
 </div>
 
-<!-- Auth Modal -->
-<div id="auth-overlay" class="auth-overlay" style="display:none">
-  <div class="auth-box" role="dialog" aria-modal="true">
-    <span id="close-auth" class="close-btn">&times;</span>
+<!-- Auth Modal (hidden by default) -->
+<div id="auth-overlay" class="auth-overlay" style="display:none" aria-hidden="true">
+  <div class="auth-box" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <span id="close-auth" class="close-btn" title="Close">&times;</span>
+
     <div id="auth-tabs" class="tabs">
       <button id="login-tab" class="tab active" type="button">Login</button>
       <button id="signup-tab" class="tab" type="button">Sign Up</button>
-      <button id="profile-tab-btn" class="tab" type="button">Profile</button>
-      <button id="chat-tab-btn" class="tab" type="button">Community Chat</button>
     </div>
 
     <!-- LOGIN FORM -->
     <form id="login-form" class="form active" autocomplete="on">
-      <h2>Login</h2>
-      <label>Email</label>
+      <h2 id="auth-title">Login</h2>
+
+      <label for="login-email">Email</label>
       <input id="login-email" type="email" required placeholder="you@example.com">
-      <label>Password</label>
+
+      <label for="login-password">Password</label>
       <div class="password-field">
         <input id="login-password" type="password" required placeholder="Enter password">
-        <span class="toggle-pass" data-target="login-password">👁️</span>
+        <span class="toggle-pass" data-target="login-password" title="Show / hide password">👁️</span>
       </div>
+
       <button type="submit" class="action-btn">Login</button>
     </form>
 
     <!-- SIGNUP FORM -->
     <form id="signup-form" class="form" autocomplete="on">
-      <h2>Sign Up</h2>
-      <label>Username</label>
+      <h2>Create Account</h2>
+
+      <label for="signup-username">Username</label>
       <input id="signup-username" type="text" required placeholder="Tr3vN0x">
-      <label>Email</label>
+
+      <label for="signup-email">Email</label>
       <input id="signup-email" type="email" required placeholder="you@example.com">
-      <label>Password</label>
+
+      <label for="signup-password">Password</label>
       <div class="password-field">
-        <input id="signup-password" type="password" required placeholder="Choose password">
-        <span class="toggle-pass" data-target="signup-password">👁️</span>
+        <input id="signup-password" type="password" required placeholder="Choose a password">
+        <span class="toggle-pass" data-target="signup-password" title="Show / hide password">👁️</span>
       </div>
-      <label>Hashtags / Interests</label>
-      <input id="signup-tags" type="text" placeholder="#gaming #roblox">
+
+      <label for="signup-tags">Hashtags (interests)</label>
+      <input id="signup-tags" type="text" placeholder="#gaming #roblox #edits">
+
       <button type="submit" class="action-btn">Sign Up</button>
-    </form>
-
-    <!-- PROFILE FORM -->
-    <form id="profile-form" class="form">
-      <h2>Profile</h2>
-      <div id="profile-tab-content">
-        <img id="profile-pic" src="" alt="Profile Picture">
-        <input type="file" id="profile-pic-input" accept="image/*">
-        <div>Username: <span id="profile-username"></span></div>
-        <div>Email: <span id="profile-email"></span></div>
-        <div>Followers: <span id="followers-count">0</span></div>
-      </div>
-    </form>
-
-    <!-- COMMUNITY CHAT -->
-    <form id="chat-form" class="form">
-      <h2>Community Chat</h2>
-      <div id="chat-box"></div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." required>
-        <button id="chat-send" type="submit">Send</button>
-      </div>
     </form>
   </div>
 </div>
 
-<!-- Main Content -->
+<!-- Main Content (featured, follow section, categories) -->
 <div class="main-content" style="padding:18px;">
+
   <!-- Featured -->
   <div class="featured" id="featured">
       <img src="https://img.youtube.com/vi/92y9uaQMIa8/maxresdefault.jpg" alt="Featured Video">
       <h2>Featured: Latest Video</h2>
   </div>
-  <!-- Follow Section -->
+
+  <!-- Follow / Subscribe Section -->
   <section class="follow-section">
       <h2>Follow & Subscribe</h2>
       <div class="social-buttons">
-          <a href="https://x.com/@Tr3vN0x" target="_blank" class="btn-x">Follow on X</a>
-          <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="btn-youtube">Subscribe on YouTube</a>
-          <a href="https://facebook.com/Tr3vN0x" target="_blank" class="btn-facebook">Follow on Facebook</a>
+          <a href="https://x.com/@Tr3vN0x" target="_blank" class="btn-x" rel="noopener">Follow on X</a>
+          <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="btn-youtube" rel="noopener">Subscribe on YouTube</a>
+          <a href="https://facebook.com/Tr3vN0x" target="_blank" class="btn-facebook" rel="noopener">Follow on Facebook</a>
       </div>
+
       <div class="youtube-subscribe" style="margin-top:12px;">
           <iframe src="https://www.youtube.com/@Tr3vN0x" style="border:0;height:60px;width:250px;" title="YouTube Subscribe"></iframe>
       </div>
   </section>
+
   <!-- Categories -->
   <div class="category">
       <h2>Trending</h2>
@@ -254,15 +242,221 @@ footer{background:var(--card);color:var(--muted);text-align:center;padding:20px;
 <footer>© 2025 Tr3vN0x. All rights reserved.</footer>
 
 <script>
-// === Loader hide ===
-window.addEventListener('load',()=>{document.getElementById('loader').style.display='none';});
+/* ===== Loader hide on load ===== */
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  if (loader) loader.style.display = 'none';
+});
 
-// === Video Data ===
-const categories={
-trending:[{id:"92y9uaQMIa8",title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)"},{id:"ZiEd3RoiKtk",title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"},{id:"Uwwga_CiFqc",title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},{id:"J-W0Vfrc26U",title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"}],
-latest:[{id:"92y9uaQMIa8",title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)"},{id:"kNkK_qclihc",title:"ROBLOXIAN HIGHSCHOOL *LIVE*"}],
-recommended:[{id:"Sn4dyr5v7m0",title:"ROBLOX BREAKING POINT"},{id:"Uwwga_CiFqc",title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},{id:"J-W0Vfrc26U",title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"}]
+/* ===== Video Data (existing) ===== */
+const categories = {
+    trending: [
+        { id: "92y9uaQMIa8", title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)" },
+        { id: "ZiEd3RoiKtk", title: "Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)" },
+        { id: "Uwwga_CiFqc", title: "Why Is Flee the Facility THIS Stressful?! 😤🔥" },
+        { id: "J-W0Vfrc26U", title: "Nobody Could Stop Me… (Sniper Only Challenge 💀)" }
+    ],
+    latest: [
+        { id: "92y9uaQMIa8", title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)" },
+        { id: "kNkK_qclihc", title: "ROBLOXIAN HIGHSCHOOL *LIVE*" }
+    ],
+    recommended: [
+        { id: "Sn4dyr5v7m0", title: "ROBLOX BREAKING POINT" },
+        { id: "Uwwga_CiFqc", title: "Why Is Flee the Facility THIS Stressful?! 😤🔥" },
+        { id: "J-W0Vfrc26U", title: "Nobody Could Stop Me… (Sniper Only Challenge 💀)" }
+    ]
 };
-let viewCounts=JSON.parse(localStorage.getItem("viewCounts"))||{};
-function createVideoCard(v){const c=document.createElement("div");c.className="video-card";const t=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`; c.innerHTML=`<img class="thumbnail" src="${t}" alt="${v.title}"><div class="video-info"><h3>${v.title}</h3><p>Views: <span id="views-${v.id}">${viewCounts[v.id]||0}</span></p></div>`; c.addEventListener("click",()=>{c.innerHTML=`<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1" allowfullscreen></iframe>`;viewCounts[v.id]=(viewCounts[v.id]||0)+1;localStorage.setItem("viewCounts",JSON.stringify(viewCounts));}); return c;}
-for
+
+/* populate video cards */
+let viewCounts = JSON.parse(localStorage.getItem("viewCounts")) || {};
+function createVideoCard(video) {
+    const card = document.createElement("div");
+    card.className = "video-card";
+    const thumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+    card.innerHTML = `
+        <img class="thumbnail" src="${thumbnailUrl}" alt="${escapeHtml(video.title)}">
+        <div class="video-info">
+            <h3>${escapeHtml(video.title)}</h3>
+            <p>Views: <span id="views-${video.id}">${viewCounts[video.id] || 0}</span></p>
+        </div>
+    `;
+    card.addEventListener("click", () => {
+        card.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
+        viewCounts[video.id] = (viewCounts[video.id] || 0) + 1;
+        localStorage.setItem("viewCounts", JSON.stringify(viewCounts));
+    });
+    return card;
+}
+for (const [cat, vids] of Object.entries(categories)) {
+    const container = document.getElementById(cat);
+    if (container) vids.forEach(v => container.appendChild(createVideoCard(v)));
+}
+const featured = document.getElementById("featured");
+if (featured) {
+    const firstTrending = categories.trending[0];
+    if (firstTrending) {
+        featured.querySelector("img").src = `https://img.youtube.com/vi/${firstTrending.id}/maxresdefault.jpg`;
+        featured.querySelector("h2").innerText = `Featured: ${firstTrending.title}`;
+    }
+}
+
+/* ===== Search functionality ===== */
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    const term = searchInput.value.toLowerCase();
+    document.querySelectorAll('.video-card').forEach(card => {
+      const titleEl = card.querySelector('.video-info h3');
+      if (!titleEl) return;
+      const title = titleEl.innerText.toLowerCase();
+      card.style.display = title.includes(term) ? '' : 'none';
+    });
+  });
+}
+
+/* ===== Auth (modal) logic ===== */
+const floatingBtn = document.getElementById('floating-auth');
+const authOverlay = document.getElementById('auth-overlay');
+const closeAuth = document.getElementById('close-auth');
+const loginTab = document.getElementById('login-tab');
+const signupTab = document.getElementById('signup-tab');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+const togglePassButtons = document.querySelectorAll('.toggle-pass');
+const floatingAuthText = document.getElementById('floating-auth-text');
+const userBubble = document.getElementById('user-bubble');
+const bubbleName = document.getElementById('bubble-name');
+const logoutBtn = document.getElementById('logout-btn');
+
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+/* helpers */
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+/* show/hide overlay */
+function openAuth(){ authOverlay.style.display='flex'; authOverlay.setAttribute('aria-hidden','false'); }
+function closeAuthOverlay(){ authOverlay.style.display='none'; authOverlay.setAttribute('aria-hidden','true'); }
+
+/* toggle password visibility (for any toggle button) */
+togglePassButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.dataset.target;
+    const input = document.getElementById(targetId);
+    if (!input) return;
+    if (input.type === 'password'){ input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁️'; }
+  });
+});
+
+/* tabs */
+loginTab.addEventListener('click', () => {
+  loginTab.classList.add('active'); signupTab.classList.remove('active');
+  loginForm.classList.add('active'); signupForm.classList.remove('active');
+});
+signupTab.addEventListener('click', () => {
+  signupTab.classList.add('active'); loginTab.classList.remove('active');
+  signupForm.classList.add('active'); loginForm.classList.remove('active');
+});
+
+/* open/close */
+floatingBtn.addEventListener('click', () => {
+  openAuth();
+});
+closeAuth.addEventListener('click', closeAuthOverlay);
+authOverlay.addEventListener('click', e => { if (e.target === authOverlay) closeAuthOverlay(); });
+
+/* Signup handler */
+signupForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const username = document.getElementById('signup-username').value.trim();
+  const email = document.getElementById('signup-email').value.trim().toLowerCase();
+  const password = document.getElementById('signup-password').value;
+  const tagsRaw = document.getElementById('signup-tags').value.trim();
+
+  if (!username || !email || !password) {
+    alert('Please complete all mandatory fields.');
+    return;
+  }
+
+  // parse hashtags: accept space-separated tokens, keep tokens that start with # or add #
+  const tags = tagsRaw.split(/\s+/).filter(Boolean).map(t => t.startsWith('#') ? t : `#${t}`);
+
+  const user = { username, email, password, tags };
+  // store demo user in localStorage (demo only!)
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  currentUser = user;
+  alert('Account created! You are now logged in.');
+  updateAuthUI();
+  closeAuthOverlay();
+});
+
+/* Login handler */
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const password = document.getElementById('login-password').value;
+
+  const saved = JSON.parse(localStorage.getItem('currentUser'));
+  if (!saved) { alert('No account found. Please sign up first.'); return; }
+
+  if (saved.email === email && saved.password === password) {
+    currentUser = saved;
+    alert('Login successful!');
+    updateAuthUI();
+    closeAuthOverlay();
+  } else {
+    alert('Incorrect email or password.');
+  }
+});
+
+/* Logout */
+logoutBtn.addEventListener('click', () => {
+  currentUser = null;
+  localStorage.removeItem('currentUser');
+  updateAuthUI();
+  alert('You have been logged out.');
+});
+
+/* Update UI based on auth state */
+function updateAuthUI() {
+  if (currentUser) {
+    floatingAuthText.textContent = currentUser.username || 'Account';
+    userBubble.classList.add('show');
+    bubbleName.textContent = currentUser.username || currentUser.email || 'User';
+    // hide overlay if open
+    closeAuthOverlay();
+  } else {
+    floatingAuthText.textContent = 'Login';
+    userBubble.classList.remove('show');
+  }
+}
+updateAuthUI();
+
+/* ===== Small improvements: prefill login email if user exists ===== */
+(function prefillLogin() {
+  const saved = JSON.parse(localStorage.getItem('currentUser'));
+  if (saved && saved.email) {
+    const le = document.getElementById('login-email');
+    if (le) le.value = saved.email;
+  }
+})();
+
+/* Accessibility: close auth on ESC */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAuthOverlay();
+});
+
+/* Small: when user bubble name clicked opens auth modal for account details */
+bubbleName.addEventListener('click', () => {
+  openAuth();
+  // switch to a read-only account view? (for demo, open login tab)
+  loginTab.click();
+});
+
+/* ===== Utility: prevent form autocomplete spam on mobile ===== */
+document.querySelectorAll('form').forEach(f => f.setAttribute('autocomplete','on'));
+
+/* End of script */
+</script>
+</body>
+</html>
