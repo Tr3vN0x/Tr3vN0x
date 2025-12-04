@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x - Streaming Platform</title>
+<title>Tr3vN0x - Video Service</title>
 
 <!-- Favicon -->
 <link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=XIwaMHEvv1eAbkWoFnWt7w&oh=00_AflHLc8jtSZHL2A_EtjUjgJUGhzUazmZHyba7GS1p0V7AQ&oe=6937C7C5">
@@ -80,7 +80,7 @@ header .controls {
     font-size: 1rem;
 }
 
-/* Featured Video */
+/* Featured */
 .featured {
     position: relative;
     margin-bottom: 20px;
@@ -101,7 +101,7 @@ header .controls {
     border-radius: 5px;
 }
 
-/* Follow / Subscribe Section */
+/* Follow Section */
 .follow-section {
     text-align: center;
     margin: 30px 0;
@@ -117,10 +117,13 @@ header .controls {
 }
 .btn-x { background-color: #1DA1F2; }
 .btn-youtube { background-color: #FF0000; }
+.btn-facebook {
+    background-color: #1877F2;
+}
 .social-buttons a:hover { transform: scale(1.1); }
 .youtube-subscribe { margin-top: 15px; }
 
-/* Category Sections */
+/* Category */
 .category { margin-bottom: 40px; }
 .category h2 {
     margin: 0 0 10px 20px;
@@ -128,7 +131,7 @@ header .controls {
     color: #e50914;
 }
 
-/* Horizontal Row for Desktop */
+/* Video Rows */
 .video-row {
     display: flex;
     gap: 15px;
@@ -177,7 +180,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Mobile Responsive */
+/* Mobile */
 @media (max-width: 768px) {
     .video-row {
         display: grid;
@@ -197,11 +200,12 @@ footer {
 
 <!-- Header -->
 <header>
-    <h1>Tr3vN0x</h1>
+    <h1>Tr3vN0x Video Hub</h1>
     <div class="controls">
         <div class="social-icons">
             <a href="https://x.com/@Tr3vN0x" target="_blank"><i class="fab fa-twitter"></i></a>
             <a href="https://youtube.com/@Tr3vN0x" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://facebook.com/Tr3vN0x" target="_blank"><i class="fab fa-facebook"></i></a>
         </div>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search videos...">
@@ -217,13 +221,15 @@ footer {
         <h2>Featured: Latest Video</h2>
     </div>
 
-    <!-- Follow / Subscribe Section -->
+    <!-- Follow & Subscribe -->
     <section class="follow-section">
         <h2>Follow & Subscribe</h2>
         <div class="social-buttons">
             <a href="https://x.com/@Tr3vN0x" target="_blank" class="btn-x">Follow on X</a>
             <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="btn-youtube">Subscribe on YouTube</a>
+            <a href="https://facebook.com/Tr3vN0x" target="_blank" class="btn-facebook">Follow on Facebook</a>
         </div>
+
         <div class="youtube-subscribe">
             <iframe 
                 src="https://www.youtube.com/@Tr3vN0x" 
@@ -246,14 +252,15 @@ footer {
         <h2>Recommended</h2>
         <div class="video-row" id="recommended"></div>
     </div>
-
 </div>
 
 <footer>© 2025 Tr3vN0x. All rights reserved.</footer>
 
 <script>
 // Loader
-window.addEventListener("load", () => { document.getElementById("loader").style.display = "none"; });
+window.addEventListener("load", () => { 
+    document.getElementById("loader").style.display = "none"; 
+});
 
 // Video Data
 const categories = {
@@ -270,7 +277,7 @@ const categories = {
     recommended: [
         { id: "Sn4dyr5v7m0", title: "ROBLOX BREAKING POINT" },
         { id: "Uwwga_CiFqc", title: "Why Is Flee the Facility THIS Stressful?! 😤🔥" },
-         { id: "J-W0Vfrc26U", title: "Nobody Could Stop Me… (Sniper Only Challenge 💀)" }
+        { id: "J-W0Vfrc26U", title: "Nobody Could Stop Me… (Sniper Only Challenge 💀)" }
     ]
 };
 
@@ -303,7 +310,7 @@ for (const [category, videos] of Object.entries(categories)) {
     if (container) videos.forEach(video => container.appendChild(createVideoCard(video)));
 }
 
-// Featured video
+// Featured Video Update
 const featured = document.getElementById("featured");
 const firstTrending = categories.trending[0];
 if (featured && firstTrending) {
@@ -311,7 +318,7 @@ if (featured && firstTrending) {
     featured.querySelector("h2").innerText = `Featured: ${firstTrending.title}`;
 }
 
-// Search functionality
+// Search
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", () => {
     const term = searchInput.value.toLowerCase();
@@ -324,9 +331,3 @@ searchInput.addEventListener("input", () => {
 
 </body>
 </html>
-
-
-
-
-
-
