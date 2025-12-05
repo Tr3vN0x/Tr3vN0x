@@ -1,398 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tr3vN0x Streaming</title>
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
+<meta charset="UTF-8">
+<title>TR3VN0X Video Hub</title>
 <style>
-/* ---------- GENERAL ---------- */
-body {
-    background: #141414;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    transition: background 0.3s, color 0.3s;
-}
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+    }
 
-/* ---------- SMALLER HEADER ---------- */
-header {
-    background: #141414;
-    padding: 8px 18px; /* smaller */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    /* ===== LOADING SCREEN ===== */
+    #loader {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        animation: fadeOutLoader 1s ease 2.2s forwards;
+    }
 
-header .logo-container { 
-    display:flex; 
-    align-items:center; 
-    gap:8px; /* smaller gap */
-}
+    .loader-logo {
+        font-size: 40px;
+        color: #e50914;
+        animation: pulseGlow 2s infinite;
+        font-weight: bold;
+    }
 
-header img.icon { 
-    width:32px; 
-    height:32px; 
-    border-radius:50%; 
-}
+    @keyframes fadeOutLoader {
+        to { opacity: 0; visibility: hidden; }
+    }
 
-header img.title-img { 
-    height:45px; /* was 65px */
-    filter: drop-shadow(0 0 6px #e50914);
-}
+    @keyframes pulseGlow {
+        0% { text-shadow: 0 0 8px #e50914; }
+        50% { text-shadow: 0 0 25px #e50914; }
+        100% { text-shadow: 0 0 8px #e50914; }
+    }
 
-header button { 
-    margin-left:8px; 
-    background:#e50914; 
-    border:none; 
-    color:white; 
-    padding:6px 10px; /* smaller button */
-    border-radius:5px; 
-    cursor:pointer; 
-    transition:0.3s; 
-}
-header button:hover { background:#ff4d4d; }
 
-/* ---------- FEATURED ---------- */
-#featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; border-radius:12px; }
-#featured img { width:100%; max-height:400px; object-fit:cover; border-radius:12px; }
-#featured-title { position:absolute; bottom:20px; left:30px; font-size:28px; font-weight:bold; text-shadow: 0 0 10px #000; }
+    /* ===== HEADER ANIMATIONS ===== */
+    @keyframes slideDown {
+        0% { transform: translateY(-40px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
 
-#search-bar {
-    width: 100%;
-    max-width:500px;
-    padding:10px;
-    border-radius:8px;
-    border:none;
-    font-size:16px;
-    margin:20px auto;
-    display:block;
-    background:#1e1e1e;
-    color:#fff;
-}
+    @keyframes glowPulse {
+        0% { text-shadow: 0 0 4px #e50914; }
+        50% { text-shadow: 0 0 15px #e50914; }
+        100% { text-shadow: 0 0 4px #e50914; }
+    }
 
-/* ---------- VIDEO CARDS ---------- */
-.video-grid {
-    display:flex;
-    overflow-x:auto;
-    gap:12px;
-    padding-bottom:10px;
-}
-.video-grid::-webkit-scrollbar { display:none; }
+    /* HEADER */
+    header {
+        background: #141414;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        border-bottom: 1px solid #222;
+        animation: slideDown 0.7s ease-out 2.3s both;
+        position: relative;
+    }
 
-.video-card-container { position: relative; flex: 0 0 220px; }
-.video-card {
-    background:#1e1e1e;
-    border-radius:8px;
-    cursor:pointer;
-    overflow:hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.video-card:hover { transform: scale(1.08); box-shadow: 0 0 20px #e50914; }
-.video-card img.thumb { width:100%; display:block; border-radius:8px; }
-.video-card img.hover-thumb { position:absolute; top:0; left:0; width:100%; border-radius:8px; opacity:0; transition:0.3s; pointer-events:none; }
-.video-card:hover img.hover-thumb { opacity:1; }
+    /* CYBERPUNK NEON BAR */
+    header::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #e50914, #ff0055, #e50914);
+        box-shadow: 0 0 12px #e50914;
+        animation: neonFlow 3s linear infinite;
+    }
 
-.title { margin-top:6px; font-size:16px; }
-.views { font-size:12px; color:#e50914; display:none; }
-.video-card:hover .views { display:block; }
+    @keyframes neonFlow {
+        0% { filter: hue-rotate(0deg); }
+        100% { filter: hue-rotate(360deg); }
+    }
 
-.heart-icon { position:absolute; top:8px; right:8px; font-size:18px; color:white; cursor:pointer; z-index:20; transition:0.2s; }
-.heart-icon.favorited { color:#e50914; transform:scale(1.2); }
+    /* LOGO */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #e50914;
+        animation: glowPulse 2.2s infinite 2.3s;
+        cursor: pointer;
+    }
 
-.live-badge, .trending-badge {
-    position:absolute;
-    top:8px;
-    left:8px;
-    background:#e50914;
-    color:#fff;
-    font-size:12px;
-    font-weight:bold;
-    padding:2px 6px;
-    border-radius:4px;
-    z-index:15;
-    display:none;
-}
+    .logo img {
+        width: 35px;
+        height: 35px;
+        border-radius: 6px;
+    }
 
-h2 { margin:20px 0 10px 20px; }
+    /* SEARCH */
+    .search-container input {
+        background: #222;
+        border: 1px solid #333;
+        padding: 6px 10px;
+        border-radius: 4px;
+        color: white;
+        width: 250px;
+        transition: 0.3s;
+    }
 
-#player-page, #about-page { display:none; padding:20px; }
-#player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:12px; }
-#back-btn, #about-back-btn { margin-bottom:20px; padding:10px 20px; background:#e50914; border:none; color:white; border-radius:8px; cursor:pointer; }
+    .search-container input:focus {
+        border-color: #e50914;
+        box-shadow: 0 0 12px #e50914;
+        outline: none;
+    }
 
-body.light { background:#f5f5f5; color:#111; }
-body.light .video-card { background:#ddd; color:#111; }
-body.light .video-card:hover { background:#ccc; }
-body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
-body.light #search-bar { background:#eee; color:#111; }
+    /* ABOUT — GLOW HOVER */
+    .about a {
+        color: white;
+        text-decoration: none;
+        font-size: 17px;
+        transition: .3s;
+    }
 
-/* ---------- ABOUT PAGE ---------- */
-#about-page img.profile-pic { width:120px; height:120px; border-radius:50%; border:3px solid #e50914; }
-#about-page h2 { margin:0; display:flex; align-items:center; gap:8px; }
-#about-page .social-links a { text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:6px; transition:0.3s; }
-#about-page .social-links a.youtube{ background:#e50914; color:white; }
-#about-page .social-links a.discord{ background:#5865F2; color:white; }
-#about-page .social-links a.instagram{ background:#C13584; color:white; }
-#about-page .social-links a:hover{ opacity:0.8; }
+    .about a:hover {
+        color: #e50914;
+        text-shadow: 0 0 10px #e50914;
+    }
 
-#about-page .skills span {
-    background:#e50914; color:white; padding:5px 12px; border-radius:20px; margin:4px 0;
-}
-#about-page .stats div{ text-align:center; margin-right:20px; }
-#about-page .stats { display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; }
-#about-page .timeline li{ margin-bottom:15px; list-style:none; }
-#about-page .timeline h3{ margin-top:30px; }
+    /* ===== VIDEO GRID ===== */
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 20px;
+    }
+
+    /* SLIDE-IN VIDEO CARDS */
+    @keyframes slideInCard {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .video-card {
+        background: #111;
+        padding: 10px;
+        border-radius: 10px;
+        transform: translateY(40px);
+        opacity: 0;
+        animation: slideInCard 0.7s ease forwards;
+    }
+
+    /* delay each card slightly */
+    .video-card:nth-child(1) { animation-delay: 2.4s; }
+    .video-card:nth-child(2) { animation-delay: 2.55s; }
+    .video-card:nth-child(3) { animation-delay: 2.7s; }
+    .video-card:nth-child(4) { animation-delay: 2.85s; }
+    .video-card:nth-child(5) { animation-delay: 2.95s; }
+    .video-card:nth-child(6) { animation-delay: 3.05s; }
+
+    .video-card:hover {
+        transform: scale(1.03);
+    }
+
+    .video-thumbnail {
+        width: 100%;
+        height: 150px;
+        background: #333;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 20px;
+        text-align: center;
+        background: #141414;
+        color: #777;
+        border-top: 1px solid #222;
+        margin-top: 20px;
+    }
 </style>
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loader">
+    <div class="loader-logo">TR3VN0X</div>
+</div>
+
 <header>
-    <div class="logo-container">
-        <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
-        <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="title"/>
+    <div class="logo">
+        <img src="https://via.placeholder.com/35" alt="Logo">
+        TR3VN0X
     </div>
-    <div>
-        <button id="theme-btn">🌙</button>
-        <button id="about-btn">ℹ️ About</button>
+
+    <div class="search-container">
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <div class="about">
+        <a href="#">About</a>
     </div>
 </header>
 
-<div class="container" id="home-page">
-    <input type="text" id="search-bar" placeholder="🔍 Search videos...">
-    <div id="featured"></div>
+<!-- VIDEO GRID -->
+<div class="video-grid">
+    <div class="video-card">
+        <div class="video-thumbnail"></div>
+        <div class="video-title">Video Title 1</div>
+    </div>
 
-    <h2>🆕 Recent</h2>
-    <div class="video-grid" id="recent-grid"></div>
+    <div class="video-card">
+        <div class="video-thumbnail"></div>
+        <div class="video-title">Video Title 2</div>
+    </div>
 
-    <h2>🔥 Recommended</h2>
-    <div class="video-grid" id="recommended-grid"></div>
+    <div class="video-card">
+        <div class="video-thumbnail"></div>
+        <div class="video-title">Video Title 3</div>
+    </div>
 
-    <h2>⭐ Fan Favorites</h2>
-    <div class="video-grid" id="favorites-grid"></div>
-
-    <h2>📺 Live Stream</h2>
-    <div class="video-grid" id="live-grid"></div>
-
-    <h2>📼 Older Videos</h2>
-    <div class="video-grid" id="older-grid"></div>
-</div>
-
-<div id="player-page">
-    <button id="back-btn">← Back</button>
-    <div id="player"></div>
-    <h2 id="video-title"></h2>
-</div>
-
-<div id="about-page">
-    <button id="about-back-btn">← Back</button>
-
-    <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
-        <img class="profile-pic" src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg" alt="Profile Pic">
-        <div style="max-width:600px;">
-            <h2>
-                Tr3vN0x 
-                <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" style="width:22px;height:22px;" alt="Verified Badge">
-            </h2>
-            <p style="margin-top:10px; font-size:16px; line-height:1.5;">
-                Hello! I am Tr3vN0x (Trevor). Welcome to my streaming hub! Here you can find my latest videos, live streams, and fan favorites.
-            </p>
-
-            <div class="social-links" style="margin-top:15px; display:flex; gap:10px;">
-                <a href="https://youtube.com/" target="_blank" class="youtube">YouTube</a>
-                <a href="https://discord.com/" target="_blank" class="discord">Discord</a>
-                <a href="https://instagram.com/" target="_blank" class="instagram">Instagram</a>
-            </div>
-
-            <div class="skills" style="margin-top:25px;">
-                <h3>🎮 Skills & Interests</h3>
-                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-                    <span>Roblox</span>
-                    <span>Video Editing</span>
-                    <span>Streaming</span>
-                    <span>Gaming Tutorials</span>
-                </div>
-            </div>
-
-            <div class="stats">
-                <div><div style="font-size:24px;font-weight:bold;">125</div><div>Videos</div></div>
-                <div><div style="font-size:24px;font-weight:bold;">3.2K</div><div>Subscribers</div></div>
-                <div><div style="font-size:24px;font-weight:bold;">15K</div><div>Likes</div></div>
-            </div>
-
-            <div class="timeline">
-                <h3>📜 My Journey</h3>
-                <ul>
-                    <li><strong>2018:</strong> Started gaming and recording Roblox videos.</li>
-                    <li><strong>2019:</strong> Created YouTube channel “Tr3vN0x”.</li>
-                    <li><strong>2021:</strong> First viral Roblox horror video.</li>
-                    <li><strong>2023:</strong> Streaming live regularly and growing community.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="video-card">
+        <div class="video-thumbnail"></div>
+        <div class="video-title">Video Title 4</div>
     </div>
 </div>
 
-<script>
-// ---------- VIDEO DATA ----------
-function randomViews(min=10,max=100){ return Math.floor(Math.random()*(max-min+1))+min; }
-let videoData = [
-    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: randomViews(), lastViews:0 },
-    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older", views: randomViews(), lastViews:0 },
-    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older", views: randomViews(), lastViews:0 },
-    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older", views: randomViews(), lastViews:0 },
-    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older", views: randomViews(), lastViews:0 },
-    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older", views: randomViews(), lastViews:0 },
-    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent", views: randomViews(), lastViews:0 },
-    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent", views: randomViews(), lastViews:0 }
-];
-let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: randomViews(50,150), lastViews:0 };
-let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: randomViews(50,200), lastViews:0 };
+<footer>
+    © TR3VN0X — All Rights Reserved
+</footer>
 
-function shuffleArray(array){ for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]]; } return array; }
-let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
-
-// ---------- CREATE CARD ----------
-function createCard(v,isLive=false){
-    const card=document.createElement("div");
-    card.className="video-card video-card-container";
-    const normalThumb=`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
-    const hoverThumb=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
-    const favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
-    const isFavorited=favorites.includes(v.id);
-
-    card.innerHTML=`
-        ${isLive?'<div class="live-badge">LIVE</div>':''}
-        <div class="trending-badge">🔥 Trending</div>
-        <img class='thumb' src="${normalThumb}">
-        <img class='hover-thumb' src="${hoverThumb}">
-        <div class='title'>${v.title}</div>
-        <div class='views'>👁️ ${v.views.toLocaleString()} views</div>
-        <div class="heart-icon ${isFavorited?'favorited':''}">❤️</div>
-    `;
-
-    const heart=card.querySelector(".heart-icon");
-    heart.onclick=(e)=>{
-        e.stopPropagation();
-        let favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
-        if(favorites.includes(v.id)){ favorites=favorites.filter(id=>id!==v.id); heart.classList.remove("favorited"); }
-        else{ favorites.push(v.id); heart.classList.add("favorited"); }
-        localStorage.setItem("favorites",JSON.stringify(favorites));
-    };
-
-    card.onclick=()=>openPlayer(v);
-    return card;
-}
-
-// ---------- UPDATE VIEWS ----------
-function updateCardViews(videoId, views){
-    const cards = document.querySelectorAll(".video-card");
-    cards.forEach(card => {
-        const title = card.querySelector(".title").innerText;
-        const v = videoData.find(v => v.id === videoId && v.title === title);
-        if(v){
-            const viewEl = card.querySelector(".views");
-            viewEl.innerText = `👁️ ${views.toLocaleString()} views`;
-        }
-    });
-}
-
-// ---------- LOAD VIDEOS ----------
-function loadVideos(){
-    const featuredDiv=document.getElementById("featured");
-    featuredDiv.innerHTML=`
-        <img src="https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg" alt="Featured">
-        <div id="featured-title">${featuredVideo.title}</div>
-    `;
-    featuredDiv.onclick=()=>openPlayer(featuredVideo);
-
-    const recentGrid=document.getElementById("recent-grid");
-    videoData.filter(v=>v.category==="recent").forEach(v=>recentGrid.appendChild(createCard(v)));
-
-    const rec=document.getElementById("recommended-grid");
-    videoData.forEach(v=>{ if(recommendedVideos.includes(v)) rec.appendChild(createCard(v)); });
-
-    const fav=document.getElementById("favorites-grid");
-    videoData.filter(v=>v.category==="favorites").forEach(v=>fav.appendChild(createCard(v)));
-
-    const live=document.getElementById("live-grid");
-    live.appendChild(createCard(liveVideo,true));
-
-    const old=document.getElementById("older-grid");
-    videoData.filter(v=>v.category==="older").forEach(v=>old.appendChild(createCard(v)));
-}
-
-// ---------- OPEN PLAYER ----------
-function openPlayer(v){
-    document.getElementById("home-page").style.display="none";
-    document.getElementById("player-page").style.display="block";
-    document.getElementById("player").innerHTML=`<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
-    document.getElementById("video-title").innerText=v.title;
-
-    const viewIncrement = setInterval(() => {
-        const increment = Math.floor(Math.random() * 2) + 1;
-        v.views += increment;
-        updateCardViews(v.id, v.views);
-    }, 1000);
-
-    document.getElementById("back-btn").onclick = () => {
-        clearInterval(viewIncrement);
-        document.getElementById("player-page").style.display="none";
-        document.getElementById("home-page").style.display="block";
-
-        recommendedVideos = shuffleArray([...videoData]).slice(0,3);
-        document.getElementById("recommended-grid").innerHTML='';
-        videoData.forEach(video => { 
-            if(recommendedVideos.includes(video)) document.getElementById("recommended-grid").appendChild(createCard(video)); 
-        });
-    };
-}
-
-// ---------- TRENDING LOGIC ----------
-setInterval(()=>{
-    videoData.forEach(v=>{
-        const cards = Array.from(document.querySelectorAll(".video-card")).filter(c=>c.querySelector(".title").innerText===v.title);
-        cards.forEach(card=>{
-            const badge = card.querySelector(".trending-badge");
-            if(badge){
-                const diff = v.views - (v.lastViews || 0);
-                badge.style.display = (diff >= 5) ? 'block' : 'none';
-                v.lastViews = v.views;
-            }
-        });
-    });
-}, 5000);
-
-// ---------- SEARCH ----------
-document.getElementById("search-bar").addEventListener("input",()=>{
-    const query=document.getElementById("search-bar").value.toLowerCase();
-    const grids=["recent-grid","recommended-grid","favorites-grid","live-grid","older-grid"];
-    grids.forEach(gridId=>{
-        const grid=document.getElementById(gridId);
-        Array.from(grid.children).forEach(card=>{
-            const title=card.querySelector(".title").innerText.toLowerCase();
-            card.style.display=title.includes(query)?"block":"none";
-        });
-    });
-    document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
-});
-
-// ---------- LIGHT/DARK TOGGLE ----------
-document.getElementById("theme-btn").onclick=()=>{
-    document.body.classList.toggle("light");
-    document.getElementById("theme-btn").innerText=document.body.classList.contains("light")?"🌑":"🌙";
-};
-
-// ---------- ABOUT TAB ----------
-document.getElementById("about-btn").onclick=()=>{
-    document.getElementById("home-page").style.display="none";
-    document.getElementById("about-page").style.display="block";
-};
-document.getElementById("about-back-btn").onclick=()=>{
-    document.getElementById("about-page").style.display="none";
-    document.getElementById("home-page").style.display="block";
-};
-
-loadVideos();
-</script>
 </body>
 </html>
