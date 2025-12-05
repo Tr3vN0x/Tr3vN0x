@@ -117,12 +117,10 @@ header {
     min-width: 220px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
 }
 
-.video-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 12px #00ff66;
-}
+.video-card:hover { transform: scale(1.08); box-shadow: 0 0 12px #00ff66; }
 
 .thumbnail-container {
     position: relative;
@@ -148,9 +146,7 @@ header {
     transition: 0.3s;
 }
 
-.thumbnail-container:hover .hover-thumb {
-    opacity: 1;
-}
+.thumbnail-container:hover .hover-thumb { opacity: 1; }
 
 .video-title {
     margin-top: 8px;
@@ -158,6 +154,23 @@ header {
     color: #00ff66;
     text-shadow: 0 0 4px #00ff66;
     text-align: center;
+}
+
+/* Favorite Heart */
+.favorite-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 20px;
+    color: #004400;
+    cursor: pointer;
+    transition: color 0.3s, text-shadow 0.3s;
+    user-select: none;
+}
+
+.favorite-btn.favorited {
+    color: #ff3366;
+    text-shadow: 0 0 6px #ff3366;
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -239,6 +252,11 @@ footer {
 
 <!-- ROWS -->
 <div class="row-container">
+    <div class="row-label">Favorites</div>
+    <div class="video-row" id="favorites-row"></div>
+</div>
+
+<div class="row-container">
     <div class="row-label">Most Viewed</div>
     <div class="video-row" id="most-viewed-row"></div>
 </div>
@@ -260,12 +278,10 @@ footer {
 </div>
 
 <!-- FOOTER -->
-<footer>
-    © 2025 Tr3vN0x — All Rights Reserved
-</footer>
+<footer>© 2025 Tr3vN0x — All Rights Reserved</footer>
 
 <script>
-// Video data
+// Video Data
 const mostViewed = [
     {id:"92y9uaQMIa8", title:"Most Viewed 1"},
     {id:"kNkK_qclihc", title:"Most Viewed 2"},
@@ -280,66 +296,80 @@ const olderVideos = [
 ];
 
 let watchHistory = [];
+let favorites = [];
 
-// Create video card
+// Create Video Card
 function createVideoCard(video){
     const card = document.createElement('div');
     card.className = 'video-card';
-    card.dataset.video = video.id;
+    card.setAttribute('data-video', video.id);
     card.innerHTML = `
+        <div class="favorite-btn">&#10084;</div>
         <div class="thumbnail-container">
             <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
             <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
         </div>
         <div class="video-title">${video.title}</div>
     `;
-    card.addEventListener('click',()=>{
+
+    const favBtn = card.querySelector('.favorite-btn');
+    favBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(favorites.find(v=>v.id===video.id)){
+            favorites = favorites.filter(v=>v.id!==video.id);
+            favBtn.classList.remove('favorited');
+        } else {
+            favorites.push(video);
+            favBtn.classList.add('favorited');
+        }
+        renderFavorites();
+    });
+
+    card.addEventListener('click', ()=>{
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
 
-        // Add to watch history if not already
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
-            renderRow('watch-history-row', watchHistory);
+            renderWatchHistory();
         }
     });
+
     return card;
 }
 
-// Render a row
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
-    videos.forEach(v=> row.appendChild(createVideoCard(v)));
+    videos.forEach(v=>{
+        const card = createVideoCard(v);
+        if(favorites.find(f=>f.id===v.id)) card.querySelector('.favorite-btn').classList.add('favorited');
+        row.appendChild(card);
+    });
 }
 
-// Initial render
+function renderFavorites(){ renderRow('favorites-row', favorites); }
+function renderWatchHistory(){ renderRow('watch-history-row', watchHistory); }
+
+// Initial Render
 renderRow('most-viewed-row', mostViewed);
 renderRow('older-videos-row', olderVideos);
+renderFavorites();
+renderWatchHistory();
 
-// Modal close
-const modal = document.getElementById('video-modal');
-modal.querySelector('.close-btn').addEventListener('click',()=>{
+// Modal Close
+document.querySelector('#video-modal .close-btn').addEventListener('click', ()=>{
+    const modal = document.getElementById('video-modal');
     modal.querySelector('iframe').src = '';
     modal.style.display = 'none';
 });
-modal.addEventListener('click', e=>{
-    if(e.target === modal){
+document.getElementById('video-modal').addEventListener('click',(e)=>{
+    if(e.target === e.currentTarget){
+        const modal = e.currentTarget;
         modal.querySelector('iframe').src = '';
         modal.style.display = 'none';
     }
-});
-
-// Search functionality
-const searchInput = document.querySelector('.search-bar');
-searchInput.addEventListener('input', ()=>{
-    const term = searchInput.value.toLowerCase();
-    [mostViewed, olderVideos, watchHistory].forEach((arr, i)=>{
-        const rowId = i===0?'most-viewed-row':i===1?'older-videos-row':'watch-history-row';
-        const filtered = arr.filter(v=> v.title.toLowerCase().includes(term));
-        renderRow(rowId, filtered);
-    });
 });
 </script>
 
