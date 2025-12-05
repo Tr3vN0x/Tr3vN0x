@@ -108,7 +108,9 @@ header {
     padding-bottom: 10px;
 }
 
-.video-row::-webkit-scrollbar { display: none; }
+.video-row::-webkit-scrollbar {
+    display: none;
+}
 
 .video-card {
     background: #111;
@@ -120,7 +122,10 @@ header {
     position: relative;
 }
 
-.video-card:hover { transform: scale(1.08); box-shadow: 0 0 12px #00ff66; }
+.video-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 12px #00ff66;
+}
 
 .thumbnail-container {
     position: relative;
@@ -146,7 +151,9 @@ header {
     transition: 0.3s;
 }
 
-.thumbnail-container:hover .hover-thumb { opacity: 1; }
+.thumbnail-container:hover .hover-thumb {
+    opacity: 1;
+}
 
 .video-title {
     margin-top: 8px;
@@ -156,21 +163,19 @@ header {
     text-align: center;
 }
 
-/* Favorite Heart */
+/* Favorites icon */
 .favorite-btn {
     position: absolute;
     top: 6px;
     right: 6px;
-    font-size: 20px;
-    color: #004400;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
-    transition: color 0.3s, text-shadow 0.3s;
-    user-select: none;
+    filter: drop-shadow(0 0 4px #00ff66);
 }
 
 .favorite-btn.favorited {
-    color: #ff3366;
-    text-shadow: 0 0 6px #ff3366;
+    filter: drop-shadow(0 0 6px #ff00ff);
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -278,64 +283,67 @@ footer {
 </div>
 
 <!-- FOOTER -->
-<footer>© 2025 Tr3vN0x — All Rights Reserved</footer>
+<footer>
+    © 2025 Tr3vN0x — All Rights Reserved
+</footer>
 
 <script>
-// Video Data
+// ---------------- DATA ----------------
+const favorites = [];
 const mostViewed = [
     {id:"92y9uaQMIa8", title:"Most Viewed 1"},
     {id:"kNkK_qclihc", title:"Most Viewed 2"},
     {id:"Sn4dyr5v7m0", title:"Most Viewed 3"}
 ];
-
 const olderVideos = [
     {id:"ZiEd3RoiKtk", title:"Older Video 1"},
     {id:"J-W0Vfrc26U", title:"Older Video 2"},
     {id:"Uwwga_CiFqc", title:"Older Video 3"},
     {id:"Sn4dyr5v7m0", title:"Older Video 4"}
 ];
+const watchHistory = [];
 
-let watchHistory = [];
-let favorites = [];
-
-// Create Video Card
-function createVideoCard(video){
+// ---------------- VIDEO RENDER ----------------
+function createVideoCard(video) {
     const card = document.createElement('div');
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
     card.innerHTML = `
-        <div class="favorite-btn">&#10084;</div>
         <div class="thumbnail-container">
             <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
             <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
         </div>
         <div class="video-title">${video.title}</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn">
     `;
+    const favoriteBtn = card.querySelector('.favorite-btn');
 
-    const favBtn = card.querySelector('.favorite-btn');
-    favBtn.addEventListener('click', (e)=>{
+    // Click favorite
+    favoriteBtn.addEventListener('click', e=>{
         e.stopPropagation();
-        if(favorites.find(v=>v.id===video.id)){
-            favorites = favorites.filter(v=>v.id!==video.id);
-            favBtn.classList.remove('favorited');
-        } else {
+        if(!favorites.find(v=>v.id===video.id)){
             favorites.push(video);
-            favBtn.classList.add('favorited');
+            favoriteBtn.classList.add('favorited');
+            renderFavorites();
+        } else {
+            const index = favorites.findIndex(v=>v.id===video.id);
+            favorites.splice(index,1);
+            favoriteBtn.classList.remove('favorited');
+            renderFavorites();
         }
-        renderFavorites();
     });
 
-    card.addEventListener('click', ()=>{
+    // Click to play
+    card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
-
+        // Add to watch history if not already there
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
-            renderWatchHistory();
+            renderRow('watch-history-row', watchHistory);
         }
     });
-
     return card;
 }
 
@@ -343,33 +351,48 @@ function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
     videos.forEach(v=>{
-        const card = createVideoCard(v);
-        if(favorites.find(f=>f.id===v.id)) card.querySelector('.favorite-btn').classList.add('favorited');
-        row.appendChild(card);
+        row.appendChild(createVideoCard(v));
     });
 }
 
-function renderFavorites(){ renderRow('favorites-row', favorites); }
-function renderWatchHistory(){ renderRow('watch-history-row', watchHistory); }
+function renderFavorites(){
+    renderRow('favorites-row', favorites);
+}
 
-// Initial Render
+// ---------------- INITIAL RENDER ----------------
 renderRow('most-viewed-row', mostViewed);
 renderRow('older-videos-row', olderVideos);
 renderFavorites();
-renderWatchHistory();
+renderRow('watch-history-row', watchHistory);
 
-// Modal Close
-document.querySelector('#video-modal .close-btn').addEventListener('click', ()=>{
-    const modal = document.getElementById('video-modal');
+// ---------------- MODAL ----------------
+const modal = document.getElementById('video-modal');
+modal.querySelector('.close-btn').addEventListener('click', ()=>{
     modal.querySelector('iframe').src = '';
     modal.style.display = 'none';
 });
-document.getElementById('video-modal').addEventListener('click',(e)=>{
-    if(e.target === e.currentTarget){
-        const modal = e.currentTarget;
+modal.addEventListener('click', e=>{
+    if(e.target === modal){
         modal.querySelector('iframe').src = '';
         modal.style.display = 'none';
     }
+});
+
+// ---------------- SEARCH ----------------
+const searchInput = document.querySelector('.search-bar');
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    const allRows = [
+        {id: 'favorites-row', videos: favorites},
+        {id: 'most-viewed-row', videos: mostViewed},
+        {id: 'older-videos-row', videos: olderVideos},
+        {id: 'watch-history-row', videos: watchHistory}
+    ];
+
+    allRows.forEach(rowObj => {
+        const filtered = rowObj.videos.filter(v=>v.title.toLowerCase().includes(query));
+        renderRow(rowObj.id, filtered);
+    });
 });
 </script>
 
