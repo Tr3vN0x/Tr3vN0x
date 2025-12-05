@@ -7,580 +7,611 @@
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
-    color: #00ff66;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0a0a0a;
+    color: #00ff66;
 }
 
-/* ---------------- SPLASH SCREEN (NEW) ---------------- */
+/* ---------------- SPLASH SCREEN ---------------- */
 #splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    z-index: 1000; /* Highest layer to cover everything */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    transition: opacity 0.5s ease-out; /* For fading out */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    z-index: 1000; /* Highest layer to cover everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* For fading out */
 }
 
 .splash-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .splash-logo {
-    max-width: 90%;
-    height: auto;
-    max-height: 120px;
-    margin-bottom: 25px;
-    /* Logo effects */
-    border-radius: 4px;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 12px #00ff66;
-    animation: pulse 1.5s infinite alternate; /* Subtle breathing animation */
+    max-width: 90%;
+    height: auto;
+    max-height: 120px;
+    margin-bottom: 25px;
+    /* Logo effects */
+    border-radius: 4px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 12px #00ff66;
+    animation: pulse 1.5s infinite alternate; /* Subtle breathing animation */
 }
 
 @keyframes pulse {
-    from { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
-    to { transform: scale(1.05); box-shadow: 0 0 16px #00ff66; }
+    from { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
+    to { transform: scale(1.05); box-shadow: 0 0 16px #00ff66; }
 }
 
 #loading-percentage {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #00ff66;
-    text-shadow: 0 0 10px #00ff66;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
 }
 
-/* ---------------- MAIN CONTENT WRAPPER (NEW) ---------------- */
+/* ---------------- MAIN CONTENT WRAPPER ---------------- */
 /* The main content starts hidden and fades in */
 #main-content {
-    opacity: 0;
-    transition: opacity 1s ease-in; /* For fading in */
+    opacity: 0;
+    transition: opacity 1s ease-in; /* For fading in */
 }
 
 /* ---------------- HEADER ---------------- */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 24px;
-    background: #0d0d0d;
-    border-bottom: 2px solid #003300;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: #0d0d0d;
+    border-bottom: 2px solid #003300;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .logo-container img {
-    height: 50px;
-    border-radius: 4px;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 8px #00ff66;
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 8px #00ff66;
 }
 
 .search-bar {
-    background: #111;
-    border: 1px solid #004400;
-    border-radius: 8px;
-    padding: 8px 14px;
-    width: 250px;
-    color: #00ff66;
-    caret-color: #00ff66;
-    transition: 0.3s;
-    margin: 8px 0;
+    background: #111;
+    border: 1px solid #004400;
+    border-radius: 8px;
+    padding: 8px 14px;
+    width: 250px;
+    color: #00ff66;
+    caret-color: #00ff66;
+    transition: 0.3s;
+    margin: 8px 0;
 }
 
 .search-bar::placeholder { color: #004400; }
 .search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
 
 .profile-btn {
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    padding: 4px;
-    background: #111;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    padding: 4px;
+    background: #111;
 }
 
 .profile-btn img {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px #00ff66);
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px #00ff66);
 }
 
 .profile-btn:hover {
-    background: #003300;
-    box-shadow: 0 0 12px #00ff66;
+    background: #003300;
+    box-shadow: 0 0 12px #00ff66;
 }
 
 /* ---------------- ROWS ---------------- */
 .row-container {
-    display: flex;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 10px;
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
 }
 
 .row-label {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-weight: bold;
-    font-size: 18px;
-    color: #00ff66;
-    min-width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    font-size: 18px;
+    color: #00ff66;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .video-row {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
 }
 
 .video-row::-webkit-scrollbar {
-    display: none;
+    display: none;
 }
 
 .video-card {
-    background: #111;
-    border: 1px solid #003300;
-    border-radius: 12px;
-    min-width: 220px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
+    background: #111;
+    border: 1px solid #003300;
+    border-radius: 12px;
+    min-width: 220px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
 }
 
 .video-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 12px #00ff66;
+    transform: scale(1.08);
+    box-shadow: 0 0 12px #00ff66;
 }
 
 .thumbnail-container {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .thumbnail-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .thumbnail-container .hover-thumb {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
 }
 
 .thumbnail-container:hover .hover-thumb {
-    opacity: 1;
+    opacity: 1;
 }
 
 .video-title {
-    margin-top: 8px;
-    font-weight: bold;
-    color: #00ff66;
-    text-shadow: 0 0 4px #00ff66;
-    text-align: center;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 4px #00ff66;
+    text-align: center;
 }
 
 /* Favorites icon */
 .favorite-btn {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    filter: drop-shadow(0 0 4px #00ff66);
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px #00ff66);
 }
 
 .favorite-btn.favorited {
-    filter: drop-shadow(0 0 6px #ff00ff);
+    filter: drop-shadow(0 0 6px #ff00ff);
 }
 
 /* ---------------- PROFILE MODAL ---------------- */
 #profile-modal {
-    display: none;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.95);
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
 
 #profile-modal .modal-content {
-    background: #111;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    border: 1px solid #003300;
+    background: #111;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #003300;
 }
 
 #profile-modal h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .profile-picture {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #00ff66;
-    margin-bottom: 12px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00ff66;
+    margin-bottom: 12px;
 }
 
 .verified-badge {
-    background: #00ff66;
-    color: #0a0a0a;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 8px;
+    background: #00ff66;
+    color: #0a0a0a;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
 }
 
 .followers {
-    margin: 10px 0;
+    margin: 10px 0;
 }
 
 .follow-btn {
-    padding: 8px 16px;
-    background: #111;
-    border: 1px solid #00ff66;
-    color: #00ff66;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 15px;
+    padding: 8px 16px;
+    background: #111;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .follow-btn:hover {
-    background: #003300;
-    box-shadow: 0 0 10px #00ff66;
+    background: #003300;
+    box-shadow: 0 0 10px #00ff66;
 }
 
 .links a {
-    display: inline-block;
-    margin: 5px 10px;
-    color: #00ff66;
-    text-decoration: none;
-    font-weight: bold;
+    display: inline-block;
+    margin: 5px 10px;
+    color: #00ff66;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .links a:hover {
-    text-decoration: underline;
+    text-decoration: underline;
 }
 
 #profile-modal .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    color: #00ff66;
-    cursor: pointer;
-    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /* ---------------- FOOTER ---------------- */
 footer {
-    text-align: center;
-    padding: 18px;
-    background: #0d0d0d;
-    border-top: 2px solid #003300;
-    color: #00ff66;
-    font-weight: bold;
-    text-shadow: 0 0 4px #00ff66;
+    text-align: center;
+    padding: 18px;
+    background: #0d0d0d;
+    border-top: 2px solid #003300;
+    color: #00ff66;
+    font-weight: bold;
+    text-shadow: 0 0 4px #00ff66;
 }
 
 /* ---------------- MODAL PLAYER ---------------- */
 #video-modal {
-    display: none;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 99;
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
 }
 
 #video-modal iframe {
-    width: 90%;
-    max-width: 800px;
-    aspect-ratio: 16/9;
-    border:none;
-    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border:none;
+    border-radius: 10px;
 }
 
 #video-modal .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 28px;
-    color: #00ff66;
-    cursor: pointer;
-    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
+/* ---------------- RESPONSIVE (MOBILE VIEW) ---------------- */
 @media (max-width: 768px) {
-    header { flex-direction: column; align-items: center; }
-    .search-bar { width: 90%; }
-    .logo-container img { height: 40px; }
-    .profile-btn { width: 50px; height: 50px; margin: 5px 0; }
-    .row-container { flex-direction: column; }
-    .row-label { writing-mode: horizontal-tb; transform: none; min-width: auto; padding-bottom: 5px;}
-    .video-row { overflow-x: auto; }
+    /* Header stacking */
+    header { 
+        flex-direction: column; 
+        align-items: center; 
+        padding: 10px; /* Reduced padding */
+    }
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    .search-bar { 
+        width: 90%; 
+        order: 3; /* Push search to the bottom of the column */
+        margin: 0;
+    } 
+    .profile-btn { 
+        width: 50px; 
+        height: 50px; 
+        position: absolute; 
+        top: 10px; 
+        right: 10px; /* Position button for easy access */
+    }
+    .logo-container img { height: 40px; }
+
+    /* Row adjustments (Vertical label becomes horizontal) */
+    .row-container { flex-direction: column; padding: 10px 15px; }
+    .row-label { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+        min-width: auto; 
+        padding-bottom: 5px;
+        text-align: left;
+        font-size: 1.1em;
+    }
+    .video-row { overflow-x: scroll; }
+    .video-card { min-width: 180px; } /* Ensures cards are tappable */
+    
+    /* Splash screen adjustments */
+    .splash-logo { max-height: 80px; }
+    #loading-percentage { font-size: 2em; }
 }
 
 @media (max-width: 480px) {
-    .logo-container img { height: 35px; }
-    .profile-btn { width: 45px; height: 45px; }
-    .thumbnail-container { height: 100px; }
-    .search-bar { width: 95%; }
+    /* Header smaller */
+    .logo-container img { height: 35px; }
+    .profile-btn { width: 45px; height: 45px; }
+    .search-bar { width: 95%; }
+    
+    /* Video card sizing */
+    .video-card { min-width: 150px; }
+    .thumbnail-container { height: 90px; }
+    .video-title { font-size: 0.9em; }
 }
 </style>
 </head>
 <body>
 
 <div id="splash-screen">
-    <div class="splash-content">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Tr3vN0x Logo" class="splash-logo">
-        <div id="loading-percentage">0%</div>
-    </div>
+    <div class="splash-content">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Tr3vN0x Logo" class="splash-logo">
+        <div id="loading-percentage">0%</div>
+    </div>
 </div>
 
 <main id="main-content">
 
-    <header>
-        <div class="logo-container">
-            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
-        </div>
+        <header>
+        <div class="logo-container">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
+        </div>
 
-        <input type="text" class="search-bar" placeholder="Search videos...">
+        <input type="text" class="search-bar" placeholder="Search videos...">
 
-        <div class="profile-btn" id="open-profile">
-            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
-        </div>
-    </header>
+        <div class="profile-btn" id="open-profile">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
+        </div>
+    </header>
 
-    <div class="row-container">
-        <div class="row-label">Favorites</div>
-        <div class="video-row" id="favorites-row"></div>
-    </div>
+        <div class="row-container">
+        <div class="row-label">Favorites</div>
+        <div class="video-row" id="favorites-row"></div>
+    </div>
 
-    <div class="row-container">
-        <div class="row-label">Most Viewed</div>
-        <div class="video-row" id="most-viewed-row"></div>
-    </div>
+    <div class="row-container">
+        <div class="row-label">Most Viewed</div>
+        <div class="video-row" id="most-viewed-row"></div>
+    </div>
 
-    <div class="row-container">
-        <div class="row-label">Older Videos</div>
-        <div class="video-row" id="older-videos-row"></div>
-    </div>
+    <div class="row-container">
+        <div class="row-label">Older Videos</div>
+        <div class="video-row" id="older-videos-row"></div>
+    </div>
 
-    <div class="row-container">
-        <div class="row-label">Watch History</div>
-        <div class="video-row" id="watch-history-row"></div>
-    </div>
+    <div class="row-container">
+        <div class="row-label">Watch History</div>
+        <div class="video-row" id="watch-history-row"></div>
+    </div>
 
-    <div id="video-modal">
-        <div class="close-btn">&times;</div>
-        <iframe src="" allowfullscreen></iframe>
-    </div>
+        <div id="video-modal">
+        <div class="close-btn">&times;</div>
+        <iframe src="" allowfullscreen></iframe>
+    </div>
 
-    <div id="profile-modal">
-        <div class="modal-content">
-            <div class="close-btn">&times;</div>
-            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
-            <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
-            <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
-            <button class="follow-btn" id="follow-btn">Follow</button>
-            <div class="links">
-                <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
-                <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
-                <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
-            </div>
-        </div>
-    </div>
+        <div id="profile-modal">
+        <div class="modal-content">
+            <div class="close-btn">&times;</div>
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
+            <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
+            <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
+            <button class="follow-btn" id="follow-btn">Follow</button>
+            <div class="links">
+                <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
+                <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
+                <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        © 2025 Tr3vN0x — All Rights Reserved
-    </footer>
+        <footer>
+        © 2025 Tr3vN0x — All Rights Reserved
+    </footer>
 </main>
 
 
 <script>
-// --- NEW LOADING SCRIPT ---
+// ---------------- NEW LOADING SCRIPT ----------------
 document.addEventListener('DOMContentLoaded', () => {
-    const splashScreen = document.getElementById('splash-screen');
-    const mainContent = document.getElementById('main-content');
-    const loadingPercentage = document.getElementById('loading-percentage');
-    
-    // Initial setup: hide main content and prevent interaction
-    mainContent.style.opacity = '0';
-    mainContent.style.pointerEvents = 'none';
+    const splashScreen = document.getElementById('splash-screen');
+    const mainContent = document.getElementById('main-content');
+    const loadingPercentage = document.getElementById('loading-percentage');
+    
+    // Initial setup: hide main content and prevent interaction
+    mainContent.style.opacity = '0';
+    mainContent.style.pointerEvents = 'none';
 
-    // --- Loading Logic ---
-    // Minimum time for the animation (Simulates fast loading, adjust as needed)
-    const MIN_LOAD_TIME_MS = 2000; 
-    const MAX_PERCENTAGE = 100;
-    let currentPercentage = 0;
-    const startTime = Date.now();
+    // --- Loading Logic ---
+    const MIN_LOAD_TIME_MS = 2000; 
+    const MAX_PERCENTAGE = 100;
+    let currentPercentage = 0;
+    const startTime = Date.now();
 
-    // Function to animate the percentage using requestAnimationFrame for smoothness
-    function animateLoading() {
-        const elapsedTime = Date.now() - startTime;
-        
-        // Calculate percentage based on time elapsed versus the minimum load time
-        let targetPercentage = Math.min(
-            Math.floor((elapsedTime / MIN_LOAD_TIME_MS) * MAX_PERCENTAGE), 
-            MAX_PERCENTAGE
-        );
+    function animateLoading() {
+        const elapsedTime = Date.now() - startTime;
+        
+        let targetPercentage = Math.min(
+            Math.floor((elapsedTime / MIN_LOAD_TIME_MS) * MAX_PERCENTAGE), 
+            MAX_PERCENTAGE
+        );
 
-        if (targetPercentage >= currentPercentage) {
-            currentPercentage = targetPercentage;
-            loadingPercentage.textContent = `${currentPercentage}%`;
-        }
-        
-        if (currentPercentage < MAX_PERCENTAGE) {
-            // Keep animating until 100%
-            requestAnimationFrame(animateLoading);
-        } else {
-            // Percentage hit 100%, now transition to main content
-            setTimeout(() => {
-                // 1. Fade out splash screen
-                splashScreen.style.opacity = '0';
-                
-                // 2. Fade in main content and re-enable interaction
-                mainContent.style.opacity = '1';
-                mainContent.style.pointerEvents = 'auto'; 
+        if (targetPercentage >= currentPercentage) {
+            currentPercentage = targetPercentage;
+            loadingPercentage.textContent = `${currentPercentage}%`;
+        }
+        
+        if (currentPercentage < MAX_PERCENTAGE) {
+            requestAnimationFrame(animateLoading);
+        } else {
+            setTimeout(() => {
+                // 1. Fade out splash screen
+                splashScreen.style.opacity = '0';
+                
+                // 2. Fade in main content and re-enable interaction
+                mainContent.style.opacity = '1';
+                mainContent.style.pointerEvents = 'auto'; 
 
-                // 3. Remove splash screen from DOM after transition completes (0.5s)
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                }, 500); 
-            }, 300); // Small delay to let user see 100% before transition
-        }
-    }
+                // 3. Remove splash screen from DOM after transition completes
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 500); 
+            }, 300); 
+        }
+    }
 
-    // Start the loading animation
-    animateLoading();
+    animateLoading();
 });
-// --- END NEW LOADING SCRIPT ---
+// ---------------- END NEW LOADING SCRIPT ----------------
 
 // ---------------- DATA ----------------
 const favorites = [];
 const mostViewed = [
-    {id:"92y9uaQMIa8", title:"Most Viewed 1"},
-    {id:"kNkK_qclihc", title:"Most Viewed 2"},
-    {id:"Sn4dyr5v7m0", title:"Most Viewed 3"}
+    {id:"92y9uaQMIa8", title:"Most Viewed 1"},
+    {id:"kNkK_qclihc", title:"Most Viewed 2"},
+    {id:"Sn4dyr5v7m0", title:"Most Viewed 3"}
 ];
 const olderVideos = [
-    {id:"ZiEd3RoiKtk", title:"Older Video 1"},
-    {id:"J-W0Vfrc26U", title:"Older Video 2"},
-    {id:"Uwwga_CiFqc", title:"Older Video 3"},
-    {id:"Sn4dyr5v7m0", title:"Older Video 4"}
+    {id:"ZiEd3RoiKtk", title:"Older Video 1"},
+    {id:"J-W0Vfrc26U", title:"Older Video 2"},
+    {id:"Uwwga_CiFqc", title:"Older Video 3"},
+    {id:"Sn4dyr5v7m0", title:"Older Video 4"}
 ];
 const watchHistory = [];
 
 // ---------------- VIDEO RENDER ----------------
 function createVideoCard(video) {
-    const card = document.createElement('div');
-    card.className = 'video-card';
-    card.setAttribute('data-video', video.id);
-    card.innerHTML = `
-        <div class="thumbnail-container">
-            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
-            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
-        </div>
-        <div class="video-title">${video.title}</div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn">
-    `;
-    const favoriteBtn = card.querySelector('.favorite-btn');
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.setAttribute('data-video', video.id);
+    card.innerHTML = `
+        <div class="thumbnail-container">
+            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+        </div>
+        <div class="video-title">${video.title}</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn">
+    `;
+    const favoriteBtn = card.querySelector('.favorite-btn');
 
-    // Click favorite
-    favoriteBtn.addEventListener('click', e=>{
-        e.stopPropagation();
-        if(!favorites.find(v=>v.id===video.id)){
-            favorites.push(video);
-            favoriteBtn.classList.add('favorited');
-            renderFavorites();
-        } else {
-            const index = favorites.findIndex(v=>v.id===video.id);
-            favorites.splice(index,1);
-            favoriteBtn.classList.remove('favorited');
-            renderFavorites();
-        }
-    });
+    // Click favorite
+    favoriteBtn.addEventListener('click', e=>{
+        e.stopPropagation();
+        if(!favorites.find(v=>v.id===video.id)){
+            favorites.push(video);
+            favoriteBtn.classList.add('favorited');
+            renderFavorites();
+        } else {
+            const index = favorites.findIndex(v=>v.id===video.id);
+            favorites.splice(index,1);
+            favoriteBtn.classList.remove('favorited');
+            renderFavorites();
+        }
+    });
 
-    // Click to play
-    card.addEventListener('click',()=>{
-        const modal = document.getElementById('video-modal');
-        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
-        modal.style.display = 'flex';
-        // Add to watch history if not already there
-        if(!watchHistory.find(v=>v.id===video.id)){
-            watchHistory.push(video);
-            renderRow('watch-history-row', watchHistory);
-        }
-    });
-    return card;
+    // Click to play
+    card.addEventListener('click',()=>{
+        const modal = document.getElementById('video-modal');
+        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
+        modal.style.display = 'flex';
+        // Add to watch history if not already there
+        if(!watchHistory.find(v=>v.id===video.id)){
+            watchHistory.push(video);
+            renderRow('watch-history-row', watchHistory);
+        }
+    });
+    return card;
 }
 
 function renderRow(rowId, videos){
-    const row = document.getElementById(rowId);
-    row.innerHTML = '';
-    videos.forEach(v=>{
-        row.appendChild(createVideoCard(v));
-    });
+    const row = document.getElementById(rowId);
+    row.innerHTML = '';
+    videos.forEach(v=>{
+        row.appendChild(createVideoCard(v));
+    });
 }
 
 function renderFavorites(){
-    renderRow('favorites-row', favorites);
+    renderRow('favorites-row', favorites);
 }
 
 // ---------------- INITIAL RENDER ----------------
@@ -592,31 +623,31 @@ renderRow('watch-history-row', watchHistory);
 // ---------------- VIDEO MODAL ----------------
 const modal = document.getElementById('video-modal');
 modal.querySelector('.close-btn').addEventListener('click', ()=>{
-    modal.querySelector('iframe').src = '';
-    modal.style.display = 'none';
+    modal.querySelector('iframe').src = '';
+    modal.style.display = 'none';
 });
 modal.addEventListener('click', e=>{
-    if(e.target === modal){
-        modal.querySelector('iframe').src = '';
-        modal.style.display = 'none';
-    }
+    if(e.target === modal){
+        modal.querySelector('iframe').src = '';
+        modal.style.display = 'none';
+    }
 });
 
 // ---------------- SEARCH ----------------
 const searchInput = document.querySelector('.search-bar');
 searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    const allRows = [
-        {id: 'favorites-row', videos: favorites},
-        {id: 'most-viewed-row', videos: mostViewed},
-        {id: 'older-videos-row', videos: olderVideos},
-        {id: 'watch-history-row', videos: watchHistory}
-    ];
+    const query = searchInput.value.toLowerCase();
+    const allRows = [
+        {id: 'favorites-row', videos: favorites},
+        {id: 'most-viewed-row', videos: mostViewed},
+        {id: 'older-videos-row', videos: olderVideos},
+        {id: 'watch-history-row', videos: watchHistory}
+    ];
 
-    allRows.forEach(rowObj => {
-        const filtered = rowObj.videos.filter(v=>v.title.toLowerCase().includes(query));
-        renderRow(rowObj.id, filtered);
-    });
+    allRows.forEach(rowObj => {
+        const filtered = rowObj.videos.filter(v=>v.title.toLowerCase().includes(query));
+        renderRow(rowObj.id, filtered);
+    });
 });
 
 // ---------------- PROFILE MODAL ----------------
@@ -632,10 +663,10 @@ const followersCount = document.getElementById('followers-count');
 let followers = 0;
 
 followBtn.addEventListener('click', ()=>{
-    followers++;
-    followersCount.textContent = followers;
-    followBtn.disabled = true;
-    followBtn.textContent = 'Following';
+    followers++;
+    followersCount.textContent = followers;
+    followBtn.disabled = true;
+    followBtn.textContent = 'Following';
 });
 </script>
 
