@@ -4,31 +4,28 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" type="image/png">
 <style>
 /* ---------------------- BODY & HEADER ---------------------- */
 body {
     background: #141414;
     color: #fff;
-    font-family: 'Orbitron', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     transition: background 0.3s, color 0.3s;
 }
 header {
     background: #141414;
     padding: 15px 30px;
-    font-size: 28px;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-header img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-}
+header .logo-container { display:flex; align-items:center; gap:12px; }
+header img.icon { width:45px; height:45px; border-radius:50%; }
+header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
+
+/* Theme toggle */
 #theme-btn { background:#e50914; border:none; color:#fff; padding:8px 12px; border-radius:5px; cursor:pointer; }
 
 /* ---------------------- FEATURED BANNER ---------------------- */
@@ -122,8 +119,10 @@ h2 { margin:20px 0 10px 20px; font-size:20px; }
 <body>
 
 <header>
-    <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
-    Tr3vN0x Video Hub
+    <div class="logo-container">
+        <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" alt="icon"/>
+        <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="title"/>
+    </div>
     <button id="theme-btn">🌙</button>
 </header>
 
@@ -296,9 +295,6 @@ document.getElementById("search-bar").addEventListener("input",()=>{
     });
     document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
 });
-
-// CATEGORY TABS
-document.querySelectorAll(".category-tab").forEach(tab=>{ tab.onclick=()=>{ const target=document.getElementById(tab.dataset.target); if(target) target.scrollIntoView({behavior:"smooth"}); }; });
 
 // DARK/LIGHT TOGGLE
 document.getElementById("theme-btn").onclick=()=>{
