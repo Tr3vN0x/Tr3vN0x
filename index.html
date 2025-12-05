@@ -254,6 +254,31 @@ button[type="submit"]:hover, .modal-button:hover {
 #cancel-edit-button { background: #444; margin-top: 10px; }
 #cancel-edit-button:hover { background: #555; }
 
+/* Follower/Following Count Display */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0 25px 0;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+.stat-item {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #fff;
+    cursor: default;
+}
+.stat-item span {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+    color: #aaa;
+    margin-top: 2px;
+}
+
+
 /* Messages/DM Styles */
 #messages-inbox-view { max-height: 400px; overflow-y: auto; }
 .inbox-item { 
@@ -285,6 +310,22 @@ button[type="submit"]:hover, .modal-button:hover {
 .dm-message-self .dm-bubble { 
     background: #e53935; 
     border-bottom-right-radius: 4px; 
+}
+
+/* Follow Button Styles */
+#follow-button {
+    background: #3954e5; /* Blue */
+}
+#follow-button:hover {
+    background: #5b79ff;
+    box-shadow: 0 2px 10px rgba(57, 84, 229, 0.5);
+}
+#unfollow-button {
+    background: #444;
+}
+#unfollow-button:hover {
+    background: #555;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 </style>
@@ -372,6 +413,11 @@ button[type="submit"]:hover, .modal-button:hover {
                         <p id="profile-bio-display"></p>
                     </div>
                 </div>
+                <div class="stats-container">
+                    <div class="stat-item" id="my-followers-count">0<span>Followers</span></div>
+                    <div class="stat-item" id="my-following-count">0<span>Following</span></div>
+                </div>
+
                 <button id="edit-profile-button" class="modal-button" style="width: 100%;">Edit Profile</button>
             </div>
             <form id="profile-edit-form" style="display:none;">
@@ -403,6 +449,16 @@ button[type="submit"]:hover, .modal-button:hover {
                     <p id="other-profile-bio-display"></p>
                 </div>
             </div>
+             <div class="stats-container">
+                <div class="stat-item" id="other-followers-count">0<span>Followers</span></div>
+                <div class="stat-item" id="other-following-count">0<span>Following</span></div>
+            </div>
+
+            <div id="follow-button-container">
+                <button id="follow-button" class="modal-button" style="width: 100%; display:none;">Follow</button>
+                <button id="unfollow-button" class="modal-button" style="width: 100%; display:none;">Unfollow</button>
+            </div>
+
             <button id="dm-user-button" class="modal-button" style="width: 100%;">Direct Message</button>
         </div>
     </section>
@@ -444,10 +500,12 @@ const messagesLink = document.getElementById('messages-link');
 const messagesOverlay = document.getElementById('messages-overlay');
 const userProfileOverlay = document.getElementById('user-profile-overlay');
 const dmUserButton = document.getElementById('dm-user-button');
+const followButton = document.getElementById('follow-button');
+const unfollowButton = document.getElementById('unfollow-button');
 
 const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
 const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; 
-const DUMMY_PASSWORD = "password"; // Use a consistent dummy password for all users
+const DUMMY_PASSWORD = "password"; 
 
 let isLoggedIn = false;
 let currentUsername = '';
@@ -456,22 +514,69 @@ let profilePicture = DEFAULT_AVATAR;
 let userBio = "Hello! I am a new user on Tr3vN0x's video site.";
 let currentDMTarget = null;
 
-// --- UTILITY FUNCTIONS ---
+
+// --- CORE UTILITY FUNCTIONS ---
 
 function getUserData(username) {
     const isOwner = username.toLowerCase() === 'tr3vn0x';
-    // Retrieve profile data, defaulting to generic if user is new
-    // **KEY FOR SYNCHRONIZATION: Always fetch the latest from storage.**
     const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
     const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
     const verified = isOwner;
     return { pic, bio, verified };
 }
 
-// --- RENDERING ---
+// --- FOLLOWER/FOLLOWING UTILITIES (NEW) ---
+
+/** Gets an array of usernames from a specific list (followers or following). */
+function getFollowList(username, type) {
+    // type will be '_following' or '_followers'
+    return JSON.parse(localStorage.getItem(`${username}${type}`) || '[]');
+}
+
+/** Updates a list in localStorage for a specific user. */
+function updateFollowList(username, type, list) {
+    localStorage.setItem(`${username}${type}`, JSON.stringify(list));
+}
+
+/** Toggles the follow status between two users. */
+function toggleFollow(targetUsername, isFollowing) {
+    // 1. Get the current user's 'following' list
+    let myFollowing = getFollowList(currentUsername, '_following');
+    
+    // 2. Get the target user's 'followers' list
+    let targetFollowers = getFollowList(targetUsername, '_followers');
+
+    if (isFollowing) {
+        // UNFOLLOW: Remove target from myFollowing list
+        myFollowing = myFollowing.filter(u => u !== targetUsername);
+        // UNFOLLOW: Remove current user from targetFollowers list
+        targetFollowers = targetFollowers.filter(u => u !== currentUsername);
+        alert(`You unfollowed ${targetUsername}.`);
+    } else {
+        // FOLLOW: Add target to myFollowing list if not already there
+        if (!myFollowing.includes(targetUsername)) {
+            myFollowing.push(targetUsername);
+        }
+        // FOLLOW: Add current user to targetFollowers list if not already there
+        if (!targetFollowers.includes(currentUsername)) {
+            targetFollowers.push(currentUsername);
+        }
+        alert(`You are now following ${targetUsername}!`);
+    }
+
+    // 3. Save the updated lists
+    updateFollowList(currentUsername, '_following', myFollowing);
+    updateFollowList(targetUsername, '_followers', targetFollowers);
+
+    // 4. Re-render the profile to update buttons and counts
+    openUserProfileModal(targetUsername); 
+}
+
+
+// --- RENDERING & DISPLAY ---
 
 function renderVideoRows(){
-    const videoData = [
+    const videoData = [
         { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
         { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
         { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
@@ -497,7 +602,6 @@ function renderVideoRows(){
                     <p>Views: 0</p>
                 </div>
             `;
-            // Add click listener to card to set featured video
             card.addEventListener('click', ()=>{
                 const featuredSection = document.getElementById('featured');
                 const featuredPlayer = featuredSection.querySelector('.featured-player');
@@ -521,7 +625,6 @@ function renderChatHistory(){
     
     chatMessagesContainer.innerHTML = '';
     history.slice().reverse().forEach(msg=>{
-        // **SYNCHRONIZATION: Always call getUserData here to fetch latest avatar/bio for chat display.**
         const userData = getUserData(msg.username); 
         const div = document.createElement('div'); 
         div.className='chat-message';
@@ -538,28 +641,26 @@ function renderChatHistory(){
     });
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 
-    // Attach click listeners to usernames
     document.querySelectorAll('.chat-username').forEach(span => {
         span.addEventListener('click', (e) => {
             const targetUsername = e.currentTarget.getAttribute('data-user');
             if (!isLoggedIn) {
-                 // If not logged in, prompt to log in instead of opening profile
                 alert("You must be logged in to view user profiles or chat.");
                 toggleAuthModal(true);
             }
             else if (targetUsername !== currentUsername) {
                 openUserProfileModal(targetUsername);
             } else {
-                toggleProfileModal(true); // Open own profile
+                toggleProfileModal(true); 
             }
         });
     });
 }
 
-// --- DM SYSTEM LOGIC (FIXED) ---
+
+// --- DM SYSTEM LOGIC (UNMODIFIED) ---
 
 function getDMKey(user1, user2) {
-    // Ensure consistent key regardless of order (alphabetical)
     const users = [user1.toLowerCase(), user2.toLowerCase()].sort();
     return `DM_${users[0]}_${users[1]}`;
 }
@@ -569,11 +670,6 @@ function getDMHistory(targetUsername) {
     return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
-/**
- * Ensures a conversation pair exists in a user's inbox list.
- * @param {string} user The user whose inbox is being updated.
- * @param {string} targetUser The other user in the conversation.
- */
 function updateInbox(user, targetUser) {
     let inbox = JSON.parse(localStorage.getItem(`${user}_inbox`) || '[]');
     if (!inbox.includes(targetUser)) {
@@ -581,7 +677,6 @@ function updateInbox(user, targetUser) {
         localStorage.setItem(`${user}_inbox`, JSON.stringify(inbox));
     }
 }
-
 
 function saveDMMessage(targetUsername, messageText) {
     const key = getDMKey(currentUsername, targetUsername);
@@ -594,9 +689,8 @@ function saveDMMessage(targetUsername, messageText) {
     history.push(newMessage);
     localStorage.setItem(key, JSON.stringify(history));
 
-    // **FIX: Update the inbox list for BOTH the sender and the receiver.**
-    updateInbox(currentUsername, targetUsername); // Sender's inbox
-    updateInbox(targetUsername, currentUsername); // Receiver's inbox
+    updateInbox(currentUsername, targetUsername); 
+    updateInbox(targetUsername, currentUsername); 
 }
 
 function renderDMInbox() {
@@ -613,7 +707,6 @@ function renderDMInbox() {
         return;
     }
 
-    // Sort inbox by most recent message (or just by name for simplicity)
     inboxTargets.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
     inboxTargets.forEach(target => {
@@ -665,7 +758,7 @@ function renderDMChatMessages(targetUsername) {
 }
 
 
-// --- PROFILE HANDLERS (SYNCHRONIZATION CHECKED) ---
+// --- PROFILE HANDLERS (UPDATED) ---
 
 function toggleAuthModal(show) {
     document.getElementById('auth-overlay').style.display = show ? 'flex' : 'none';
@@ -674,10 +767,14 @@ function toggleAuthModal(show) {
 function toggleProfileModal(show) {
     document.getElementById('profile-overlay').style.display = show ? 'flex' : 'none';
     if (show) {
-        // Render own profile data
+        // Load own profile data (already in local state)
         document.getElementById('profile-username-display').innerHTML = `${currentUsername}${isVerified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
         document.getElementById('profile-pic-display').src = profilePicture;
         document.getElementById('profile-bio-display').innerText = userBio;
+
+        // **NEW: Display Follower/Following Counts for own profile**
+        document.getElementById('my-followers-count').innerHTML = `${getFollowList(currentUsername, '_followers').length}<span>Followers</span>`;
+        document.getElementById('my-following-count').innerHTML = `${getFollowList(currentUsername, '_following').length}<span>Following</span>`;
 
         document.getElementById('edit-pic-url').value = profilePicture === DEFAULT_AVATAR ? '' : profilePicture;
         document.getElementById('edit-bio').value = userBio;
@@ -688,19 +785,41 @@ function toggleProfileModal(show) {
     }
 }
 
-function openUserProfileModal(username) {
-    // **SYNCHRONIZATION: This call ensures we always get the LATEST profile data.**
-    const userData = getUserData(username);
+function openUserProfileModal(targetUsername) {
+    const userData = getUserData(targetUsername);
     
-    document.getElementById('other-profile-title').innerText = `${username}'s Profile`;
-    document.getElementById('other-profile-username-display').innerHTML = `${username}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
+    document.getElementById('other-profile-title').innerText = `${targetUsername}'s Profile`;
+    document.getElementById('other-profile-username-display').innerHTML = `${targetUsername}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
     document.getElementById('other-profile-pic-display').src = userData.pic;
     document.getElementById('other-profile-bio-display').innerText = userData.bio;
 
+    // **NEW: Display Follower/Following Counts for other user**
+    document.getElementById('other-followers-count').innerHTML = `${getFollowList(targetUsername, '_followers').length}<span>Followers</span>`;
+    document.getElementById('other-following-count').innerHTML = `${getFollowList(targetUsername, '_following').length}<span>Following</span>`;
+
+
+    // **NEW: Handle Follow Button State**
+    const myFollowingList = getFollowList(currentUsername, '_following');
+    const isFollowing = myFollowingList.includes(targetUsername);
+
+    followButton.style.display = isFollowing ? 'none' : 'block';
+    unfollowButton.style.display = isFollowing ? 'block' : 'none';
+
+    // Clear previous listeners and add new ones to prevent duplication
+    followButton.replaceWith(followButton.cloneNode(true));
+    unfollowButton.replaceWith(unfollowButton.cloneNode(true));
+    const newFollowButton = document.getElementById('follow-button');
+    const newUnfollowButton = document.getElementById('unfollow-button');
+
+    newFollowButton.addEventListener('click', () => toggleFollow(targetUsername, false));
+    newUnfollowButton.addEventListener('click', () => toggleFollow(targetUsername, true));
+
+
+    // DM button setup
     dmUserButton.onclick = () => {
         userProfileOverlay.style.display = 'none';
         toggleMessagesModal(true);
-        openDMChat(username);
+        openDMChat(targetUsername);
     };
 
     userProfileOverlay.style.display = 'flex';
@@ -713,14 +832,13 @@ function toggleMessagesModal(show) {
     }
 }
 
-// --- AUTHENTICATION LOGIC (WITH DUMMY PASSWORD) ---
+// --- AUTHENTICATION LOGIC (UNMODIFIED) ---
 
 function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('login-username').value.trim();
     const password = document.getElementById('login-password').value;
     
-    // 1. Check if username exists
     const userExists = localStorage.getItem(`user_${username}_exists`); 
 
     if (!userExists) {
@@ -728,23 +846,19 @@ function handleLogin(e) {
         return;
     }
 
-    // 2. Check for the correct dummy password
     if (password !== DUMMY_PASSWORD) {
         alert("Login Failed: Incorrect Password. (Remember, it's 'password' for this demo!)");
         return;
     }
 
-    // LOGIN SUCCESS
     isLoggedIn = true;
     currentUsername = username;
     
-    // Load user data
     const userData = getUserData(currentUsername);
     isVerified = userData.verified;
     profilePicture = userData.pic;
     userBio = userData.bio;
     
-    // Store session state
     localStorage.setItem('current_user_session', username);
 
     updateAuthState();
@@ -763,17 +877,14 @@ function handleSignup(e) {
         return;
     }
     
-    // Create new account: Store existence marker
     localStorage.setItem(`user_${username}_exists`, 'true');
     
-    // Store default profile data
     localStorage.setItem(`${username}_pic`, DEFAULT_AVATAR);
     localStorage.setItem(`${username}_bio`, "Hello! I am a new user on Tr3vN0x's video site.");
 
-    // Auto-login after successful signup
     isLoggedIn = true;
     currentUsername = username;
-    isVerified = (username.toLowerCase() === 'tr3vn0x'); // Only the owner is verified by default
+    isVerified = (username.toLowerCase() === 'tr3vn0x'); 
     profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     
@@ -787,7 +898,6 @@ function handleSignup(e) {
 }
 
 function handleLogout() {
-    // Clear session state
     localStorage.removeItem('current_user_session');
 
     isLoggedIn = false;
@@ -832,7 +942,6 @@ function updateAuthState() {
 function initializeSession() {
     const activeUser = localStorage.getItem('current_user_session');
     if (activeUser) {
-        // Automatically log in the user if a session is found
         isLoggedIn = true;
         currentUsername = activeUser;
         
@@ -843,6 +952,7 @@ function initializeSession() {
     }
     updateAuthState();
 }
+
 // --- ATTACHING ALL EVENT LISTENERS ---
 
 // Auth
@@ -857,7 +967,6 @@ document.getElementById('close-profile').addEventListener('click', () => toggleP
 document.getElementById('edit-profile-button').addEventListener('click', () => { profileView.style.display = 'none'; profileEditForm.style.display = 'block'; });
 document.getElementById('cancel-edit-button').addEventListener('click', () => { profileEditForm.style.display = 'none'; profileView.style.display = 'block'; });
 
-// **UPDATED PROFILE EDIT SUBMIT LISTENER**
 document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const newPicUrl = document.getElementById('edit-pic-url').value.trim();
@@ -873,7 +982,6 @@ document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
     profileView.style.display = 'block';
     toggleProfileModal(false); 
     
-    // **SYNCHRONIZATION FIX 2: Re-render chat immediately to update the user's avatar/username in the chat.**
     renderChatHistory(); 
     
     alert('Profile updated successfully!');
@@ -961,7 +1069,6 @@ document.querySelectorAll('.toggle-pass').forEach(button => {
 
 
 // --- INITIALIZATION ---
-// NOTE: Must call initializeSession BEFORE rendering anything reliant on user data
 initializeSession(); 
 renderVideoRows();
 renderChatHistory();
