@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Dark LED Hub</title>
 <style>
+/* ---------------- GLOBAL ---------------- */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -30,7 +31,6 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
-    animation: pulseLogo 2s infinite;
 }
 
 .logo-container img {
@@ -38,12 +38,6 @@ header {
     border-radius: 4px;
     border: 1px solid #00ff66;
     box-shadow: 0 0 8px #00ff66;
-}
-
-@keyframes pulseLogo {
-    0% { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px #00ff66, 0 0 30px #00ff66; }
-    100% { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
 }
 
 .search-bar {
@@ -87,81 +81,85 @@ header {
     box-shadow: 0 0 12px #00ff66;
 }
 
-/* ---------------- HORIZONTAL ROWS ---------------- */
-.row {
+/* ---------------- ROWS ---------------- */
+.row-container {
     display: flex;
     align-items: flex-start;
-    gap: 15px;
-    padding: 20px 25px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #00ff66 #111;
+    padding: 20px;
+    gap: 10px;
 }
 
-.row::-webkit-scrollbar {
-    height: 10px;
-}
-
-.row::-webkit-scrollbar-thumb {
-    background: #00ff66;
-    border-radius: 5px;
-}
-
-.row::-webkit-scrollbar-track {
-    background: #111;
-}
-
-.row-header {
-    flex: 0 0 200px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+.row-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 18px;
     color: #00ff66;
-    margin-right: 10px;
-    white-space: nowrap;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Video Card */
+.video-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.video-row::-webkit-scrollbar {
+    display: none;
+}
+
 .video-card {
-    flex: 0 0 200px;
     background: #111;
     border: 1px solid #003300;
     border-radius: 12px;
+    min-width: 220px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .video-card:hover {
+    transform: scale(1.08);
     box-shadow: 0 0 12px #00ff66;
 }
 
 .thumbnail-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 */
+    height: 120px;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .thumbnail-container img {
-    position: absolute;
-    top:0; left:0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.thumbnail-container .hover-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.thumbnail-container:hover .hover-thumb {
+    opacity: 1;
 }
 
 .video-title {
-    padding: 6px 8px;
+    margin-top: 8px;
     font-weight: bold;
     color: #00ff66;
     text-shadow: 0 0 4px #00ff66;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: center;
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -175,24 +173,7 @@ footer {
     text-shadow: 0 0 4px #00ff66;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 768px) {
-    header { flex-direction: column; align-items: center; }
-    .search-bar { width: 90%; }
-    .logo-container img { height: 40px; }
-    .about { width: 50px; height: 50px; }
-    .row-header { flex: 0 0 120px; font-size: 1em; }
-    .video-card { flex: 0 0 150px; }
-}
-
-@media (max-width: 480px) {
-    .logo-container img { height: 35px; }
-    .about { width: 45px; height: 45px; }
-    .search-bar { width: 95%; }
-    .video-card { flex: 0 0 120px; }
-}
-
-/* ---------------- MODAL ---------------- */
+/* ---------------- MODAL PLAYER ---------------- */
 #video-modal {
     display: none;
     position: fixed;
@@ -223,10 +204,29 @@ footer {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+    header { flex-direction: column; align-items: center; }
+    .search-bar { width: 90%; }
+    .logo-container img { height: 40px; }
+    .about { width: 50px; height: 50px; }
+    .row-container { flex-direction: column; }
+    .row-label { writing-mode: horizontal-tb; transform: none; min-width: auto; padding-bottom: 5px;}
+    .video-row { overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+    .logo-container img { height: 35px; }
+    .about { width: 45px; height: 45px; }
+    .thumbnail-container { height: 100px; }
+    .search-bar { width: 95%; }
+}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
     <div class="logo-container">
         <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdm4wWA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Logo">
@@ -239,17 +239,26 @@ footer {
     </div>
 </header>
 
-<!-- Rows -->
-<div class="row" id="most-viewed-row">
-    <div class="row-header">Most Viewed</div>
+<!-- ROWS -->
+<div class="row-container">
+    <div class="row-label">Most Viewed</div>
+    <div class="video-row" id="most-viewed-row">
+        <!-- Videos added via JS -->
+    </div>
 </div>
 
-<div class="row" id="older-videos-row">
-    <div class="row-header">Older Videos</div>
+<div class="row-container">
+    <div class="row-label">Older Videos</div>
+    <div class="video-row" id="older-videos-row">
+        <!-- Videos added via JS -->
+    </div>
 </div>
 
-<div class="row" id="watch-history-row">
-    <div class="row-header">Watch History</div>
+<div class="row-container">
+    <div class="row-label">Watch History</div>
+    <div class="video-row" id="watch-history-row">
+        <!-- Videos added via JS -->
+    </div>
 </div>
 
 <!-- VIDEO MODAL -->
@@ -258,6 +267,7 @@ footer {
     <iframe src="" allowfullscreen></iframe>
 </div>
 
+<!-- FOOTER -->
 <footer>
     © 2025 Tr3vN0x — All Rights Reserved
 </footer>
@@ -266,58 +276,59 @@ footer {
 // Video data
 const mostViewed = [
     {id:"92y9uaQMIa8", title:"Most Viewed 1"},
-    {id:"kNkK_qclihc", title:"Most Viewed 2"}
+    {id:"kNkK_qclihc", title:"Most Viewed 2"},
+    {id:"Sn4dyr5v7m0", title:"Most Viewed 3"}
 ];
-const olderVideos = [
-    {id:"ZiEd3RoiKtk", title:"Older 1"},
-    {id:"J-W0Vfrc26U", title:"Older 2"},
-    {id:"Uwwga_CiFqc", title:"Older 3"},
-    {id:"Sn4dyr5v7m0", title:"Older 4"}
-];
-let watchHistory = [];
 
-// Function to create video card
-function createCard(video){
+const olderVideos = [
+    {id:"ZiEd3RoiKtk", title:"Older Video 1"},
+    {id:"J-W0Vfrc26U", title:"Older Video 2"},
+    {id:"Uwwga_CiFqc", title:"Older Video 3"},
+    {id:"Sn4dyr5v7m0", title:"Older Video 4"}
+];
+
+const watchHistory = [];
+
+// Render videos
+function createVideoCard(video) {
     const card = document.createElement('div');
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
     card.innerHTML = `
         <div class="thumbnail-container">
-            <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
         </div>
         <div class="video-title">${video.title}</div>
     `;
-    card.addEventListener('click', () => {
-        // Modal play
+    card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
-
-        // Add to watch history
+        // Add to watch history if not already there
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
-            document.getElementById('watch-history-row').appendChild(createCard(video));
+            renderWatchHistory();
         }
     });
     return card;
 }
 
-// Render videos
-mostViewed.forEach(v => document.getElementById('most-viewed-row').appendChild(createCard(v)));
-olderVideos.forEach(v => document.getElementById('older-videos-row').appendChild(createCard(v)));
+function renderRow(rowId, videos){
+    const row = document.getElementById(rowId);
+    row.innerHTML = '';
+    videos.forEach(v=>{
+        row.appendChild(createVideoCard(v));
+    });
+}
 
-// Modal close
-document.querySelector('#video-modal .close-btn').addEventListener('click',()=>{
-    const modal = document.getElementById('video-modal');
-    modal.querySelector('iframe').src = '';
-    modal.style.display = 'none';
-});
-document.getElementById('video-modal').addEventListener('click', e=>{
-    if(e.target === e.currentTarget){
-        e.currentTarget.querySelector('iframe').src='';
-        e.currentTarget.style.display='none';
-    }
-});
+function renderWatchHistory(){
+    renderRow('watch-history-row', watchHistory);
+}
+
+// Initial render
+renderRow('most-viewed-row', mostViewed);
+renderRow('older-videos-row', olderVideos);
 </script>
 
 </body>
