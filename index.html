@@ -336,15 +336,23 @@ button[type="submit"]:hover, .modal-button:hover {
                 <div class="tab active" id="login-tab">Log In</div>
                 <div class="tab" id="signup-tab">Sign Up</div>
             </div>
-                        <form id="login-form">
+            
+            <form id="login-form">
                 <div class="form-group"><label>Username</label><input type="text" id="login-username" required></div>
-                <div class="form-group"><label>Password (Any value works - Simulation Only)</label><input type="password" id="login-password" value="password" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
+                    <p style="font-size:0.8em; color:#e53935; margin-top:5px;">NOTE: The password is always **"password"** in this client-side demo.</p>
+                </div>
                 <button type="submit">Log In</button>
             </form>
-                        <form id="signup-form" style="display:none;">
+            
+            <form id="signup-form" style="display:none;">
                 <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
                 <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
-                <div class="form-group"><label>Password (Not stored/checked - Simulation Only)</label><input type="password" id="signup-password" value="password" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
+                    <p style="font-size:0.8em; color:#e53935; margin-top:5px;">NOTE: The password will be set to **"password"** automatically for this client-side demo.</p>
+                </div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
@@ -439,6 +447,7 @@ const dmUserButton = document.getElementById('dm-user-button');
 
 const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
 const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; 
+const DUMMY_PASSWORD = "password"; // Use a consistent dummy password for all users
 
 let isLoggedIn = false;
 let currentUsername = '';
@@ -687,16 +696,24 @@ function toggleMessagesModal(show) {
     }
 }
 
-// --- AUTHENTICATION LOGIC (SECURE SIMULATION) ---
+// --- AUTHENTICATION LOGIC (WITH DUMMY PASSWORD) ---
 
 function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('login-username').value.trim();
-    // In this simplified version, we only check if the user has signed up before.
+    const password = document.getElementById('login-password').value;
+    
+    // 1. Check if username exists
     const userExists = localStorage.getItem(`user_${username}_exists`); 
 
     if (!userExists) {
         alert("Login Failed: Username does not exist. Please sign up first.");
+        return;
+    }
+
+    // 2. Check for the correct dummy password
+    if (password !== DUMMY_PASSWORD) {
+        alert("Login Failed: Incorrect Password. (Remember, it's 'password' for this demo!)");
         return;
     }
 
@@ -729,7 +746,7 @@ function handleSignup(e) {
         return;
     }
     
-    // Create new account: Store existence marker and default data
+    // Create new account: Store existence marker
     localStorage.setItem(`user_${username}_exists`, 'true');
     
     // Store default profile data
@@ -905,7 +922,7 @@ signupTab.addEventListener('click', () => {
     signupForm.style.display = 'block';
 });
 
-// Password toggles (Kept for visual consistency, though fields are ignored)
+// Password toggles
 document.querySelectorAll('.toggle-pass').forEach(button => {
     button.addEventListener('click', (e) => {
         const targetId = e.target.getAttribute('data-target');
