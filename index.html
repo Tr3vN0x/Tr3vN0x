@@ -4,119 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x - Red & Black Video Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; margin:0; background: linear-gradient(to bottom, #000 0%, #111 100%); color:#fff; }
+/* --- UPDATED STYLES FOR CLEANER/COOLER LOOK --- */
+body {
+    /* Use the new Inter font */
+    font-family: 'Inter', Arial, sans-serif;
+    margin:0;
+    /* Keeping the sleek gradient background */
+    background: linear-gradient(to bottom, #000 0%, #111 100%);
+    color:#fff;
+    /* Smooth scroll for professional feel */
+    scroll-behavior: smooth;
+}
 .container { max-width:1200px; margin:20px auto; padding:0 20px; }
-h1,h2 { color:#e53935; border-bottom:2px solid #444; padding-bottom:5px; margin-top:30px; }
-header { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#111; box-shadow:0 2px 4px rgba(0,0,0,0.5); position:sticky; top:0; z-index:100; }
-.search-container input { width:100%; padding:8px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
-.floating-auth { padding:8px 15px; background:#e53935; color:white; border-radius:4px; cursor:pointer; white-space: nowrap; transition: transform 0.2s; }
-.floating-auth:hover { transform:scale(1.05); }
-.floating-auth.logged-out { background: #e53935; } 
+
+/* 2. REFINED HEADERS */
+h1,h2 {
+    color:#e53935;
+    /* Softer, more spaced-out divider line */
+    border-bottom:2px solid rgba(229, 57, 53, 0.3);
+    padding-bottom:10px;
+    margin-top:40px; /* Increased top margin for separation */
+}
+
+/* 3. SLEEKER HEADER BAR */
+header { 
+    display:flex; justify-content:space-between; align-items:center; 
+    padding:15px 30px; 
+    background:rgba(0,0,0,0.9); /* Slightly translucent background */
+    box-shadow:0 4px 8px rgba(229, 57, 53, 0.2); /* Subtle red shadow */
+    position:sticky; top:0; z-index:100; 
+    backdrop-filter: blur(5px); /* Modern blur effect */
+}
+.search-container { flex-grow: 1; margin: 0 40px; max-width: 500px; }
+
+.search-container input { 
+    width:100%; padding:10px 20px; 
+    border:none; /* No harsh border */
+    border-radius:25px; /* Pill shape */
+    background:#222; color:#fff; 
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.search-container input:focus {
+    outline: none;
+    background: #333;
+    box-shadow: 0 0 0 2px #e53935; /* Red glow on focus */
+}
+
+.floating-auth { 
+    padding:10px 20px; /* More padding */
+    border-radius:25px; /* Pill shape */
+    font-weight:600; 
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s; 
+}
+.floating-auth:hover { 
+    transform:scale(1.05); 
+    box-shadow: 0 0 10px rgba(229, 57, 53, 0.6); /* Glow on hover */
+}
 .floating-auth.logged-in { background: #3954e5; } 
 
-#featured { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 15px rgba(255,0,0,0.3); }
-#featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
-.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
+/* 4. FEATURED SECTION */
+#featured { 
+    background:#1c1c1c; border-radius:12px; padding:30px; /* More internal padding */
+    margin-top:20px; 
+    box-shadow:0 6px 20px rgba(0,0,0,0.6); /* Deeper, darker shadow */
+}
+#featured h2 { margin-top:0; border-bottom:none; font-size:1.8em; }
+.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; border-radius: 8px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
 
-.video-row { margin-bottom: 40px; }
-.video-grid { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: none; position:relative; }
+.video-row { margin-bottom: 50px; }
+.video-grid { 
+    display: flex; gap: 20px; /* Slightly more space between cards */
+    overflow-x: auto; padding-bottom: 10px; 
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; 
+    position:relative; 
+}
 .video-grid::-webkit-scrollbar { display: none; }
-.video-card { background:#1c1c1c; border-radius:12px; overflow:hidden; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; min-width:280px; max-width:280px; flex-shrink:0; box-shadow:0 4px 8px rgba(0,0,0,0.4); }
-.video-card:hover { transform:scale(1.08); z-index:5; box-shadow:0 8px 25px rgba(255,0,0,0.6); }
+
+/* 5. POLISHED VIDEO CARDS */
+.video-card { 
+    background:#1c1c1c; 
+    border-radius:10px; /* Sleek corner radius */
+    overflow:hidden; cursor:pointer; 
+    border: 1px solid #1c1c1c; /* Base border for clean look */
+    transition: transform 0.2s, box-shadow 0.2s, border 0.2s; 
+    min-width:280px; max-width:280px; flex-shrink:0; 
+    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+.video-card:hover { 
+    transform:scale(1.05); /* Less aggressive scale */
+    z-index:5; 
+    /* Cleaner, modern hover effect with a red glow and border */
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.7), 0 8px 25px rgba(0,0,0,0.8); 
+    border: 1px solid #e53935; 
+}
 .thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
 .thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
-.video-info { padding:10px; display:flex; align-items:center; gap:5px; }
-.video-info h3 { margin:0 0 5px 0; line-height:1.2; color:#fff; font-size:1em; display:flex; align-items:center; gap:5px; }
+.video-info { padding:15px; display:block; } /* Changed to block for better title flow */
+.video-info h3 { 
+    margin:0 0 5px 0; line-height:1.3; color:#fff; 
+    font-size:1.1em; font-weight: 700; /* Bolder title */
+    display:flex; align-items:center; gap:5px; 
+}
 .verified-badge { width:18px; height:18px; }
-.video-info p { margin:0; font-size:0.85em; color:#bbb; }
+.video-info p { margin:0; font-size:0.8em; color:#888; /* Softer color for metadata */ }
 
-#auth-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:1000; display:none; }
-.auth-modal { background:#111; border-radius:8px; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff; }
-.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-.modal-header h3 { margin:0; }
-.tabs { display:flex; border-bottom:1px solid #444; margin-bottom:15px; }
-.tab { flex-grow:1; text-align:center; padding:10px 15px; cursor:pointer; font-weight:bold; color:#bbb; }
-.tab.active { border-bottom:2px solid #e53935; color:#e53935; }
-.form-group { margin-bottom:15px; }
-.form-group label { display:block; margin-bottom:5px; font-weight:600; font-size:0.9em; color:#fff; }
-.form-group input { width:100%; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; box-sizing:border-box; }
-.password-container { display:flex; }
-.password-container input { flex-grow:1; border-right:none; border-radius:4px 0 0 4px; }
-.password-container button { background:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
-button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
+/* 6. CHAT & AUTH MODAL REFINEMENT */
+#chat-container { 
+    background:#111; border-radius:12px; padding:20px; 
+    margin-top:40px; 
+    box-shadow:0 4px 15px rgba(229, 57, 53, 0.2); /* Subtle red shadow on chat */
+}
+#chat-messages { 
+    height:300px; overflow-y:auto; 
+    border:1px solid #333; padding:15px; 
+    background:#0a0a0a; border-radius:8px; 
+}
+.chat-message .chat-username { font-weight:700; color:#e53935; }
+#chat-input { 
+    padding:10px; border:1px solid #333; 
+    border-radius:4px; background:#1c1c1c; 
+}
+#send-button { 
+    padding:10px 20px; 
+    font-weight:600; 
+    letter-spacing: 0.5px;
+}
 
-#chat-container { background:#111; border-radius:12px; padding:15px; margin-top:40px; box-shadow:0 4px 12px rgba(255,0,0,0.3); }
-#chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:10px; margin-bottom:10px; background:#0a0a0a; border-radius:8px; display:flex; flex-direction:column-reverse; }
-.chat-message { margin-bottom:8px; line-height:1.4; font-size:0.9em; display:flex; align-items:center; gap:5px; }
-.chat-message .chat-username { font-weight:bold; color:#e53935; display:flex; align-items:center; gap:3px; }
-#chat-input-container { display:flex; gap:10px; }
-#chat-input { flex-grow:1; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
-#send-button { padding:10px 15px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-weight:bold; transition: transform 0.2s; }
-#send-button:hover { transform:scale(1.05); }
+.auth-modal { 
+    background:#111; border-radius:12px; width:90%; max-width:450px; 
+    box-shadow:0 5px 25px rgba(255,0,0,0.7); /* Stronger modal shadow */
+    padding:30px; 
+}
+.tab.active { border-bottom:3px solid #e53935; color:#e53935; }
+button[type="submit"] { 
+    padding:12px; background:#e53935; 
+    font-size:1.1em; 
+    font-weight: 600;
+}
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Tr3vN0x</h1>
-    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
-    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth">Login</div></div>
+    <h1>Tr3vN0x</h1>
+    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
+    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth">Login</div></div>
 </header>
 
 <div class="container">
-    <section id="featured">
-        <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT</h2>
-        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
-    </section>
+    <section id="featured">
+        <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT</h2>
+        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
+    </section>
 
-    <div class="video-row">
-        <h2>✨ Fan Favorites</h2>
-        <div class="video-grid" id="favorites-grid"></div>
-    </div>
+    <div class="video-row">
+        <h2>✨ Fan Favorites</h2>
+        <div class="video-grid" id="favorites-grid"></div>
+    </div>
 
-    <div class="video-row">
-        <h2>📼 Older Videos</h2>
-        <div class="video-grid" id="older-grid"></div>
-    </div>
+    <div class="video-row">
+        <h2>📼 Older Videos</h2>
+        <div class="video-grid" id="older-grid"></div>
+    </div>
 
-    <section id="chat-container">
-        <h2>💬 Global Chat</h2>
-        <div id="chat-messages"></div>
-        <div id="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
-            <button id="send-button" disabled>Send</button>
-        </div>
-    </section>
+    <section id="chat-container">
+        <h2>💬 Global Chat</h2>
+        <div id="chat-messages"></div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
+            <button id="send-button" disabled>Send</button>
+        </div>
+    </section>
 
-    <section id="auth-overlay">
-        <div class="auth-modal">
-            <div class="modal-header">
-                <h3>Authentication</h3>
-                <span id="close-auth">&times;</span>
-            </div>
-            <div class="tabs">
-                <div class="tab active" id="login-tab">Log In</div>
-                <div class="tab" id="signup-tab">Sign Up</div>
-            </div>
-            <form id="login-form">
-                <div class="form-group"><label>Email</label><input type="email" id="login-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
-                </div>
-                <button type="submit">Log In</button>
-            </form>
-            <form id="signup-form" style="display:none;">
-                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
-                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    </section>
+    <section id="auth-overlay">
+        <div class="auth-modal">
+            <div class="modal-header">
+                <h3>Authentication</h3>
+                <span id="close-auth">&times;</span>
+            </div>
+            <div class="tabs">
+                <div class="tab active" id="login-tab">Log In</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
+            </div>
+            <form id="login-form">
+                <div class="form-group"><label>Email</label><input type="email" id="login-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+            <form id="signup-form" style="display:none;">
+                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </section>
 </div>
 
 <script>
@@ -137,61 +227,209 @@ const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png
 const DEFAULT_AVATAR = "https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?_nc_cat=102&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&oh=00_Afkujh61dvGsGO9dNf7KqvLkpKEhIqbtbN9SvMZb7Ddj6A&oe=69380005";
 
 let videoData = [
-    { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
-    { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
-    { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
-    { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
-    { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
-    { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
-    { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
+    { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
+    { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
+    { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
+    { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
+    { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
+    { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
+    { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
 ];
 
-// --- FUNCTIONS ---
-// Auth, login, signup same as before (omitted here for brevity, you can copy your previous logic)
+// --- FUNCTIONS (kept the same logic) ---
 
 function createVideoCard(video){
-    const card = document.createElement('div');
-    card.className='video-card';
-    card.dataset.video = video.id;
-    card.innerHTML = `
-        <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}"></div>
-        <div class="video-info">
-            <h3>${video.title}${video.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
-            <p>Views: <span class="views-count">${video.views}</span></p>
-        </div>
-    `;
-    card.addEventListener('click', ()=>{
-        video.views++;
-        card.querySelector('.views-count').innerText = video.views;
-        const player = document.createElement('div'); player.className='featured-player';
-        player.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
-        card.innerHTML=''; card.appendChild(player);
-    });
-    return card;
+    const card = document.createElement('div');
+    card.className='video-card';
+    card.dataset.video = video.id;
+    card.innerHTML = `
+        <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}"></div>
+        <div class="video-info">
+            <h3>${video.title}${video.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
+            <p>Views: <span class="views-count">${video.views}</span></p>
+        </div>
+    `;
+    card.addEventListener('click', ()=>{
+        video.views++;
+        card.querySelector('.views-count').innerText = video.views;
+        // Update the featured player with the clicked video
+        const featuredSection = document.getElementById('featured');
+        const featuredPlayer = featuredSection.querySelector('.featured-player');
+        featuredSection.querySelector('h2').innerText = `Featured: ${video.title}`;
+        featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
+    });
+    return card;
 }
 
 function renderVideoRows(){
-    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
-    Object.keys(grids).forEach(cat=>{
-        const grid = document.getElementById(grids[cat]);
-        grid.innerHTML = '';
-        videoData.filter(v => v.category === cat).forEach(v => grid.appendChild(createVideoCard(v)));
-    });
+    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
+    Object.keys(grids).forEach(cat=>{
+        const grid = document.getElementById(grids[cat]);
+        grid.innerHTML = '';
+        videoData.filter(v => v.category === cat).forEach(v => grid.appendChild(createVideoCard(v)));
+    });
 }
 
 renderVideoRows();
 
 // Chat rendering with verified badges
 function renderChatHistory(){
-    const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
-    chatMessagesContainer.innerHTML = '';
-    history.slice().reverse().forEach(msg=>{
-        const div = document.createElement('div'); div.className='chat-message';
-        div.innerHTML = `<span class='chat-username'>${msg.username}${msg.verified?` <img src='${VERIFIED_ICON}' class='verified-badge'>`:''}</span>: <span class='chat-text'>${msg.message}</span>`;
-        chatMessagesContainer.appendChild(div);
-    });
-    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    // Note: Since this is a static HTML/JS structure, I'll simulate some initial chat for display purposes
+    // In a real application, you would fetch this from a server.
+    const initialHistory = [
+        { username: 'Tr3vN0x', message: 'Welcome to the stream! Smash that like button! 🔥', verified: true },
+        { username: 'GamerDude42', message: 'Dead By Daylight is so fun! When are you playing more?', verified: false },
+        { username: 'VerifiedFan', message: 'Loving the new site design! Looks clean!', verified: true }
+    ];
+
+    const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]').concat(initialHistory);
+    
+    chatMessagesContainer.innerHTML = '';
+    history.slice().reverse().forEach(msg=>{
+        const div = document.createElement('div'); div.className='chat-message';
+        div.innerHTML = `<span class='chat-username'>${msg.username}${msg.verified?` <img src='${VERIFIED_ICON}' class='verified-badge'>`:''}</span>: <span class='chat-text'>${msg.message}</span>`;
+        chatMessagesContainer.prepend(div); // Use prepend to keep history flowing top-down, but new messages at bottom
+    });
+    // Scroll to bottom (latest messages)
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
+
+renderChatHistory(); // Render initial chat
+
+// --- AUTH LOGIC (Optional, but included for completeness) ---
+let isLoggedIn = false;
+let currentUsername = '';
+
+function toggleAuthModal(show) {
+    overlay.style.display = show ? 'flex' : 'none';
+    if (show) {
+        // Reset to login tab when opening
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+    }
+}
+
+function handleLogin(e) {
+    e.preventDefault();
+    // Simplified login/signup for static demo
+    const email = document.getElementById('login-email').value;
+    // In a real app: validate credentials with a server
+    isLoggedIn = true;
+    currentUsername = email.split('@')[0];
+    updateAuthState();
+    toggleAuthModal(false);
+    document.getElementById('login-form').reset();
+    alert(`Logged in as ${currentUsername}!`);
+}
+
+function handleSignup(e) {
+    e.preventDefault();
+    // Simplified login/signup for static demo
+    currentUsername = document.getElementById('signup-username').value;
+    // In a real app: create user account on server
+    isLoggedIn = true;
+    updateAuthState();
+    toggleAuthModal(false);
+    document.getElementById('signup-form').reset();
+    alert(`Account created and logged in as ${currentUsername}!`);
+}
+
+function updateAuthState() {
+    if (isLoggedIn) {
+        floatingAuth.innerText = currentUsername;
+        floatingAuth.className = 'floating-auth logged-in';
+        floatingAuth.removeEventListener('click', openLogin);
+        floatingAuth.addEventListener('click', handleLogout);
+        
+        chatInput.disabled = false;
+        chatInput.placeholder = 'Say something cool...';
+        sendButton.disabled = false;
+    } else {
+        floatingAuth.innerText = 'Login';
+        floatingAuth.className = 'floating-auth logged-out';
+        floatingAuth.removeEventListener('click', handleLogout);
+        floatingAuth.addEventListener('click', openLogin);
+        
+        chatInput.disabled = true;
+        chatInput.placeholder = 'Login to chat...';
+        sendButton.disabled = true;
+    }
+}
+
+function handleLogout() {
+    isLoggedIn = false;
+    currentUsername = '';
+    updateAuthState();
+    alert('Logged out.');
+}
+
+function openLogin() {
+    toggleAuthModal(true);
+}
+
+// Event Listeners for Auth
+floatingAuth.addEventListener('click', openLogin);
+closeAuth.addEventListener('click', () => toggleAuthModal(false));
+loginTab.addEventListener('click', () => {
+    loginTab.classList.add('active');
+    signupTab.classList.remove('active');
+    loginForm.style.display = 'block';
+    signupForm.style.display = 'none';
+});
+signupTab.addEventListener('click', () => {
+    signupTab.classList.add('active');
+    loginTab.classList.remove('active');
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+});
+loginForm.addEventListener('submit', handleLogin);
+signupForm.addEventListener('submit', handleSignup);
+
+// Password visibility toggle
+document.querySelectorAll('.toggle-pass').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const targetId = e.target.getAttribute('data-target');
+        const targetInput = document.getElementById(targetId);
+        if (targetInput.type === 'password') {
+            targetInput.type = 'text';
+            e.target.innerText = '🔒';
+        } else {
+            targetInput.type = 'password';
+            e.target.innerText = '👁️';
+        }
+    });
+});
+
+// Chat Send Logic
+sendButton.addEventListener('click', () => {
+    const messageText = chatInput.value.trim();
+    if (messageText && isLoggedIn) {
+        const newMessage = {
+            username: currentUsername,
+            message: messageText,
+            verified: false // New users are not verified
+        };
+        
+        // Add to local storage (simulated persistence)
+        const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
+        history.push(newMessage);
+        localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
+        
+        // Re-render chat (or just append)
+        renderChatHistory();
+        chatInput.value = '';
+    }
+});
+
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendButton.click();
+    }
+});
+
+updateAuthState(); // Initialize auth state on load
 </script>
 </body>
 </html>
