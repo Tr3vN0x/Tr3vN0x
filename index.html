@@ -1,242 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>TR3VN0X Video Hub</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tr3vN0x Aqua Hub</title>
+
 <style>
-    body {
-        margin: 0;
-        background: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        overflow-x: hidden;
-    }
+/* ---------------- GLOBAL ---------------- */
+body {
+    margin: 0;
+    background: #e8faf6; /* soft ocean background */
+    color: #01352c;      /* deep sea green text */
+    font-family: "Arial", sans-serif;
+}
 
-    /* ===== LOADING SCREEN ===== */
-    #loader {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        animation: fadeOutLoader 1s ease 2.2s forwards;
-    }
+/* ---------------- HEADER ---------------- */
+header {
+    background: #c8f3ea; /* light aqua */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    border-bottom: 2px solid #9ee0d7;
+    box-shadow: 0 3px 10px rgba(0, 80, 60, 0.08);
+}
 
-    .loader-logo {
-        font-size: 40px;
-        color: #e50914;
-        animation: pulseGlow 2s infinite;
-        font-weight: bold;
-    }
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-    @keyframes fadeOutLoader {
-        to { opacity: 0; visibility: hidden; }
-    }
+.logo-container img {
+    height: 50px;
+    border-radius: 6px;
+}
 
-    @keyframes pulseGlow {
-        0% { text-shadow: 0 0 8px #e50914; }
-        50% { text-shadow: 0 0 25px #e50914; }
-        100% { text-shadow: 0 0 8px #e50914; }
-    }
+/* Search */
+.search-bar {
+    background: #ffffff;
+    border: 2px solid #b8ece1;
+    border-radius: 10px;
+    padding: 7px 14px;
+    width: 260px;
+    transition: 0.25s;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #63d2c3;
+    box-shadow: 0 0 8px #63d2c344;
+}
+
+/* About Link */
+header .about {
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+header .about:hover {
+    background: #b8ebe281;
+    color: #01483a;
+}
 
 
-    /* ===== HEADER ANIMATIONS ===== */
-    @keyframes slideDown {
-        0% { transform: translateY(-40px); opacity: 0; }
-        100% { transform: translateY(0); opacity: 1; }
-    }
+/* ---------------- VIDEO GRID ---------------- */
+.video-grid {
+    padding: 25px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
 
-    @keyframes glowPulse {
-        0% { text-shadow: 0 0 4px #e50914; }
-        50% { text-shadow: 0 0 15px #e50914; }
-        100% { text-shadow: 0 0 4px #e50914; }
-    }
+/* Video Cards */
+.video-card {
+    background: white;
+    border-radius: 14px;
+    padding: 10px;
+    transition: 0.3s ease;
+    opacity: 0;
+    transform: translateY(35px);
+    animation: slideUp 0.6s forwards;
+    border: 1px solid #d4f6ef;
+}
 
-    /* HEADER */
-    header {
-        background: #141414;
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 60px;
-        border-bottom: 1px solid #222;
-        animation: slideDown 0.7s ease-out 2.3s both;
-        position: relative;
-    }
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 90, 70, 0.15);
+}
 
-    /* CYBERPUNK NEON BAR */
-    header::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, #e50914, #ff0055, #e50914);
-        box-shadow: 0 0 12px #e50914;
-        animation: neonFlow 3s linear infinite;
-    }
+/* Thumbnail */
+.thumbnail {
+    width: 100%;
+    height: 150px;
+    background: #dff7f1;
+    border-radius: 12px;
+}
 
-    @keyframes neonFlow {
-        0% { filter: hue-rotate(0deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
+/* Card Title */
+.video-title {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #013d33;
+}
 
-    /* LOGO */
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 22px;
-        font-weight: bold;
-        color: #e50914;
-        animation: glowPulse 2.2s infinite 2.3s;
-        cursor: pointer;
-    }
+/* Animation */
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(35px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
 
-    .logo img {
-        width: 35px;
-        height: 35px;
-        border-radius: 6px;
-    }
-
-    /* SEARCH */
-    .search-container input {
-        background: #222;
-        border: 1px solid #333;
-        padding: 6px 10px;
-        border-radius: 4px;
-        color: white;
-        width: 250px;
-        transition: 0.3s;
-    }
-
-    .search-container input:focus {
-        border-color: #e50914;
-        box-shadow: 0 0 12px #e50914;
-        outline: none;
-    }
-
-    /* ABOUT — GLOW HOVER */
-    .about a {
-        color: white;
-        text-decoration: none;
-        font-size: 17px;
-        transition: .3s;
-    }
-
-    .about a:hover {
-        color: #e50914;
-        text-shadow: 0 0 10px #e50914;
-    }
-
-    /* ===== VIDEO GRID ===== */
-    .video-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 15px;
-        padding: 20px;
-    }
-
-    /* SLIDE-IN VIDEO CARDS */
-    @keyframes slideInCard {
-        0% { opacity: 0; transform: translateY(40px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .video-card {
-        background: #111;
-        padding: 10px;
-        border-radius: 10px;
-        transform: translateY(40px);
-        opacity: 0;
-        animation: slideInCard 0.7s ease forwards;
-    }
-
-    /* delay each card slightly */
-    .video-card:nth-child(1) { animation-delay: 2.4s; }
-    .video-card:nth-child(2) { animation-delay: 2.55s; }
-    .video-card:nth-child(3) { animation-delay: 2.7s; }
-    .video-card:nth-child(4) { animation-delay: 2.85s; }
-    .video-card:nth-child(5) { animation-delay: 2.95s; }
-    .video-card:nth-child(6) { animation-delay: 3.05s; }
-
-    .video-card:hover {
-        transform: scale(1.03);
-    }
-
-    .video-thumbnail {
-        width: 100%;
-        height: 150px;
-        background: #333;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
-    /* FOOTER */
-    footer {
-        padding: 20px;
-        text-align: center;
-        background: #141414;
-        color: #777;
-        border-top: 1px solid #222;
-        margin-top: 20px;
-    }
+/* ---------------- FOOTER ---------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #c8f3ea;
+    border-top: 2px solid #9ee0d7;
+    margin-top: 40px;
+    color: #015043;
+    font-weight: 600;
+}
 </style>
 </head>
+
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loader">
-    <div class="loader-logo">TR3VN0X</div>
-</div>
-
+<!-- HEADER -->
 <header>
-    <div class="logo">
-        <img src="https://via.placeholder.com/35" alt="Logo">
-        TR3VN0X
+    <div class="logo-container">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdm4wWA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65">
     </div>
 
-    <div class="search-container">
-        <input type="text" placeholder="Search...">
-    </div>
+    <input type="text" class="search-bar" placeholder="Search videos...">
 
-    <div class="about">
-        <a href="#">About</a>
-    </div>
+    <div class="about">About</div>
 </header>
 
 <!-- VIDEO GRID -->
 <div class="video-grid">
+
     <div class="video-card">
-        <div class="video-thumbnail"></div>
+        <div class="thumbnail"></div>
         <div class="video-title">Video Title 1</div>
     </div>
 
     <div class="video-card">
-        <div class="video-thumbnail"></div>
+        <div class="thumbnail"></div>
         <div class="video-title">Video Title 2</div>
     </div>
 
     <div class="video-card">
-        <div class="video-thumbnail"></div>
+        <div class="thumbnail"></div>
         <div class="video-title">Video Title 3</div>
     </div>
 
     <div class="video-card">
-        <div class="video-thumbnail"></div>
+        <div class="thumbnail"></div>
         <div class="video-title">Video Title 4</div>
     </div>
+
 </div>
 
-<footer>
-    © TR3VN0X — All Rights Reserved
-</footer>
+<!-- FOOTER -->
+<footer>© 2025 Tr3vN0x — All Rights Reserved</footer>
 
 </body>
 </html>
