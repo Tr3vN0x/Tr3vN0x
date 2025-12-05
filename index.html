@@ -6,7 +6,7 @@
 <title>Tr3vN0x Streaming</title>
 
 <!-- Favicon/Icon -->
-<link rel="icon" href="https://img.icons8.com/fluency/48/000000/video.png" type="image/png">
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" type="image/png">
 
 <style>
     body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; }
@@ -21,6 +21,29 @@
     #featured:hover { transform:scale(1.02); }
     #featured img { width:100%; max-width:700px; border-radius:12px; }
     #featured-title { margin-top:10px; font-size:20px; text-align:center; }
+
+    /* Video card LIVE badge */
+    .live-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 4px;
+        z-index: 10;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 5px red; }
+        50% { box-shadow: 0 0 15px red; }
+        100% { box-shadow: 0 0 5px red; }
+    }
+
+    .video-card-container { position: relative; }
 
     /* Mobile improvements */
     @media(max-width:600px){
@@ -43,15 +66,17 @@
 <body>
 
 <header>
-    <img src="https://img.icons8.com/fluency/48/000000/video.png" alt="icon"/>
+    <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" alt="icon"/>
     Tr3vN0x Video Hub
 </header>
 
-<!-- MAIN PAGE -->
 <div class="container" id="home-page">
 
     <!-- FEATURED VIDEO -->
     <div id="featured"></div>
+
+    <h2>🆕 Recent</h2>
+    <div class="video-grid" id="recent-grid"></div>
 
     <h2>🔥 Recommended</h2>
     <div class="video-grid" id="recommended-grid"></div>
@@ -59,11 +84,13 @@
     <h2>⭐ Fan Favorites</h2>
     <div class="video-grid" id="favorites-grid"></div>
 
+    <h2>📺 Live Stream</h2>
+    <div class="video-grid" id="live-grid"></div>
+
     <h2>📼 Older Videos</h2>
     <div class="video-grid" id="older-grid"></div>
 </div>
 
-<!-- VIDEO PLAYER PAGE -->
 <div id="player-page">
     <button id="back-btn">← Back</button>
     <div id="player"></div>
@@ -78,8 +105,13 @@ let videoData = [
     { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older" },
     { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older" },
     { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older" },
-    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older" }
+    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older" },
+    { title: "Recent Upload 1", id: "abc123", category: "recent" }, // replace with your real video IDs
+    { title: "Recent Upload 2", id: "def456", category: "recent" }
 ];
+
+// LIVE STREAM VIDEO
+let liveVideo = { title: "LIVE NOW - Playing Roblox Horror", id: "kNkK_qclihc" };
 
 // FEATURED VIDEO
 let featuredVideo = { 
@@ -100,10 +132,11 @@ function shuffleArray(array) {
 let recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
 
 // CREATE VIDEO CARD
-function createCard(v){
+function createCard(v, isLive=false){
     const card = document.createElement("div");
-    card.className = "video-card";
+    card.className = "video-card video-card-container";
     card.innerHTML = `
+        ${isLive ? '<div class="live-badge">LIVE</div>' : ''}
         <img class='thumb' src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"> 
         <div class='title'>${v.title}</div>
     `;
@@ -122,15 +155,32 @@ function loadVideos(){
     `;
     featuredDiv.onclick = ()=>openPlayer(featuredVideo);
 
-    // Recommended, Favorites, Older
-    const rec = document.getElementById("recommended-grid");
-    const fav = document.getElementById("favorites-grid");
-    const old = document.getElementById("older-grid");
+    // Recent
+    const recentGrid = document.getElementById("recent-grid");
+    videoData.filter(v=>v.category==="recent").forEach(v=>{
+        recentGrid.appendChild(createCard(v));
+    });
 
+    // Recommended
+    const rec = document.getElementById("recommended-grid");
     videoData.forEach(v=>{
         if(recommendedVideos.includes(v)) rec.appendChild(createCard(v));
-        if(v.category === "favorites") fav.appendChild(createCard(v));
-        if(v.category === "older") old.appendChild(createCard(v));
+    });
+
+    // Favorites
+    const fav = document.getElementById("favorites-grid");
+    videoData.filter(v=>v.category==="favorites").forEach(v=>{
+        fav.appendChild(createCard(v));
+    });
+
+    // Live Stream
+    const live = document.getElementById("live-grid");
+    live.appendChild(createCard(liveVideo, true));
+
+    // Older
+    const old = document.getElementById("older-grid");
+    videoData.filter(v=>v.category==="older").forEach(v=>{
+        old.appendChild(createCard(v));
     });
 }
 
