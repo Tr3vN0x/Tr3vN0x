@@ -108,9 +108,7 @@ header {
     padding-bottom: 10px;
 }
 
-.video-row::-webkit-scrollbar {
-    display: none;
-}
+.video-row::-webkit-scrollbar { display: none; }
 
 .video-card {
     background: #111;
@@ -242,23 +240,17 @@ footer {
 <!-- ROWS -->
 <div class="row-container">
     <div class="row-label">Most Viewed</div>
-    <div class="video-row" id="most-viewed-row">
-        <!-- Videos added via JS -->
-    </div>
+    <div class="video-row" id="most-viewed-row"></div>
 </div>
 
 <div class="row-container">
     <div class="row-label">Older Videos</div>
-    <div class="video-row" id="older-videos-row">
-        <!-- Videos added via JS -->
-    </div>
+    <div class="video-row" id="older-videos-row"></div>
 </div>
 
 <div class="row-container">
     <div class="row-label">Watch History</div>
-    <div class="video-row" id="watch-history-row">
-        <!-- Videos added via JS -->
-    </div>
+    <div class="video-row" id="watch-history-row"></div>
 </div>
 
 <!-- VIDEO MODAL -->
@@ -287,13 +279,13 @@ const olderVideos = [
     {id:"Sn4dyr5v7m0", title:"Older Video 4"}
 ];
 
-const watchHistory = [];
+let watchHistory = [];
 
-// Render videos
-function createVideoCard(video) {
+// Create video card
+function createVideoCard(video){
     const card = document.createElement('div');
     card.className = 'video-card';
-    card.setAttribute('data-video', video.id);
+    card.dataset.video = video.id;
     card.innerHTML = `
         <div class="thumbnail-container">
             <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
@@ -305,30 +297,50 @@ function createVideoCard(video) {
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
-        // Add to watch history if not already there
+
+        // Add to watch history if not already
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
-            renderWatchHistory();
+            renderRow('watch-history-row', watchHistory);
         }
     });
     return card;
 }
 
+// Render a row
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
-    videos.forEach(v=>{
-        row.appendChild(createVideoCard(v));
-    });
-}
-
-function renderWatchHistory(){
-    renderRow('watch-history-row', watchHistory);
+    videos.forEach(v=> row.appendChild(createVideoCard(v)));
 }
 
 // Initial render
 renderRow('most-viewed-row', mostViewed);
 renderRow('older-videos-row', olderVideos);
+
+// Modal close
+const modal = document.getElementById('video-modal');
+modal.querySelector('.close-btn').addEventListener('click',()=>{
+    modal.querySelector('iframe').src = '';
+    modal.style.display = 'none';
+});
+modal.addEventListener('click', e=>{
+    if(e.target === modal){
+        modal.querySelector('iframe').src = '';
+        modal.style.display = 'none';
+    }
+});
+
+// Search functionality
+const searchInput = document.querySelector('.search-bar');
+searchInput.addEventListener('input', ()=>{
+    const term = searchInput.value.toLowerCase();
+    [mostViewed, olderVideos, watchHistory].forEach((arr, i)=>{
+        const rowId = i===0?'most-viewed-row':i===1?'older-videos-row':'watch-history-row';
+        const filtered = arr.filter(v=> v.title.toLowerCase().includes(term));
+        renderRow(rowId, filtered);
+    });
+});
 </script>
 
 </body>
