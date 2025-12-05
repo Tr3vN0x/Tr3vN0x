@@ -6,7 +6,6 @@
 <title>Tr3vN0x Streaming</title>
 <link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" type="image/png">
 <style>
-/* ---------------------- BODY & HEADER ---------------------- */
 body {
     background: #141414;
     color: #fff;
@@ -25,28 +24,13 @@ header .logo-container { display:flex; align-items:center; gap:12px; }
 header img.icon { width:45px; height:45px; border-radius:50%; }
 header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
 
-/* Theme toggle */
-#theme-btn { background:#e50914; border:none; color:#fff; padding:8px 12px; border-radius:5px; cursor:pointer; }
+header button { margin-left:10px; background:#e50914; border:none; color:white; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+header button:hover { background:#ff4d4d; }
 
-/* ---------------------- FEATURED BANNER ---------------------- */
-#featured {
-    position: relative;
-    width: 100%;
-    max-height: 400px;
-    overflow: hidden;
-    margin-bottom: 40px;
-}
+#featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; }
 #featured img { width:100%; max-height:400px; object-fit:cover; }
-#featured-title {
-    position:absolute;
-    bottom:20px;
-    left:30px;
-    font-size:28px;
-    font-weight:bold;
-    text-shadow: 0 0 10px #000;
-}
+#featured-title { position:absolute; bottom:20px; left:30px; font-size:28px; font-weight:bold; text-shadow: 0 0 10px #000; }
 
-/* ---------------------- SEARCH ---------------------- */
 #search-bar {
     width: 100%;
     max-width:500px;
@@ -60,7 +44,6 @@ header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
     color:#fff;
 }
 
-/* ---------------------- HORIZONTAL CAROUSEL ---------------------- */
 .video-grid {
     display:flex;
     overflow-x:auto;
@@ -69,7 +52,6 @@ header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
 }
 .video-grid::-webkit-scrollbar { display:none; }
 
-/* ---------------------- VIDEO CARDS ---------------------- */
 .video-card-container { position: relative; flex: 0 0 220px; }
 .video-card {
     background:#1e1e1e;
@@ -78,10 +60,7 @@ header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
     overflow:hidden;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.video-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px #e50914;
-}
+.video-card:hover { transform: scale(1.08); box-shadow: 0 0 20px #e50914; }
 .video-card img.thumb { width:100%; display:block; border-radius:8px; }
 .video-card img.hover-thumb { position:absolute; top:0; left:0; width:100%; border-radius:8px; opacity:0; transition:0.3s; pointer-events:none; }
 .video-card:hover img.hover-thumb { opacity:1; }
@@ -107,13 +86,17 @@ header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
     display:none;
 }
 
-/* ---------------------- HEADINGS ---------------------- */
 h2 { margin:20px 0 10px 20px; font-size:20px; }
 
-/* ---------------------- PLAYER PAGE ---------------------- */
-#player-page { display:none; padding:20px; }
+#player-page, #about-page { display:none; padding:20px; }
 #player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:12px; }
-#back-btn { margin-bottom:20px; padding:10px 20px; background:#e50914; border:none; color:white; border-radius:8px; cursor:pointer; }
+#back-btn, #about-back-btn { margin-bottom:20px; padding:10px 20px; background:#e50914; border:none; color:white; border-radius:8px; cursor:pointer; }
+
+body.light { background:#f5f5f5; color:#111; }
+body.light .video-card { background:#ddd; color:#111; }
+body.light .video-card:hover { background:#ccc; }
+body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
+body.light #search-bar { background:#eee; color:#111; }
 </style>
 </head>
 <body>
@@ -123,12 +106,14 @@ h2 { margin:20px 0 10px 20px; font-size:20px; }
         <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" alt="icon"/>
         <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="title"/>
     </div>
-    <button id="theme-btn">🌙</button>
+    <div>
+        <button id="theme-btn">🌙</button>
+        <button id="about-btn">ℹ️ About</button>
+    </div>
 </header>
 
 <div class="container" id="home-page">
     <input type="text" id="search-bar" placeholder="🔍 Search videos...">
-
     <div id="featured"></div>
 
     <h2>🆕 Recent</h2>
@@ -151,6 +136,19 @@ h2 { margin:20px 0 10px 20px; font-size:20px; }
     <button id="back-btn">← Back</button>
     <div id="player"></div>
     <h2 id="video-title"></h2>
+</div>
+
+<div id="about-page">
+    <button id="about-back-btn">← Back</button>
+    <div style="display:flex; align-items:center; gap:15px; margin-top:20px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" alt="Profile Pic" style="width:100px; height:100px; border-radius:50%;">
+        <div>
+            <h2 style="display:flex; align-items:center; gap:8px;">Tr3vN0x <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" style="width:20px;height:20px;" alt="Verified Badge"></h2>
+            <p style="max-width:600px; margin-top:10px; font-size:16px; line-height:1.4;">
+                Hey! I'm Tr3vN0x, a passionate content creator and gamer. I love sharing gameplay videos, tips, and fun moments from Roblox and other games with my community. Welcome to my streaming hub!
+            </p>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -296,10 +294,21 @@ document.getElementById("search-bar").addEventListener("input",()=>{
     document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
 });
 
-// DARK/LIGHT TOGGLE
+// ---------- DARK/LIGHT TOGGLE ----------
 document.getElementById("theme-btn").onclick=()=>{
     document.body.classList.toggle("light");
     document.getElementById("theme-btn").innerText=document.body.classList.contains("light")?"🌑":"🌙";
+};
+
+// ---------- ABOUT PAGE ----------
+document.getElementById("about-btn").onclick = () => {
+    document.getElementById("home-page").style.display = "none";
+    document.getElementById("player-page").style.display = "none";
+    document.getElementById("about-page").style.display = "block";
+};
+document.getElementById("about-back-btn").onclick = () => {
+    document.getElementById("about-page").style.display = "none";
+    document.getElementById("home-page").style.display = "block";
 };
 
 loadVideos();
