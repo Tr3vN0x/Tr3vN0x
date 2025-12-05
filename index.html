@@ -238,7 +238,7 @@ let videoData = [
 
 let isLoggedIn = false;
 let currentUsername = '';
-let isVerified = false; // NEW: State for verified badge in chat
+let isVerified = false; // State for verified badge in chat
 
 // --- FUNCTIONS ---
 
@@ -276,8 +276,7 @@ function renderVideoRows(){
 
 // Chat rendering with verified badges
 function renderChatHistory(){
-    // Note: Since this is a static HTML/JS structure, I'll simulate some initial chat for display purposes
-    const initialHistory = [
+    const initialHistory = [
         { username: 'Tr3vN0x', message: 'Welcome to the stream! Smash that like button! 🔥', verified: true },
         { username: 'GamerDude42', message: 'Dead By Daylight is so fun! When are you playing more?', verified: false },
         { username: 'VerifiedFan', message: 'Loving the new site design! Looks clean!', verified: true }
@@ -359,10 +358,11 @@ function openLogin() {
 }
 
 function updateAuthState() {
-    // Clear existing listeners to prevent duplicates/errors
+    // 1. Clear existing listeners to prevent duplicates/errors
     floatingAuth.removeEventListener('click', openLogin);
     floatingAuth.removeEventListener('click', handleLogout);
 
+    // 2. Attach new listener based on state
     if (isLoggedIn) {
         floatingAuth.innerText = currentUsername;
         floatingAuth.className = 'floating-auth logged-in';
