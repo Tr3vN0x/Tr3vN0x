@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x - Red & Black Video Site</title>
 <style>
+/* CSS unchanged, included for completeness */
 body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; }
 .container { max-width:1200px; margin:20px auto; padding:0 20px; }
 h1,h2 { color:#e53935; border-bottom:2px solid #444; padding-bottom:5px; margin-top:30px; }
 header { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#111; box-shadow:0 2px 4px rgba(0,0,0,0.5); position:sticky; top:0; z-index:100; }
 .search-container input { width:100%; padding:8px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
 .floating-auth { padding:8px 15px; background:#e53935; color:white; border-radius:4px; cursor:pointer; }
-.floating-auth.logged-out { background: #e53935; } /* Login button color */
-.floating-auth.logged-in { background: #555; } /* Logout button color - changed for distinction */
+/* Styles for logged-in/out states */
+.floating-auth.logged-out { background: #e53935; } 
+.floating-auth.logged-in { background: #e53935; } /* Use same color, but text will change */
 #featured, .video-card { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
 #featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
 .featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
@@ -126,13 +128,13 @@ function updateAuthUI(user) {
     floatingAuth.removeEventListener('click', handleLogout); 
 
     if (user) {
-        // Logged In State: Button becomes Log Out
-        floatingAuth.innerText = 'Log Out (' + user.username + ')';
+        // Logged In State: Button shows username and acts as a one-click Logout button
+        floatingAuth.innerText = 'Signed in as ' + user.username + ' (Log Out)';
         floatingAuth.classList.remove('logged-out');
         floatingAuth.classList.add('logged-in');
-        floatingAuth.addEventListener('click', handleLogout); // Add logout handler
+        floatingAuth.addEventListener('click', handleLogout); // Add single-click logout handler
     } else {
-        // Logged Out State: Button becomes Login
+        // Logged Out State: Button shows Login and opens the modal
         floatingAuth.innerText = 'Login';
         floatingAuth.classList.remove('logged-in');
         floatingAuth.classList.add('logged-out');
@@ -147,6 +149,7 @@ function showAuthModal() {
 
 // LOGOUT FUNCTIONALITY 
 function handleLogout() {
+    // Confirmation is useful for one-click logout
     if(confirm("Are you sure you want to log out?")) {
         // Remove the current session
         localStorage.removeItem('tr3vn0x_current');
