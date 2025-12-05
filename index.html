@@ -9,12 +9,18 @@
 <link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" type="image/png">
 
 <style>
-    body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; }
+    body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; transition: background 0.3s, color 0.3s;}
     header { background:#111; padding:20px; font-size:28px; font-weight:bold; text-align:center; border-bottom:2px solid red; display:flex; align-items:center; justify-content:center; gap:10px; }
     header img { width:40px; height:40px; }
 
     .container { padding: 20px; }
     h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10px; }
+
+    /* Search & Filters */
+    #search-bar { width:100%; max-width:500px; padding:10px; border-radius:8px; border:none; font-size:16px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
+    .category-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+    .category-tab { background:red; border:none; padding:8px 15px; border-radius:8px; color:white; cursor:pointer; transition:0.2s; }
+    .category-tab:hover { background:#ff4d4d; }
 
     /* Featured Video */
     #featured { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; cursor:pointer; transition:0.2s; }
@@ -23,25 +29,8 @@
     #featured-title { margin-top:10px; font-size:20px; text-align:center; }
 
     /* Video card LIVE badge */
-    .live-badge {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        background: red;
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 2px 6px;
-        border-radius: 4px;
-        z-index: 10;
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 5px red; }
-        50% { box-shadow: 0 0 15px red; }
-        100% { box-shadow: 0 0 5px red; }
-    }
+    .live-badge { position: absolute; top: 8px; left: 8px; background: red; color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 4px; z-index: 10; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 5px red; } 50% { box-shadow: 0 0 15px red; } 100% { box-shadow: 0 0 5px red; } }
 
     .video-card-container { position: relative; }
 
@@ -61,6 +50,16 @@
     #player-page { display:none; padding:20px; }
     #player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:10px; }
     #back-btn { margin-bottom:20px; padding:10px 20px; background:red; border:none; color:white; border-radius:8px; cursor:pointer; }
+
+    /* Dark/Light toggle */
+    #theme-btn { position:absolute; right:20px; top:20px; background:red; border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.3s; }
+    #theme-btn:hover { background:#ff4d4d; }
+
+    /* Light theme */
+    body.light { background:#f5f5f5; color:#111; }
+    body.light .video-card { background:#ddd; color:#111; }
+    body.light .video-card:hover { background:#ccc; }
+    body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 </style>
 </head>
 <body>
@@ -68,9 +67,23 @@
 <header>
     <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" alt="icon"/>
     Tr3vN0x Video Hub
+    <button id="theme-btn">🌙</button>
 </header>
 
 <div class="container" id="home-page">
+
+    <!-- SEARCH BAR -->
+    <input type="text" id="search-bar" placeholder="🔍 Search videos...">
+
+    <!-- CATEGORY TABS -->
+    <div class="category-tabs">
+        <button class="category-tab" data-target="featured">Featured</button>
+        <button class="category-tab" data-target="recent-grid">Recent</button>
+        <button class="category-tab" data-target="recommended-grid">Recommended</button>
+        <button class="category-tab" data-target="favorites-grid">Favorites</button>
+        <button class="category-tab" data-target="live-grid">Live</button>
+        <button class="category-tab" data-target="older-grid">Older</button>
+    </div>
 
     <!-- FEATURED VIDEO -->
     <div id="featured"></div>
@@ -106,20 +119,13 @@ let videoData = [
     { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older" },
     { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older" },
     { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older" },
-    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent" }, // replace with your real video IDs
+    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent" },
     { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent" }
 ];
 
-// LIVE STREAM VIDEO
 let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc" };
+let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8" };
 
-// FEATURED VIDEO
-let featuredVideo = { 
-    title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", 
-    id: "92y9uaQMIa8" 
-};
-
-// SHUFFLE FUNCTION
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -128,10 +134,8 @@ function shuffleArray(array) {
     return array;
 }
 
-// RANDOM RECOMMENDED
 let recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
 
-// CREATE VIDEO CARD
 function createCard(v, isLive=false){
     const card = document.createElement("div");
     card.className = "video-card video-card-container";
@@ -144,10 +148,7 @@ function createCard(v, isLive=false){
     return card;
 }
 
-// LOAD VIDEOS
 function loadVideos(){
-
-    // Featured
     const featuredDiv = document.getElementById("featured");
     featuredDiv.innerHTML = `
         <img src="https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg" alt="Featured">
@@ -155,33 +156,20 @@ function loadVideos(){
     `;
     featuredDiv.onclick = ()=>openPlayer(featuredVideo);
 
-    // Recent
     const recentGrid = document.getElementById("recent-grid");
-    videoData.filter(v=>v.category==="recent").forEach(v=>{
-        recentGrid.appendChild(createCard(v));
-    });
+    videoData.filter(v=>v.category==="recent").forEach(v=>recentGrid.appendChild(createCard(v)));
 
-    // Recommended
     const rec = document.getElementById("recommended-grid");
-    videoData.forEach(v=>{
-        if(recommendedVideos.includes(v)) rec.appendChild(createCard(v));
-    });
+    videoData.forEach(v=>{ if(recommendedVideos.includes(v)) rec.appendChild(createCard(v)); });
 
-    // Favorites
     const fav = document.getElementById("favorites-grid");
-    videoData.filter(v=>v.category==="favorites").forEach(v=>{
-        fav.appendChild(createCard(v));
-    });
+    videoData.filter(v=>v.category==="favorites").forEach(v=>fav.appendChild(createCard(v)));
 
-    // Live Stream
     const live = document.getElementById("live-grid");
     live.appendChild(createCard(liveVideo, true));
 
-    // Older
     const old = document.getElementById("older-grid");
-    videoData.filter(v=>v.category==="older").forEach(v=>{
-        old.appendChild(createCard(v));
-    });
+    videoData.filter(v=>v.category==="older").forEach(v=>old.appendChild(createCard(v)));
 }
 
 // PLAYER PAGE
@@ -197,16 +185,44 @@ document.getElementById("back-btn").onclick = ()=>{
     document.getElementById("player-page").style.display="none";
     document.getElementById("home-page").style.display="block";
 
-    // Re-randomize Recommended
     recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
     document.getElementById("recommended-grid").innerHTML = '';
-    videoData.forEach(v=>{
-        if(recommendedVideos.includes(v)) document.getElementById("recommended-grid").appendChild(createCard(v));
+    videoData.forEach(v=>{ if(recommendedVideos.includes(v)) document.getElementById("recommended-grid").appendChild(createCard(v)); });
+};
+
+// SEARCH FUNCTIONALITY
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener("input", () => {
+    const query = searchBar.value.toLowerCase();
+    const grids = ["recent-grid", "recommended-grid", "favorites-grid", "live-grid", "older-grid"];
+    
+    grids.forEach(gridId => {
+        const grid = document.getElementById(gridId);
+        Array.from(grid.children).forEach(card => {
+            const title = card.querySelector(".title").innerText.toLowerCase();
+            card.style.display = title.includes(query) ? "block" : "none";
+        });
     });
+
+    document.getElementById("featured").style.display = featuredVideo.title.toLowerCase().includes(query) ? "flex" : "none";
+});
+
+// CATEGORY TABS SCROLL
+document.querySelectorAll(".category-tab").forEach(tab => {
+    tab.onclick = () => {
+        const target = document.getElementById(tab.dataset.target);
+        if(target) target.scrollIntoView({behavior:"smooth"});
+    };
+});
+
+// DARK/LIGHT TOGGLE
+const themeBtn = document.getElementById("theme-btn");
+themeBtn.onclick = () => {
+    document.body.classList.toggle("light");
+    themeBtn.innerText = document.body.classList.contains("light") ? "🌑" : "🌙";
 };
 
 loadVideos();
 </script>
 </body>
 </html>
-
