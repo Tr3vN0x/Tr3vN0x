@@ -6,145 +6,136 @@
 <title>Tr3vN0x - Red & Black Video Site</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <style>
-/* --- UPDATED STYLES FOR CLEANER/COOLER LOOK --- */
+/* --- BASE STYLES --- */
 body {
-    /* Use the new Inter font */
     font-family: 'Inter', Arial, sans-serif;
     margin:0;
-    /* Keeping the sleek gradient background */
     background: linear-gradient(to bottom, #000 0%, #111 100%);
     color:#fff;
-    /* Smooth scroll for professional feel */
     scroll-behavior: smooth;
 }
 .container { max-width:1200px; margin:20px auto; padding:0 20px; }
-
-/* 2. REFINED HEADERS */
 h1,h2 {
     color:#e53935;
-    /* Softer, more spaced-out divider line */
     border-bottom:2px solid rgba(229, 57, 53, 0.3);
     padding-bottom:10px;
-    margin-top:40px; /* Increased top margin for separation */
+    margin-top:40px; 
 }
-
-/* 3. SLEEKER HEADER BAR */
 header { 
     display:flex; justify-content:space-between; align-items:center; 
     padding:15px 30px; 
-    background:rgba(0,0,0,0.9); /* Slightly translucent background */
-    box-shadow:0 4px 8px rgba(229, 57, 53, 0.2); /* Subtle red shadow */
+    background:rgba(0,0,0,0.9); 
+    box-shadow:0 4px 8px rgba(229, 57, 53, 0.2); 
     position:sticky; top:0; z-index:100; 
-    backdrop-filter: blur(5px); /* Modern blur effect */
+    backdrop-filter: blur(5px); 
 }
 .search-container { flex-grow: 1; margin: 0 40px; max-width: 500px; }
-
 .search-container input { 
     width:100%; padding:10px 20px; 
-    border:none; /* No harsh border */
-    border-radius:25px; /* Pill shape */
+    border:none; 
+    border-radius:25px; 
     background:#222; color:#fff; 
     transition: background 0.3s, box-shadow 0.3s;
 }
 .search-container input:focus {
     outline: none;
     background: #333;
-    box-shadow: 0 0 0 2px #e53935; /* Red glow on focus */
+    box-shadow: 0 0 0 2px #e53935; 
 }
 
+/* --- NAVIGATION AND AUTH CONTROLS --- */
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { 
+    color: #fff; text-decoration: none; font-weight: 500;
+    transition: color 0.2s;
+}
+.nav-links a:hover { color: #e53935; }
+
 .floating-auth { 
-    padding:10px 20px; /* More padding */
-    border-radius:25px; /* Pill shape */
+    padding:10px 20px; 
+    border-radius:25px; 
     font-weight:600; 
     letter-spacing: 0.5px;
     transition: transform 0.2s, box-shadow 0.2s; 
+    cursor: pointer;
 }
 .floating-auth:hover { 
     transform:scale(1.05); 
-    box-shadow: 0 0 10px rgba(229, 57, 53, 0.6); /* Glow on hover */
+    box-shadow: 0 0 10px rgba(229, 57, 53, 0.6); 
 }
 .floating-auth.logged-in { background: #3954e5; } 
 
-/* 4. FEATURED SECTION */
-#featured { 
-    background:#1c1c1c; border-radius:12px; padding:30px; /* More internal padding */
-    margin-top:20px; 
-    box-shadow:0 6px 20px rgba(0,0,0,0.6); /* Deeper, darker shadow */
+/* --- MODAL BASE STYLES (Auth and Profile) --- */
+#auth-overlay, #profile-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* Controlled by JS */
+    justify-content: center; align-items: center; z-index: 1000;
 }
-#featured h2 { margin-top:0; border-bottom:none; font-size:1.8em; }
+.auth-modal, .profile-modal { 
+    background:#111; border-radius:12px; width:90%; max-width:450px; 
+    box-shadow:0 5px 25px rgba(255,0,0,0.7); 
+    padding:30px; 
+    position: relative;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { margin: 0; }
+#close-auth, #close-profile { 
+    font-size: 1.5em; cursor: pointer; color: #e53935;
+    transition: transform 0.2s;
+}
+#close-auth:hover, #close-profile:hover { transform: rotate(90deg); }
+
+/* --- PROFILE SPECIFIC STYLES --- */
+.profile-card { text-align: center; padding: 20px 0; }
+.profile-picture { 
+    width: 120px; height: 120px; border-radius: 50%; 
+    object-fit: cover; margin-bottom: 15px;
+    border: 3px solid #e53935;
+}
+.profile-info h3 { font-size: 1.5em; margin: 10px 0 5px 0; }
+.profile-info p { color: #aaa; margin-bottom: 20px; }
+.profile-info .verified-badge { width: 24px; height: 24px; margin-left: 5px; vertical-align: middle; }
+
+/* --- PROFILE EDIT FORM STYLES --- */
+#profile-edit-form textarea {
+    width: 100%; height: 80px; padding: 10px; margin-bottom: 15px;
+    background: #222; color: #fff; border: 1px solid #333;
+    border-radius: 4px; resize: vertical;
+}
+#profile-edit-form button { margin-top: 10px; }
+
+/* --- BUTTONS & FORMS --- */
+.tabs { display:flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
+.tab { padding:10px 15px; cursor:pointer; transition: color 0.2s, border-bottom 0.2s; }
+.tab.active { border-bottom:3px solid #e53935; color:#e53935; font-weight: 600; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+.form-group input, .form-group select { 
+    width: calc(100% - 22px); padding:10px; 
+    border:1px solid #333; border-radius:4px; 
+    background:#1c1c1c; color:#fff; 
+}
+button[type="submit"], .modal-button { 
+    padding:12px 20px; background:#e53935; border:none; border-radius:4px; 
+    font-size:1em; font-weight: 600; color: #fff; cursor: pointer;
+    transition: background 0.2s;
+}
+button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
+
+/* --- VIDEO AND CHAT STYLES (Keep existing) --- */
+#featured { background:#1c1c1c; border-radius:12px; padding:30px; margin-top:20px; box-shadow:0 6px 20px rgba(0,0,0,0.6); }
 .featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; border-radius: 8px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-
-.video-row { margin-bottom: 50px; }
-.video-grid { 
-    display: flex; gap: 20px; /* Slightly more space between cards */
-    overflow-x: auto; padding-bottom: 10px; 
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; 
-    position:relative; 
-}
-.video-grid::-webkit-scrollbar { display: none; }
-
-/* 5. POLISHED VIDEO CARDS */
-.video-card { 
-    background:#1c1c1c; 
-    border-radius:10px; /* Sleek corner radius */
-    overflow:hidden; cursor:pointer; 
-    border: 1px solid #1c1c1c; /* Base border for clean look */
-    transition: transform 0.2s, box-shadow 0.2s, border 0.2s; 
-    min-width:280px; max-width:280px; flex-shrink:0; 
-    box-shadow:0 4px 10px rgba(0,0,0,0.5);
-}
-.video-card:hover { 
-    transform:scale(1.05); /* Less aggressive scale */
-    z-index:5; 
-    /* Cleaner, modern hover effect with a red glow and border */
-    box-shadow: 0 0 15px rgba(229, 57, 53, 0.7), 0 8px 25px rgba(0,0,0,0.8); 
-    border: 1px solid #e53935; 
-}
-.thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
-.thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
-.video-info { padding:15px; display:block; } /* Changed to block for better title flow */
-.video-info h3 { 
-    margin:0 0 5px 0; line-height:1.3; color:#fff; 
-    font-size:1.1em; font-weight: 700; /* Bolder title */
-    display:flex; align-items:center; gap:5px; 
-}
+.video-grid { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; position:relative; }
+.video-card { background:#1c1c1c; border-radius:10px; overflow:hidden; cursor:pointer; border: 1px solid #1c1c1c; transition: transform 0.2s, box-shadow 0.2s, border 0.2s; min-width:280px; max-width:280px; flex-shrink:0; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
 .verified-badge { width:18px; height:18px; }
-.video-info p { margin:0; font-size:0.8em; color:#888; /* Softer color for metadata */ }
-
-/* 6. CHAT & AUTH MODAL REFINEMENT */
-#chat-container { 
-    background:#111; border-radius:12px; padding:20px; 
-    margin-top:40px; 
-    box-shadow:0 4px 15px rgba(229, 57, 53, 0.2); /* Subtle red shadow on chat */
-}
-#chat-messages { 
-    height:300px; overflow-y:auto; 
-    border:1px solid #333; padding:15px; 
-    background:#0a0a0a; border-radius:8px; 
-}
+#chat-container { background:#111; border-radius:12px; padding:20px; margin-top:40px; box-shadow:0 4px 15px rgba(229, 57, 53, 0.2); }
+#chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:15px; background:#0a0a0a; border-radius:8px; }
 .chat-message .chat-username { font-weight:700; color:#e53935; }
-#chat-input { 
-    padding:10px; border:1px solid #333; 
-    border-radius:4px; background:#1c1c1c; 
-}
-#send-button { 
-    padding:10px 20px; 
-    font-weight:600; 
-    letter-spacing: 0.5px;
-}
-
-.auth-modal { 
-    background:#111; border-radius:12px; width:90%; max-width:450px; 
-    box-shadow:0 5px 25px rgba(255,0,0,0.7); /* Stronger modal shadow */
-    padding:30px; 
-}
-.tab.active { border-bottom:3px solid #e53935; color:#e53935; }
-button[type="submit"] { 
-    padding:12px; background:#e53935; 
-    font-size:1.1em; 
-    font-weight: 600;
-}
+#chat-input-container { display: flex; gap: 10px; margin-top: 15px; }
+#chat-input { flex-grow: 1; padding:10px; border:1px solid #333; border-radius:4px; background:#1c1c1c; }
+#send-button { padding:10px 20px; font-weight:600; letter-spacing: 0.5px; }
 </style>
 </head>
 <body>
@@ -152,7 +143,10 @@ button[type="submit"] {
 <header>
     <h1>Tr3vN0x</h1>
     <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
-    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth">Login</div></div>
+    <div class="nav-links">
+        <a href="#" id="profile-link" style="display:none;">Profile</a>
+        <div class="floating-auth logged-out" id="floating-auth">Login</div>
+    </div>
 </header>
 
 <div class="container">
@@ -180,7 +174,7 @@ button[type="submit"] {
         </div>
     </section>
 
-    <section id="auth-overlay">
+        <section id="auth-overlay">
         <div class="auth-modal">
             <div class="modal-header">
                 <h3>Authentication</h3>
@@ -190,16 +184,14 @@ button[type="submit"] {
                 <div class="tab active" id="login-tab">Log In</div>
                 <div class="tab" id="signup-tab">Sign Up</div>
             </div>
-            
-                        <form id="login-form">
+            <form id="login-form">
                 <div class="form-group"><label>Username</label><input type="text" id="login-username" required></div>
                 <div class="form-group"><label>Password</label>
                     <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
                 </div>
                 <button type="submit">Log In</button>
             </form>
-
-                        <form id="signup-form" style="display:none;">
+            <form id="signup-form" style="display:none;">
                 <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
                 <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
                 <div class="form-group"><label>Password</label>
@@ -209,10 +201,45 @@ button[type="submit"] {
             </form>
         </div>
     </section>
+
+    <section id="profile-overlay">
+        <div class="profile-modal">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <span id="close-profile">&times;</span>
+            </div>
+
+            <div id="profile-view">
+                <div class="profile-card">
+                    <img id="profile-pic-display" class="profile-picture" src="" alt="Profile Picture">
+                    <div class="profile-info">
+                        <h3 id="profile-username-display"></h3>
+                        <p id="profile-bio-display"></p>
+                    </div>
+                </div>
+                <button id="edit-profile-button" class="modal-button" style="width: 100%;">Edit Profile</button>
+            </div>
+
+            <form id="profile-edit-form" style="display:none;">
+                <h4>Edit Your Profile</h4>
+                <div class="form-group">
+                    <label>New Profile Picture URL</label>
+                    <input type="url" id="edit-pic-url" placeholder="Paste image URL (e.g., https://example.com/pic.jpg)">
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="edit-bio"></textarea>
+                </div>
+                <button type="submit" class="modal-button">Save Changes</button>
+                <button type="button" id="cancel-edit-button" class="modal-button" style="background:#444;">Cancel</button>
+            </form>
+        </div>
+    </section>
+
 </div>
 
 <script>
-// --- GLOBAL DATA ---
+// --- GLOBAL DATA & ELEMENTS ---
 const overlay = document.getElementById('auth-overlay');
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
@@ -223,10 +250,17 @@ const closeAuth = document.getElementById('close-auth');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
 const chatMessagesContainer = document.getElementById('chat-messages');
-const searchInput = document.getElementById('searchInput');
+
+const profileLink = document.getElementById('profile-link');
+const profileOverlay = document.getElementById('profile-overlay');
+const closeProfile = document.getElementById('close-profile');
+const profileView = document.getElementById('profile-view');
+const profileEditForm = document.getElementById('profile-edit-form');
+const editProfileButton = document.getElementById('edit-profile-button');
+const cancelEditButton = document.getElementById('cancel-edit-button');
 
 const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
-const DEFAULT_AVATAR = "https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?_nc_cat=102&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&oh=00_Afkujh61dvGsGO9dNf7KqvLkpKEhIqbtbN9SvMZb7Ddj6A&oe=69380005";
+const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; // Placeholder Avatar
 
 let videoData = [
     { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
@@ -242,7 +276,12 @@ let isLoggedIn = false;
 let currentUsername = '';
 let isVerified = false; 
 
-// --- FUNCTIONS ---
+// --- NEW PROFILE STATE ---
+let profilePicture = DEFAULT_AVATAR;
+let userBio = "Hello! I am a new user on Tr3vN0x's video site.";
+
+
+// --- CORE FUNCTIONS ---
 
 function createVideoCard(video){
     const card = document.createElement('div');
@@ -258,7 +297,6 @@ function createVideoCard(video){
     card.addEventListener('click', ()=>{
         video.views++;
         card.querySelector('.views-count').innerText = video.views;
-        // Update the featured player with the clicked video
         const featuredSection = document.getElementById('featured');
         const featuredPlayer = featuredSection.querySelector('.featured-player');
         featuredSection.querySelector('h2').innerText = `Featured: ${video.title}`;
@@ -276,12 +314,10 @@ function renderVideoRows(){
     });
 }
 
-// Chat rendering with verified badges
 function renderChatHistory(){
     const initialHistory = [
         { username: 'Tr3vN0x', message: 'Welcome to the stream! Smash that like button! 🔥', verified: true },
         { username: 'GamerDude42', message: 'Dead By Daylight is so fun! When are you playing more?', verified: false },
-        { username: 'VerifiedFan', message: 'Loving the new site design! Looks clean!', verified: true }
     ];
 
     const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]').concat(initialHistory);
@@ -289,18 +325,19 @@ function renderChatHistory(){
     chatMessagesContainer.innerHTML = '';
     history.slice().reverse().forEach(msg=>{
         const div = document.createElement('div'); div.className='chat-message';
-        div.innerHTML = `<span class='chat-username'>${msg.username}${msg.verified?` <img src='${VERIFIED_ICON}' class='verified-badge'>`:''}</span>: <span class='chat-text'>${msg.message}</span>`;
+        const verifiedTag = msg.verified ? `<img src='${VERIFIED_ICON}' class='verified-badge'>` : '';
+        div.innerHTML = `<span class='chat-username'>${msg.username}${verifiedTag}</span>: <span class='chat-text'>${msg.message}</span>`;
         chatMessagesContainer.prepend(div); 
     });
-    // Scroll to bottom (latest messages)
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
 
-// --- AUTH LOGIC UPDATED FOR USERNAME LOGIN ---
+// --- AUTH HANDLERS ---
 
 function toggleAuthModal(show) {
     overlay.style.display = show ? 'flex' : 'none';
     if (show) {
+        // Reset to Login tab on open
         loginTab.classList.add('active');
         signupTab.classList.remove('active');
         loginForm.style.display = 'block';
@@ -310,12 +347,16 @@ function toggleAuthModal(show) {
 
 function handleLogin(e) {
     e.preventDefault();
-    // **NEW LOGIC: Get username directly from the login form input**
     currentUsername = document.getElementById('login-username').value; 
     
+    // Attempt to load saved profile data
+    const savedPic = localStorage.getItem(`${currentUsername}_pic`);
+    const savedBio = localStorage.getItem(`${currentUsername}_bio`);
+
     isLoggedIn = true;
+    profilePicture = savedPic || DEFAULT_AVATAR;
+    userBio = savedBio || "Hello! I am a new user on Tr3vN0x's video site.";
     
-    // Check for the specific username for verification
     if (currentUsername.toLowerCase() === 'tr3vn0x') {
         isVerified = true;
     } else {
@@ -332,14 +373,16 @@ function handleSignup(e) {
     e.preventDefault();
     currentUsername = document.getElementById('signup-username').value;
     
-    // Check for the specific username for verification
+    isLoggedIn = true;
+    profilePicture = DEFAULT_AVATAR; // Set default on signup
+    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
+
     if (currentUsername.toLowerCase() === 'tr3vn0x') {
         isVerified = true;
     } else {
         isVerified = false;
     }
     
-    isLoggedIn = true;
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('signup-form').reset();
@@ -349,7 +392,9 @@ function handleSignup(e) {
 function handleLogout() {
     isLoggedIn = false;
     currentUsername = '';
-    isVerified = false; // Reset verification status
+    isVerified = false;
+    profilePicture = DEFAULT_AVATAR; // Clear state on logout
+    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     updateAuthState();
     alert('Logged out.');
 }
@@ -359,29 +404,107 @@ function openLogin() {
 }
 
 function updateAuthState() {
-    // 1. Clear existing listeners to prevent duplicates/errors
     floatingAuth.removeEventListener('click', openLogin);
     floatingAuth.removeEventListener('click', handleLogout);
 
-    // 2. Attach new listener based on state
     if (isLoggedIn) {
         floatingAuth.innerText = currentUsername;
         floatingAuth.className = 'floating-auth logged-in';
-        floatingAuth.addEventListener('click', handleLogout); // Logged in: clicking logs out
+        floatingAuth.addEventListener('click', handleLogout); 
         
         chatInput.disabled = false;
         chatInput.placeholder = 'Say something cool...';
         sendButton.disabled = false;
+        profileLink.style.display = 'block'; // Show profile link
     } else {
         floatingAuth.innerText = 'Login';
         floatingAuth.className = 'floating-auth logged-out';
-        floatingAuth.addEventListener('click', openLogin); // Logged out: clicking opens modal
+        floatingAuth.addEventListener('click', openLogin); 
         
         chatInput.disabled = true;
         chatInput.placeholder = 'Login to chat...';
         sendButton.disabled = true;
+        profileLink.style.display = 'none'; // Hide profile link
     }
 }
+
+// --- NEW PROFILE HANDLERS ---
+
+function toggleProfileModal(show) {
+    profileOverlay.style.display = show ? 'flex' : 'none';
+    if (show) {
+        renderProfileModal();
+        // Always start in view mode
+        profileView.style.display = 'block';
+        profileEditForm.style.display = 'none';
+    }
+}
+
+function renderProfileModal() {
+    // Fill the profile view card
+    document.getElementById('profile-username-display').innerHTML = `${currentUsername}${isVerified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
+    document.getElementById('profile-pic-display').src = profilePicture;
+    document.getElementById('profile-bio-display').innerText = userBio;
+
+    // Fill the edit form fields
+    document.getElementById('edit-pic-url').value = profilePicture === DEFAULT_AVATAR ? '' : profilePicture;
+    document.getElementById('edit-bio').value = userBio;
+}
+
+function handleProfileEdit(e) {
+    e.preventDefault();
+    const newPicUrl = document.getElementById('edit-pic-url').value.trim();
+    const newBio = document.getElementById('edit-bio').value.trim();
+
+    // Update global state
+    profilePicture = newPicUrl || DEFAULT_AVATAR;
+    userBio = newBio || "Hello! I am a new user on Tr3vN0x's video site.";
+
+    // Save to local storage for persistence
+    localStorage.setItem(`${currentUsername}_pic`, profilePicture);
+    localStorage.setItem(`${currentUsername}_bio`, userBio);
+
+    // Switch back to view mode and update
+    profileEditForm.style.display = 'none';
+    profileView.style.display = 'block';
+    renderProfileModal();
+    alert('Profile updated successfully!');
+}
+
+
+// --- EVENT LISTENERS ---
+
+// Auth Modal Listeners
+closeAuth.addEventListener('click', () => toggleAuthModal(false));
+loginTab.addEventListener('click', () => {
+    loginTab.classList.add('active'); signupTab.classList.remove('active');
+    loginForm.style.display = 'block'; signupForm.style.display = 'none';
+});
+signupTab.addEventListener('click', () => {
+    signupTab.classList.add('active'); loginTab.classList.remove('active');
+    loginForm.style.display = 'none'; signupForm.style.display = 'block';
+});
+loginForm.addEventListener('submit', handleLogin);
+signupForm.addEventListener('submit', handleSignup);
+
+// Profile Modal Listeners
+profileLink.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    if (isLoggedIn) { 
+        toggleProfileModal(true); 
+    }
+});
+closeProfile.addEventListener('click', () => toggleProfileModal(false));
+
+editProfileButton.addEventListener('click', () => {
+    profileView.style.display = 'none';
+    profileEditForm.style.display = 'block';
+});
+cancelEditButton.addEventListener('click', () => {
+    profileEditForm.style.display = 'none';
+    profileView.style.display = 'block';
+});
+profileEditForm.addEventListener('submit', handleProfileEdit);
 
 
 // Chat Send Logic
@@ -391,10 +514,9 @@ sendButton.addEventListener('click', () => {
         const newMessage = {
             username: currentUsername,
             message: messageText,
-            verified: isVerified // Use the current verification status
+            verified: isVerified 
         };
         
-        // Add to local storage (simulated persistence)
         const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
         history.push(newMessage);
         localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
@@ -403,27 +525,6 @@ sendButton.addEventListener('click', () => {
         chatInput.value = '';
     }
 });
-
-// --- INITIALIZATION ---
-renderVideoRows();
-renderChatHistory(); 
-
-// Event Listeners for Auth Modal
-closeAuth.addEventListener('click', () => toggleAuthModal(false));
-loginTab.addEventListener('click', () => {
-    loginTab.classList.add('active');
-    signupTab.classList.remove('active');
-    loginForm.style.display = 'block';
-    signupForm.style.display = 'none';
-});
-signupTab.addEventListener('click', () => {
-    signupTab.classList.add('active');
-    loginTab.classList.remove('active');
-    loginForm.style.display = 'none';
-    signupForm.style.display = 'block';
-});
-loginForm.addEventListener('submit', handleLogin);
-signupForm.addEventListener('submit', handleSignup);
 
 // Password visibility toggle
 document.querySelectorAll('.toggle-pass').forEach(button => {
@@ -446,7 +547,11 @@ chatInput.addEventListener('keypress', (e) => {
     }
 });
 
-updateAuthState(); // Initialize auth state on load and set up the floating button listener
+
+// --- INITIALIZATION ---
+renderVideoRows();
+renderChatHistory(); 
+updateAuthState(); 
 </script>
 </body>
 </html>
