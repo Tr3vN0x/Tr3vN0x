@@ -91,19 +91,44 @@ header {
     box-shadow: 0 0 12px #00ff66;
 }
 
-/* ---------------- VIDEO GRID ---------------- */
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+/* ---------------- COLUMNS ---------------- */
+.columns-container {
+    display: flex;
     gap: 20px;
     padding: 25px;
+    flex-wrap: wrap;
 }
 
+.column {
+    flex: 1;
+    min-width: 250px;
+    background: #111;
+    border: 1px solid #003300;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.column-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.column-header img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    animation: pulseLogo 2s infinite;
+}
+
+/* Video Card */
 .video-card {
     background: #111;
     border: 1px solid #003300;
     border-radius: 12px;
     padding: 10px;
+    margin-bottom: 12px;
     transition: 0.3s ease;
     opacity: 0;
     transform: translateY(30px);
@@ -117,7 +142,7 @@ header {
 
 .thumbnail {
     width: 100%;
-    height: 150px;
+    height: 120px;
     background: #001100;
     border-radius: 10px;
     box-shadow: inset 0 0 8px #004400;
@@ -162,18 +187,16 @@ footer {
         width: 50px;
         height: 50px;
     }
-    .video-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    .columns-container {
+        flex-direction: column;
+        gap: 20px;
         padding: 15px;
-        gap: 15px;
     }
-    .thumbnail { height: 120px; }
 }
 
 @media (max-width: 480px) {
     .logo-container img { height: 35px; }
     .about { width: 45px; height: 45px; }
-    .video-grid { grid-template-columns: 1fr; padding: 10px; gap: 12px; }
     .thumbnail { height: 100px; }
     .search-bar { width: 95%; }
 }
@@ -194,24 +217,54 @@ footer {
     </div>
 </header>
 
-<!-- VIDEO GRID -->
-<div class="video-grid">
-    <div class="video-card">
-        <div class="thumbnail"></div>
-        <div class="video-title">Video 1</div>
+<!-- COLUMNS -->
+<div class="columns-container">
+
+    <!-- Most Viewed -->
+    <div class="column">
+        <div class="column-header">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/TW9zdCBWaWV3ZWQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Most Viewed">
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Most Viewed Video 1</div>
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Most Viewed Video 2</div>
+        </div>
     </div>
-    <div class="video-card">
-        <div class="thumbnail"></div>
-        <div class="video-title">Video 2</div>
+
+    <!-- Older Videos -->
+    <div class="column">
+        <div class="column-header">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/T2xkZXIgVmlkZW9z/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Older Videos">
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Older Video 1</div>
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Older Video 2</div>
+        </div>
     </div>
-    <div class="video-card">
-        <div class="thumbnail"></div>
-        <div class="video-title">Video 3</div>
+
+    <!-- Watch History -->
+    <div class="column">
+        <div class="column-header">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/V2F0Y2ggSGlzdG9yeQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Watch History">
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Watched Video 1</div>
+        </div>
+        <div class="video-card">
+            <div class="thumbnail"></div>
+            <div class="video-title">Watched Video 2</div>
+        </div>
     </div>
-    <div class="video-card">
-        <div class="thumbnail"></div>
-        <div class="video-title">Video 4</div>
-    </div>
+
 </div>
 
 <!-- FOOTER -->
