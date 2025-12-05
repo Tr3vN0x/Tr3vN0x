@@ -14,19 +14,46 @@ body {
     margin: 0;
     transition: background 0.3s, color 0.3s;
 }
+
+/* ---------- SMALLER HEADER ---------- */
 header {
     background: #141414;
-    padding: 15px 30px;
+    padding: 8px 18px; /* smaller */
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-header .logo-container { display:flex; align-items:center; gap:12px; }
-header img.icon { width:45px; height:45px; border-radius:50%; }
-header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
-header button { margin-left:10px; background:#e50914; border:none; color:white; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+
+header .logo-container { 
+    display:flex; 
+    align-items:center; 
+    gap:8px; /* smaller gap */
+}
+
+header img.icon { 
+    width:32px; 
+    height:32px; 
+    border-radius:50%; 
+}
+
+header img.title-img { 
+    height:45px; /* was 65px */
+    filter: drop-shadow(0 0 6px #e50914);
+}
+
+header button { 
+    margin-left:8px; 
+    background:#e50914; 
+    border:none; 
+    color:white; 
+    padding:6px 10px; /* smaller button */
+    border-radius:5px; 
+    cursor:pointer; 
+    transition:0.3s; 
+}
 header button:hover { background:#ff4d4d; }
 
+/* ---------- FEATURED ---------- */
 #featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; border-radius:12px; }
 #featured img { width:100%; max-height:400px; object-fit:cover; border-radius:12px; }
 #featured-title { position:absolute; bottom:20px; left:30px; font-size:28px; font-weight:bold; text-shadow: 0 0 10px #000; }
@@ -44,6 +71,7 @@ header button:hover { background:#ff4d4d; }
     color:#fff;
 }
 
+/* ---------- VIDEO CARDS ---------- */
 .video-grid {
     display:flex;
     overflow-x:auto;
@@ -155,7 +183,6 @@ body.light #search-bar { background:#eee; color:#111; }
     <h2 id="video-title"></h2>
 </div>
 
-<!-- ---------- ABOUT PAGE ---------- -->
 <div id="about-page">
     <button id="about-back-btn">← Back</button>
 
@@ -167,17 +194,15 @@ body.light #search-bar { background:#eee; color:#111; }
                 <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" style="width:22px;height:22px;" alt="Verified Badge">
             </h2>
             <p style="margin-top:10px; font-size:16px; line-height:1.5;">
-                Hello! I am Tr3vN0x (Trevor). Welcome to my streaming hub! Here you can find my latest videos, live streams, and fan favorites. I love gaming, making content, and sharing my passion with all of you.
+                Hello! I am Tr3vN0x (Trevor). Welcome to my streaming hub! Here you can find my latest videos, live streams, and fan favorites.
             </p>
 
-            <!-- Social Links -->
             <div class="social-links" style="margin-top:15px; display:flex; gap:10px;">
                 <a href="https://youtube.com/" target="_blank" class="youtube">YouTube</a>
                 <a href="https://discord.com/" target="_blank" class="discord">Discord</a>
                 <a href="https://instagram.com/" target="_blank" class="instagram">Instagram</a>
             </div>
 
-            <!-- Skills / Interests -->
             <div class="skills" style="margin-top:25px;">
                 <h3>🎮 Skills & Interests</h3>
                 <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
@@ -188,14 +213,12 @@ body.light #search-bar { background:#eee; color:#111; }
                 </div>
             </div>
 
-            <!-- Stats -->
             <div class="stats">
                 <div><div style="font-size:24px;font-weight:bold;">125</div><div>Videos</div></div>
                 <div><div style="font-size:24px;font-weight:bold;">3.2K</div><div>Subscribers</div></div>
                 <div><div style="font-size:24px;font-weight:bold;">15K</div><div>Likes</div></div>
             </div>
 
-            <!-- Timeline -->
             <div class="timeline">
                 <h3>📜 My Journey</h3>
                 <ul>
@@ -224,6 +247,7 @@ let videoData = [
 ];
 let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: randomViews(50,150), lastViews:0 };
 let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: randomViews(50,200), lastViews:0 };
+
 function shuffleArray(array){ for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]]; } return array; }
 let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
 
