@@ -5,82 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
 
-<!-- Favicon/Icon -->
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" type="image/png">
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
 
 <style>
-    body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; transition: background 0.3s, color 0.3s;}
-    header { background:#111; padding:20px; font-size:28px; font-weight:bold; text-align:center; border-bottom:2px solid red; display:flex; align-items:center; justify-content:center; gap:10px; }
-    header img { width:40px; height:40px; }
+body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; transition: background 0.3s, color 0.3s;}
+header { background:#111; padding:20px; font-size:28px; font-weight:bold; text-align:center; border-bottom:2px solid red; display:flex; align-items:center; justify-content:center; gap:10px; }
+header img { width:40px; height:40px; }
 
-    .container { padding: 20px; }
-    h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10px; }
+.container { padding: 20px; }
+h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10px; }
 
-    /* Search & Filters */
-    #search-bar { width:100%; max-width:500px; padding:10px; border-radius:8px; border:none; font-size:16px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
-    .category-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
-    .category-tab { background:red; border:none; padding:8px 15px; border-radius:8px; color:white; cursor:pointer; transition:0.2s; }
-    .category-tab:hover { background:#ff4d4d; }
+#search-bar { width:100%; max-width:500px; padding:10px; border-radius:8px; border:none; font-size:16px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
+.category-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.category-tab { background:red; border:none; padding:8px 15px; border-radius:8px; color:white; cursor:pointer; transition:0.2s; }
+.category-tab:hover { background:#ff4d4d; }
 
-    /* Featured Video */
-    #featured { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; cursor:pointer; transition:0.2s; }
-    #featured:hover { transform:scale(1.02); }
-    #featured img { width:100%; max-width:700px; border-radius:12px; }
-    #featured-title { margin-top:10px; font-size:20px; text-align:center; }
+#featured { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; cursor:pointer; transition:0.2s; }
+#featured:hover { transform:scale(1.02); }
+#featured img { width:100%; max-width:700px; border-radius:12px; }
+#featured-title { margin-top:10px; font-size:20px; text-align:center; }
 
-    /* Video card LIVE badge */
-    .live-badge { position: absolute; top: 8px; left: 8px; background: red; color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 4px; z-index: 10; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0% { box-shadow: 0 0 5px red; } 50% { box-shadow: 0 0 15px red; } 100% { box-shadow: 0 0 5px red; } }
+.live-badge { position: absolute; top: 8px; left: 8px; background: red; color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 4px; z-index: 10; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 5px red; } 50% { box-shadow: 0 0 15px red; } 100% { box-shadow: 0 0 5px red; } }
 
-    .video-card-container { position: relative; }
+.video-card-container { position: relative; }
+.video-card { background:#151515; padding:10px; border-radius:10px; cursor:pointer; transition:0.2s; overflow:hidden; position:relative;}
+.video-card img.thumb { width:100%; border-radius:10px; transition: opacity 0.3s ease; display:block;}
+.video-card img.hover-thumb { position:absolute; top:0; left:0; width:100%; border-radius:10px; opacity:0; transition: opacity 0.3s ease; pointer-events:none; }
+.video-card:hover img.hover-thumb { opacity:1; }
+.video-card:hover { transform:scale(1.02); background:#1d1d1d; }
+.title { margin-top:10px; font-size:16px; }
 
-    /* Video Card Hover Preview */
-    .video-card { background:#151515; padding:10px; border-radius:10px; cursor:pointer; transition:0.2s; overflow:hidden; position:relative;}
-    .video-card img.thumb { width:100%; border-radius:10px; transition: opacity 0.3s ease; display:block;}
-    .video-card img.hover-thumb { position:absolute; top:0; left:0; width:100%; border-radius:10px; opacity:0; transition: opacity 0.3s ease; pointer-events:none; }
-    .video-card:hover img.hover-thumb { opacity:1; }
-    .video-card:hover { transform:scale(1.02); background:#1d1d1d; }
+/* Heart Icon for favorites */
+.video-card .heart-icon { position: absolute; top: 8px; right: 8px; font-size: 18px; color: white; cursor: pointer; z-index: 20; transition: color 0.2s, transform 0.2s; }
+.video-card .heart-icon.favorited { color: red; transform: scale(1.2); }
 
-    .title { margin-top:10px; font-size:16px; }
+@media(max-width:600px){ .video-grid { grid-template-columns: 1fr !important; } iframe { height:200px !important; } }
+.video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
 
-    /* Mobile improvements */
-    @media(max-width:600px){
-        .video-grid { grid-template-columns: 1fr !important; }
-        iframe { height:200px !important; }
-    }
+#player-page { display:none; padding:20px; }
+#player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:10px; }
+#back-btn { margin-bottom:20px; padding:10px 20px; background:red; border:none; color:white; border-radius:8px; cursor:pointer; }
 
-    .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
-
-    /* PLAYER PAGE */
-    #player-page { display:none; padding:20px; }
-    #player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:10px; }
-    #back-btn { margin-bottom:20px; padding:10px 20px; background:red; border:none; color:white; border-radius:8px; cursor:pointer; }
-
-    /* Dark/Light toggle */
-    #theme-btn { position:absolute; right:20px; top:20px; background:red; border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.3s; }
-    #theme-btn:hover { background:#ff4d4d; }
-
-    /* Light theme */
-    body.light { background:#f5f5f5; color:#111; }
-    body.light .video-card { background:#ddd; color:#111; }
-    body.light .video-card:hover { background:#ccc; }
-    body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
+#theme-btn { position:absolute; right:20px; top:20px; background:red; border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.3s; }
+#theme-btn:hover { background:#ff4d4d; }
+body.light { background:#f5f5f5; color:#111; }
+body.light .video-card { background:#ddd; color:#111; }
+body.light .video-card:hover { background:#ccc; }
+body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 </style>
 </head>
 <body>
 
 <header>
-    <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" alt="icon"/>
+    <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
     Tr3vN0x Video Hub
     <button id="theme-btn">🌙</button>
 </header>
 
 <div class="container" id="home-page">
-
-    <!-- SEARCH BAR -->
     <input type="text" id="search-bar" placeholder="🔍 Search videos...">
-
-    <!-- CATEGORY TABS -->
     <div class="category-tabs">
         <button class="category-tab" data-target="featured">Featured</button>
         <button class="category-tab" data-target="recent-grid">Recent</button>
@@ -90,7 +74,6 @@
         <button class="category-tab" data-target="older-grid">Older</button>
     </div>
 
-    <!-- FEATURED VIDEO -->
     <div id="featured"></div>
 
     <h2>🆕 Recent</h2>
@@ -131,105 +114,101 @@ let videoData = [
 let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc" };
 let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8" };
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+function shuffleArray(array) { for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]];} return array; }
+let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
 
-let recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
+function createCard(v,isLive=false){
+    const card=document.createElement("div");
+    card.className="video-card video-card-container";
 
-function createCard(v, isLive=false){
-    const card = document.createElement("div");
-    card.className = "video-card video-card-container";
+    const normalThumb=`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+    const hoverThumb=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
 
-    const normalThumb = `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
-    const hoverThumb = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`; // or your GIF URL
+    const favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
+    const isFavorited=favorites.includes(v.id);
 
-    card.innerHTML = `
-        ${isLive ? '<div class="live-badge">LIVE</div>' : ''}
-        <img class='thumb' src="${normalThumb}"> 
+    card.innerHTML=`
+        ${isLive?'<div class="live-badge">LIVE</div>':''}
+        <img class='thumb' src="${normalThumb}">
         <img class='hover-thumb' src="${hoverThumb}">
         <div class='title'>${v.title}</div>
+        <div class="heart-icon ${isFavorited?'favorited':''}">❤️</div>
     `;
-    card.onclick = ()=>openPlayer(v);
+
+    const heart=card.querySelector(".heart-icon");
+    heart.onclick=(e)=>{
+        e.stopPropagation();
+        let favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
+        if(favorites.includes(v.id)){ favorites=favorites.filter(id=>id!==v.id); heart.classList.remove("favorited"); }
+        else{ favorites.push(v.id); heart.classList.add("favorited"); }
+        localStorage.setItem("favorites",JSON.stringify(favorites));
+    };
+
+    card.onclick=()=>openPlayer(v);
     return card;
 }
 
 function loadVideos(){
-    const featuredDiv = document.getElementById("featured");
-    featuredDiv.innerHTML = `
+    const featuredDiv=document.getElementById("featured");
+    featuredDiv.innerHTML=`
         <img src="https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg" alt="Featured">
         <div id="featured-title">${featuredVideo.title}</div>
     `;
-    featuredDiv.onclick = ()=>openPlayer(featuredVideo);
+    featuredDiv.onclick=()=>openPlayer(featuredVideo);
 
-    const recentGrid = document.getElementById("recent-grid");
+    const recentGrid=document.getElementById("recent-grid");
     videoData.filter(v=>v.category==="recent").forEach(v=>recentGrid.appendChild(createCard(v)));
 
-    const rec = document.getElementById("recommended-grid");
+    const rec=document.getElementById("recommended-grid");
     videoData.forEach(v=>{ if(recommendedVideos.includes(v)) rec.appendChild(createCard(v)); });
 
-    const fav = document.getElementById("favorites-grid");
+    const fav=document.getElementById("favorites-grid");
     videoData.filter(v=>v.category==="favorites").forEach(v=>fav.appendChild(createCard(v)));
 
-    const live = document.getElementById("live-grid");
-    live.appendChild(createCard(liveVideo, true));
+    const live=document.getElementById("live-grid");
+    live.appendChild(createCard(liveVideo,true));
 
-    const old = document.getElementById("older-grid");
+    const old=document.getElementById("older-grid");
     videoData.filter(v=>v.category==="older").forEach(v=>old.appendChild(createCard(v)));
 }
 
-// PLAYER PAGE
 function openPlayer(v){
     document.getElementById("home-page").style.display="none";
     document.getElementById("player-page").style.display="block";
-    document.getElementById("player").innerHTML = `<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
-    document.getElementById("video-title").innerText = v.title;
+    document.getElementById("player").innerHTML=`<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
+    document.getElementById("video-title").innerText=v.title;
 }
 
-// BACK BUTTON
-document.getElementById("back-btn").onclick = ()=>{
+document.getElementById("back-btn").onclick=()=>{
     document.getElementById("player-page").style.display="none";
     document.getElementById("home-page").style.display="block";
 
-    recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
-    document.getElementById("recommended-grid").innerHTML = '';
+    recommendedVideos=shuffleArray([...videoData]).slice(0,3);
+    document.getElementById("recommended-grid").innerHTML='';
     videoData.forEach(v=>{ if(recommendedVideos.includes(v)) document.getElementById("recommended-grid").appendChild(createCard(v)); });
 };
 
 // SEARCH FUNCTIONALITY
-const searchBar = document.getElementById("search-bar");
-searchBar.addEventListener("input", () => {
-    const query = searchBar.value.toLowerCase();
-    const grids = ["recent-grid", "recommended-grid", "favorites-grid", "live-grid", "older-grid"];
-    
-    grids.forEach(gridId => {
-        const grid = document.getElementById(gridId);
-        Array.from(grid.children).forEach(card => {
-            const title = card.querySelector(".title").innerText.toLowerCase();
-            card.style.display = title.includes(query) ? "block" : "none";
+document.getElementById("search-bar").addEventListener("input",()=>{
+    const query=document.getElementById("search-bar").value.toLowerCase();
+    const grids=["recent-grid","recommended-grid","favorites-grid","live-grid","older-grid"];
+    grids.forEach(gridId=>{
+        const grid=document.getElementById(gridId);
+        Array.from(grid.children).forEach(card=>{
+            const title=card.querySelector(".title").innerText.toLowerCase();
+            card.style.display=title.includes(query)?"block":"none";
         });
     });
-
-    document.getElementById("featured").style.display = featuredVideo.title.toLowerCase().includes(query) ? "flex" : "none";
+    document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
 });
 
-// CATEGORY TABS SCROLL
-document.querySelectorAll(".category-tab").forEach(tab => {
-    tab.onclick = () => {
-        const target = document.getElementById(tab.dataset.target);
-        if(target) target.scrollIntoView({behavior:"smooth"});
-    };
-});
+// CATEGORY TABS
+document.querySelectorAll(".category-tab").forEach(tab=>{ tab.onclick=()=>{ const target=document.getElementById(tab.dataset.target); if(target) target.scrollIntoView({behavior:"smooth"}); }; });
 
 // DARK/LIGHT TOGGLE
-const themeBtn = document.getElementById("theme-btn");
-themeBtn.onclick = () => {
+document.getElementById("theme-btn").onclick=()=>{
     document.body.classList.toggle("light");
-    themeBtn.innerText = document.body.classList.contains("light") ? "🌑" : "🌙";
+    document.getElementById("theme-btn").innerText=document.body.classList.contains("light")?"🌑":"🌙";
 };
 
 loadVideos();
