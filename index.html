@@ -40,6 +40,10 @@ h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10
 .video-card .heart-icon { position: absolute; top: 8px; right: 8px; font-size: 18px; color: white; cursor: pointer; z-index: 20; transition: color 0.2s, transform 0.2s; }
 .video-card .heart-icon.favorited { color: red; transform: scale(1.2); }
 
+/* Views */
+.video-card .views { font-size: 12px; color: #ccc; margin-top: 4px; }
+body.light .video-card .views { color: #555; }
+
 @media(max-width:600px){ .video-grid { grid-template-columns: 1fr !important; } iframe { height:200px !important; } }
 .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
 
@@ -101,18 +105,18 @@ body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 <script>
 // VIDEO DATA
 let videoData = [
-    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites" },
-    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older" },
-    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older" },
-    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older" },
-    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older" },
-    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older" },
-    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent" },
-    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent" }
+    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: 15234 },
+    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older", views: 8456 },
+    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older", views: 3241 },
+    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older", views: 5123 },
+    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older", views: 2312 },
+    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older", views: 6341 },
+    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent", views: 12456 },
+    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent", views: 8765 }
 ];
 
-let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc" };
-let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8" };
+let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: 5432 };
+let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: 15234 };
 
 function shuffleArray(array) { for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]];} return array; }
 let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
@@ -132,6 +136,7 @@ function createCard(v,isLive=false){
         <img class='thumb' src="${normalThumb}">
         <img class='hover-thumb' src="${hoverThumb}">
         <div class='title'>${v.title}</div>
+        <div class='views'>👁️ ${v.views.toLocaleString()} views</div>
         <div class="heart-icon ${isFavorited?'favorited':''}">❤️</div>
     `;
 
@@ -145,6 +150,15 @@ function createCard(v,isLive=false){
     };
 
     card.onclick=()=>openPlayer(v);
+
+    // Live view counter
+    const viewEl = card.querySelector(".views");
+    setInterval(() => {
+        const increment = isLive ? Math.floor(Math.random()*10) : Math.floor(Math.random()*3);
+        v.views += increment;
+        viewEl.innerText = `👁️ ${v.views.toLocaleString()} views`;
+    }, 1000);
+
     return card;
 }
 
