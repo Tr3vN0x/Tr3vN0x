@@ -200,6 +200,18 @@ header {
     width: 90%;
     max-width: 400px;
     border: 1px solid #003300;
+    position: relative;
+}
+
+/* Profile picture inside modal */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #00ff66;
+    object-fit: cover;
+    margin-bottom: 12px;
+    box-shadow: 0 0 12px #00ff66;
 }
 
 #profile-modal h2 {
@@ -326,13 +338,13 @@ footer {
 <!-- HEADER -->
 <header>
     <div class="logo-container">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdm4wWA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Logo">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/VHIzdm4wWA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Logo">
     </div>
 
     <input type="text" class="search-bar" placeholder="Search videos...">
 
     <div class="profile-btn" id="open-profile">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile">
     </div>
 </header>
 
@@ -367,6 +379,8 @@ footer {
 <div id="profile-modal">
     <div class="modal-content">
         <div class="close-btn">&times;</div>
+        <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" 
+             alt="Profile Picture" class="profile-pic">
         <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
         <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
         <button class="follow-btn" id="follow-btn">Follow</button>
