@@ -3,344 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x - The Video Community</title>
+<title>Tr3vN0x - The Video Showcase</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 /* --------------------------------------
-   1. GLOBAL & TYPOGRAPHY
-   -------------------------------------- */
+   1. GLOBAL & TYPOGRAPHY
+   -------------------------------------- */
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    margin:0;
-    /* Deep, consistent dark background */
-    background-color: #0d0d0d; 
-    color:#e0e0e0; /* Softer white text */
-    scroll-behavior: smooth;
-    line-height: 1.6;
+    font-family: 'Inter', Arial, sans-serif;
+    margin:0;
+    /* Deep, consistent dark background */
+    background-color: #0d0d0d; 
+    color:#e0e0e0; /* Softer white text */
+    scroll-behavior: smooth;
+    line-height: 1.6;
 }
-.container { 
-    max-width:1400px; /* Slightly wider container */
-    margin:0 auto; /* Center the container */
-    padding:20px 40px; 
+.container { 
+    max-width:1400px; /* Slightly wider container */
+    margin:0 auto; /* Center the container */
+    padding:20px 40px; 
 }
 h1 {
-    font-weight: 900;
-    font-size: 2.5em;
-    color: #e53935;
-    letter-spacing: -1px;
-    margin: 0;
+    font-weight: 900;
+    font-size: 2.5em;
+    color: #e53935;
+    letter-spacing: -1px;
+    margin: 0;
 }
 h2 {
-    color:#e53935;
-    font-size: 1.8em;
-    font-weight: 700;
-    border-bottom:2px solid rgba(229, 57, 53, 0.15); /* Lighter divider */
-    padding-bottom:10px;
-    margin-top:40px; 
-    margin-bottom: 25px;
+    color:#e53935;
+    font-size: 1.8em;
+    font-weight: 700;
+    border-bottom:2px solid rgba(229, 57, 53, 0.15); /* Lighter divider */
+    padding-bottom:10px;
+    margin-top:40px; 
+    margin-bottom: 25px;
 }
 a { color: #fff; text-decoration: none; transition: color 0.2s; }
 a:hover { color: #e53935; }
 
 
 /* --------------------------------------
-   2. HEADER & NAVIGATION
-   -------------------------------------- */
-header { 
-    display:flex; justify-content:space-between; align-items:center; 
-    padding:15px 40px; 
-    background:rgba(0,0,0,0.95); /* Nearly opaque background */
-    box-shadow:0 2px 10px rgba(0,0,0,0.5); /* Clean shadow */
-    position:sticky; top:0; z-index:1000; 
-    backdrop-filter: blur(8px); /* Stronger blur for modern look */
+   2. HEADER & NAVIGATION (Simplified)
+   -------------------------------------- */
+header { 
+    display:flex; justify-content:flex-start; align-items:center; 
+    padding:15px 40px; 
+    background:rgba(0,0,0,0.95);
+    box-shadow:0 2px 10px rgba(0,0,0,0.5);
+    position:sticky; top:0; z-index:1000; 
+    backdrop-filter: blur(8px);
 }
 .search-container { flex-grow: 1; margin: 0 40px; max-width: 600px; }
-.search-container input { 
-    width:100%; padding:10px 20px; 
-    border:1px solid #333; /* Subtle border */
-    border-radius:25px; 
-    background:#1c1c1c; 
-    color:#e0e0e0; 
-    font-size: 1em;
-    transition: all 0.3s;
+.search-container input { 
+    width:100%; padding:10px 20px; 
+    border:1px solid #333;
+    border-radius:25px; 
+    background:#1c1c1c; 
+    color:#e0e0e0; 
+    font-size: 1em;
+    transition: all 0.3s;
 }
 .search-container input:focus {
-    outline: none;
-    border-color: #e53935;
-    background: #252525;
-}
-.nav-links { display: flex; gap: 20px; align-items: center; }
-.nav-links a { font-weight: 600; }
-
-.floating-auth { 
-    padding:10px 18px; 
-    border-radius:20px; 
-    font-weight:700; 
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    background-color: #e53935; /* Primary Button Color */
-    color: #fff;
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s; 
-    border: none;
-}
-.floating-auth:hover { 
-    background-color: #ff5722;
-    transform:scale(1.03); 
-    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.5); 
-}
-.floating-auth.logged-in { 
-    background: #3954e5; 
-} 
-.floating-auth.logged-in:hover {
-    background: #5b79ff;
+    outline: none;
+    border-color: #e53935;
+    background: #252525;
 }
 
 
 /* --------------------------------------
-   3. VIDEO GRIDS & CARDS
-   -------------------------------------- */
+   3. VIDEO GRIDS & CARDS
+   -------------------------------------- */
 .video-row { margin-bottom: 50px; }
-.video-grid { 
-    display: flex; gap: 25px; /* Increased gap */
-    overflow-x: auto; padding-bottom: 10px; 
-    scrollbar-width: none; 
+.video-grid { 
+    display: flex; gap: 25px;
+    overflow-x: auto; padding-bottom: 10px; 
+    scrollbar-width: none; 
 }
 .video-grid::-webkit-scrollbar { display: none; }
 
-.video-card { 
-    background:#181818; 
-    border-radius:10px; 
-    overflow:hidden; cursor:pointer; 
-    border: 1px solid #181818; 
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
-    min-width:300px; max-width:300px; flex-shrink:0; 
-    box-shadow:0 4px 12px rgba(0,0,0,0.6);
+.video-card { 
+    background:#181818; 
+    border-radius:10px; 
+    overflow:hidden; cursor:pointer; 
+    border: 1px solid #181818; 
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
+    min-width:300px; max-width:300px; flex-shrink:0; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.6);
 }
-.video-card:hover { 
-    transform:translateY(-5px); /* Lift effect */
-    box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4); 
-    border-color: #e53935; 
+.video-card:hover { 
+    transform:translateY(-5px);
+    box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4); 
+    border-color: #e53935; 
 }
 .thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
 .thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
-.video-info { padding:15px; } 
-.video-info h3 { 
-    margin:0 0 5px 0; line-height:1.4; color:#fff; 
-    font-size:1.15em; font-weight: 700; 
-    display:flex; align-items:center; gap:5px; 
+.video-info { padding:15px; } 
+.video-info h3 { 
+    margin:0 0 5px 0; line-height:1.4; color:#fff; 
+    font-size:1.15em; font-weight: 700; 
+    display:flex; align-items:center; gap:5px; 
 }
 .video-info p { margin:0; font-size:0.9em; color:#a0a0a0; }
 .verified-badge { width:18px; height:18px; }
 
 /* FEATURED SECTION */
-#featured { 
-    background:#1c1c1c; border-radius:12px; padding:30px; 
-    margin-top:20px; 
-    box-shadow:0 8px 30px rgba(0,0,0,0.7); 
+#featured { 
+    background:#1c1c1c; border-radius:12px; padding:30px; 
+    margin-top:20px; 
+    box-shadow:0 8px 30px rgba(0,0,0,0.7); 
 }
 #featured h2 { margin-top:0; border-bottom:none; font-size:2em; }
 .featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; border-radius: 10px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-
-
-/* --------------------------------------
-   4. CHAT SECTION
-   -------------------------------------- */
-#chat-container { 
-    background:#1c1c1c; border-radius:12px; padding:25px; 
-    margin-top:40px; 
-    box-shadow:0 4px 15px rgba(0,0,0,0.3); 
-}
-#chat-messages { 
-    height:300px; overflow-y:auto; 
-    border:1px solid #333; padding:15px; 
-    background:#0a0a0a; border-radius:8px; 
-}
-#chat-input-container { display: flex; gap: 10px; margin-top: 15px; }
-#chat-input { flex-grow: 1; padding:10px; border:1px solid #333; border-radius:6px; background:#1c1c1c; color: #e0e0e0; }
-#send-button { 
-    padding:10px 15px; background: #e53935; color: #fff; 
-    font-weight:600; border: none; border-radius:6px;
-    transition: background 0.2s;
-}
-#send-button:hover:not(:disabled) { background: #ff5722; }
-#send-button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* Chat Avatars and Layout */
-.chat-message { margin-bottom: 12px; display: flex; align-items: flex-start; font-size: 0.95em; }
-.chat-avatar {
-    width: 28px; height: 28px; border-radius: 50%; border: 2px solid #e53935;
-    margin-right: 10px; flex-shrink: 0;
-}
-.chat-username { 
-    font-weight:700; color:#e53935; margin-right: 5px; cursor: pointer;
-    transition: color 0.2s;
-}
-.chat-username:hover { color: #ff5722; text-decoration: underline; }
-.chat-message-content { display: flex; align-items: center; }
-
-
-/* --------------------------------------
-   5. MODALS (Auth, Profile, Messages)
-   -------------------------------------- */
-#auth-overlay, #profile-overlay, #user-profile-overlay, #messages-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none; 
-    justify-content: center; align-items: center; z-index: 2000;
-}
-.auth-modal, .profile-modal, .user-profile-modal, .messages-modal { 
-    background:#1c1c1c; border-radius:12px; width:90%; max-width:400px; 
-    box-shadow:0 0 40px rgba(255,0,0,0.6); /* Prominent shadow */
-    padding:30px; 
-    position: relative;
-    color: #e0e0e0;
-}
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.modal-header h3 { margin: 0; font-size: 1.5em; color: #e53935; }
-#close-auth, #close-profile, #close-user-profile, #close-messages { 
-    font-size: 2em; cursor: pointer; color: #e53935;
-    transition: transform 0.2s, color 0.2s;
-}
-#close-auth:hover, #close-profile:hover, #close-user-profile:hover, #close-messages:hover { transform: rotate(180deg); color: #fff; }
-
-/* Tabs */
-.tabs { display:flex; margin-bottom: 25px; border-bottom: 2px solid #333; }
-.tab { padding:10px 15px; cursor:pointer; font-weight: 600; transition: color 0.2s, border-bottom 0.2s; }
-.tab.active { border-bottom:3px solid #e53935; color:#e53935; }
-
-/* Forms */
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9em; }
-.form-group input { 
-    width: 100%; padding:12px; 
-    border:1px solid #444; border-radius:6px; 
-    background:#252525; color:#e0e0e0; 
-    box-sizing: border-box;
-}
-.password-container { display: flex; align-items: center; }
-.password-container input { border-right: none; border-radius: 6px 0 0 6px; }
-.toggle-pass { 
-    padding: 10px 12px; background: #333; color: #e0e0e0; border: 1px solid #444;
-    border-left: none; border-radius: 0 6px 6px 0; cursor: pointer; height: 44px; /* Match input height */
-}
-
-/* Buttons */
-button[type="submit"], .modal-button { 
-    width: 100%;
-    padding:12px 20px; background:#e53935; border:none; border-radius:6px; 
-    font-size:1.05em; font-weight: 700; color: #fff; cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
-    margin-top: 10px;
-}
-button[type="submit"]:hover, .modal-button:hover { 
-    background: #ff5722; 
-    box-shadow: 0 2px 10px rgba(229, 57, 53, 0.5);
-}
-
-/* Profile Card */
-.profile-card { text-align: center; padding: 10px 0 30px 0; }
-.profile-picture { 
-    width: 100px; height: 100px; border-radius: 50%; 
-    object-fit: cover; margin-bottom: 15px;
-    border: 4px solid #e53935;
-    box-shadow: 0 0 15px rgba(229, 57, 53, 0.4);
-}
-#profile-edit-form textarea {
-    width: 100%; height: 100px; padding: 10px; margin-bottom: 15px;
-    background: #252525; color: #e0e0e0; border: 1px solid #444;
-    border-radius: 6px; resize: vertical; box-sizing: border-box;
-}
-#cancel-edit-button { background: #444; margin-top: 10px; }
-#cancel-edit-button:hover { background: #555; }
-
-/* Follower/Following Count Display */
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0 25px 0;
-    padding: 10px 0;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-}
-.stat-item {
-    text-align: center;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #fff;
-    cursor: default;
-}
-.stat-item span {
-    display: block;
-    font-size: 0.8em;
-    font-weight: 400;
-    color: #aaa;
-    margin-top: 2px;
-}
-
-
-/* Messages/DM Styles */
-#messages-inbox-view { max-height: 400px; overflow-y: auto; }
-.inbox-item { 
-    display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #333;
-    cursor: pointer; transition: background 0.2s;
-}
-.inbox-item:hover { background: #222; }
-.inbox-user-pic { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #e53935; }
-.inbox-username { font-weight: 700; color: #fff; }
-.inbox-last-message { font-size: 0.85em; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; }
-
-#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0a0a0a; border-radius: 8px; margin-bottom: 15px; }
-#dm-input { flex-grow: 1; padding: 10px; border: 1px solid #333; border-radius: 6px; background: #252525; color: #e0e0e0; }
-
-/* DM Bubble Colors */
-.dm-message-self { text-align: right; margin-bottom: 8px; }
-.dm-message-other { text-align: left; margin-bottom: 8px; }
-.dm-bubble { 
-    display: inline-block; padding: 10px 14px; border-radius: 18px; 
-    max-width: 80%; word-wrap: break-word; font-size: 0.95em;
-    color: #fff;
-}
-/* RECEIVED (Other User) - Black/Dark Gray */
-.dm-message-other .dm-bubble { 
-    background: #252525; 
-    border-bottom-left-radius: 4px; 
-}
-/* SENT (Self) - Red */
-.dm-message-self .dm-bubble { 
-    background: #e53935; 
-    border-bottom-right-radius: 4px; 
-}
-
-/* Follow Button Styles */
-#follow-button {
-    background: #3954e5; /* Blue */
-}
-#follow-button:hover {
-    background: #5b79ff;
-    box-shadow: 0 2px 10px rgba(57, 84, 229, 0.5);
-}
-#unfollow-button {
-    background: #444;
-}
-#unfollow-button:hover {
-    background: #555;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
 </style>
 </head>
 <body>
 
 <header>
     <h1>Tr3vN0x</h1>
-    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
-    <div class="nav-links">
-        <a href="#" id="messages-link" style="display:none;">Messages</a>
-        <a href="#" id="profile-link" style="display:none;">Profile</a>
-        <div class="floating-auth logged-out" id="floating-auth">Login</div>
-    </div>
-</header>
+        <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
+    </header>
 
 <div class="container">
     <section id="featured">
@@ -357,721 +140,58 @@ button[type="submit"]:hover, .modal-button:hover {
         <h2>📼 Older Videos</h2>
         <div class="video-grid" id="older-grid"></div>
     </div>
-
-    <section id="chat-container">
-        <h2>💬 Global Chat</h2>
-        <div id="chat-messages"></div>
-        <div id="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
-            <button id="send-button" disabled>Send</button>
-        </div>
-    </section>
-
-        <section id="auth-overlay">
-        <div class="auth-modal">
-            <div class="modal-header">
-                <h3>Authentication</h3>
-                <span id="close-auth">&times;</span>
-            </div>
-            <div class="tabs">
-                <div class="tab active" id="login-tab">Log In</div>
-                <div class="tab" id="signup-tab">Sign Up</div>
-            </div>
-            
-            <form id="login-form">
-                <div class="form-group"><label>Username</label><input type="text" id="login-username" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
-                    <p style="font-size:0.8em; color:#e53935; margin-top:5px;">NOTE: The password is always **"password"** in this client-side demo.</p>
-                </div>
-                <button type="submit">Log In</button>
-            </form>
-            
-            <form id="signup-form" style="display:none;">
-                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
-                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
-                    <p style="font-size:0.8em; color:#e53935; margin-top:5px;">NOTE: The password will be set to **"password"** automatically for this client-side demo.</p>
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="profile-overlay">
-        <div class="profile-modal">
-            <div class="modal-header">
-                <h3>Your Profile</h3>
-                <span id="close-profile">&times;</span>
-            </div>
-            <div id="profile-view">
-                <div class="profile-card">
-                    <img id="profile-pic-display" class="profile-picture" src="" alt="Profile Picture">
-                    <div class="profile-info">
-                        <h3 id="profile-username-display"></h3>
-                        <p id="profile-bio-display"></p>
-                    </div>
-                </div>
-                <div class="stats-container">
-                    <div class="stat-item" id="my-followers-count">0<span>Followers</span></div>
-                    <div class="stat-item" id="my-following-count">0<span>Following</span></div>
-                </div>
-
-                <button id="edit-profile-button" class="modal-button" style="width: 100%;">Edit Profile</button>
-            </div>
-            <form id="profile-edit-form" style="display:none;">
-                <h4>Edit Your Profile</h4>
-                <div class="form-group">
-                    <label>New Profile Picture URL</label>
-                    <input type="url" id="edit-pic-url" placeholder="Paste image URL (e.g., https://example.com/pic.jpg)">
-                </div>
-                <div class="form-group">
-                    <label>Bio</label>
-                    <textarea id="edit-bio"></textarea>
-                </div>
-                <button type="submit" class="modal-button">Save Changes</button>
-                <button type="button" id="cancel-edit-button" class="modal-button">Cancel</button>
-            </form>
-        </div>
-    </section>
-
-    <section id="user-profile-overlay">
-        <div class="user-profile-modal profile-modal">
-            <div class="modal-header">
-                <h3 id="other-profile-title">User Profile</h3>
-                <span id="close-user-profile">&times;</span>
-            </div>
-            <div class="profile-card">
-                <img id="other-profile-pic-display" class="profile-picture" src="" alt="Profile Picture">
-                <div class="profile-info">
-                    <h3 id="other-profile-username-display"></h3>
-                    <p id="other-profile-bio-display"></p>
-                </div>
-            </div>
-             <div class="stats-container">
-                <div class="stat-item" id="other-followers-count">0<span>Followers</span></div>
-                <div class="stat-item" id="other-following-count">0<span>Following</span></div>
-            </div>
-
-            <div id="follow-button-container">
-                <button id="follow-button" class="modal-button" style="width: 100%; display:none;">Follow</button>
-                <button id="unfollow-button" class="modal-button" style="width: 100%; display:none;">Unfollow</button>
-            </div>
-
-            <button id="dm-user-button" class="modal-button" style="width: 100%;">Direct Message</button>
-        </div>
-    </section>
-
-    <section id="messages-overlay">
-        <div class="messages-modal profile-modal">
-            <div class="modal-header">
-                <h3 id="messages-modal-title">Messages Inbox</h3>
-                <span id="close-messages">&times;</span>
-            </div>
-
-            <div id="messages-inbox-view">
-                </div>
-
-            <div id="messages-chat-view" style="display:none;">
-                <button id="back-to-inbox-button" class="modal-button" style="background: #444; margin-bottom: 15px; width: auto; padding: 8px 15px;">&larr; Back to Inbox</button>
-                <div id="dm-messages">
-                    </div>
-                <div id="dm-input-container">
-                    <input type="text" id="dm-input" placeholder="Send a message..." required>
-                    <button id="dm-send-button" class="modal-button" style="width: auto; padding: 10px 15px;">Send</button>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>
 
 <script>
-// --- GLOBAL DATA & ELEMENTS ---
-const floatingAuth = document.getElementById('floating-auth');
-const chatInput = document.getElementById('chat-input');
-const sendButton = document.getElementById('send-button');
-const chatMessagesContainer = document.getElementById('chat-messages');
-const profileLink = document.getElementById('profile-link');
-const profileOverlay = document.getElementById('profile-overlay');
-const profileView = document.getElementById('profile-view');
-const profileEditForm = document.getElementById('profile-edit-form');
-const messagesLink = document.getElementById('messages-link');
-const messagesOverlay = document.getElementById('messages-overlay');
-const userProfileOverlay = document.getElementById('user-profile-overlay');
-const dmUserButton = document.getElementById('dm-user-button');
-const followButton = document.getElementById('follow-button');
-const unfollowButton = document.getElementById('unfollow-button');
-
-const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
-const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; 
-const DUMMY_PASSWORD = "password"; 
-
-let isLoggedIn = false;
-let currentUsername = '';
-let isVerified = false; 
-let profilePicture = DEFAULT_AVATAR;
-let userBio = "Hello! I am a new user on Tr3vN0x's video site.";
-let currentDMTarget = null;
-
-
 // --- CORE UTILITY FUNCTIONS ---
-
-function getUserData(username) {
-    const isOwner = username.toLowerCase() === 'tr3vn0x';
-    const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
-    const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
-    const verified = isOwner;
-    return { pic, bio, verified };
-}
-
-// --- FOLLOWER/FOLLOWING UTILITIES (NEW) ---
-
-/** Gets an array of usernames from a specific list (followers or following). */
-function getFollowList(username, type) {
-    // type will be '_following' or '_followers'
-    return JSON.parse(localStorage.getItem(`${username}${type}`) || '[]');
-}
-
-/** Updates a list in localStorage for a specific user. */
-function updateFollowList(username, type, list) {
-    localStorage.setItem(`${username}${type}`, JSON.stringify(list));
-}
-
-/** Toggles the follow status between two users. */
-function toggleFollow(targetUsername, isFollowing) {
-    // 1. Get the current user's 'following' list
-    let myFollowing = getFollowList(currentUsername, '_following');
-    
-    // 2. Get the target user's 'followers' list
-    let targetFollowers = getFollowList(targetUsername, '_followers');
-
-    if (isFollowing) {
-        // UNFOLLOW: Remove target from myFollowing list
-        myFollowing = myFollowing.filter(u => u !== targetUsername);
-        // UNFOLLOW: Remove current user from targetFollowers list
-        targetFollowers = targetFollowers.filter(u => u !== currentUsername);
-        alert(`You unfollowed ${targetUsername}.`);
-    } else {
-        // FOLLOW: Add target to myFollowing list if not already there
-        if (!myFollowing.includes(targetUsername)) {
-            myFollowing.push(targetUsername);
-        }
-        // FOLLOW: Add current user to targetFollowers list if not already there
-        if (!targetFollowers.includes(currentUsername)) {
-            targetFollowers.push(currentUsername);
-        }
-        alert(`You are now following ${targetUsername}!`);
-    }
-
-    // 3. Save the updated lists
-    updateFollowList(currentUsername, '_following', myFollowing);
-    updateFollowList(targetUsername, '_followers', targetFollowers);
-
-    // 4. Re-render the profile to update buttons and counts
-    openUserProfileModal(targetUsername); 
-}
-
+const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
 
 // --- RENDERING & DISPLAY ---
 
 function renderVideoRows(){
-    const videoData = [
-        { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
-        { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
-        { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
-        { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
-        { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
-        { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
-        { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
-    ];
-    
-    // Existing logic to render video rows...
-    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
+    const videoData = [
+        { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
+        { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
+        { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
+        { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
+        { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
+        { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
+        { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
+    ];
+    
+    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
     Object.keys(grids).forEach(cat=>{
         const grid = document.getElementById(grids[cat]);
         grid.innerHTML = '';
         videoData.filter(v => v.category === cat).forEach(v => {
-            const card = document.createElement('div');
-            card.className='video-card';
-            card.dataset.video = v.id;
-            card.innerHTML = `
-                <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}"></div>
-                <div class="video-info">
-                    <h3>${v.title}${v.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
-                    <p>Views: 0</p>
-                </div>
-            `;
-            card.addEventListener('click', ()=>{
-                const featuredSection = document.getElementById('featured');
-                const featuredPlayer = featuredSection.querySelector('.featured-player');
-                featuredSection.querySelector('h2').innerText = `Featured: ${v.title}`;
-                featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1" allowfullscreen></iframe>`;
-            });
-            grid.appendChild(card);
-        });
+            const card = document.createElement('div');
+            card.className='video-card';
+            card.dataset.video = v.id;
+            card.innerHTML = `
+                <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}"></div>
+                <div class="video-info">
+                    <h3>${v.title}${v.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
+                    <p>Views: 0</p>
+                </div>
+            `;
+            card.addEventListener('click', ()=>{
+                const featuredSection = document.getElementById('featured');
+                const featuredPlayer = featuredSection.querySelector('.featured-player');
+                featuredSection.querySelector('h2').innerText = `Featured: ${v.title}`;
+                featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1" allowfullscreen></iframe>`;
+                // Smooth scroll to the featured section when a video is clicked
+                featuredSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            grid.appendChild(card);
+        });
     });
 }
-
-function renderChatHistory(){
-    const initialHistory = [
-        { username: 'Tr3vN0x', message: 'Welcome! Click on a name to see a profile.', verified: true },
-        { username: 'GamerDude42', message: 'Testing profile pics in chat!', verified: false },
-        { username: 'VerifiedFan', message: 'Looks awesome!', verified: true }
-    ];
-
-    // Merge history from storage with initial history
-    const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]').concat(initialHistory);
-    
-    chatMessagesContainer.innerHTML = '';
-    history.slice().reverse().forEach(msg=>{
-        const userData = getUserData(msg.username); 
-        const div = document.createElement('div'); 
-        div.className='chat-message';
-        div.innerHTML = `
-            <img src='${userData.pic}' class='chat-avatar'>
-            <span class='chat-message-content'>
-                <span class='chat-username' data-user='${msg.username}'>
-                    ${msg.username}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}
-                </span>: 
-                <span class='chat-message-text'>${msg.message}</span>
-            </span>
-        `;
-        chatMessagesContainer.prepend(div); 
-    });
-    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-
-    document.querySelectorAll('.chat-username').forEach(span => {
-        span.addEventListener('click', (e) => {
-            const targetUsername = e.currentTarget.getAttribute('data-user');
-            if (!isLoggedIn) {
-                alert("You must be logged in to view user profiles or chat.");
-                toggleAuthModal(true);
-            }
-            else if (targetUsername !== currentUsername) {
-                openUserProfileModal(targetUsername);
-            } else {
-                toggleProfileModal(true); 
-            }
-        });
-    });
-}
-
-
-// --- DM SYSTEM LOGIC (UNMODIFIED) ---
-
-function getDMKey(user1, user2) {
-    const users = [user1.toLowerCase(), user2.toLowerCase()].sort();
-    return `DM_${users[0]}_${users[1]}`;
-}
-
-function getDMHistory(targetUsername) {
-    const key = getDMKey(currentUsername, targetUsername);
-    return JSON.parse(localStorage.getItem(key) || '[]');
-}
-
-function updateInbox(user, targetUser) {
-    let inbox = JSON.parse(localStorage.getItem(`${user}_inbox`) || '[]');
-    if (!inbox.includes(targetUser)) {
-        inbox.push(targetUser);
-        localStorage.setItem(`${user}_inbox`, JSON.stringify(inbox));
-    }
-}
-
-function saveDMMessage(targetUsername, messageText) {
-    const key = getDMKey(currentUsername, targetUsername);
-    const history = getDMHistory(targetUsername);
-    const newMessage = {
-        sender: currentUsername,
-        message: messageText,
-        timestamp: Date.now()
-    };
-    history.push(newMessage);
-    localStorage.setItem(key, JSON.stringify(history));
-
-    updateInbox(currentUsername, targetUsername); 
-    updateInbox(targetUsername, currentUsername); 
-}
-
-function renderDMInbox() {
-    document.getElementById('messages-modal-title').innerText = 'Messages Inbox';
-    document.getElementById('messages-inbox-view').style.display = 'block';
-    document.getElementById('messages-chat-view').style.display = 'none';
-    const inboxView = document.getElementById('messages-inbox-view');
-    inboxView.innerHTML = '';
-
-    const inboxTargets = JSON.parse(localStorage.getItem(`${currentUsername}_inbox`) || '[]');
-
-    if (inboxTargets.length === 0) {
-        inboxView.innerHTML = '<p style="text-align:center; color:#888; padding: 20px;">No conversations yet. Start a DM from a user\'s profile!</p>';
-        return;
-    }
-
-    inboxTargets.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-
-    inboxTargets.forEach(target => {
-        const history = getDMHistory(target);
-        const lastMessage = history.length > 0 ? history[history.length - 1] : { message: "Start a new chat!", sender: target };
-        const userData = getUserData(target);
-
-        const item = document.createElement('div');
-        item.className = 'inbox-item';
-        item.dataset.user = target;
-        item.innerHTML = `
-            <img src='${userData.pic}' class='inbox-user-pic'>
-            <div>
-                <div class='inbox-username'>${target}</div>
-                <div class='inbox-last-message'>${lastMessage.sender === currentUsername ? 'You: ' : ''}${lastMessage.message}</div>
-            </div>
-        `;
-        item.addEventListener('click', () => {
-            openDMChat(target);
-        });
-        inboxView.appendChild(item);
-    });
-}
-
-function openDMChat(targetUsername) {
-    currentDMTarget = targetUsername;
-    const targetData = getUserData(targetUsername);
-
-    document.getElementById('messages-modal-title').innerHTML = `Chatting with ${targetUsername} ${targetData.verified ? `<img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
-    document.getElementById('messages-inbox-view').style.display = 'none';
-    document.getElementById('messages-chat-view').style.display = 'block';
-    
-    renderDMChatMessages(targetUsername);
-}
-
-function renderDMChatMessages(targetUsername) {
-    const dmMessagesContainer = document.getElementById('dm-messages');
-    dmMessagesContainer.innerHTML = '';
-    const history = getDMHistory(targetUsername);
-
-    history.forEach(msg => {
-        const isSelf = msg.sender === currentUsername;
-        const div = document.createElement('div');
-        div.className = isSelf ? 'dm-message-self' : 'dm-message-other';
-        div.innerHTML = `<span class="dm-bubble">${msg.message}</span>`;
-        dmMessagesContainer.appendChild(div);
-    });
-    dmMessagesContainer.scrollTop = dmMessagesContainer.scrollHeight;
-}
-
-
-// --- PROFILE HANDLERS (UPDATED) ---
-
-function toggleAuthModal(show) {
-    document.getElementById('auth-overlay').style.display = show ? 'flex' : 'none';
-}
-
-function toggleProfileModal(show) {
-    document.getElementById('profile-overlay').style.display = show ? 'flex' : 'none';
-    if (show) {
-        // Load own profile data (already in local state)
-        document.getElementById('profile-username-display').innerHTML = `${currentUsername}${isVerified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
-        document.getElementById('profile-pic-display').src = profilePicture;
-        document.getElementById('profile-bio-display').innerText = userBio;
-
-        // **NEW: Display Follower/Following Counts for own profile**
-        document.getElementById('my-followers-count').innerHTML = `${getFollowList(currentUsername, '_followers').length}<span>Followers</span>`;
-        document.getElementById('my-following-count').innerHTML = `${getFollowList(currentUsername, '_following').length}<span>Following</span>`;
-
-        document.getElementById('edit-pic-url').value = profilePicture === DEFAULT_AVATAR ? '' : profilePicture;
-        document.getElementById('edit-bio').value = userBio;
-
-        // Reset to view mode
-        profileView.style.display = 'block';
-        profileEditForm.style.display = 'none';
-    }
-}
-
-function openUserProfileModal(targetUsername) {
-    const userData = getUserData(targetUsername);
-    
-    document.getElementById('other-profile-title').innerText = `${targetUsername}'s Profile`;
-    document.getElementById('other-profile-username-display').innerHTML = `${targetUsername}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
-    document.getElementById('other-profile-pic-display').src = userData.pic;
-    document.getElementById('other-profile-bio-display').innerText = userData.bio;
-
-    // **NEW: Display Follower/Following Counts for other user**
-    document.getElementById('other-followers-count').innerHTML = `${getFollowList(targetUsername, '_followers').length}<span>Followers</span>`;
-    document.getElementById('other-following-count').innerHTML = `${getFollowList(targetUsername, '_following').length}<span>Following</span>`;
-
-
-    // **NEW: Handle Follow Button State**
-    const myFollowingList = getFollowList(currentUsername, '_following');
-    const isFollowing = myFollowingList.includes(targetUsername);
-
-    followButton.style.display = isFollowing ? 'none' : 'block';
-    unfollowButton.style.display = isFollowing ? 'block' : 'none';
-
-    // Clear previous listeners and add new ones to prevent duplication
-    followButton.replaceWith(followButton.cloneNode(true));
-    unfollowButton.replaceWith(unfollowButton.cloneNode(true));
-    const newFollowButton = document.getElementById('follow-button');
-    const newUnfollowButton = document.getElementById('unfollow-button');
-
-    newFollowButton.addEventListener('click', () => toggleFollow(targetUsername, false));
-    newUnfollowButton.addEventListener('click', () => toggleFollow(targetUsername, true));
-
-
-    // DM button setup
-    dmUserButton.onclick = () => {
-        userProfileOverlay.style.display = 'none';
-        toggleMessagesModal(true);
-        openDMChat(targetUsername);
-    };
-
-    userProfileOverlay.style.display = 'flex';
-}
-
-function toggleMessagesModal(show) {
-    messagesOverlay.style.display = show ? 'flex' : 'none';
-    if (show) {
-        renderDMInbox();
-    }
-}
-
-// --- AUTHENTICATION LOGIC (UNMODIFIED) ---
-
-function handleLogin(e) {
-    e.preventDefault();
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value;
-    
-    const userExists = localStorage.getItem(`user_${username}_exists`); 
-
-    if (!userExists) {
-        alert("Login Failed: Username does not exist. Please sign up first.");
-        return;
-    }
-
-    if (password !== DUMMY_PASSWORD) {
-        alert("Login Failed: Incorrect Password. (Remember, it's 'password' for this demo!)");
-        return;
-    }
-
-    isLoggedIn = true;
-    currentUsername = username;
-    
-    const userData = getUserData(currentUsername);
-    isVerified = userData.verified;
-    profilePicture = userData.pic;
-    userBio = userData.bio;
-    
-    localStorage.setItem('current_user_session', username);
-
-    updateAuthState();
-    toggleAuthModal(false);
-    document.getElementById('login-form').reset();
-    renderChatHistory();
-    alert(`Logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
-}
-
-function handleSignup(e) {
-    e.preventDefault();
-    const username = document.getElementById('signup-username').value.trim();
-
-    if (localStorage.getItem(`user_${username}_exists`)) {
-        alert("Signup Failed: Username already taken.");
-        return;
-    }
-    
-    localStorage.setItem(`user_${username}_exists`, 'true');
-    
-    localStorage.setItem(`${username}_pic`, DEFAULT_AVATAR);
-    localStorage.setItem(`${username}_bio`, "Hello! I am a new user on Tr3vN0x's video site.");
-
-    isLoggedIn = true;
-    currentUsername = username;
-    isVerified = (username.toLowerCase() === 'tr3vn0x'); 
-    profilePicture = DEFAULT_AVATAR; 
-    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
-    
-    localStorage.setItem('current_user_session', username);
-
-    updateAuthState();
-    toggleAuthModal(false);
-    document.getElementById('signup-form').reset();
-    renderChatHistory();
-    alert(`Account created and logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
-}
-
-function handleLogout() {
-    localStorage.removeItem('current_user_session');
-
-    isLoggedIn = false;
-    currentUsername = '';
-    isVerified = false;
-    profilePicture = DEFAULT_AVATAR; 
-    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
-    updateAuthState();
-    renderChatHistory(); 
-    alert('Logged out.');
-}
-
-function updateAuthState() {
-    floatingAuth.removeEventListener('click', openLogin);
-    floatingAuth.removeEventListener('click', handleLogout);
-
-    if (isLoggedIn) {
-        floatingAuth.innerText = currentUsername;
-        floatingAuth.className = 'floating-auth logged-in';
-        floatingAuth.addEventListener('click', handleLogout); 
-        
-        profileLink.style.display = 'block'; 
-        messagesLink.style.display = 'block';
-        
-        chatInput.disabled = false;
-        chatInput.placeholder = 'Say something cool...';
-        sendButton.disabled = false;
-    } else {
-        floatingAuth.innerText = 'Login';
-        floatingAuth.className = 'floating-auth logged-out';
-        floatingAuth.addEventListener('click', openLogin); 
-        
-        profileLink.style.display = 'none'; 
-        messagesLink.style.display = 'none';
-        
-        chatInput.disabled = true;
-        chatInput.placeholder = 'Login to chat...';
-        sendButton.disabled = true;
-    }
-}
-
-function initializeSession() {
-    const activeUser = localStorage.getItem('current_user_session');
-    if (activeUser) {
-        isLoggedIn = true;
-        currentUsername = activeUser;
-        
-        const userData = getUserData(currentUsername);
-        isVerified = userData.verified;
-        profilePicture = userData.pic;
-        userBio = userData.bio;
-    }
-    updateAuthState();
-}
-
-// --- ATTACHING ALL EVENT LISTENERS ---
-
-// Auth
-document.getElementById('close-auth').addEventListener('click', () => toggleAuthModal(false));
-document.getElementById('login-form').addEventListener('submit', handleLogin);
-document.getElementById('signup-form').addEventListener('submit', handleSignup);
-function openLogin() { toggleAuthModal(true); }
-
-// Own Profile
-profileLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedIn) { toggleProfileModal(true); } });
-document.getElementById('close-profile').addEventListener('click', () => toggleProfileModal(false));
-document.getElementById('edit-profile-button').addEventListener('click', () => { profileView.style.display = 'none'; profileEditForm.style.display = 'block'; });
-document.getElementById('cancel-edit-button').addEventListener('click', () => { profileEditForm.style.display = 'none'; profileView.style.display = 'block'; });
-
-document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newPicUrl = document.getElementById('edit-pic-url').value.trim();
-    const newBio = document.getElementById('edit-bio').value.trim();
-
-    profilePicture = newPicUrl || DEFAULT_AVATAR;
-    userBio = newBio || "Hello! I am a new user on Tr3vN0x's video site.";
-
-    localStorage.setItem(`${currentUsername}_pic`, profilePicture);
-    localStorage.setItem(`${currentUsername}_bio`, userBio);
-
-    profileEditForm.style.display = 'none';
-    profileView.style.display = 'block';
-    toggleProfileModal(false); 
-    
-    renderChatHistory(); 
-    
-    alert('Profile updated successfully!');
-});
-
-// Other User Profile
-document.getElementById('close-user-profile').addEventListener('click', () => { userProfileOverlay.style.display = 'none'; });
-
-// Messages
-messagesLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedIn) { toggleMessagesModal(true); } });
-document.getElementById('close-messages').addEventListener('click', () => toggleMessagesModal(false));
-document.getElementById('back-to-inbox-button').addEventListener('click', renderDMInbox);
-
-// DM Chat Send
-document.getElementById('dm-send-button').addEventListener('click', () => {
-    const dmInput = document.getElementById('dm-input');
-    const messageText = dmInput.value.trim();
-    if (messageText && currentDMTarget) {
-        saveDMMessage(currentDMTarget, messageText);
-        renderDMChatMessages(currentDMTarget);
-        dmInput.value = '';
-        dmInput.focus();
-    }
-});
-document.getElementById('dm-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('dm-send-button').click();
-    }
-});
-
-
-// Chat (Global)
-sendButton.addEventListener('click', () => {
-    const messageText = chatInput.value.trim();
-    if (messageText && isLoggedIn) {
-        const newMessage = {
-            username: currentUsername,
-            message: messageText,
-            verified: isVerified 
-        };
-        const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
-        history.push(newMessage);
-        localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
-        renderChatHistory();
-        chatInput.value = '';
-    }
-});
-document.getElementById('chat-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') { sendButton.click(); }
-});
-
-// Tab switching
-const loginTab = document.getElementById('login-tab');
-const signupTab = document.getElementById('signup-tab');
-const loginForm = document.getElementById('login-form');
-const signupForm = document.getElementById('signup-form');
-
-loginTab.addEventListener('click', () => {
-    loginTab.classList.add('active'); 
-    signupTab.classList.remove('active');
-    loginForm.style.display = 'block'; 
-    signupForm.style.display = 'none';
-});
-signupTab.addEventListener('click', () => {
-    signupTab.classList.add('active'); 
-    loginTab.classList.remove('active');
-    loginForm.style.display = 'none'; 
-    signupForm.style.display = 'block';
-});
-
-// Password toggles
-document.querySelectorAll('.toggle-pass').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const targetId = e.target.getAttribute('data-target');
-        const targetInput = document.getElementById(targetId);
-        if (targetInput.type === 'password') {
-            targetInput.type = 'text';
-            e.target.innerText = '🔒';
-        } else {
-            targetInput.type = 'password';
-            e.target.innerText = '👁️';
-        }
-    });
-});
-
 
 // --- INITIALIZATION ---
-initializeSession(); 
-renderVideoRows();
-renderChatHistory();
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderVideoRows();
+});
 </script>
 </body>
 </html>
