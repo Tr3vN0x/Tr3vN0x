@@ -43,18 +43,9 @@ header {
 
 /* Logo Pulse Animation */
 @keyframes pulseLogo {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 8px #00ff66;
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px #00ff66, 0 0 30px #00ff66;
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 8px #00ff66;
-    }
+    0% { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px #00ff66, 0 0 30px #00ff66; }
+    100% { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
 }
 
 /* Search */
@@ -79,16 +70,25 @@ header {
     outline: none;
 }
 
-/* About link */
-header .about {
-    font-weight: bold;
+/* About button with icon */
+.about {
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    padding: 6px 12px;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: 0.3s;
 }
 
-header .about:hover {
+.about img {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 0 4px #00ff66);
+}
+
+.about:hover {
     background: #003300;
     box-shadow: 0 0 10px #00ff66;
 }
@@ -163,7 +163,9 @@ footer {
 
     <input type="text" class="search-bar" placeholder="Search videos...">
 
-    <div class="about">About</div>
+    <div class="about">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="About">
+    </div>
 </header>
 
 <!-- VIDEO GRID -->
