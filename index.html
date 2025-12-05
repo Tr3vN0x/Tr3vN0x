@@ -4,30 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
-
 <link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
-
 <style>
 body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; transition: background 0.3s, color 0.3s;}
 header { background:#111; padding:20px; font-size:28px; font-weight:bold; text-align:center; border-bottom:2px solid red; display:flex; align-items:center; justify-content:center; gap:10px; }
 header img { width:40px; height:40px; }
-
 .container { padding: 20px; }
 h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10px; }
-
 #search-bar { width:100%; max-width:500px; padding:10px; border-radius:8px; border:none; font-size:16px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
 .category-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
 .category-tab { background:red; border:none; padding:8px 15px; border-radius:8px; color:white; cursor:pointer; transition:0.2s; }
 .category-tab:hover { background:#ff4d4d; }
-
 #featured { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; cursor:pointer; transition:0.2s; }
 #featured:hover { transform:scale(1.02); }
 #featured img { width:100%; max-width:700px; border-radius:12px; }
 #featured-title { margin-top:10px; font-size:20px; text-align:center; }
-
 .live-badge { position: absolute; top: 8px; left: 8px; background: red; color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 4px; z-index: 10; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 5px red; } 50% { box-shadow: 0 0 15px red; } 100% { box-shadow: 0 0 5px red; } }
-
 .video-card-container { position: relative; }
 .video-card { background:#151515; padding:10px; border-radius:10px; cursor:pointer; transition:0.2s; overflow:hidden; position:relative;}
 .video-card img.thumb { width:100%; border-radius:10px; transition: opacity 0.3s ease; display:block;}
@@ -35,22 +28,15 @@ h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10
 .video-card:hover img.hover-thumb { opacity:1; }
 .video-card:hover { transform:scale(1.02); background:#1d1d1d; }
 .title { margin-top:10px; font-size:16px; }
-
-/* Heart Icon for favorites */
 .video-card .heart-icon { position: absolute; top: 8px; right: 8px; font-size: 18px; color: white; cursor: pointer; z-index: 20; transition: color 0.2s, transform 0.2s; }
 .video-card .heart-icon.favorited { color: red; transform: scale(1.2); }
-
-/* Views */
 .video-card .views { font-size: 12px; color: #ccc; margin-top: 4px; }
 body.light .video-card .views { color: #555; }
-
 @media(max-width:600px){ .video-grid { grid-template-columns: 1fr !important; } iframe { height:200px !important; } }
 .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
-
 #player-page { display:none; padding:20px; }
 #player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:10px; }
 #back-btn { margin-bottom:20px; padding:10px 20px; background:red; border:none; color:white; border-radius:8px; cursor:pointer; }
-
 #theme-btn { position:absolute; right:20px; top:20px; background:red; border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer; transition:0.3s; }
 #theme-btn:hover { background:#ff4d4d; }
 body.light { background:#f5f5f5; color:#111; }
@@ -60,7 +46,6 @@ body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 </style>
 </head>
 <body>
-
 <header>
     <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
     Tr3vN0x Video Hub
@@ -103,20 +88,22 @@ body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 </div>
 
 <script>
-// VIDEO DATA
+// VIDEO DATA with realistic starting views
+function randomViews(min=10,max=100){ return Math.floor(Math.random()*(max-min+1))+min; }
+
 let videoData = [
-    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: 15234 },
-    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older", views: 8456 },
-    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older", views: 3241 },
-    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older", views: 5123 },
-    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older", views: 2312 },
-    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older", views: 6341 },
-    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent", views: 12456 },
-    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent", views: 8765 }
+    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: randomViews() },
+    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older", views: randomViews() },
+    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older", views: randomViews() },
+    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older", views: randomViews() },
+    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older", views: randomViews() },
+    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older", views: randomViews() },
+    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent", views: randomViews() },
+    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent", views: randomViews() }
 ];
 
-let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: 5432 };
-let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: 15234 };
+let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: randomViews(50,150) };
+let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: randomViews(50,200) };
 
 function shuffleArray(array) { for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]];} return array; }
 let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
@@ -149,7 +136,8 @@ function createCard(v,isLive=false){
         localStorage.setItem("favorites",JSON.stringify(favorites));
     };
 
-    card.onclick=()=>openPlayer(v); 
+    card.onclick=()=>openPlayer(v);
+
     return card;
 }
 
@@ -195,22 +183,22 @@ function openPlayer(v){
     document.getElementById("player").innerHTML=`<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
     document.getElementById("video-title").innerText=v.title;
 
-    // Increment views while video is open
     const viewIncrement = setInterval(() => {
-        const increment = Math.floor(Math.random() * 5) + 1; // 1-5 views/sec
+        const increment = Math.floor(Math.random() * 2) + 1; // 1-2 views/sec
         v.views += increment;
         updateCardViews(v.id, v.views);
     }, 1000);
 
-    // Stop increment when user clicks back
     document.getElementById("back-btn").onclick = () => {
         clearInterval(viewIncrement);
         document.getElementById("player-page").style.display="none";
         document.getElementById("home-page").style.display="block";
 
-        recommendedVideos=shuffleArray([...videoData]).slice(0,3);
+        recommendedVideos = shuffleArray([...videoData]).slice(0,3);
         document.getElementById("recommended-grid").innerHTML='';
-        videoData.forEach(video=>{ if(recommendedVideos.includes(video)) document.getElementById("recommended-grid").appendChild(createCard(video)); });
+        videoData.forEach(video => { 
+            if(recommendedVideos.includes(video)) document.getElementById("recommended-grid").appendChild(createCard(video)); 
+        });
     };
 }
 
