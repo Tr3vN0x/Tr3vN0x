@@ -93,7 +93,8 @@ header {
     display: flex;
     gap: 20px;
     padding: 25px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* keep columns aligned neatly on PC */
+    justify-content: space-between;
 }
 
 .column {
@@ -127,10 +128,9 @@ header {
     padding: 10px;
     margin-bottom: 12px;
     transition: 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUp 0.6s forwards;
     cursor: pointer;
+    opacity: 1; /* no animation */
+    transform: none; /* no animation */
 }
 
 .video-card:hover {
@@ -174,11 +174,6 @@ header {
     text-shadow: 0 0 4px #00ff66;
 }
 
-@keyframes slideUp {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
@@ -191,6 +186,12 @@ footer {
 }
 
 /* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1024px) {
+    .columns-container {
+        flex-wrap: wrap; /* wrap on smaller screens */
+    }
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;
