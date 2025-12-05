@@ -265,8 +265,27 @@ button[type="submit"]:hover, .modal-button:hover {
 .inbox-username { font-weight: 700; color: #fff; }
 .inbox-last-message { font-size: 0.85em; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; }
 
-#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0d0d0d; border-radius: 8px; margin-bottom: 15px; }
+#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0a0a0a; border-radius: 8px; margin-bottom: 15px; }
 #dm-input { flex-grow: 1; padding: 10px; border: 1px solid #333; border-radius: 6px; background: #252525; color: #e0e0e0; }
+
+/* DM Bubble Colors */
+.dm-message-self { text-align: right; margin-bottom: 8px; }
+.dm-message-other { text-align: left; margin-bottom: 8px; }
+.dm-bubble { 
+    display: inline-block; padding: 10px 14px; border-radius: 18px; 
+    max-width: 80%; word-wrap: break-word; font-size: 0.95em;
+    color: #fff;
+}
+/* RECEIVED (Other User) - Black/Dark Gray */
+.dm-message-other .dm-bubble { 
+    background: #252525; 
+    border-bottom-left-radius: 4px; 
+}
+/* SENT (Self) - Red */
+.dm-message-self .dm-bubble { 
+    background: #e53935; 
+    border-bottom-right-radius: 4px; 
+}
 
 </style>
 </head>
