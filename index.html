@@ -4,8 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" type="image/png">
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
 <style>
+/* ---------- GENERAL ---------- */
 body {
     background: #141414;
     color: #fff;
@@ -23,11 +24,10 @@ header {
 header .logo-container { display:flex; align-items:center; gap:12px; }
 header img.icon { width:45px; height:45px; border-radius:50%; }
 header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
-
 header button { margin-left:10px; background:#e50914; border:none; color:white; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
 header button:hover { background:#ff4d4d; }
 
-#featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; }
+#featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; border-radius:12px; }
 #featured img { width:100%; max-height:400px; object-fit:cover; border-radius:12px; }
 #featured-title { position:absolute; bottom:20px; left:30px; font-size:28px; font-weight:bold; text-shadow: 0 0 10px #000; }
 
@@ -92,20 +92,35 @@ h2 { margin:20px 0 10px 20px; }
 #player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:12px; }
 #back-btn, #about-back-btn { margin-bottom:20px; padding:10px 20px; background:#e50914; border:none; color:white; border-radius:8px; cursor:pointer; }
 
-#about-page img.profile-pic { width:120px; height:120px; border-radius:50%; border:3px solid #e50914; }
-
 body.light { background:#f5f5f5; color:#111; }
 body.light .video-card { background:#ddd; color:#111; }
 body.light .video-card:hover { background:#ccc; }
 body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
 body.light #search-bar { background:#eee; color:#111; }
+
+/* ---------- ABOUT PAGE ---------- */
+#about-page img.profile-pic { width:120px; height:120px; border-radius:50%; border:3px solid #e50914; }
+#about-page h2 { margin:0; display:flex; align-items:center; gap:8px; }
+#about-page .social-links a { text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:6px; transition:0.3s; }
+#about-page .social-links a.youtube{ background:#e50914; color:white; }
+#about-page .social-links a.discord{ background:#5865F2; color:white; }
+#about-page .social-links a.instagram{ background:#C13584; color:white; }
+#about-page .social-links a:hover{ opacity:0.8; }
+
+#about-page .skills span {
+    background:#e50914; color:white; padding:5px 12px; border-radius:20px; margin:4px 0;
+}
+#about-page .stats div{ text-align:center; margin-right:20px; }
+#about-page .stats { display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; }
+#about-page .timeline li{ margin-bottom:15px; list-style:none; }
+#about-page .timeline h3{ margin-top:30px; }
 </style>
 </head>
 <body>
 
 <header>
     <div class="logo-container">
-        <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=AWkCj7WX2HbZr3lMSDkdwA&oh=00_AfljRtWnLO4Kww6uCFOxwD8ZwSSUEh8MCgjp01JvNYULUg&oe=69387085" alt="icon"/>
+        <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
         <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="title"/>
     </div>
     <div>
@@ -140,20 +155,56 @@ body.light #search-bar { background:#eee; color:#111; }
     <h2 id="video-title"></h2>
 </div>
 
+<!-- ---------- ABOUT PAGE ---------- -->
 <div id="about-page">
     <button id="about-back-btn">← Back</button>
-    <div style="display:flex; align-items:center; gap:20px; margin-top:20px;">
-        <!-- Updated profile picture -->
-        <img class="profile-pic" src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=LYg8kmBF0G1jh6yk2YyYqQ&oh=00_Afm4Dde2XOuqfgdFqrpZoiVGkPHHlisL2M3KvsRTipcScw&oe=69387882" 
-             alt="Profile Pic">
-        <div>
-            <h2 style="display:flex; align-items:center; gap:8px;">
+
+    <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
+        <img class="profile-pic" src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg" alt="Profile Pic">
+        <div style="max-width:600px;">
+            <h2>
                 Tr3vN0x 
                 <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" style="width:22px;height:22px;" alt="Verified Badge">
             </h2>
-            <p style="max-width:600px; margin-top:10px; font-size:16px; line-height:1.4;">
-                Hello, I am Tr3vN0x thanks for coming to my website. This is my about section, so you can learn more about me! I am excited to see you here.. This website displays my recent videos, and more from YouTube, Sincerely Tr3vN0x, or Trevor!
+            <p style="margin-top:10px; font-size:16px; line-height:1.5;">
+                Hello! I am Tr3vN0x (Trevor). Welcome to my streaming hub! Here you can find my latest videos, live streams, and fan favorites. I love gaming, making content, and sharing my passion with all of you.
             </p>
+
+            <!-- Social Links -->
+            <div class="social-links" style="margin-top:15px; display:flex; gap:10px;">
+                <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="youtube">YouTube</a>
+                <a href="https://discord.gg/RjNcs9Jmeh" target="_blank" class="discord">Discord</a>
+                <a href="https://x.com/@Tr3vN0x" target="_blank" class="instagram">Instagram</a>
+            </div>
+
+            <!-- Skills / Interests -->
+            <div class="skills" style="margin-top:25px;">
+                <h3>🎮 Skills & Interests</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                    <span>Roblox</span>
+                    <span>Video Editing</span>
+                    <span>Streaming</span>
+                    <span>Gaming Tutorials</span>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div><div style="font-size:24px;font-weight:bold;">125</div><div>Videos</div></div>
+                <div><div style="font-size:24px;font-weight:bold;">3.2K</div><div>Subscribers</div></div>
+                <div><div style="font-size:24px;font-weight:bold;">15K</div><div>Likes</div></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <h3>📜 My Journey</h3>
+                <ul>
+                    <li><strong>2018:</strong> Started gaming and recording Roblox videos.</li>
+                    <li><strong>2019:</strong> Created YouTube channel “Tr3vN0x”.</li>
+                    <li><strong>2021:</strong> First viral Roblox horror video.</li>
+                    <li><strong>2023:</strong> Streaming live regularly and growing community.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
