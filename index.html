@@ -55,7 +55,7 @@ header {
 .search-bar::placeholder { color: #004400; }
 .search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
 
-.about {
+.profile-btn {
     width: 60px;
     height: 60px;
     cursor: pointer;
@@ -68,7 +68,7 @@ header {
     background: #111;
 }
 
-.about img {
+.profile-btn img {
     width: 100%;
     height: auto;
     max-height: 100%;
@@ -76,7 +76,7 @@ header {
     filter: drop-shadow(0 0 6px #00ff66);
 }
 
-.about:hover {
+.profile-btn:hover {
     background: #003300;
     box-shadow: 0 0 12px #00ff66;
 }
@@ -178,6 +178,87 @@ header {
     filter: drop-shadow(0 0 6px #ff00ff);
 }
 
+/* ---------------- PROFILE MODAL ---------------- */
+#profile-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#profile-modal .modal-content {
+    background: #111;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #003300;
+}
+
+#profile-modal h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.verified-badge {
+    background: #00ff66;
+    color: #0a0a0a;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.followers {
+    margin: 10px 0;
+}
+
+.follow-btn {
+    padding: 8px 16px;
+    background: #111;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.follow-btn:hover {
+    background: #003300;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+.links a {
+    display: inline-block;
+    margin: 5px 10px;
+    color: #00ff66;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+#profile-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
@@ -200,7 +281,7 @@ footer {
     background: rgba(0,0,0,0.9);
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 99;
 }
 
 #video-modal iframe {
@@ -226,7 +307,7 @@ footer {
     header { flex-direction: column; align-items: center; }
     .search-bar { width: 90%; }
     .logo-container img { height: 40px; }
-    .about { width: 50px; height: 50px; }
+    .profile-btn { width: 50px; height: 50px; margin: 5px 0; }
     .row-container { flex-direction: column; }
     .row-label { writing-mode: horizontal-tb; transform: none; min-width: auto; padding-bottom: 5px;}
     .video-row { overflow-x: auto; }
@@ -234,7 +315,7 @@ footer {
 
 @media (max-width: 480px) {
     .logo-container img { height: 35px; }
-    .about { width: 45px; height: 45px; }
+    .profile-btn { width: 45px; height: 45px; }
     .thumbnail-container { height: 100px; }
     .search-bar { width: 95%; }
 }
@@ -250,8 +331,8 @@ footer {
 
     <input type="text" class="search-bar" placeholder="Search videos...">
 
-    <div class="about">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="About">
+    <div class="profile-btn" id="open-profile">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile">
     </div>
 </header>
 
@@ -280,6 +361,21 @@ footer {
 <div id="video-modal">
     <div class="close-btn">&times;</div>
     <iframe src="" allowfullscreen></iframe>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profile-modal">
+    <div class="modal-content">
+        <div class="close-btn">&times;</div>
+        <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
+        <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
+        <button class="follow-btn" id="follow-btn">Follow</button>
+        <div class="links">
+            <p>Stay motivated! Keep coding and creating 💻</p>
+            <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
+            <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+        </div>
+    </div>
 </div>
 
 <!-- FOOTER -->
@@ -365,7 +461,7 @@ renderRow('older-videos-row', olderVideos);
 renderFavorites();
 renderRow('watch-history-row', watchHistory);
 
-// ---------------- MODAL ----------------
+// ---------------- VIDEO MODAL ----------------
 const modal = document.getElementById('video-modal');
 modal.querySelector('.close-btn').addEventListener('click', ()=>{
     modal.querySelector('iframe').src = '';
@@ -393,6 +489,25 @@ searchInput.addEventListener('input', () => {
         const filtered = rowObj.videos.filter(v=>v.title.toLowerCase().includes(query));
         renderRow(rowObj.id, filtered);
     });
+});
+
+// ---------------- PROFILE MODAL ----------------
+const profileModal = document.getElementById('profile-modal');
+document.getElementById('open-profile').addEventListener('click',()=> profileModal.style.display='flex');
+document.querySelector('#profile-modal .close-btn').addEventListener('click',()=> profileModal.style.display='none');
+profileModal.addEventListener('click', e => { if(e.target===profileModal) profileModal.style.display='none'; });
+document.addEventListener('keydown', e => { if(e.key==='Escape') profileModal.style.display='none'; });
+
+// ---------------- FOLLOW BUTTON ----------------
+const followBtn = document.getElementById('follow-btn');
+const followersCount = document.getElementById('followers-count');
+let followers = 0;
+
+followBtn.addEventListener('click', ()=>{
+    followers++;
+    followersCount.textContent = followers;
+    followBtn.disabled = true;
+    followBtn.textContent = 'Following';
 });
 </script>
 
