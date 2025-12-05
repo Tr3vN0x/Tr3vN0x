@@ -336,19 +336,15 @@ button[type="submit"]:hover, .modal-button:hover {
                 <div class="tab active" id="login-tab">Log In</div>
                 <div class="tab" id="signup-tab">Sign Up</div>
             </div>
-            <form id="login-form">
+                        <form id="login-form">
                 <div class="form-group"><label>Username</label><input type="text" id="login-username" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
-                </div>
+                <div class="form-group"><label>Password (Any value works - Simulation Only)</label><input type="password" id="login-password" value="password" required></div>
                 <button type="submit">Log In</button>
             </form>
-            <form id="signup-form" style="display:none;">
+                        <form id="signup-form" style="display:none;">
                 <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
                 <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
-                </div>
+                <div class="form-group"><label>Password (Not stored/checked - Simulation Only)</label><input type="password" id="signup-password" value="password" required></div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
@@ -455,7 +451,7 @@ let currentDMTarget = null;
 
 function getUserData(username) {
     const isOwner = username.toLowerCase() === 'tr3vn0x';
-    // Use the specific username to retrieve profile data
+    // Retrieve profile data, defaulting to generic if user is new
     const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
     const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
     const verified = isOwner;
@@ -549,7 +545,7 @@ function renderChatHistory(){
     });
 }
 
-// --- DM SYSTEM LOGIC ---
+// --- DM SYSTEM LOGIC (UNMODIFIED) ---
 
 function getDMKey(user1, user2) {
     // Ensure consistent key regardless of order (alphabetical)
@@ -644,7 +640,7 @@ function renderDMChatMessages(targetUsername) {
 }
 
 
-// --- PROFILE HANDLERS ---
+// --- PROFILE HANDLERS (UNMODIFIED) ---
 
 function toggleAuthModal(show) {
     document.getElementById('auth-overlay').style.display = show ? 'flex' : 'none';
@@ -691,58 +687,82 @@ function toggleMessagesModal(show) {
     }
 }
 
-// --- AUTH HANDLERS ---
+// --- AUTHENTICATION LOGIC (SECURE SIMULATION) ---
 
 function handleLogin(e) {
     e.preventDefault();
-    const username = document.getElementById('login-username').value; 
-    
+    const username = document.getElementById('login-username').value.trim();
+    // In this simplified version, we only check if the user has signed up before.
+    const userExists = localStorage.getItem(`user_${username}_exists`); 
+
+    if (!userExists) {
+        alert("Login Failed: Username does not exist. Please sign up first.");
+        return;
+    }
+
+    // LOGIN SUCCESS
     isLoggedIn = true;
     currentUsername = username;
     
+    // Load user data
     const userData = getUserData(currentUsername);
     isVerified = userData.verified;
     profilePicture = userData.pic;
     userBio = userData.bio;
     
+    // Store session state
+    localStorage.setItem('current_user_session', username);
+
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('login-form').reset();
-    renderChatHistory(); // Re-render chat to reflect logged-in user's data
+    renderChatHistory();
     alert(`Logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
 function handleSignup(e) {
     e.preventDefault();
-    const username = document.getElementById('signup-username').value;
+    const username = document.getElementById('signup-username').value.trim();
+
+    if (localStorage.getItem(`user_${username}_exists`)) {
+        alert("Signup Failed: Username already taken.");
+        return;
+    }
     
+    // Create new account: Store existence marker and default data
+    localStorage.setItem(`user_${username}_exists`, 'true');
+    
+    // Store default profile data
+    localStorage.setItem(`${username}_pic`, DEFAULT_AVATAR);
+    localStorage.setItem(`${username}_bio`, "Hello! I am a new user on Tr3vN0x's video site.");
+
+    // Auto-login after successful signup
     isLoggedIn = true;
     currentUsername = username;
-    
-    const userData = getUserData(currentUsername); 
-    isVerified = userData.verified;
+    isVerified = (username.toLowerCase() === 'tr3vn0x'); // Only the owner is verified by default
     profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     
-    // Save defaults to storage for next login
-    localStorage.setItem(`${currentUsername}_pic`, profilePicture);
-    localStorage.setItem(`${currentUsername}_bio`, userBio);
+    localStorage.setItem('current_user_session', username);
 
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('signup-form').reset();
-    renderChatHistory(); // Re-render chat
+    renderChatHistory();
     alert(`Account created and logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
 function handleLogout() {
+    // Clear session state
+    localStorage.removeItem('current_user_session');
+
     isLoggedIn = false;
     currentUsername = '';
     isVerified = false;
     profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     updateAuthState();
-    renderChatHistory(); // Re-render chat to hide logged-in data
+    renderChatHistory(); 
     alert('Logged out.');
 }
 
@@ -775,7 +795,20 @@ function updateAuthState() {
     }
 }
 
-
+function initializeSession() {
+    const activeUser = localStorage.getItem('current_user_session');
+    if (activeUser) {
+        // Automatically log in the user if a session is found
+        isLoggedIn = true;
+        currentUsername = activeUser;
+        
+        const userData = getUserData(currentUsername);
+        isVerified = userData.verified;
+        profilePicture = userData.pic;
+        userBio = userData.bio;
+    }
+    updateAuthState();
+}
 // --- ATTACHING ALL EVENT LISTENERS ---
 
 // Auth
@@ -872,7 +905,7 @@ signupTab.addEventListener('click', () => {
     signupForm.style.display = 'block';
 });
 
-// Password toggles
+// Password toggles (Kept for visual consistency, though fields are ignored)
 document.querySelectorAll('.toggle-pass').forEach(button => {
     button.addEventListener('click', (e) => {
         const targetId = e.target.getAttribute('data-target');
@@ -889,8 +922,9 @@ document.querySelectorAll('.toggle-pass').forEach(button => {
 
 
 // --- INITIALIZATION ---
+// NOTE: Must call initializeSession BEFORE rendering anything reliant on user data
+initializeSession(); 
 renderVideoRows();
-updateAuthState(); 
 renderChatHistory();
 </script>
 </body>
