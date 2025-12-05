@@ -3,137 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x - Red & Black Video Site</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<title>Tr3vN0x - The Video Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
-/* --- BASE STYLES --- */
+/* --------------------------------------
+   1. GLOBAL & TYPOGRAPHY
+   -------------------------------------- */
 body {
     font-family: 'Inter', Arial, sans-serif;
     margin:0;
-    background: linear-gradient(to bottom, #000 0%, #111 100%);
-    color:#fff;
+    /* Deep, consistent dark background */
+    background-color: #0d0d0d; 
+    color:#e0e0e0; /* Softer white text */
     scroll-behavior: smooth;
+    line-height: 1.6;
 }
-.container { max-width:1200px; margin:20px auto; padding:0 20px; }
-h1,h2 {
+.container { 
+    max-width:1400px; /* Slightly wider container */
+    margin:0 auto; /* Center the container */
+    padding:20px 40px; 
+}
+h1 {
+    font-weight: 900;
+    font-size: 2.5em;
+    color: #e53935;
+    letter-spacing: -1px;
+    margin: 0;
+}
+h2 {
     color:#e53935;
-    border-bottom:2px solid rgba(229, 57, 53, 0.3);
+    font-size: 1.8em;
+    font-weight: 700;
+    border-bottom:2px solid rgba(229, 57, 53, 0.15); /* Lighter divider */
     padding-bottom:10px;
     margin-top:40px; 
+    margin-bottom: 25px;
 }
+a { color: #fff; text-decoration: none; transition: color 0.2s; }
+a:hover { color: #e53935; }
+
+
+/* --------------------------------------
+   2. HEADER & NAVIGATION
+   -------------------------------------- */
 header { 
     display:flex; justify-content:space-between; align-items:center; 
-    padding:15px 30px; 
-    background:rgba(0,0,0,0.9); 
-    box-shadow:0 4px 8px rgba(229, 57, 53, 0.2); 
-    position:sticky; top:0; z-index:100; 
-    backdrop-filter: blur(5px); 
+    padding:15px 40px; 
+    background:rgba(0,0,0,0.95); /* Nearly opaque background */
+    box-shadow:0 2px 10px rgba(0,0,0,0.5); /* Clean shadow */
+    position:sticky; top:0; z-index:1000; 
+    backdrop-filter: blur(8px); /* Stronger blur for modern look */
 }
-.search-container { flex-grow: 1; margin: 0 40px; max-width: 500px; }
+.search-container { flex-grow: 1; margin: 0 40px; max-width: 600px; }
 .search-container input { 
     width:100%; padding:10px 20px; 
-    border:none; 
+    border:1px solid #333; /* Subtle border */
     border-radius:25px; 
-    background:#222; color:#fff; 
-    transition: background 0.3s, box-shadow 0.3s;
+    background:#1c1c1c; 
+    color:#e0e0e0; 
+    font-size: 1em;
+    transition: all 0.3s;
 }
 .search-container input:focus {
     outline: none;
-    background: #333;
-    box-shadow: 0 0 0 2px #e53935; 
+    border-color: #e53935;
+    background: #252525;
 }
-
-/* --- NAVIGATION AND AUTH CONTROLS --- */
 .nav-links { display: flex; gap: 20px; align-items: center; }
-.nav-links a { 
-    color: #fff; text-decoration: none; font-weight: 500;
-    transition: color 0.2s;
-}
-.nav-links a:hover { color: #e53935; }
+.nav-links a { font-weight: 600; }
 
 .floating-auth { 
-    padding:10px 20px; 
-    border-radius:25px; 
-    font-weight:600; 
+    padding:10px 18px; 
+    border-radius:20px; 
+    font-weight:700; 
     letter-spacing: 0.5px;
-    transition: transform 0.2s, box-shadow 0.2s; 
     cursor: pointer;
+    background-color: #e53935; /* Primary Button Color */
+    color: #fff;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s; 
+    border: none;
 }
 .floating-auth:hover { 
-    transform:scale(1.05); 
-    box-shadow: 0 0 10px rgba(229, 57, 53, 0.6); 
+    background-color: #ff5722;
+    transform:scale(1.03); 
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.5); 
 }
-.floating-auth.logged-in { background: #3954e5; } 
+.floating-auth.logged-in { 
+    background: #3954e5; 
+} 
+.floating-auth.logged-in:hover {
+    background: #5b79ff;
+}
 
-/* --- MODAL BASE STYLES --- */
-#auth-overlay, #profile-overlay, #user-profile-overlay, #messages-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none; 
-    justify-content: center; align-items: center; z-index: 1000;
-}
-.auth-modal, .profile-modal, .user-profile-modal, .messages-modal { 
-    background:#111; border-radius:12px; width:90%; max-width:450px; 
-    box-shadow:0 5px 25px rgba(255,0,0,0.7); 
-    padding:30px; 
-    position: relative;
-}
-.modal-header { display: flex; justify-content: space-between; align-items: center; }
-.modal-header h3 { margin: 0; }
-#close-auth, #close-profile, #close-user-profile, #close-messages { 
-    font-size: 1.5em; cursor: pointer; color: #e53935;
-    transition: transform 0.2s;
-}
-#close-auth:hover, #close-profile:hover, #close-user-profile:hover, #close-messages:hover { transform: rotate(90deg); }
 
-/* --- PROFILE CARD STYLES (Used in both modals) --- */
-.profile-card { text-align: center; padding: 20px 0; }
-.profile-picture, .chat-avatar { 
-    width: 120px; height: 120px; border-radius: 50%; 
-    object-fit: cover; margin-bottom: 15px;
-    border: 3px solid #e53935;
+/* --------------------------------------
+   3. VIDEO GRIDS & CARDS
+   -------------------------------------- */
+.video-row { margin-bottom: 50px; }
+.video-grid { 
+    display: flex; gap: 25px; /* Increased gap */
+    overflow-x: auto; padding-bottom: 10px; 
+    scrollbar-width: none; 
 }
+.video-grid::-webkit-scrollbar { display: none; }
+
+.video-card { 
+    background:#181818; 
+    border-radius:10px; 
+    overflow:hidden; cursor:pointer; 
+    border: 1px solid #181818; 
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
+    min-width:300px; max-width:300px; flex-shrink:0; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.6);
+}
+.video-card:hover { 
+    transform:translateY(-5px); /* Lift effect */
+    box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4); 
+    border-color: #e53935; 
+}
+.thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
+.thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+.video-info { padding:15px; } 
+.video-info h3 { 
+    margin:0 0 5px 0; line-height:1.4; color:#fff; 
+    font-size:1.15em; font-weight: 700; 
+    display:flex; align-items:center; gap:5px; 
+}
+.video-info p { margin:0; font-size:0.9em; color:#a0a0a0; }
+.verified-badge { width:18px; height:18px; }
+
+/* FEATURED SECTION */
+#featured { 
+    background:#1c1c1c; border-radius:12px; padding:30px; 
+    margin-top:20px; 
+    box-shadow:0 8px 30px rgba(0,0,0,0.7); 
+}
+#featured h2 { margin-top:0; border-bottom:none; font-size:2em; }
+.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; border-radius: 10px; }
+.featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+
+
+/* --------------------------------------
+   4. CHAT SECTION
+   -------------------------------------- */
+#chat-container { 
+    background:#1c1c1c; border-radius:12px; padding:25px; 
+    margin-top:40px; 
+    box-shadow:0 4px 15px rgba(0,0,0,0.3); 
+}
+#chat-messages { 
+    height:300px; overflow-y:auto; 
+    border:1px solid #333; padding:15px; 
+    background:#0a0a0a; border-radius:8px; 
+}
+#chat-input-container { display: flex; gap: 10px; margin-top: 15px; }
+#chat-input { flex-grow: 1; padding:10px; border:1px solid #333; border-radius:6px; background:#1c1c1c; color: #e0e0e0; }
+#send-button { 
+    padding:10px 15px; background: #e53935; color: #fff; 
+    font-weight:600; border: none; border-radius:6px;
+    transition: background 0.2s;
+}
+#send-button:hover:not(:disabled) { background: #ff5722; }
+#send-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Chat Avatars and Layout */
+.chat-message { margin-bottom: 12px; display: flex; align-items: flex-start; font-size: 0.95em; }
 .chat-avatar {
-    width: 25px; height: 25px; border: 1px solid #e53935;
-    margin-right: 8px; vertical-align: middle;
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid #e53935;
+    margin-right: 10px; flex-shrink: 0;
 }
-.profile-info h3 { font-size: 1.5em; margin: 10px 0 5px 0; }
-.profile-info p { color: #aaa; margin-bottom: 20px; }
-.profile-info .verified-badge, .chat-message .verified-badge { width: 18px; height: 18px; margin-left: 5px; vertical-align: middle; }
-
-/* --- CHAT STYLES --- */
-#chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:15px; background:#0a0a0a; border-radius:8px; }
-.chat-message { margin-bottom: 8px; display: flex; align-items: flex-start; }
-.chat-message-content { display: flex; align-items: center; }
-.chat-message-text { display: inline-block; word-wrap: break-word; max-width: 80%; }
 .chat-username { 
     font-weight:700; color:#e53935; margin-right: 5px; cursor: pointer;
     transition: color 0.2s;
 }
 .chat-username:hover { color: #ff5722; text-decoration: underline; }
+.chat-message-content { display: flex; align-items: center; }
 
-/* --- MESSAGES MODAL STYLES --- */
+
+/* --------------------------------------
+   5. MODALS (Auth, Profile, Messages)
+   -------------------------------------- */
+#auth-overlay, #profile-overlay, #user-profile-overlay, #messages-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none; 
+    justify-content: center; align-items: center; z-index: 2000;
+}
+.auth-modal, .profile-modal, .user-profile-modal, .messages-modal { 
+    background:#1c1c1c; border-radius:12px; width:90%; max-width:400px; 
+    box-shadow:0 0 40px rgba(255,0,0,0.6); /* Prominent shadow */
+    padding:30px; 
+    position: relative;
+    color: #e0e0e0;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.modal-header h3 { margin: 0; font-size: 1.5em; color: #e53935; }
+#close-auth, #close-profile, #close-user-profile, #close-messages { 
+    font-size: 2em; cursor: pointer; color: #e53935;
+    transition: transform 0.2s, color 0.2s;
+}
+#close-auth:hover, #close-profile:hover, #close-user-profile:hover, #close-messages:hover { transform: rotate(180deg); color: #fff; }
+
+/* Tabs */
+.tabs { display:flex; margin-bottom: 25px; border-bottom: 2px solid #333; }
+.tab { padding:10px 15px; cursor:pointer; font-weight: 600; transition: color 0.2s, border-bottom 0.2s; }
+.tab.active { border-bottom:3px solid #e53935; color:#e53935; }
+
+/* Forms */
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9em; }
+.form-group input { 
+    width: 100%; padding:12px; 
+    border:1px solid #444; border-radius:6px; 
+    background:#252525; color:#e0e0e0; 
+    box-sizing: border-box;
+}
+.password-container { display: flex; align-items: center; }
+.password-container input { border-right: none; border-radius: 6px 0 0 6px; }
+.toggle-pass { 
+    padding: 10px 12px; background: #333; color: #e0e0e0; border: 1px solid #444;
+    border-left: none; border-radius: 0 6px 6px 0; cursor: pointer; height: 44px; /* Match input height */
+}
+
+/* Buttons */
+button[type="submit"], .modal-button { 
+    width: 100%;
+    padding:12px 20px; background:#e53935; border:none; border-radius:6px; 
+    font-size:1.05em; font-weight: 700; color: #fff; cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+button[type="submit"]:hover, .modal-button:hover { 
+    background: #ff5722; 
+    box-shadow: 0 2px 10px rgba(229, 57, 53, 0.5);
+}
+
+/* Profile Card */
+.profile-card { text-align: center; padding: 10px 0 30px 0; }
+.profile-picture { 
+    width: 100px; height: 100px; border-radius: 50%; 
+    object-fit: cover; margin-bottom: 15px;
+    border: 4px solid #e53935;
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.4);
+}
+#profile-edit-form textarea {
+    width: 100%; height: 100px; padding: 10px; margin-bottom: 15px;
+    background: #252525; color: #e0e0e0; border: 1px solid #444;
+    border-radius: 6px; resize: vertical; box-sizing: border-box;
+}
+#cancel-edit-button { background: #444; margin-top: 10px; }
+#cancel-edit-button:hover { background: #555; }
+
+/* Messages/DM Styles */
 #messages-inbox-view { max-height: 400px; overflow-y: auto; }
 .inbox-item { 
-    display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #333;
+    display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #333;
     cursor: pointer; transition: background 0.2s;
 }
 .inbox-item:hover { background: #222; }
-.inbox-user-pic { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
-.inbox-username { font-weight: 600; }
-.inbox-last-message { font-size: 0.9em; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inbox-user-pic { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-right: 15px; border: 2px solid #e53935; }
+.inbox-username { font-weight: 700; color: #fff; }
+.inbox-last-message { font-size: 0.85em; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; }
 
-#messages-chat-view { display: none; }
-#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0a0a0a; border-radius: 8px; margin-bottom: 15px; }
-#dm-input-container { display: flex; gap: 10px; }
-.dm-message-self { text-align: right; margin-bottom: 5px; }
-.dm-message-other { text-align: left; margin-bottom: 5px; }
-.dm-bubble { 
-    display: inline-block; padding: 8px 12px; border-radius: 15px; 
-    max-width: 80%; word-wrap: break-word;
-}
-.dm-message-self .dm-bubble { background: #3954e5; color: #fff; border-bottom-right-radius: 0; }
-.dm-message-other .dm-bubble { background: #222; color: #fff; border-bottom-left-radius: 0; }
+#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0d0d0d; border-radius: 8px; margin-bottom: 15px; }
+#dm-input { flex-grow: 1; padding: 10px; border: 1px solid #333; border-radius: 6px; background: #252525; color: #e0e0e0; }
+
 </style>
 </head>
 <body>
@@ -228,7 +362,7 @@ header {
                     <textarea id="edit-bio"></textarea>
                 </div>
                 <button type="submit" class="modal-button">Save Changes</button>
-                <button type="button" id="cancel-edit-button" class="modal-button" style="background:#444;">Cancel</button>
+                <button type="button" id="cancel-edit-button" class="modal-button">Cancel</button>
             </form>
         </div>
     </section>
@@ -260,13 +394,13 @@ header {
             <div id="messages-inbox-view">
                 </div>
 
-            <div id="messages-chat-view">
-                <button id="back-to-inbox-button" class="modal-button" style="background: #444; margin-bottom: 10px;">&larr; Back to Inbox</button>
+            <div id="messages-chat-view" style="display:none;">
+                <button id="back-to-inbox-button" class="modal-button" style="background: #444; margin-bottom: 15px; width: auto; padding: 8px 15px;">&larr; Back to Inbox</button>
                 <div id="dm-messages">
                     </div>
                 <div id="dm-input-container">
                     <input type="text" id="dm-input" placeholder="Send a message..." required>
-                    <button id="dm-send-button" class="modal-button">Send</button>
+                    <button id="dm-send-button" class="modal-button" style="width: auto; padding: 10px 15px;">Send</button>
                 </div>
             </div>
         </div>
@@ -275,7 +409,6 @@ header {
 
 <script>
 // --- GLOBAL DATA & ELEMENTS ---
-const overlay = document.getElementById('auth-overlay');
 const floatingAuth = document.getElementById('floating-auth');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
@@ -303,6 +436,7 @@ let currentDMTarget = null;
 
 function getUserData(username) {
     const isOwner = username.toLowerCase() === 'tr3vn0x';
+    // Use the specific username to retrieve profile data
     const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
     const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
     const verified = isOwner;
@@ -321,13 +455,13 @@ function renderVideoRows(){
         { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
         { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
     ];
+    
     // Existing logic to render video rows...
     const grids = { favorites: 'favorites-grid', older: 'older-grid' };
     Object.keys(grids).forEach(cat=>{
         const grid = document.getElementById(grids[cat]);
         grid.innerHTML = '';
         videoData.filter(v => v.category === cat).forEach(v => {
-            // Re-adding card creation logic locally since the full function was removed in the previous block
             const card = document.createElement('div');
             card.className='video-card';
             card.dataset.video = v.id;
@@ -338,6 +472,13 @@ function renderVideoRows(){
                     <p>Views: 0</p>
                 </div>
             `;
+            // Add click listener to card to set featured video
+            card.addEventListener('click', ()=>{
+                const featuredSection = document.getElementById('featured');
+                const featuredPlayer = featuredSection.querySelector('.featured-player');
+                featuredSection.querySelector('h2').innerText = `Featured: ${v.title}`;
+                featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1" allowfullscreen></iframe>`;
+            });
             grid.appendChild(card);
         });
     });
@@ -375,7 +516,12 @@ function renderChatHistory(){
     document.querySelectorAll('.chat-username').forEach(span => {
         span.addEventListener('click', (e) => {
             const targetUsername = e.currentTarget.getAttribute('data-user');
-            if (targetUsername !== currentUsername) {
+            if (!isLoggedIn) {
+                 // If not logged in, prompt to log in instead of opening profile
+                alert("You must be logged in to view user profiles or chat.");
+                toggleAuthModal(true);
+            }
+            else if (targetUsername !== currentUsername) {
                 openUserProfileModal(targetUsername);
             } else {
                 toggleProfileModal(true); // Open own profile
@@ -426,7 +572,7 @@ function renderDMInbox() {
     const inboxTargets = JSON.parse(localStorage.getItem(`${currentUsername}_inbox`) || '[]');
 
     if (inboxTargets.length === 0) {
-        inboxView.innerHTML = '<p style="text-align:center; color:#888;">No conversations yet. Start a DM from a user\'s profile!</p>';
+        inboxView.innerHTML = '<p style="text-align:center; color:#888; padding: 20px;">No conversations yet. Start a DM from a user\'s profile!</p>';
         return;
     }
 
@@ -478,26 +624,6 @@ function renderDMChatMessages(targetUsername) {
     dmMessagesContainer.scrollTop = dmMessagesContainer.scrollHeight;
 }
 
-// DM Send Listener
-document.getElementById('dm-send-button').addEventListener('click', () => {
-    const dmInput = document.getElementById('dm-input');
-    const messageText = dmInput.value.trim();
-    if (messageText && currentDMTarget) {
-        saveDMMessage(currentDMTarget, messageText);
-        renderDMChatMessages(currentDMTarget);
-        dmInput.value = '';
-        dmInput.focus();
-    }
-});
-
-document.getElementById('dm-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('dm-send-button').click();
-    }
-});
-
-document.getElementById('back-to-inbox-button').addEventListener('click', renderDMInbox);
-
 
 // --- PROFILE HANDLERS ---
 
@@ -546,7 +672,7 @@ function toggleMessagesModal(show) {
     }
 }
 
-// --- AUTH HANDLERS (Simplified for brevity, assuming previous functions work) ---
+// --- AUTH HANDLERS ---
 
 function handleLogin(e) {
     e.preventDefault();
@@ -563,6 +689,7 @@ function handleLogin(e) {
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('login-form').reset();
+    renderChatHistory(); // Re-render chat to reflect logged-in user's data
     alert(`Logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
@@ -573,7 +700,7 @@ function handleSignup(e) {
     isLoggedIn = true;
     currentUsername = username;
     
-    const userData = getUserData(currentUsername); // Re-run to establish defaults/owner status
+    const userData = getUserData(currentUsername); 
     isVerified = userData.verified;
     profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
@@ -585,6 +712,7 @@ function handleSignup(e) {
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('signup-form').reset();
+    renderChatHistory(); // Re-render chat
     alert(`Account created and logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
@@ -595,11 +723,11 @@ function handleLogout() {
     profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     updateAuthState();
+    renderChatHistory(); // Re-render chat to hide logged-in data
     alert('Logged out.');
 }
 
 function updateAuthState() {
-    // Standard listener logic to switch between login/logout
     floatingAuth.removeEventListener('click', openLogin);
     floatingAuth.removeEventListener('click', handleLogout);
 
@@ -608,7 +736,6 @@ function updateAuthState() {
         floatingAuth.className = 'floating-auth logged-in';
         floatingAuth.addEventListener('click', handleLogout); 
         
-        // Show new navigation links
         profileLink.style.display = 'block'; 
         messagesLink.style.display = 'block';
         
@@ -656,8 +783,8 @@ document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
 
     profileEditForm.style.display = 'none';
     profileView.style.display = 'block';
-    toggleProfileModal(false); // Close profile modal after save
-    renderChatHistory(); // Update chat with new picture
+    toggleProfileModal(false); 
+    renderChatHistory(); 
     alert('Profile updated successfully!');
 });
 
@@ -667,6 +794,25 @@ document.getElementById('close-user-profile').addEventListener('click', () => { 
 // Messages
 messagesLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedIn) { toggleMessagesModal(true); } });
 document.getElementById('close-messages').addEventListener('click', () => toggleMessagesModal(false));
+document.getElementById('back-to-inbox-button').addEventListener('click', renderDMInbox);
+
+// DM Chat Send
+document.getElementById('dm-send-button').addEventListener('click', () => {
+    const dmInput = document.getElementById('dm-input');
+    const messageText = dmInput.value.trim();
+    if (messageText && currentDMTarget) {
+        saveDMMessage(currentDMTarget, messageText);
+        renderDMChatMessages(currentDMTarget);
+        dmInput.value = '';
+        dmInput.focus();
+    }
+});
+document.getElementById('dm-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('dm-send-button').click();
+    }
+});
+
 
 // Chat (Global)
 sendButton.addEventListener('click', () => {
@@ -689,17 +835,22 @@ document.getElementById('chat-input').addEventListener('keypress', (e) => {
 });
 
 // Tab switching
-document.getElementById('login-tab').addEventListener('click', () => {
-    document.getElementById('login-tab').classList.add('active'); 
-    document.getElementById('signup-tab').classList.remove('active');
-    document.getElementById('login-form').style.display = 'block'; 
-    document.getElementById('signup-form').style.display = 'none';
+const loginTab = document.getElementById('login-tab');
+const signupTab = document.getElementById('signup-tab');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+
+loginTab.addEventListener('click', () => {
+    loginTab.classList.add('active'); 
+    signupTab.classList.remove('active');
+    loginForm.style.display = 'block'; 
+    signupForm.style.display = 'none';
 });
-document.getElementById('signup-tab').addEventListener('click', () => {
-    document.getElementById('signup-tab').classList.add('active'); 
-    document.getElementById('login-tab').classList.remove('active');
-    document.getElementById('login-form').style.display = 'none'; 
-    document.getElementById('signup-form').style.display = 'block';
+signupTab.addEventListener('click', () => {
+    signupTab.classList.add('active'); 
+    loginTab.classList.remove('active');
+    loginForm.style.display = 'none'; 
+    signupForm.style.display = 'block';
 });
 
 // Password toggles
@@ -721,8 +872,6 @@ document.querySelectorAll('.toggle-pass').forEach(button => {
 // --- INITIALIZATION ---
 renderVideoRows();
 updateAuthState(); 
-// Delay rendering chat history until after updateAuthState runs and sets up state correctly on load.
-// For initial load, we call it here to ensure static messages display.
 renderChatHistory();
 </script>
 </body>
