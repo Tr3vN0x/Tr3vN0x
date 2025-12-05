@@ -65,14 +65,14 @@ header {
 }
 .floating-auth.logged-in { background: #3954e5; } 
 
-/* --- MODAL BASE STYLES (Auth and Profile) --- */
-#auth-overlay, #profile-overlay {
+/* --- MODAL BASE STYLES --- */
+#auth-overlay, #profile-overlay, #user-profile-overlay, #messages-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    display: none; /* Controlled by JS */
+    display: none; 
     justify-content: center; align-items: center; z-index: 1000;
 }
-.auth-modal, .profile-modal { 
+.auth-modal, .profile-modal, .user-profile-modal, .messages-modal { 
     background:#111; border-radius:12px; width:90%; max-width:450px; 
     box-shadow:0 5px 25px rgba(255,0,0,0.7); 
     padding:30px; 
@@ -80,62 +80,60 @@ header {
 }
 .modal-header { display: flex; justify-content: space-between; align-items: center; }
 .modal-header h3 { margin: 0; }
-#close-auth, #close-profile { 
+#close-auth, #close-profile, #close-user-profile, #close-messages { 
     font-size: 1.5em; cursor: pointer; color: #e53935;
     transition: transform 0.2s;
 }
-#close-auth:hover, #close-profile:hover { transform: rotate(90deg); }
+#close-auth:hover, #close-profile:hover, #close-user-profile:hover, #close-messages:hover { transform: rotate(90deg); }
 
-/* --- PROFILE SPECIFIC STYLES --- */
+/* --- PROFILE CARD STYLES (Used in both modals) --- */
 .profile-card { text-align: center; padding: 20px 0; }
-.profile-picture { 
+.profile-picture, .chat-avatar { 
     width: 120px; height: 120px; border-radius: 50%; 
     object-fit: cover; margin-bottom: 15px;
     border: 3px solid #e53935;
 }
+.chat-avatar {
+    width: 25px; height: 25px; border: 1px solid #e53935;
+    margin-right: 8px; vertical-align: middle;
+}
 .profile-info h3 { font-size: 1.5em; margin: 10px 0 5px 0; }
 .profile-info p { color: #aaa; margin-bottom: 20px; }
-.profile-info .verified-badge { width: 24px; height: 24px; margin-left: 5px; vertical-align: middle; }
+.profile-info .verified-badge, .chat-message .verified-badge { width: 18px; height: 18px; margin-left: 5px; vertical-align: middle; }
 
-/* --- PROFILE EDIT FORM STYLES --- */
-#profile-edit-form textarea {
-    width: 100%; height: 80px; padding: 10px; margin-bottom: 15px;
-    background: #222; color: #fff; border: 1px solid #333;
-    border-radius: 4px; resize: vertical;
-}
-#profile-edit-form button { margin-top: 10px; }
-
-/* --- BUTTONS & FORMS --- */
-.tabs { display:flex; margin-bottom: 20px; border-bottom: 1px solid #333; }
-.tab { padding:10px 15px; cursor:pointer; transition: color 0.2s, border-bottom 0.2s; }
-.tab.active { border-bottom:3px solid #e53935; color:#e53935; font-weight: 600; }
-.form-group { margin-bottom: 15px; }
-.form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-.form-group input, .form-group select { 
-    width: calc(100% - 22px); padding:10px; 
-    border:1px solid #333; border-radius:4px; 
-    background:#1c1c1c; color:#fff; 
-}
-button[type="submit"], .modal-button { 
-    padding:12px 20px; background:#e53935; border:none; border-radius:4px; 
-    font-size:1em; font-weight: 600; color: #fff; cursor: pointer;
-    transition: background 0.2s;
-}
-button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
-
-/* --- VIDEO AND CHAT STYLES (Keep existing) --- */
-#featured { background:#1c1c1c; border-radius:12px; padding:30px; margin-top:20px; box-shadow:0 6px 20px rgba(0,0,0,0.6); }
-.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; border-radius: 8px; }
-.featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-.video-grid { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; position:relative; }
-.video-card { background:#1c1c1c; border-radius:10px; overflow:hidden; cursor:pointer; border: 1px solid #1c1c1c; transition: transform 0.2s, box-shadow 0.2s, border 0.2s; min-width:280px; max-width:280px; flex-shrink:0; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
-.verified-badge { width:18px; height:18px; }
-#chat-container { background:#111; border-radius:12px; padding:20px; margin-top:40px; box-shadow:0 4px 15px rgba(229, 57, 53, 0.2); }
+/* --- CHAT STYLES --- */
 #chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:15px; background:#0a0a0a; border-radius:8px; }
-.chat-message .chat-username { font-weight:700; color:#e53935; }
-#chat-input-container { display: flex; gap: 10px; margin-top: 15px; }
-#chat-input { flex-grow: 1; padding:10px; border:1px solid #333; border-radius:4px; background:#1c1c1c; }
-#send-button { padding:10px 20px; font-weight:600; letter-spacing: 0.5px; }
+.chat-message { margin-bottom: 8px; display: flex; align-items: flex-start; }
+.chat-message-content { display: flex; align-items: center; }
+.chat-message-text { display: inline-block; word-wrap: break-word; max-width: 80%; }
+.chat-username { 
+    font-weight:700; color:#e53935; margin-right: 5px; cursor: pointer;
+    transition: color 0.2s;
+}
+.chat-username:hover { color: #ff5722; text-decoration: underline; }
+
+/* --- MESSAGES MODAL STYLES --- */
+#messages-inbox-view { max-height: 400px; overflow-y: auto; }
+.inbox-item { 
+    display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #333;
+    cursor: pointer; transition: background 0.2s;
+}
+.inbox-item:hover { background: #222; }
+.inbox-user-pic { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+.inbox-username { font-weight: 600; }
+.inbox-last-message { font-size: 0.9em; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+#messages-chat-view { display: none; }
+#dm-messages { height: 300px; overflow-y: auto; padding: 15px; background: #0a0a0a; border-radius: 8px; margin-bottom: 15px; }
+#dm-input-container { display: flex; gap: 10px; }
+.dm-message-self { text-align: right; margin-bottom: 5px; }
+.dm-message-other { text-align: left; margin-bottom: 5px; }
+.dm-bubble { 
+    display: inline-block; padding: 8px 12px; border-radius: 15px; 
+    max-width: 80%; word-wrap: break-word;
+}
+.dm-message-self .dm-bubble { background: #3954e5; color: #fff; border-bottom-right-radius: 0; }
+.dm-message-other .dm-bubble { background: #222; color: #fff; border-bottom-left-radius: 0; }
 </style>
 </head>
 <body>
@@ -144,6 +142,7 @@ button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
     <h1>Tr3vN0x</h1>
     <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
     <div class="nav-links">
+        <a href="#" id="messages-link" style="display:none;">Messages</a>
         <a href="#" id="profile-link" style="display:none;">Profile</a>
         <div class="floating-auth logged-out" id="floating-auth">Login</div>
     </div>
@@ -205,10 +204,9 @@ button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
     <section id="profile-overlay">
         <div class="profile-modal">
             <div class="modal-header">
-                <h3>User Profile</h3>
+                <h3>Your Profile</h3>
                 <span id="close-profile">&times;</span>
             </div>
-
             <div id="profile-view">
                 <div class="profile-card">
                     <img id="profile-pic-display" class="profile-picture" src="" alt="Profile Picture">
@@ -219,7 +217,6 @@ button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
                 </div>
                 <button id="edit-profile-button" class="modal-button" style="width: 100%;">Edit Profile</button>
             </div>
-
             <form id="profile-edit-form" style="display:none;">
                 <h4>Edit Your Profile</h4>
                 <div class="form-group">
@@ -236,132 +233,332 @@ button[type="submit"]:hover, .modal-button:hover { background: #ff5722; }
         </div>
     </section>
 
+    <section id="user-profile-overlay">
+        <div class="user-profile-modal profile-modal">
+            <div class="modal-header">
+                <h3 id="other-profile-title">User Profile</h3>
+                <span id="close-user-profile">&times;</span>
+            </div>
+            <div class="profile-card">
+                <img id="other-profile-pic-display" class="profile-picture" src="" alt="Profile Picture">
+                <div class="profile-info">
+                    <h3 id="other-profile-username-display"></h3>
+                    <p id="other-profile-bio-display"></p>
+                </div>
+            </div>
+            <button id="dm-user-button" class="modal-button" style="width: 100%;">Direct Message</button>
+        </div>
+    </section>
+
+    <section id="messages-overlay">
+        <div class="messages-modal profile-modal">
+            <div class="modal-header">
+                <h3 id="messages-modal-title">Messages Inbox</h3>
+                <span id="close-messages">&times;</span>
+            </div>
+
+            <div id="messages-inbox-view">
+                </div>
+
+            <div id="messages-chat-view">
+                <button id="back-to-inbox-button" class="modal-button" style="background: #444; margin-bottom: 10px;">&larr; Back to Inbox</button>
+                <div id="dm-messages">
+                    </div>
+                <div id="dm-input-container">
+                    <input type="text" id="dm-input" placeholder="Send a message..." required>
+                    <button id="dm-send-button" class="modal-button">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <script>
 // --- GLOBAL DATA & ELEMENTS ---
 const overlay = document.getElementById('auth-overlay');
-const loginForm = document.getElementById('login-form');
-const signupForm = document.getElementById('signup-form');
-const loginTab = document.getElementById('login-tab');
-const signupTab = document.getElementById('signup-tab');
 const floatingAuth = document.getElementById('floating-auth');
-const closeAuth = document.getElementById('close-auth');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
 const chatMessagesContainer = document.getElementById('chat-messages');
-
 const profileLink = document.getElementById('profile-link');
 const profileOverlay = document.getElementById('profile-overlay');
-const closeProfile = document.getElementById('close-profile');
 const profileView = document.getElementById('profile-view');
 const profileEditForm = document.getElementById('profile-edit-form');
-const editProfileButton = document.getElementById('edit-profile-button');
-const cancelEditButton = document.getElementById('cancel-edit-button');
+const messagesLink = document.getElementById('messages-link');
+const messagesOverlay = document.getElementById('messages-overlay');
+const userProfileOverlay = document.getElementById('user-profile-overlay');
+const dmUserButton = document.getElementById('dm-user-button');
 
 const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
-const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; // Placeholder Avatar
-
-let videoData = [
-    { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
-    { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
-    { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
-    { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
-    { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
-    { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
-    { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
-];
+const DEFAULT_AVATAR = "https://i.imgur.com/K1oWf9J.png"; 
 
 let isLoggedIn = false;
 let currentUsername = '';
 let isVerified = false; 
-
-// --- NEW PROFILE STATE ---
 let profilePicture = DEFAULT_AVATAR;
 let userBio = "Hello! I am a new user on Tr3vN0x's video site.";
+let currentDMTarget = null;
 
+// --- UTILITY FUNCTIONS ---
 
-// --- CORE FUNCTIONS ---
-
-function createVideoCard(video){
-    const card = document.createElement('div');
-    card.className='video-card';
-    card.dataset.video = video.id;
-    card.innerHTML = `
-        <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}"></div>
-        <div class="video-info">
-            <h3>${video.title}${video.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
-            <p>Views: <span class="views-count">${video.views}</span></p>
-        </div>
-    `;
-    card.addEventListener('click', ()=>{
-        video.views++;
-        card.querySelector('.views-count').innerText = video.views;
-        const featuredSection = document.getElementById('featured');
-        const featuredPlayer = featuredSection.querySelector('.featured-player');
-        featuredSection.querySelector('h2').innerText = `Featured: ${video.title}`;
-        featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
-    });
-    return card;
+function getUserData(username) {
+    const isOwner = username.toLowerCase() === 'tr3vn0x';
+    const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
+    const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
+    const verified = isOwner;
+    return { pic, bio, verified };
 }
 
+// --- RENDERING ---
+
 function renderVideoRows(){
-    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
+    const videoData = [
+        { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites', verified:true },
+        { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites', verified:false },
+        { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older', verified:false },
+        { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older', verified:false },
+        { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older', verified:false },
+        { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older', verified:false },
+        { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
+    ];
+    // Existing logic to render video rows...
+    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
     Object.keys(grids).forEach(cat=>{
         const grid = document.getElementById(grids[cat]);
         grid.innerHTML = '';
-        videoData.filter(v => v.category === cat).forEach(v => grid.appendChild(createVideoCard(v)));
+        videoData.filter(v => v.category === cat).forEach(v => {
+            // Re-adding card creation logic locally since the full function was removed in the previous block
+            const card = document.createElement('div');
+            card.className='video-card';
+            card.dataset.video = v.id;
+            card.innerHTML = `
+                <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}"></div>
+                <div class="video-info">
+                    <h3>${v.title}${v.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
+                    <p>Views: 0</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
     });
 }
 
 function renderChatHistory(){
     const initialHistory = [
-        { username: 'Tr3vN0x', message: 'Welcome to the stream! Smash that like button! 🔥', verified: true },
-        { username: 'GamerDude42', message: 'Dead By Daylight is so fun! When are you playing more?', verified: false },
+        { username: 'Tr3vN0x', message: 'Welcome! Click on a name to see a profile.', verified: true },
+        { username: 'GamerDude42', message: 'Testing profile pics in chat!', verified: false },
+        { username: 'VerifiedFan', message: 'Looks awesome!', verified: true }
     ];
 
+    // Merge history from storage with initial history
     const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]').concat(initialHistory);
     
     chatMessagesContainer.innerHTML = '';
     history.slice().reverse().forEach(msg=>{
-        const div = document.createElement('div'); div.className='chat-message';
-        const verifiedTag = msg.verified ? `<img src='${VERIFIED_ICON}' class='verified-badge'>` : '';
-        div.innerHTML = `<span class='chat-username'>${msg.username}${verifiedTag}</span>: <span class='chat-text'>${msg.message}</span>`;
+        const userData = getUserData(msg.username);
+        const div = document.createElement('div'); 
+        div.className='chat-message';
+        div.innerHTML = `
+            <img src='${userData.pic}' class='chat-avatar'>
+            <span class='chat-message-content'>
+                <span class='chat-username' data-user='${msg.username}'>
+                    ${msg.username}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}
+                </span>: 
+                <span class='chat-message-text'>${msg.message}</span>
+            </span>
+        `;
         chatMessagesContainer.prepend(div); 
     });
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+
+    // Attach click listeners to usernames
+    document.querySelectorAll('.chat-username').forEach(span => {
+        span.addEventListener('click', (e) => {
+            const targetUsername = e.currentTarget.getAttribute('data-user');
+            if (targetUsername !== currentUsername) {
+                openUserProfileModal(targetUsername);
+            } else {
+                toggleProfileModal(true); // Open own profile
+            }
+        });
+    });
 }
 
-// --- AUTH HANDLERS ---
+// --- DM SYSTEM LOGIC ---
 
-function toggleAuthModal(show) {
-    overlay.style.display = show ? 'flex' : 'none';
-    if (show) {
-        // Reset to Login tab on open
-        loginTab.classList.add('active');
-        signupTab.classList.remove('active');
-        loginForm.style.display = 'block';
-        signupForm.style.display = 'none';
+function getDMKey(user1, user2) {
+    // Ensure consistent key regardless of order (alphabetical)
+    const users = [user1.toLowerCase(), user2.toLowerCase()].sort();
+    return `DM_${users[0]}_${users[1]}`;
+}
+
+function getDMHistory(targetUsername) {
+    const key = getDMKey(currentUsername, targetUsername);
+    return JSON.parse(localStorage.getItem(key) || '[]');
+}
+
+function saveDMMessage(targetUsername, messageText) {
+    const key = getDMKey(currentUsername, targetUsername);
+    const history = getDMHistory(targetUsername);
+    const newMessage = {
+        sender: currentUsername,
+        message: messageText,
+        timestamp: Date.now()
+    };
+    history.push(newMessage);
+    localStorage.setItem(key, JSON.stringify(history));
+
+    // Also track the conversation pair in a global inbox list
+    let inbox = JSON.parse(localStorage.getItem(`${currentUsername}_inbox`) || '[]');
+    if (!inbox.includes(targetUsername)) {
+        inbox.push(targetUsername);
+        localStorage.setItem(`${currentUsername}_inbox`, JSON.stringify(inbox));
     }
 }
+
+function renderDMInbox() {
+    document.getElementById('messages-modal-title').innerText = 'Messages Inbox';
+    document.getElementById('messages-inbox-view').style.display = 'block';
+    document.getElementById('messages-chat-view').style.display = 'none';
+    const inboxView = document.getElementById('messages-inbox-view');
+    inboxView.innerHTML = '';
+
+    const inboxTargets = JSON.parse(localStorage.getItem(`${currentUsername}_inbox`) || '[]');
+
+    if (inboxTargets.length === 0) {
+        inboxView.innerHTML = '<p style="text-align:center; color:#888;">No conversations yet. Start a DM from a user\'s profile!</p>';
+        return;
+    }
+
+    inboxTargets.forEach(target => {
+        const history = getDMHistory(target);
+        const lastMessage = history.length > 0 ? history[history.length - 1] : { message: "Start a new chat!", sender: target };
+        const userData = getUserData(target);
+
+        const item = document.createElement('div');
+        item.className = 'inbox-item';
+        item.dataset.user = target;
+        item.innerHTML = `
+            <img src='${userData.pic}' class='inbox-user-pic'>
+            <div>
+                <div class='inbox-username'>${target}</div>
+                <div class='inbox-last-message'>${lastMessage.sender === currentUsername ? 'You: ' : ''}${lastMessage.message}</div>
+            </div>
+        `;
+        item.addEventListener('click', () => {
+            openDMChat(target);
+        });
+        inboxView.appendChild(item);
+    });
+}
+
+function openDMChat(targetUsername) {
+    currentDMTarget = targetUsername;
+    const targetData = getUserData(targetUsername);
+
+    document.getElementById('messages-modal-title').innerHTML = `Chatting with ${targetUsername} ${targetData.verified ? `<img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
+    document.getElementById('messages-inbox-view').style.display = 'none';
+    document.getElementById('messages-chat-view').style.display = 'block';
+    
+    renderDMChatMessages(targetUsername);
+}
+
+function renderDMChatMessages(targetUsername) {
+    const dmMessagesContainer = document.getElementById('dm-messages');
+    dmMessagesContainer.innerHTML = '';
+    const history = getDMHistory(targetUsername);
+
+    history.forEach(msg => {
+        const isSelf = msg.sender === currentUsername;
+        const div = document.createElement('div');
+        div.className = isSelf ? 'dm-message-self' : 'dm-message-other';
+        div.innerHTML = `<span class="dm-bubble">${msg.message}</span>`;
+        dmMessagesContainer.appendChild(div);
+    });
+    dmMessagesContainer.scrollTop = dmMessagesContainer.scrollHeight;
+}
+
+// DM Send Listener
+document.getElementById('dm-send-button').addEventListener('click', () => {
+    const dmInput = document.getElementById('dm-input');
+    const messageText = dmInput.value.trim();
+    if (messageText && currentDMTarget) {
+        saveDMMessage(currentDMTarget, messageText);
+        renderDMChatMessages(currentDMTarget);
+        dmInput.value = '';
+        dmInput.focus();
+    }
+});
+
+document.getElementById('dm-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('dm-send-button').click();
+    }
+});
+
+document.getElementById('back-to-inbox-button').addEventListener('click', renderDMInbox);
+
+
+// --- PROFILE HANDLERS ---
+
+function toggleAuthModal(show) {
+    document.getElementById('auth-overlay').style.display = show ? 'flex' : 'none';
+}
+
+function toggleProfileModal(show) {
+    document.getElementById('profile-overlay').style.display = show ? 'flex' : 'none';
+    if (show) {
+        // Render own profile data
+        document.getElementById('profile-username-display').innerHTML = `${currentUsername}${isVerified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
+        document.getElementById('profile-pic-display').src = profilePicture;
+        document.getElementById('profile-bio-display').innerText = userBio;
+
+        document.getElementById('edit-pic-url').value = profilePicture === DEFAULT_AVATAR ? '' : profilePicture;
+        document.getElementById('edit-bio').value = userBio;
+
+        // Reset to view mode
+        profileView.style.display = 'block';
+        profileEditForm.style.display = 'none';
+    }
+}
+
+function openUserProfileModal(username) {
+    const userData = getUserData(username);
+    
+    document.getElementById('other-profile-title').innerText = `${username}'s Profile`;
+    document.getElementById('other-profile-username-display').innerHTML = `${username}${userData.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
+    document.getElementById('other-profile-pic-display').src = userData.pic;
+    document.getElementById('other-profile-bio-display').innerText = userData.bio;
+
+    dmUserButton.onclick = () => {
+        userProfileOverlay.style.display = 'none';
+        toggleMessagesModal(true);
+        openDMChat(username);
+    };
+
+    userProfileOverlay.style.display = 'flex';
+}
+
+function toggleMessagesModal(show) {
+    messagesOverlay.style.display = show ? 'flex' : 'none';
+    if (show) {
+        renderDMInbox();
+    }
+}
+
+// --- AUTH HANDLERS (Simplified for brevity, assuming previous functions work) ---
 
 function handleLogin(e) {
     e.preventDefault();
-    currentUsername = document.getElementById('login-username').value; 
+    const username = document.getElementById('login-username').value; 
     
-    // Attempt to load saved profile data
-    const savedPic = localStorage.getItem(`${currentUsername}_pic`);
-    const savedBio = localStorage.getItem(`${currentUsername}_bio`);
-
     isLoggedIn = true;
-    profilePicture = savedPic || DEFAULT_AVATAR;
-    userBio = savedBio || "Hello! I am a new user on Tr3vN0x's video site.";
+    currentUsername = username;
     
-    if (currentUsername.toLowerCase() === 'tr3vn0x') {
-        isVerified = true;
-    } else {
-        isVerified = false;
-    }
+    const userData = getUserData(currentUsername);
+    isVerified = userData.verified;
+    profilePicture = userData.pic;
+    userBio = userData.bio;
     
     updateAuthState();
     toggleAuthModal(false);
@@ -371,18 +568,20 @@ function handleLogin(e) {
 
 function handleSignup(e) {
     e.preventDefault();
-    currentUsername = document.getElementById('signup-username').value;
+    const username = document.getElementById('signup-username').value;
     
     isLoggedIn = true;
-    profilePicture = DEFAULT_AVATAR; // Set default on signup
-    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
-
-    if (currentUsername.toLowerCase() === 'tr3vn0x') {
-        isVerified = true;
-    } else {
-        isVerified = false;
-    }
+    currentUsername = username;
     
+    const userData = getUserData(currentUsername); // Re-run to establish defaults/owner status
+    isVerified = userData.verified;
+    profilePicture = DEFAULT_AVATAR; 
+    userBio = "Hello! I am a new user on Tr3vN0x's video site.";
+    
+    // Save defaults to storage for next login
+    localStorage.setItem(`${currentUsername}_pic`, profilePicture);
+    localStorage.setItem(`${currentUsername}_bio`, userBio);
+
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('signup-form').reset();
@@ -393,17 +592,14 @@ function handleLogout() {
     isLoggedIn = false;
     currentUsername = '';
     isVerified = false;
-    profilePicture = DEFAULT_AVATAR; // Clear state on logout
+    profilePicture = DEFAULT_AVATAR; 
     userBio = "Hello! I am a new user on Tr3vN0x's video site.";
     updateAuthState();
     alert('Logged out.');
 }
 
-function openLogin() {
-    toggleAuthModal(true);
-}
-
 function updateAuthState() {
+    // Standard listener logic to switch between login/logout
     floatingAuth.removeEventListener('click', openLogin);
     floatingAuth.removeEventListener('click', handleLogout);
 
@@ -412,102 +608,67 @@ function updateAuthState() {
         floatingAuth.className = 'floating-auth logged-in';
         floatingAuth.addEventListener('click', handleLogout); 
         
+        // Show new navigation links
+        profileLink.style.display = 'block'; 
+        messagesLink.style.display = 'block';
+        
         chatInput.disabled = false;
         chatInput.placeholder = 'Say something cool...';
         sendButton.disabled = false;
-        profileLink.style.display = 'block'; // Show profile link
     } else {
         floatingAuth.innerText = 'Login';
         floatingAuth.className = 'floating-auth logged-out';
         floatingAuth.addEventListener('click', openLogin); 
         
+        profileLink.style.display = 'none'; 
+        messagesLink.style.display = 'none';
+        
         chatInput.disabled = true;
         chatInput.placeholder = 'Login to chat...';
         sendButton.disabled = true;
-        profileLink.style.display = 'none'; // Hide profile link
     }
 }
 
-// --- NEW PROFILE HANDLERS ---
 
-function toggleProfileModal(show) {
-    profileOverlay.style.display = show ? 'flex' : 'none';
-    if (show) {
-        renderProfileModal();
-        // Always start in view mode
-        profileView.style.display = 'block';
-        profileEditForm.style.display = 'none';
-    }
-}
+// --- ATTACHING ALL EVENT LISTENERS ---
 
-function renderProfileModal() {
-    // Fill the profile view card
-    document.getElementById('profile-username-display').innerHTML = `${currentUsername}${isVerified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}`;
-    document.getElementById('profile-pic-display').src = profilePicture;
-    document.getElementById('profile-bio-display').innerText = userBio;
+// Auth
+document.getElementById('close-auth').addEventListener('click', () => toggleAuthModal(false));
+document.getElementById('login-form').addEventListener('submit', handleLogin);
+document.getElementById('signup-form').addEventListener('submit', handleSignup);
+function openLogin() { toggleAuthModal(true); }
 
-    // Fill the edit form fields
-    document.getElementById('edit-pic-url').value = profilePicture === DEFAULT_AVATAR ? '' : profilePicture;
-    document.getElementById('edit-bio').value = userBio;
-}
-
-function handleProfileEdit(e) {
+// Own Profile
+profileLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedIn) { toggleProfileModal(true); } });
+document.getElementById('close-profile').addEventListener('click', () => toggleProfileModal(false));
+document.getElementById('edit-profile-button').addEventListener('click', () => { profileView.style.display = 'none'; profileEditForm.style.display = 'block'; });
+document.getElementById('cancel-edit-button').addEventListener('click', () => { profileEditForm.style.display = 'none'; profileView.style.display = 'block'; });
+document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const newPicUrl = document.getElementById('edit-pic-url').value.trim();
     const newBio = document.getElementById('edit-bio').value.trim();
 
-    // Update global state
     profilePicture = newPicUrl || DEFAULT_AVATAR;
     userBio = newBio || "Hello! I am a new user on Tr3vN0x's video site.";
 
-    // Save to local storage for persistence
     localStorage.setItem(`${currentUsername}_pic`, profilePicture);
     localStorage.setItem(`${currentUsername}_bio`, userBio);
 
-    // Switch back to view mode and update
     profileEditForm.style.display = 'none';
     profileView.style.display = 'block';
-    renderProfileModal();
+    toggleProfileModal(false); // Close profile modal after save
+    renderChatHistory(); // Update chat with new picture
     alert('Profile updated successfully!');
-}
-
-
-// --- EVENT LISTENERS ---
-
-// Auth Modal Listeners
-closeAuth.addEventListener('click', () => toggleAuthModal(false));
-loginTab.addEventListener('click', () => {
-    loginTab.classList.add('active'); signupTab.classList.remove('active');
-    loginForm.style.display = 'block'; signupForm.style.display = 'none';
 });
-signupTab.addEventListener('click', () => {
-    signupTab.classList.add('active'); loginTab.classList.remove('active');
-    loginForm.style.display = 'none'; signupForm.style.display = 'block';
-});
-loginForm.addEventListener('submit', handleLogin);
-signupForm.addEventListener('submit', handleSignup);
 
-// Profile Modal Listeners
-profileLink.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    if (isLoggedIn) { 
-        toggleProfileModal(true); 
-    }
-});
-closeProfile.addEventListener('click', () => toggleProfileModal(false));
+// Other User Profile
+document.getElementById('close-user-profile').addEventListener('click', () => { userProfileOverlay.style.display = 'none'; });
 
-editProfileButton.addEventListener('click', () => {
-    profileView.style.display = 'none';
-    profileEditForm.style.display = 'block';
-});
-cancelEditButton.addEventListener('click', () => {
-    profileEditForm.style.display = 'none';
-    profileView.style.display = 'block';
-});
-profileEditForm.addEventListener('submit', handleProfileEdit);
+// Messages
+messagesLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedIn) { toggleMessagesModal(true); } });
+document.getElementById('close-messages').addEventListener('click', () => toggleMessagesModal(false));
 
-
-// Chat Send Logic
+// Chat (Global)
 sendButton.addEventListener('click', () => {
     const messageText = chatInput.value.trim();
     if (messageText && isLoggedIn) {
@@ -516,17 +677,32 @@ sendButton.addEventListener('click', () => {
             message: messageText,
             verified: isVerified 
         };
-        
         const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
         history.push(newMessage);
         localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
-        
         renderChatHistory();
         chatInput.value = '';
     }
 });
+document.getElementById('chat-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { sendButton.click(); }
+});
 
-// Password visibility toggle
+// Tab switching
+document.getElementById('login-tab').addEventListener('click', () => {
+    document.getElementById('login-tab').classList.add('active'); 
+    document.getElementById('signup-tab').classList.remove('active');
+    document.getElementById('login-form').style.display = 'block'; 
+    document.getElementById('signup-form').style.display = 'none';
+});
+document.getElementById('signup-tab').addEventListener('click', () => {
+    document.getElementById('signup-tab').classList.add('active'); 
+    document.getElementById('login-tab').classList.remove('active');
+    document.getElementById('login-form').style.display = 'none'; 
+    document.getElementById('signup-form').style.display = 'block';
+});
+
+// Password toggles
 document.querySelectorAll('.toggle-pass').forEach(button => {
     button.addEventListener('click', (e) => {
         const targetId = e.target.getAttribute('data-target');
@@ -541,17 +717,13 @@ document.querySelectorAll('.toggle-pass').forEach(button => {
     });
 });
 
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendButton.click();
-    }
-});
-
 
 // --- INITIALIZATION ---
 renderVideoRows();
-renderChatHistory(); 
 updateAuthState(); 
+// Delay rendering chat history until after updateAuthState runs and sets up state correctly on load.
+// For initial load, we call it here to ensure static messages display.
+renderChatHistory();
 </script>
 </body>
 </html>
