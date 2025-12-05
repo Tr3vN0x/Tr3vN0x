@@ -6,7 +6,7 @@
 <title>Tr3vN0x Streaming</title>
 
 <!-- Favicon/Icon -->
-<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" type="image/png">
+<link rel="icon" href="https://img.icons8.com/fluency/48/000000/video.png" type="image/png">
 
 <style>
     body { background: #0a0a0a; color: white; font-family: Arial; margin: 0; }
@@ -15,6 +15,12 @@
 
     .container { padding: 20px; }
     h2 { margin-top:40px; font-size:22px; border-left:4px solid red; padding-left:10px; }
+
+    /* Featured Video */
+    #featured { display:flex; flex-direction:column; align-items:center; margin-bottom:40px; cursor:pointer; transition:0.2s; }
+    #featured:hover { transform:scale(1.02); }
+    #featured img { width:100%; max-width:700px; border-radius:12px; }
+    #featured-title { margin-top:10px; font-size:20px; text-align:center; }
 
     /* Mobile improvements */
     @media(max-width:600px){
@@ -37,12 +43,16 @@
 <body>
 
 <header>
-    <img src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=102&ccb=1-7&_nc_sid=50ad20&_nc_ohc=38UB5y6IynsQ7kNvwGYC6fF&_nc_oc=Adk3hqDdJpTB6geXvND3NNniZ6H5OH6qxA4sKa2_R0cjg6fK3dz60UbKSuSu5YvfyKUrEz4NWixbmsULKKnqmEkv&_nc_zt=23&_nc_ht=scontent-iad3-1.xx&_nc_gid=r5wYnUhSkmQIGxWaFrZFgw&oh=00_Afk4R1BxChMPFLzikFKrl4O2sz3tKoWwL5GNGzd4rgMcoA&oe=69383845" alt="icon"/>
+    <img src="https://img.icons8.com/fluency/48/000000/video.png" alt="icon"/>
     Tr3vN0x Video Hub
 </header>
 
 <!-- MAIN PAGE -->
 <div class="container" id="home-page">
+
+    <!-- FEATURED VIDEO -->
+    <div id="featured"></div>
+
     <h2>🔥 Recommended</h2>
     <div class="video-grid" id="recommended-grid"></div>
 
@@ -71,6 +81,12 @@ let videoData = [
     { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older" }
 ];
 
+// FEATURED VIDEO
+let featuredVideo = { 
+    title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", 
+    id: "92y9uaQMIa8" 
+};
+
 // SHUFFLE FUNCTION
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -97,6 +113,16 @@ function createCard(v){
 
 // LOAD VIDEOS
 function loadVideos(){
+
+    // Featured
+    const featuredDiv = document.getElementById("featured");
+    featuredDiv.innerHTML = `
+        <img src="https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg" alt="Featured">
+        <div id="featured-title">${featuredVideo.title}</div>
+    `;
+    featuredDiv.onclick = ()=>openPlayer(featuredVideo);
+
+    // Recommended, Favorites, Older
     const rec = document.getElementById("recommended-grid");
     const fav = document.getElementById("favorites-grid");
     const old = document.getElementById("older-grid");
@@ -121,7 +147,7 @@ document.getElementById("back-btn").onclick = ()=>{
     document.getElementById("player-page").style.display="none";
     document.getElementById("home-page").style.display="block";
 
-    // RE-RANDOMIZE Recommended when going back
+    // Re-randomize Recommended
     recommendedVideos = shuffleArray([...videoData]).slice(0, 3);
     document.getElementById("recommended-grid").innerHTML = '';
     videoData.forEach(v=>{
@@ -133,4 +159,3 @@ loadVideos();
 </script>
 </body>
 </html>
-
