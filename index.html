@@ -3,234 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x - The Video Showcase</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Tr3vN0x - Red & Black Video Site</title>
 <style>
-/* --------------------------------------
-   1. NETFLIX GLOBAL & TYPOGRAPHY
-   -------------------------------------- */
-:root {
-    --netflix-red: #E50914;
-    --dark-background: #141414;
-    --medium-dark: #222222;
-    --text-color: #ffffff;
-}
-body {
-    font-family: 'Inter', Arial, sans-serif;
-    margin:0;
-    background-color: var(--dark-background);  /* Netflix dark background */
-    color: var(--text-color);
-    scroll-behavior: smooth;
-    line-height: 1.4;
-}
-.container { 
-    max-width:1400px;
-    margin:0 auto;
-    padding:0 40px; /* Adjusted padding */
-}
-h1 {
-    font-weight: 900;
-    font-size: 2.5em;
-    color: var(--netflix-red); /* Logo color */
-    letter-spacing: -2px;
-    margin: 0;
-}
-h2 {
-    color: var(--text-color);
-    font-size: 1.6em;
-    font-weight: 700;
-    margin-top: 30px; 
-    margin-bottom: 15px;
-    padding-left: 5px; /* Slight indent for category titles */
-}
-a { color: var(--text-color); text-decoration: none; transition: color 0.2s; }
-a:hover { color: var(--netflix-red); }
+body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; }
+.container { max-width:1200px; margin:20px auto; padding:0 20px; }
+h1,h2 { color:#e53935; border-bottom:2px solid #444; padding-bottom:5px; margin-top:30px; }
+header { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#111; box-shadow:0 2px 4px rgba(0,0,0,0.5); position:sticky; top:0; z-index:100; }
+.search-container input { width:100%; padding:8px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
+.floating-auth { padding:8px 15px; background:#e53935; color:white; border-radius:4px; cursor:pointer; white-space: nowrap; }
+.floating-auth.logged-out { background: #e53935; } 
+.floating-auth.logged-in { background: #3954e5; } 
 
-
-/* --------------------------------------
-   2. HEADER & SEARCH
-   -------------------------------------- */
-header { 
-    display:flex; justify-content:flex-start; align-items:center; 
-    padding: 20px 40px; 
-    background: rgba(20, 20, 20, 0.95); /* Nearly opaque dark header */
-    position:sticky; top:0; z-index:1000; 
-    backdrop-filter: blur(8px);
-}
-.search-container { flex-grow: 0; margin-left: auto; max-width: 300px; }
-.search-container input { 
-    width:100%; padding:8px 15px; 
-    border:1px solid #666;
-    border-radius: 4px; 
-    background: #333333; 
-    color: var(--text-color); 
-    font-size: 0.9em;
-    transition: all 0.3s;
-}
-.search-container input:focus {
-    outline: none;
-    border-color: var(--netflix-red);
-    background: #444444;
-}
-
-
-/* --------------------------------------
-   3. VIDEO GRIDS & CARDS (Carousel Style)
-   -------------------------------------- */
-.video-row { margin-bottom: 30px; }
-.video-grid { 
-    display: flex;
-    gap: 10px; /* Reduced gap for dense carousel look */
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    padding-bottom: 10px; 
-    /* Hide default scrollbar */
-    scrollbar-width: none; 
-}
-.video-grid::-webkit-scrollbar { display: none; }
-
-.video-card { 
-    background: none; /* No card background */
-    border-radius: 4px; 
-    overflow:hidden; cursor:pointer; 
-    transition: transform 0.3s, box-shadow 0.3s, z-index 0.3s; 
-    min-width: 250px; /* Thinner cards */
-    max-width: 250px;
-    flex-shrink:0; 
-    position: relative;
-}
-
-/* Hover effect to pop forward */
-.video-card:hover { 
-    transform: scale(1.1);
-    z-index: 10;
-    box-shadow: 0 0 15px rgba(0,0,0,0.8);
-    border: 3px solid var(--netflix-red); /* Red border on hover */
-}
-
-/* Remove default info display, only show thumbnail */
-.thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:var(--medium-dark); }
-.thumbnail-placeholder img { 
-    position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
-    border-radius: 4px; /* Slightly rounded corners */
-}
-.video-info { 
-    position: absolute; /* Place info over thumbnail on hover */
-    bottom: 0; left: 0; right: 0;
-    padding: 8px;
-    background: rgba(0, 0, 0, 0.7);
-    transform: translateY(100%); /* Hide initially */
-    transition: transform 0.3s;
-}
-.video-card:hover .video-info {
-    transform: translateY(0); /* Show on hover */
-}
-
-.video-info h3 { 
-    margin:0; line-height:1.2; color:var(--text-color); 
-    font-size:0.9em; font-weight: 700; 
-}
-.video-info p { display: none; } /* Hide views counter */
-.verified-badge { width:15px; height:15px; }
-
-
-/* FEATURED SECTION (Hero/Banner area) */
-#featured { 
-    background: linear-gradient(to bottom, #111111, #141414); /* Subtle gradient for depth */
-    padding: 0; /* Remove padding for fullscreen look */
-    margin-top: -20px; /* Pull up to touch header */
-    margin-bottom: 40px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-}
-#featured h2 { 
-    position: absolute; top: 10%; left: 80px; 
-    z-index: 20; color: var(--text-color);
-    font-size: 3em; 
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
+#featured { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.2); }
+#featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
+.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+
+.video-row { margin-bottom: 40px; }
+.video-grid { display: flex; gap: 15px; overflow-x: scroll; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.video-grid::-webkit-scrollbar { display: none; }
+.video-card { background:#1c1c1c; border-radius:8px; overflow:hidden; cursor:pointer; transition: transform 0.2s, box-shadow 0.2s; min-width:280px; max-width:280px; flex-shrink:0; box-shadow:0 4px 8px rgba(0,0,0,0.3); }
+.video-card:hover { transform:scale(1.05); z-index:5; box-shadow:0 4px 20px rgba(255,0,0,0.6); }
+.thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
+.thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+.video-info { padding:10px; }
+.video-info h3 { margin:0 0 5px 0; line-height:1.4; color:#fff; font-size:1em; }
+.video-info p { margin:0; font-size:0.85em; color:#bbb; }
+
+#auth-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:1000; display:none; }
+.auth-modal { background:#111; border-radius:8px; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff; }
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.modal-header h3 { margin:0; }
+.tabs { display:flex; border-bottom:1px solid #444; margin-bottom:15px; }
+.tab { flex-grow:1; text-align:center; padding:10px 15px; cursor:pointer; font-weight:bold; color:#bbb; }
+.tab.active { border-bottom:2px solid #e53935; color:#e53935; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:block; margin-bottom:5px; font-weight:600; font-size:0.9em; color:#fff; }
+.form-group input { width:100%; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; box-sizing:border-box; }
+.password-container { display:flex; }
+.password-container input { flex-grow:1; border-right:none; border-radius:4px 0 0 4px; }
+.password-container button { background:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
+button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
+
+#chat-container { background:#111; border-radius:8px; padding:15px; margin-top:40px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
+#chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:10px; margin-bottom:10px; background:#0a0a0a; border-radius:4px; display:flex; flex-direction:column-reverse; }
+.chat-message { margin-bottom:8px; line-height:1.4; font-size:0.9em; }
+.chat-username { font-weight:bold; color:#e53935; margin-right:5px; }
+#chat-input-container { display:flex; gap:10px; }
+#chat-input { flex-grow:1; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
+#send-button { padding:10px 15px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-weight:bold; }
 </style>
 </head>
 <body>
 
 <header>
-        <h1 style="color:var(--netflix-red); font-size:2.8em;">N</h1>
-    <h1 style="color:var(--text-color); font-size:1.5em; margin-left: 10px; font-weight:400;">Tr3vN0x</h1>
-    
-    <div class="search-container"><input type="text" id="searchInput" placeholder="Search..."></div>
+    <h1>Tr3vN0x</h1>
+    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
+    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth">Login</div></div>
 </header>
 
 <div class="container">
-    <section id="featured">
-                <h2>I PLAYED ROBLOX DEAD BY DAYLIGHT</h2>
-        
-                <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8?autoplay=0&controls=0&modestbranding=1" allowfullscreen></iframe></div>
-    </section>
+    <section id="featured">
+        <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT</h2>
+        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
+    </section>
 
-    <div class="video-row">
-        <h2>Trending Now 🔥</h2>
-        <div class="video-grid" id="favorites-grid"></div>
-    </div>
+    <div class="video-row">
+        <h2>✨ Fan Favorites</h2>
+        <div class="video-grid" id="favorites-grid"></div>
+    </div>
 
-    <div class="video-row">
-        <h2>Tr3vN0x Classics 🕹️</h2>
-        <div class="video-grid" id="older-grid"></div>
-    </div>
+    <div class="video-row">
+        <h2>📼 Older Videos</h2>
+        <div class="video-grid" id="older-grid"></div>
+    </div>
+
+    <section id="chat-container">
+        <h2>💬 Global Chat</h2>
+        <div id="chat-messages"></div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
+            <button id="send-button" disabled>Send</button>
+        </div>
+    </section>
+
+    <section id="auth-overlay">
+        <div class="auth-modal">
+            <div class="modal-header">
+                <h3>Authentication</h3>
+                <span id="close-auth">&times;</span>
+            </div>
+            <div class="tabs">
+                <div class="tab active" id="login-tab">Log In</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
+            </div>
+            <form id="login-form">
+                <div class="form-group"><label>Email</label><input type="email" id="login-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+            <form id="signup-form" style="display:none;">
+                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </section>
 </div>
 
 <script>
-// --- CORE UTILITY FUNCTIONS ---
-const VERIFIED_ICON = "https://cdn-icons-png.flaticon.com/512/10627/10627194.png";
+// --- GLOBAL DATA & ELEMENTS ---
+const overlay = document.getElementById('auth-overlay');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+const loginTab = document.getElementById('login-tab');
+const signupTab = document.getElementById('signup-tab');
+const floatingAuth = document.getElementById('floating-auth');
+const closeAuth = document.getElementById('close-auth');
 
-// --- RENDERING & DISPLAY ---
+const chatInput = document.getElementById('chat-input');
+const sendButton = document.getElementById('send-button');
+const chatMessagesContainer = document.getElementById('chat-messages');
+const searchInput = document.getElementById('searchInput');
 
-function renderVideoRows(){
-    const videoData = [
-        // Renamed categories for Netflix style
-        { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", category:'favorites', verified:true },
-        { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", category:'favorites', verified:false },
-        { title:"New Upload: Bloxburg Build", id:"XqmcBMy3X1k", category:'favorites', verified:false },
-        { title:"Roblox Bedwars Epic Win", id:"Sn4dyr5v7m0", category:'older', verified:false },
-        { title:"Original Bloxburg Roleplay", id:"Uwwga_CiFqc", category:'older', verified:false },
-        { title:"The Great Pizza Escape", id:"J-W0Vfrc26U", category:'older', verified:false },
-        { title:"First Day of High School", id:"ZiEd3RoiKtk", category:'older', verified:false }
-    ];
-    
-    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
-    Object.keys(grids).forEach(cat=>{
-        const grid = document.getElementById(grids[cat]);
-        grid.innerHTML = '';
-        videoData.filter(v => v.category === cat).forEach(v => {
-            const card = document.createElement('div');
-            card.className='video-card';
-            card.dataset.video = v.id;
-            card.innerHTML = `
-                <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg" alt="${v.title}" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${v.id}/hqdefault.jpg';"></div>
-                <div class="video-info">
-                    <h3>${v.title}${v.verified ? ` <img src='${VERIFIED_ICON}' class='verified-badge'>` : ''}</h3>
-                </div>
-            `;
-            card.addEventListener('click', ()=>{
-                const featuredSection = document.getElementById('featured');
-                const featuredPlayer = featuredSection.querySelector('.featured-player');
-                
-                // Update the large title and player
-                featuredSection.querySelector('h2').innerText = v.title;
-                featuredPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1&controls=0&modestbranding=1" allowfullscreen></iframe>`;
-                
-                // Scroll to the hero section
-                featuredSection.scrollIntoView({ behavior: 'smooth' });
-            });
-            grid.appendChild(card);
-        });
-    });
+let videoData = [
+    { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites' },
+    { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites' }, // new fan favorite
+    { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older' },
+    { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older' },
+    { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older' },
+    { title:"Older Video 4", id:"J-W0Vfrc26U", views:0, category:'older' },
+    { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older' }
+];
+
+// --- AUTH FUNCTIONS ---
+function getUsers(){ return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); }
+function getCurrentUser(){ return JSON.parse(localStorage.getItem('tr3vn0x_current')); }
+
+function updateAuthUI() {
+    const user = getCurrentUser();
+    floatingAuth.replaceWith(floatingAuth.cloneNode(true));
+    const newAuth = document.getElementById('floating-auth');
+    if(user){
+        newAuth.innerText = `Signed in as ${user.username} (Log Out)`;
+        newAuth.classList.remove('logged-out'); newAuth.classList.add('logged-in');
+        newAuth.addEventListener('click', handleLogout);
+        chatInput.disabled = false; sendButton.disabled = false; chatInput.placeholder="Type your message...";
+        renderChatHistory();
+    } else {
+        newAuth.innerText = 'Login';
+        newAuth.classList.remove('logged-in'); newAuth.classList.add('logged-out');
+        newAuth.addEventListener('click', ()=>overlay.style.display='flex');
+        chatInput.disabled = true; sendButton.disabled = true; chatInput.placeholder="Login to chat...";
+    }
 }
 
-// --- INITIALIZATION ---
+function handleLogout() {
+    if(confirm("Are you sure you want to log out?")){
+        localStorage.removeItem('tr3vn0x_current');
+        updateAuthUI();
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderVideoRows();
+// INITIAL AUTH
+updateAuthUI();
+closeAuth.addEventListener('click', ()=>overlay.style.display='none');
+loginTab.addEventListener('click', ()=>{ loginForm.style.display='block'; signupForm.style.display='none'; loginTab.classList.add('active'); signupTab.classList.remove('active'); });
+signupTab.addEventListener('click', ()=>{ signupForm.style.display='block'; loginForm.style.display='none'; signupTab.classList.add('active'); loginTab.classList.remove('active'); });
+document.querySelectorAll('.toggle-pass').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        const input = document.getElementById(btn.dataset.target);
+        input.type = input.type==='password' ? 'text' : 'password';
+    });
 });
+
+// SIGNUP & LOGIN
+signupForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    const username = document.getElementById('signup-username').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    if(!username || !email || !password){ alert('All fields required'); return; }
+    let users = getUsers();
+    if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){ alert('Username taken'); return; }
+    if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ alert('Email registered'); return; }
+    users.push({username,email,password});
+    localStorage.setItem('tr3vn0x_users', JSON.stringify(users));
+    alert('Signup successful! Log in now.');
+    signupForm.reset(); loginTab.click();
+});
+
+loginForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const users = getUsers();
+    const user = users.find(u => u.email.toLowerCase()===email.toLowerCase() && u.password===password);
+    if(user){
+        localStorage.setItem('tr3vn0x_current', JSON.stringify(user));
+        updateAuthUI();
+        overlay.style.display='none';
+        loginForm.reset();
+    } else alert('Invalid email or password.');
+});
+
+// VIDEO FUNCTIONS
+function createVideoCard(video){
+    const card = document.createElement('div');
+    card.className='video-card'; card.dataset.video = video.id;
+    card.innerHTML = `
+        <div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}"></div>
+        <div class="video-info"><h3>${video.title}</h3><p>Views: <span class="views-count">${video.views}</span></p></div>
+    `;
+    card.addEventListener('click', ()=>{
+        video.views++;
+        card.querySelector('.views-count').innerText = video.views;
+        const player = document.createElement('div'); player.className='featured-player';
+        player.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
+        card.innerHTML=''; card.appendChild(player);
+    });
+    return card;
+}
+
+function renderVideoRows(){
+    const grids = { favorites: 'favorites-grid', older: 'older-grid' };
+    Object.keys(grids).forEach(cat=>{
+        const grid = document.getElementById(grids[cat]);
+        grid.innerHTML = '';
+        videoData.filter(v => v.category === cat).forEach(v => grid.appendChild(createVideoCard(v)));
+    });
+}
+
+renderVideoRows();
+
+// SEARCH FILTER
+searchInput.addEventListener('input', ()=>{
+    const q = searchInput.value.toLowerCase();
+    document.querySelectorAll('.video-card').forEach(card=>{
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(q) ? 'block' : 'none';
+    });
+});
+
+// CHAT
+function getChatHistory(){ return JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]'); }
+function saveChatHistory(h){ localStorage.setItem('tr3vn0x_chat', JSON.stringify(h)); }
+
+function renderChatHistory(){
+    const history = getChatHistory(); chatMessagesContainer.innerHTML = '';
+    history.slice().reverse().forEach(msg=>{
+        const div = document.createElement('div');
+        div.className = 'chat-message';
+        div.innerText = `${msg.username}${msg.username==='Tr3vN0x' ? ' ✔':''}: ${msg.message}`;
+        chatMessagesContainer.appendChild(div);
+    });
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+}
+
+function handleSendMessage(){
+    const user = getCurrentUser(); if(!user) return;
+    const message = chatInput.value.trim(); if(!message) return;
+    const history = getChatHistory();
+    history.push({ username: user.username, message });
+    saveChatHistory(history);
+    chatInput.value = '';
+    renderChatHistory();
+}
+
+sendButton.addEventListener('click', handleSendMessage);
+chatInput.addEventListener('keypress', e=>{ if(e.key==='Enter') handleSendMessage(); });
+
 </script>
 </body>
 </html>
