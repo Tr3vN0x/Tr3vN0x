@@ -4,7 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
-<link rel="icon" href="" type="image/png">
+<!-- Favicon -->
+<link rel="icon" href="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" type="image/png">
+
 <style>
 /* ---------- GENERAL ---------- */
 body {
@@ -23,10 +25,10 @@ header {
 }
 header .logo-container { display:flex; align-items:center; gap:12px; }
 header img.icon { 
-    width: 65px;  /* increased from 45px */
-    height: 65px; /* increased from 45px */
-    border-radius:12px; /* slightly rounded for style */
-    filter: drop-shadow(0 0 8px #e50914); /* subtle shadow like title */
+    width: 65px;
+    height: 65px;
+    border-radius:12px;
+    filter: drop-shadow(0 0 8px #e50914);
 }
 header img.title-img { 
     height:65px; 
@@ -212,7 +214,7 @@ body.light #search-bar { background:#eee; color:#111; }
 </div>
 
 <script>
-// ---------- VIDEO DATA ----------
+// ---------- VIDEO DATA & FUNCTIONS ----------
 function randomViews(min=10,max=100){ return Math.floor(Math.random()*(max-min+1))+min; }
 let videoData = [
     { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: randomViews(), lastViews:0 },
@@ -302,75 +304,4 @@ function loadVideos(){
 // ---------- OPEN PLAYER ----------
 function openPlayer(v){
     document.getElementById("home-page").style.display="none";
-    document.getElementById("player-page").style.display="block";
-    document.getElementById("player").innerHTML=`<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
-    document.getElementById("video-title").innerText=v.title;
-
-    const viewIncrement = setInterval(() => {
-        const increment = Math.floor(Math.random() * 2) + 1;
-        v.views += increment;
-        updateCardViews(v.id, v.views);
-    }, 1000);
-
-    document.getElementById("back-btn").onclick = () => {
-        clearInterval(viewIncrement);
-        document.getElementById("player-page").style.display="none";
-        document.getElementById("home-page").style.display="block";
-
-        recommendedVideos = shuffleArray([...videoData]).slice(0,3);
-        document.getElementById("recommended-grid").innerHTML='';
-        videoData.forEach(video => { 
-            if(recommendedVideos.includes(video)) document.getElementById("recommended-grid").appendChild(createCard(video)); 
-        });
-    };
-}
-
-// ---------- TRENDING LOGIC ----------
-setInterval(()=>{
-    videoData.forEach(v=>{
-        const cards = Array.from(document.querySelectorAll(".video-card")).filter(c=>c.querySelector(".title").innerText===v.title);
-        cards.forEach(card=>{
-            const badge = card.querySelector(".trending-badge");
-            if(badge){
-                const diff = v.views - (v.lastViews || 0);
-                badge.style.display = (diff >= 5) ? 'block' : 'none';
-                v.lastViews = v.views;
-            }
-        });
-    });
-}, 5000);
-
-// ---------- SEARCH ----------
-document.getElementById("search-bar").addEventListener("input",()=>{
-    const query=document.getElementById("search-bar").value.toLowerCase();
-    const grids=["recent-grid","recommended-grid","favorites-grid","live-grid","older-grid"];
-    grids.forEach(gridId=>{
-        const grid=document.getElementById(gridId);
-        Array.from(grid.children).forEach(card=>{
-            const title=card.querySelector(".title").innerText.toLowerCase();
-            card.style.display=title.includes(query)?"block":"none";
-        });
-    });
-    document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
-});
-
-// ---------- LIGHT/DARK TOGGLE ----------
-document.getElementById("theme-btn").onclick=()=>{
-    document.body.classList.toggle("light");
-    document.getElementById("theme-btn").innerText=document.body.classList.contains("light")?"🌑":"🌙";
-};
-
-// ---------- ABOUT TAB ----------
-document.getElementById("about-btn").onclick=()=>{
-    document.getElementById("home-page").style.display="none";
-    document.getElementById("about-page").style.display="block";
-};
-document.getElementById("about-back-btn").onclick=()=>{
-    document.getElementById("about-page").style.display="none";
-    document.getElementById("home-page").style.display="block";
-};
-
-loadVideos();
-</script>
-</body>
-</html>
+    document.getElementById("player-page").
