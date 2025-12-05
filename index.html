@@ -13,7 +13,7 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .search-container input { width:100%; padding:8px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
 .floating-auth { padding:8px 15px; background:#e53935; color:white; border-radius:4px; cursor:pointer; white-space: nowrap; }
 .floating-auth.logged-out { background: #e53935; } 
-.floating-auth.logged-in { background: #3954e5; } /* Changed color for logged-in user */
+.floating-auth.logged-in { background: #3954e5; } 
 
 /* --- FEATURED PLAYER --- */
 #featured { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
@@ -21,17 +21,16 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
 
-/* --- NETFLIX-STYLE VIDEO CAROUSEL (NEW/IMPROVED) --- */
+/* --- NETFLIX-STYLE VIDEO CAROUSEL --- */
 .video-row { margin-bottom: 40px; }
 .video-grid {
-    display: flex; /* Change to flex for horizontal scrolling */
+    display: flex; 
     gap: 15px;
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    padding-bottom: 10px; /* Space for the scrollbar */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    overflow-x: scroll; 
+    padding-bottom: 10px; 
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none; 
 }
-/* Hide scrollbar for Chrome/Safari/Opera */
 .video-grid::-webkit-scrollbar {
     display: none;
 }
@@ -41,13 +40,13 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
     overflow:hidden; 
     cursor:pointer; 
     transition: transform 0.2s, box-shadow 0.2s;
-    min-width: 280px; /* Fixed width for card */
+    min-width: 280px; 
     max-width: 280px; 
-    flex-shrink: 0; /* Important: Prevents cards from shrinking */
+    flex-shrink: 0; 
     box-shadow:0 4px 8px rgba(0,0,0,0.3); 
 }
 .video-card:hover { 
-    transform:scale(1.05); /* Zoom effect */
+    transform:scale(1.05); 
     z-index: 5;
     box-shadow:0 4px 20px rgba(255,0,0,0.6); 
 }
@@ -57,7 +56,7 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .video-info h3 { margin:0 0 5px 0; line-height:1.4; color:#fff; font-size:1em; }
 .video-info p { margin:0; font-size:0.85em; color:#bbb; }
 
-/* --- AUTH MODAL (UNCHANGED) --- */
+/* --- AUTH MODAL --- */
 #auth-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:1000; display:none; }
 .auth-modal { background:#111; border-radius:8px; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff; }
 .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
@@ -73,7 +72,7 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .password-container button { background:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
 button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
 
-/* --- CHAT STYLES (NEW) --- */
+/* --- CHAT STYLES --- */
 #chat-container {
     background: #111;
     border-radius: 8px;
@@ -90,7 +89,7 @@ button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff
     background: #0a0a0a;
     border-radius: 4px;
     display: flex;
-    flex-direction: column-reverse; /* Display new messages at the bottom */
+    flex-direction: column-reverse; 
 }
 .chat-message {
     margin-bottom: 8px;
@@ -142,27 +141,27 @@ button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff
     <div class="video-row">
         <h2>🔥 Trending</h2>
         <div class="video-grid" id="trending-grid">
-            </div>
+        </div>
     </div>
 
     <div class="video-row">
         <h2>🎮 Gaming Highlights</h2>
         <div class="video-grid" id="gaming-grid">
-            </div>
+        </div>
     </div>
     
     <div class="video-row">
         <h2>✨ Fan Favorites</h2>
         <div class="video-grid" id="favorites-grid">
-            </div>
+        </div>
     </div>
 
     <section id="chat-container">
         <h2>💬 Global Chat</h2>
         <div id="chat-messages">
-            </div>
+        </div>
         <div id="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Type your message..." disabled>
+            <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
             <button id="send-button" disabled>Send</button>
         </div>
     </section>
@@ -225,7 +224,6 @@ let videoData = [
 // --- AUTH UTILITY FUNCTIONS ---
 
 function getUsers(){ 
-    // FIXED: Ensure localStorage access is safe
     return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); 
 }
 
@@ -233,13 +231,15 @@ function getCurrentUser() {
     return JSON.parse(localStorage.getItem('tr3vn0x_current'));
 }
 
-function updateAuthUI(user) {
+function updateAuthUI() {
+    const user = getCurrentUser(); // Always retrieve fresh user data
+    
     // Clear previous listeners to prevent duplicates
     floatingAuth.removeEventListener('click', showAuthModal);
     floatingAuth.removeEventListener('click', handleLogout); 
 
     if (user) {
-        // Logged In State: Button shows username and acts as a one-click Logout button
+        // Logged In State
         floatingAuth.innerText = 'Signed in as ' + user.username + ' (Log Out)';
         floatingAuth.classList.remove('logged-out');
         floatingAuth.classList.add('logged-in');
@@ -249,7 +249,7 @@ function updateAuthUI(user) {
         sendButton.disabled = false;
         chatInput.placeholder = "Type your message...";
     } else {
-        // Logged Out State: Button shows Login and opens the modal
+        // Logged Out State
         floatingAuth.innerText = 'Login';
         floatingAuth.classList.remove('logged-in');
         floatingAuth.classList.add('logged-out');
@@ -268,15 +268,16 @@ function showAuthModal() {
 function handleLogout() {
     if(confirm("Are you sure you want to log out?")) {
         localStorage.removeItem('tr3vn0x_current');
-        updateAuthUI(null);
+        updateAuthUI(); // Call with no arguments to re-check status
         alert('You have been logged out.');
+        renderChatHistory(); // Clear chat or show only saved history
     }
 }
 
 // --- INITIAL SETUP AND EVENT LISTENERS (Authentication) ---
 
-// Check current user on load (FIXED: ensures user stays logged in after refresh)
-updateAuthUI(getCurrentUser());
+// FIX: Initial UI check to load session on refresh
+updateAuthUI();
 
 // Handle modal close
 closeAuth.addEventListener('click', ()=>{ overlay.style.display='none'; });
@@ -305,7 +306,11 @@ signupForm.addEventListener('submit', e=>{
     const username = document.getElementById('signup-username').value.trim();
     const email = document.getElementById('signup-email').value.trim();
     const password = document.getElementById('signup-password').value;
+    
     if(!username||!email||!password){ alert('All fields required.'); return; }
+    // Added basic email format check
+    if(!email.includes('@')){ alert('Please enter a valid email address.'); return; } 
+
     let users = getUsers();
     if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){ alert('Username already taken.'); return; }
     if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ alert('Email already registered.'); return; }
@@ -321,21 +326,23 @@ loginForm.addEventListener('submit', e=>{
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
     const users = getUsers();
-    // FIXED: This line finds the user
+    
+    // FIX: This is the correct logic for finding the user
     const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase() && u.password===password);
+    
     if(user){
-        // FIXED: Save the *full* user object to localStorage for session tracking
+        // FIX: Save the user object to localStorage for session tracking
         localStorage.setItem('tr3vn0x_current', JSON.stringify(user));
-        updateAuthUI(user); 
+        updateAuthUI(); // Update UI to logged-in state
         overlay.style.display='none';
         loginForm.reset();
+        renderChatHistory(); // Load chat messages now that user is logged in
     } else alert('Invalid email or password.');
 });
 
 
 // --- VIDEO RENDERING & PLAYBACK ---
 
-// Function to generate the HTML for a single video card
 function createVideoCard(video) {
     const card = document.createElement('div');
     card.classList.add('video-card');
@@ -352,7 +359,6 @@ function createVideoCard(video) {
     return card;
 }
 
-// Function to render all videos into their respective rows/grids
 function renderVideoRows() {
     const trendingGrid = document.getElementById('trending-grid');
     const gamingGrid = document.getElementById('gaming-grid');
@@ -369,35 +375,28 @@ function renderVideoRows() {
         else if (video.category === 'favorites') favoritesGrid.appendChild(card);
     });
     
-    // Reattach event listeners after rendering new cards (FIXED)
     document.querySelectorAll('.video-card').forEach(card => {
         card.addEventListener('click', handleVideoPlayback);
     });
 }
 
-// Function to handle video playback when a card is clicked (FIXED to allow full video replacement)
 function handleVideoPlayback() {
     const videoId = this.dataset.video;
-    // Create a player element
     const player = document.createElement('div');
     player.classList.add('featured-player');
     player.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allowfullscreen></iframe>`;
     
-    // Clear the card content and insert the player
     this.innerHTML = '';
     this.appendChild(player);
 
-    // After starting playback, prevent further clicks on the same card (optional, but prevents bugs)
     this.removeEventListener('click', handleVideoPlayback);
 }
 
-// Initial render of video rows
 renderVideoRows();
 
-// --- CHAT FUNCTIONALITY (NEW) ---
+// --- CHAT FUNCTIONALITY ---
 
 function getChatHistory() {
-    // Get chat history or return empty array if none exists
     return JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
 }
 
@@ -407,17 +406,14 @@ function saveChatHistory(history) {
 
 function renderChatHistory() {
     const history = getChatHistory();
-    // Clear current messages
     chatMessagesContainer.innerHTML = '';
     
-    // Loop through history and create HTML elements
-    // We use history.slice().reverse() to display newest messages at the bottom
-    // since CSS flex-direction: column-reverse is used.
     history.forEach(msg => {
         const msgElement = document.createElement('div');
         msgElement.classList.add('chat-message');
-        msgElement.innerHTML = `<span class="chat-username">${msg.username}:</span> ${msg.message}`;
-        // Prepend (add to top) because the flexbox CSS reverses the order
+        // FIX: Ensure messages are escaped if needed (basic safety)
+        const safeMessage = msg.message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        msgElement.innerHTML = `<span class="chat-username">${msg.username}:</span> ${safeMessage}`;
         chatMessagesContainer.prepend(msgElement);
     });
 }
@@ -445,7 +441,6 @@ function handleSendMessage() {
     history.push(newMessage);
     saveChatHistory(history);
 
-    // Clear input and re-render/update chat
     chatInput.value = '';
     renderChatHistory();
 }
