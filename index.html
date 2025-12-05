@@ -338,13 +338,15 @@ footer {
 <!-- HEADER -->
 <header>
     <div class="logo-container">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/VHIzdm4wWA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Logo">
+        <!-- Tr3vN0x logo icon -->
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Logo">
     </div>
 
     <input type="text" class="search-bar" placeholder="Search videos...">
 
     <div class="profile-btn" id="open-profile">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/QWJvdXQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile">
+        <!-- Profile icon -->
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4Nzk.udHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile">
     </div>
 </header>
 
@@ -448,7 +450,6 @@ function createVideoCard(video) {
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
-        // Add to watch history if not already there
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
             renderRow('watch-history-row', watchHistory);
