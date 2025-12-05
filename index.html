@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x - Red & Black Video Site</title>
 <style>
-/* --- BASE & UTILITY --- */
 body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; }
 .container { max-width:1200px; margin:20px auto; padding:0 20px; }
 h1,h2 { color:#e53935; border-bottom:2px solid #444; padding-bottom:5px; margin-top:30px; }
@@ -15,48 +14,22 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .floating-auth.logged-out { background: #e53935; } 
 .floating-auth.logged-in { background: #3954e5; } 
 
-/* --- FEATURED PLAYER --- */
-#featured { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
+#featured { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.2); }
 #featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
 .featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
 .featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
 
-/* --- NETFLIX-STYLE VIDEO CAROUSEL --- */
 .video-row { margin-bottom: 40px; }
-.video-grid {
-    display: flex; 
-    gap: 15px;
-    overflow-x: scroll; 
-    padding-bottom: 10px; 
-    -webkit-overflow-scrolling: touch; 
-    scrollbar-width: none; 
-}
-.video-grid::-webkit-scrollbar {
-    display: none;
-}
-.video-card {
-    background:#1c1c1c; 
-    border-radius:8px; 
-    overflow:hidden; 
-    cursor:pointer; 
-    transition: transform 0.2s, box-shadow 0.2s;
-    min-width: 280px; 
-    max-width: 280px; 
-    flex-shrink: 0; 
-    box-shadow:0 4px 8px rgba(0,0,0,0.3); 
-}
-.video-card:hover { 
-    transform:scale(1.05); 
-    z-index: 5;
-    box-shadow:0 4px 20px rgba(255,0,0,0.6); 
-}
+.video-grid { display: flex; gap: 15px; overflow-x: scroll; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.video-grid::-webkit-scrollbar { display: none; }
+.video-card { background:#1c1c1c; border-radius:8px; overflow:hidden; cursor:pointer; transition: transform 0.2s, box-shadow 0.2s; min-width:280px; max-width:280px; flex-shrink:0; box-shadow:0 4px 8px rgba(0,0,0,0.3); }
+.video-card:hover { transform:scale(1.05); z-index:5; box-shadow:0 4px 20px rgba(255,0,0,0.6); }
 .thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
 .thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
 .video-info { padding:10px; }
 .video-info h3 { margin:0 0 5px 0; line-height:1.4; color:#fff; font-size:1em; }
 .video-info p { margin:0; font-size:0.85em; color:#bbb; }
 
-/* --- AUTH MODAL --- */
 #auth-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:1000; display:none; }
 .auth-modal { background:#111; border-radius:8px; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff; }
 .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
@@ -72,131 +45,84 @@ header { display:flex; justify-content:space-between; align-items:center; paddin
 .password-container button { background:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
 button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
 
-/* --- CHAT STYLES --- */
-#chat-container {
-    background: #111;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 40px;
-    box-shadow: 0 4px 8px rgba(255,0,0,0.1);
-}
-#chat-messages {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #333;
-    padding: 10px;
-    margin-bottom: 10px;
-    background: #0a0a0a;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column-reverse; 
-}
-.chat-message {
-    margin-bottom: 8px;
-    line-height: 1.4;
-    font-size: 0.9em;
-}
-.chat-username {
-    font-weight: bold;
-    color: #e53935;
-    margin-right: 5px;
-}
-#chat-input-container {
-    display: flex;
-    gap: 10px;
-}
-#chat-input {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background: #222;
-    color: #fff;
-}
-#send-button {
-    padding: 10px 15px;
-    background: #e53935;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
+#chat-container { background:#111; border-radius:8px; padding:15px; margin-top:40px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
+#chat-messages { height:300px; overflow-y:auto; border:1px solid #333; padding:10px; margin-bottom:10px; background:#0a0a0a; border-radius:4px; display:flex; flex-direction:column-reverse; }
+.chat-message { margin-bottom:8px; line-height:1.4; font-size:0.9em; }
+.chat-username { font-weight:bold; color:#e53935; margin-right:5px; }
+#chat-input-container { display:flex; gap:10px; }
+#chat-input { flex-grow:1; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
+#send-button { padding:10px 15px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-weight:bold; }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Tr3vN0x</h1>
-    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
-    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth"><span id="floating-auth-text">Login</span></div></div>
+    <h1>Tr3vN0x</h1>
+    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
+    <div class="auth-controls"><div class="floating-auth logged-out" id="floating-auth"><span id="floating-auth-text">Login</span></div></div>
 </header>
 
 <div class="container">
-    <section id="featured">
-        <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)</h2>
-        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
-    </section>
-    
+    <section id="featured">
+        <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)</h2>
+        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
+    </section>
+
     <div class="video-row">
         <h2>🔥 Trending</h2>
-        <div class="video-grid" id="trending-grid">
-        </div>
+        <div class="video-grid" id="trending-grid"></div>
     </div>
 
     <div class="video-row">
         <h2>🎮 Gaming Highlights</h2>
-        <div class="video-grid" id="gaming-grid">
-        </div>
+        <div class="video-grid" id="gaming-grid"></div>
     </div>
-    
+
     <div class="video-row">
         <h2>✨ Fan Favorites</h2>
-        <div class="video-grid" id="favorites-grid">
-        </div>
+        <div class="video-grid" id="favorites-grid"></div>
     </div>
 
     <section id="chat-container">
         <h2>💬 Global Chat</h2>
-        <div id="chat-messages">
-        </div>
+        <div id="chat-messages"></div>
         <div id="chat-input-container">
             <input type="text" id="chat-input" placeholder="Login to chat..." disabled>
             <button id="send-button" disabled>Send</button>
         </div>
     </section>
 
-    <section id="auth-overlay">
-        <div class="auth-modal">
-            <div class="modal-header">
-                <h3>Authentication</h3>
-                <span id="close-auth">&times;</span>
-            </div>
-            <div class="tabs">
-                <div class="tab active" id="login-tab">Log In</div>
-                <div class="tab" id="signup-tab">Sign Up</div>
-            </div>
-            <form id="login-form">
-                <div class="form-group"><label>Email</label><input type="email" id="login-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
-                </div>
-                <button type="submit">Log In</button>
-            </form>
-            <form id="signup-form" style="display:none;">
-                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
-                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
-                <div class="form-group"><label>Password</label>
-                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    </section>
+    <section id="auth-overlay">
+        <div class="auth-modal">
+            <div class="modal-header">
+                <h3>Authentication</h3>
+                <span id="close-auth">&times;</span>
+            </div>
+            <div class="tabs">
+                <div class="tab active" id="login-tab">Log In</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
+            </div>
+            <form id="login-form">
+                <div class="form-group"><label>Email</label><input type="email" id="login-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="login-password" required><button type="button" class="toggle-pass" data-target="login-password">👁️</button></div>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+            <form id="signup-form" style="display:none;">
+                <div class="form-group"><label>Username</label><input type="text" id="signup-username" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="signup-email" required></div>
+                <div class="form-group"><label>Password</label>
+                    <div class="password-container"><input type="password" id="signup-password" required><button type="button" class="toggle-pass" data-target="signup-password">👁️</button></div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </section>
 </div>
 
 <script>
-// --- GLOBAL DATA & ELEMENTS ---
+// --- DATA & ELEMENTS ---
 const overlay = document.getElementById('auth-overlay');
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
@@ -208,254 +134,138 @@ const closeAuth = document.getElementById('close-auth');
 const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
 const chatMessagesContainer = document.getElementById('chat-messages');
+const searchInput = document.getElementById('searchInput');
 
 let videoData = [
-    { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT", id: "92y9uaQMIa8", views: 0, category: 'trending' },
-    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", views: 0, category: 'trending' },
-    { title: "Why Is Flee the Facility THIS Stressful?!", id: "Uwwga_CiFqc", views: 0, category: 'trending' },
-    { title: "NEW Bloxburg House Build!", id: "rSg0kP8yYmE", views: 0, category: 'gaming' },
-    { title: "Roblox Tycoon Challenge", id: "l-S3sH9fR7A", views: 0, category: 'gaming' },
-    { title: "The FUNNIEST Roblox Moments", id: "P2x7l2fT0sE", views: 0, category: 'favorites' },
-    { title: "Crazy Fan Mail Opening", id: "A1cT2yH4pZ5", views: 0, category: 'favorites' },
-    { title: "My Favorite Game of All Time", id: "Q0w9rE8iU7y", views: 0, category: 'gaming' },
-    { title: "Epic Fails Compilation", id: "M5nB6vC4xZ1", views: 0, category: 'trending' }
+    { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'trending' },
+    { title:"Who Is TR3VN0X?", id:"ZiEd3RoiKtk", views:0, category:'trending' },
+    { title:"Why Is Flee the Facility THIS Stressful?!", id:"Uwwga_CiFqc", views:0, category:'trending' },
+    { title:"NEW Bloxburg House Build!", id:"rSg0kP8yYmE", views:0, category:'gaming' },
+    { title:"Roblox Tycoon Challenge", id:"l-S3sH9fR7A", views:0, category:'gaming' },
+    { title:"The FUNNIEST Roblox Moments", id:"P2x7l2fT0sE", views:0, category:'favorites' },
+    { title:"Crazy Fan Mail Opening", id:"A1cT2yH4pZ5", views:0, category:'favorites' },
+    { title:"My Favorite Game of All Time", id:"Q0w9rE8iU7y", views:0, category:'gaming' },
+    { title:"Epic Fails Compilation", id:"M5nB6vC4xZ1", views:0, category:'trending' }
 ];
 
-// --- AUTH UTILITY FUNCTIONS ---
-
-function getUsers(){ 
-    return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); 
-}
-
-function getCurrentUser() {
-    return JSON.parse(localStorage.getItem('tr3vn0x_current'));
-}
+// --- AUTH FUNCTIONS ---
+function getUsers(){ return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); }
+function getCurrentUser(){ return JSON.parse(localStorage.getItem('tr3vn0x_current')); }
 
 function updateAuthUI() {
-    const user = getCurrentUser(); // Always retrieve fresh user data
-    
-    // Clear previous listeners to prevent duplicates
-    floatingAuth.removeEventListener('click', showAuthModal);
-    floatingAuth.removeEventListener('click', handleLogout); 
-
-    if (user) {
-        // Logged In State
-        floatingAuth.innerText = 'Signed in as ' + user.username + ' (Log Out)';
-        floatingAuth.classList.remove('logged-out');
-        floatingAuth.classList.add('logged-in');
-        floatingAuth.addEventListener('click', handleLogout); 
-        // Enable Chat features
-        chatInput.disabled = false;
-        sendButton.disabled = false;
-        chatInput.placeholder = "Type your message...";
+    const user = getCurrentUser();
+    floatingAuth.replaceWith(floatingAuth.cloneNode(true));
+    const newAuth = document.getElementById('floating-auth');
+    if(user){
+        newAuth.innerText = `Signed in as ${user.username} (Log Out)`;
+        newAuth.classList.remove('logged-out'); newAuth.classList.add('logged-in');
+        newAuth.addEventListener('click', handleLogout);
+        chatInput.disabled = false; sendButton.disabled = false; chatInput.placeholder="Type your message...";
+        renderChatHistory();
     } else {
-        // Logged Out State
-        floatingAuth.innerText = 'Login';
-        floatingAuth.classList.remove('logged-in');
-        floatingAuth.classList.add('logged-out');
-        floatingAuth.addEventListener('click', showAuthModal); 
-        // Disable Chat features
-        chatInput.disabled = true;
-        sendButton.disabled = true;
-        chatInput.placeholder = "Login to chat...";
+        newAuth.innerText = 'Login';
+        newAuth.classList.remove('logged-in'); newAuth.classList.add('logged-out');
+        newAuth.addEventListener('click', ()=>overlay.style.display='flex');
+        chatInput.disabled = true; sendButton.disabled = true; chatInput.placeholder="Login to chat...";
     }
-}
-
-function showAuthModal() {
-    overlay.style.display='flex';
 }
 
 function handleLogout() {
-    if(confirm("Are you sure you want to log out?")) {
+    if(confirm("Are you sure you want to log out?")){
         localStorage.removeItem('tr3vn0x_current');
-        updateAuthUI(); // Call with no arguments to re-check status
-        alert('You have been logged out.');
-        renderChatHistory(); // Clear chat or show only saved history
+        updateAuthUI();
     }
 }
 
-// --- INITIAL SETUP AND EVENT LISTENERS (Authentication) ---
-
-// FIX: Initial UI check to load session on refresh
+// --- INITIAL AUTH SETUP ---
 updateAuthUI();
+closeAuth.addEventListener('click', ()=>overlay.style.display='none');
+loginTab.addEventListener('click', ()=>{ loginForm.style.display='block'; signupForm.style.display='none'; loginTab.classList.add('active'); signupTab.classList.remove('active'); });
+signupTab.addEventListener('click', ()=>{ signupForm.style.display='block'; loginForm.style.display='none'; signupTab.classList.add('active'); loginTab.classList.remove('active'); });
+document.querySelectorAll('.toggle-pass').forEach(btn=>{ btn.addEventListener('click', ()=>{ const input=document.getElementById(btn.dataset.target); input.type=(input.type==='password')?'text':'password'; }); });
 
-// Handle modal close
-closeAuth.addEventListener('click', ()=>{ overlay.style.display='none'; });
-
-// Toggle tabs
-loginTab.addEventListener('click', ()=>{
-    loginForm.style.display='block'; signupForm.style.display='none';
-    loginTab.classList.add('active'); signupTab.classList.remove('active');
-});
-signupTab.addEventListener('click', ()=>{
-    signupForm.style.display='block'; loginForm.style.display='none';
-    signupTab.classList.add('active'); loginTab.classList.remove('active');
-});
-
-// Password toggle
-document.querySelectorAll('.toggle-pass').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-        const input = document.getElementById(btn.dataset.target);
-        input.type = input.type==='password'?'text':'password';
-    });
-});
-
-// Signup logic
+// --- SIGNUP ---
 signupForm.addEventListener('submit', e=>{
-    e.preventDefault();
-    const username = document.getElementById('signup-username').value.trim();
-    const email = document.getElementById('signup-email').value.trim();
-    const password = document.getElementById('signup-password').value;
-    
-    if(!username||!email||!password){ alert('All fields required.'); return; }
-    // Added basic email format check
-    if(!email.includes('@')){ alert('Please enter a valid email address.'); return; } 
-
-    let users = getUsers();
-    if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){ alert('Username already taken.'); return; }
-    if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ alert('Email already registered.'); return; }
-    users.push({username,email,password});
-    localStorage.setItem('tr3vn0x_users', JSON.stringify(users));
-    alert('Signup successful! You can now log in.');
-    signupForm.reset(); loginTab.click();
+    e.preventDefault();
+    const username = document.getElementById('signup-username').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    if(!username||!email||!password){ alert('All fields required.'); return; }
+    let users = getUsers();
+    if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){ alert('Username already taken.'); return; }
+    if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ alert('Email already registered.'); return; }
+    users.push({username,email,password});
+    localStorage.setItem('tr3vn0x_users', JSON.stringify(users));
+    alert('Signup successful! You can now log in.'); signupForm.reset(); loginTab.click();
 });
 
-// Login logic
+// --- LOGIN ---
 loginForm.addEventListener('submit', e=>{
-    e.preventDefault();
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    const users = getUsers();
-    
-    // FIX: This is the correct logic for finding the user
-    const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase() && u.password===password);
-    
-    if(user){
-        // FIX: Save the user object to localStorage for session tracking
-        localStorage.setItem('tr3vn0x_current', JSON.stringify(user));
-        updateAuthUI(); // Update UI to logged-in state
-        overlay.style.display='none';
-        loginForm.reset();
-        renderChatHistory(); // Load chat messages now that user is logged in
-    } else alert('Invalid email or password.');
+    e.preventDefault();
+    const email=document.getElementById('login-email').value.trim();
+    const password=document.getElementById('login-password').value;
+    const users = getUsers();
+    const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase()&&u.password===password);
+    if(user){ localStorage.setItem('tr3vn0x_current', JSON.stringify(user)); updateAuthUI(); overlay.style.display='none'; loginForm.reset(); }
+    else alert('Invalid email or password.');
 });
 
-
-// --- VIDEO RENDERING & PLAYBACK ---
-
-function createVideoCard(video) {
+// --- VIDEO FUNCTIONS ---
+function createVideoCard(video){
     const card = document.createElement('div');
-    card.classList.add('video-card');
-    card.dataset.video = video.id;
-    card.innerHTML = `
-        <div class="thumbnail-placeholder">
-            <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title} thumbnail">
-        </div>
-        <div class="video-info">
-            <h3>${video.title}</h3>
-            <p>Views: ${video.views}</p>
-        </div>
-    `;
+    card.classList.add('video-card'); card.dataset.video=video.id;
+    card.innerHTML = `<div class="thumbnail-placeholder"><img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}"></div>
+                      <div class="video-info"><h3>${video.title}</h3><p>Views: <span class="views-count">${video.views}</span></p></div>`;
+    card.addEventListener('click', ()=>{
+        video.views++; card.querySelector('.views-count').innerText = video.views;
+        const player = document.createElement('div'); player.classList.add('featured-player');
+        player.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.id}?autoplay=1" allowfullscreen></iframe>`;
+        card.innerHTML=''; card.appendChild(player);
+    });
     return card;
 }
 
-function renderVideoRows() {
-    const trendingGrid = document.getElementById('trending-grid');
-    const gamingGrid = document.getElementById('gaming-grid');
-    const favoritesGrid = document.getElementById('favorites-grid');
-
-    trendingGrid.innerHTML = '';
-    gamingGrid.innerHTML = '';
-    favoritesGrid.innerHTML = '';
-
-    videoData.forEach(video => {
-        const card = createVideoCard(video);
-        if (video.category === 'trending') trendingGrid.appendChild(card);
-        else if (video.category === 'gaming') gamingGrid.appendChild(card);
-        else if (video.category === 'favorites') favoritesGrid.appendChild(card);
+function renderVideoRows(){
+    const grids = {trending:'trending-grid', gaming:'gaming-grid', favorites:'favorites-grid'};
+    Object.keys(grids).forEach(cat=>{
+        const grid = document.getElementById(grids[cat]); grid.innerHTML='';
+        videoData.filter(v=>v.category===cat).forEach(v=>grid.appendChild(createVideoCard(v)));
     });
-    
-    document.querySelectorAll('.video-card').forEach(card => {
-        card.addEventListener('click', handleVideoPlayback);
-    });
-}
-
-function handleVideoPlayback() {
-    const videoId = this.dataset.video;
-    const player = document.createElement('div');
-    player.classList.add('featured-player');
-    player.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allowfullscreen></iframe>`;
-    
-    this.innerHTML = '';
-    this.appendChild(player);
-
-    this.removeEventListener('click', handleVideoPlayback);
 }
 
 renderVideoRows();
 
-// --- CHAT FUNCTIONALITY ---
+// --- SEARCH ---
+searchInput.addEventListener('input', ()=>{
+    const query = searchInput.value.toLowerCase();
+    document.querySelectorAll('.video-card').forEach(card=>{
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(query)?'block':'none';
+    });
+});
 
-function getChatHistory() {
-    return JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
-}
-
-function saveChatHistory(history) {
-    localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
-}
-
-function renderChatHistory() {
-    const history = getChatHistory();
-    chatMessagesContainer.innerHTML = '';
-    
-    history.forEach(msg => {
-        const msgElement = document.createElement('div');
-        msgElement.classList.add('chat-message');
-        // FIX: Ensure messages are escaped if needed (basic safety)
-        const safeMessage = msg.message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        msgElement.innerHTML = `<span class="chat-username">${msg.username}:</span> ${safeMessage}`;
-        chatMessagesContainer.prepend(msgElement);
+// --- CHAT FUNCTIONS ---
+function getChatHistory(){ return JSON.parse(localStorage.getItem('tr3vn0x_chat')||'[]'); }
+function saveChatHistory(history){ localStorage.setItem('tr3vn0x_chat', JSON.stringify(history)); }
+function renderChatHistory(){
+    const history = getChatHistory(); chatMessagesContainer.innerHTML='';
+    history.slice().reverse().forEach(msg=>{
+        const div=document.createElement('div'); div.classList.add('chat-message');
+        div.innerHTML=`<span class="chat-username">${msg.username}:</span> ${msg.message}`;
+        chatMessagesContainer.appendChild(div);
     });
 }
 
-function handleSendMessage() {
-    const user = getCurrentUser();
-    const message = chatInput.value.trim();
-
-    if (!user) {
-        alert("You must be logged in to chat.");
-        return;
-    }
-    
-    if (message === "") {
-        return;
-    }
-
-    const history = getChatHistory();
-    const newMessage = {
-        username: user.username,
-        message: message,
-        timestamp: new Date().toISOString()
-    };
-
-    history.push(newMessage);
-    saveChatHistory(history);
-
-    chatInput.value = '';
-    renderChatHistory();
+function handleSendMessage(){
+    const user=getCurrentUser(); if(!user) return;
+    const message = chatInput.value.trim(); if(!message) return;
+    const history = getChatHistory(); history.push({username:user.username,message}); saveChatHistory(history);
+    chatInput.value=''; renderChatHistory();
 }
 
-// Event listeners for chat
 sendButton.addEventListener('click', handleSendMessage);
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        handleSendMessage();
-    }
-});
+chatInput.addEventListener('keypress', e=>{ if(e.key==='Enter') handleSendMessage(); });
 
-// Initial render of chat history
-renderChatHistory();
-</script type="text/javascript">
-
+</script>
 </body>
 </html>
