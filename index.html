@@ -27,7 +27,6 @@ header {
     flex-wrap: wrap;
 }
 
-/* Logo */
 .logo-container {
     display: flex;
     align-items: center;
@@ -48,7 +47,6 @@ header {
     100% { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
 }
 
-/* Search */
 .search-bar {
     background: #111;
     border: 1px solid #004400;
@@ -64,7 +62,6 @@ header {
 .search-bar::placeholder { color: #004400; }
 .search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
 
-/* About button */
 .about {
     width: 60px;
     height: 60px;
@@ -133,6 +130,7 @@ header {
     opacity: 0;
     transform: translateY(30px);
     animation: slideUp 0.6s forwards;
+    cursor: pointer;
 }
 
 .video-card:hover {
@@ -210,6 +208,38 @@ footer {
     .thumbnail-container { height: 100px; }
     .search-bar { width: 95%; }
 }
+
+/* ---------------- MODAL PLAYER ---------------- */
+#video-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#video-modal iframe {
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border:none;
+    border-radius: 10px;
+}
+
+#video-modal .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -235,14 +265,14 @@ footer {
         <div class="column-header">
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/TW9zdCBWaWV3ZWQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Most Viewed">
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="92y9uaQMIa8">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/92y9uaQMIa8/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/92y9uaQMIa8/hqdefault.jpg">
             </div>
             <div class="video-title">Most Viewed Video 1</div>
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="kNkK_qclihc">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/kNkK_qclihc/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/kNkK_qclihc/hqdefault.jpg">
@@ -256,28 +286,28 @@ footer {
         <div class="column-header">
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/T2xkZXIgVmlkZW9z/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Older Videos">
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="ZiEd3RoiKtk">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/ZiEd3RoiKtk/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/ZiEd3RoiKtk/hqdefault.jpg">
             </div>
             <div class="video-title">Older Video 1</div>
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="J-W0Vfrc26U">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/J-W0Vfrc26U/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/J-W0Vfrc26U/hqdefault.jpg">
             </div>
             <div class="video-title">Older Video 2</div>
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="Uwwga_CiFqc">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/Uwwga_CiFqc/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/Uwwga_CiFqc/hqdefault.jpg">
             </div>
             <div class="video-title">Older Video 3</div>
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="Sn4dyr5v7m0">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/Sn4dyr5v7m0/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/Sn4dyr5v7m0/hqdefault.jpg">
@@ -291,14 +321,14 @@ footer {
         <div class="column-header">
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/V2F0Y2ggSGlzdG9yeQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Watch History">
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="kNkK_qclihc">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/kNkK_qclihc/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/kNkK_qclihc/hqdefault.jpg">
             </div>
             <div class="video-title">Watched Video 1</div>
         </div>
-        <div class="video-card">
+        <div class="video-card" data-video="92y9uaQMIa8">
             <div class="thumbnail-container">
                 <img class="thumb" src="https://img.youtube.com/vi/92y9uaQMIa8/mqdefault.jpg">
                 <img class="hover-thumb" src="https://img.youtube.com/vi/92y9uaQMIa8/hqdefault.jpg">
@@ -309,10 +339,43 @@ footer {
 
 </div>
 
+<!-- VIDEO MODAL -->
+<div id="video-modal">
+    <div class="close-btn">&times;</div>
+    <iframe src="" allowfullscreen></iframe>
+</div>
+
 <!-- FOOTER -->
 <footer>
     © 2025 Tr3vN0x — All Rights Reserved
 </footer>
+
+<script>
+// Open video modal on click
+document.querySelectorAll('.video-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+        const videoId = card.getAttribute('data-video');
+        const modal = document.getElementById('video-modal');
+        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modal.style.display = 'flex';
+    });
+});
+
+// Close modal
+document.querySelector('#video-modal .close-btn').addEventListener('click',()=>{
+    const modal = document.getElementById('video-modal');
+    modal.querySelector('iframe').src = '';
+    modal.style.display = 'none';
+});
+
+// Close modal on outside click
+document.getElementById('video-modal').addEventListener('click',(e)=>{
+    if(e.target === e.currentTarget){
+        e.currentTarget.querySelector('iframe').src = '';
+        e.currentTarget.style.display = 'none';
+    }
+});
+</script>
 
 </body>
 </html>
