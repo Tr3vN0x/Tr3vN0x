@@ -133,7 +133,7 @@ const searchInput = document.getElementById('searchInput');
 
 let videoData = [
     { title:"I PLAYED ROBLOX DEAD BY DAYLIGHT", id:"92y9uaQMIa8", views:0, category:'favorites' },
-    { title:"Who Is TR3VN0X?", id:"ZiEd3RoiKtk", views:0, category:'favorites' },
+    { title:"ROBLOXIAN HIGHSCHOOL *LIVE*", id:"kNkK_qclihc", views:0, category:'favorites' }, // new fan favorite
     { title:"Older Video 1", id:"XqmcBMy3X1k", views:0, category:'older' },
     { title:"Older Video 2", id:"Sn4dyr5v7m0", views:0, category:'older' },
     { title:"Older Video 3", id:"Uwwga_CiFqc", views:0, category:'older' },
@@ -141,7 +141,7 @@ let videoData = [
     { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older' }
 ];
 
-// --- AUTH (simple) ---
+// --- AUTH FUNCTIONS ---
 function getUsers(){ return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); }
 function getCurrentUser(){ return JSON.parse(localStorage.getItem('tr3vn0x_current')); }
 
@@ -170,10 +170,8 @@ function handleLogout() {
     }
 }
 
-// INITIAL AUTH UI
+// INITIAL AUTH
 updateAuthUI();
-
-// Modal / Tab logic
 closeAuth.addEventListener('click', ()=>overlay.style.display='none');
 loginTab.addEventListener('click', ()=>{ loginForm.style.display='block'; signupForm.style.display='none'; loginTab.classList.add('active'); signupTab.classList.remove('active'); });
 signupTab.addEventListener('click', ()=>{ signupForm.style.display='block'; loginForm.style.display='none'; signupTab.classList.add('active'); loginTab.classList.remove('active'); });
@@ -184,7 +182,7 @@ document.querySelectorAll('.toggle-pass').forEach(btn=>{
     });
 });
 
-// SIGNUP
+// SIGNUP & LOGIN
 signupForm.addEventListener('submit', e=>{
     e.preventDefault();
     const username = document.getElementById('signup-username').value.trim();
@@ -200,7 +198,6 @@ signupForm.addEventListener('submit', e=>{
     signupForm.reset(); loginTab.click();
 });
 
-// LOGIN
 loginForm.addEventListener('submit', e=>{
     e.preventDefault();
     const email = document.getElementById('login-email').value.trim();
@@ -215,7 +212,7 @@ loginForm.addEventListener('submit', e=>{
     } else alert('Invalid email or password.');
 });
 
-// VIDEO RENDERING
+// VIDEO FUNCTIONS
 function createVideoCard(video){
     const card = document.createElement('div');
     card.className='video-card'; card.dataset.video = video.id;
@@ -262,16 +259,7 @@ function renderChatHistory(){
     history.slice().reverse().forEach(msg=>{
         const div = document.createElement('div');
         div.className = 'chat-message';
-        const usernameSpan = document.createElement('span');
-        usernameSpan.className = 'chat-username';
-        usernameSpan.innerText = msg.username;
-        if(msg.username === 'Tr3vN0x'){
-            const badge = document.createElement('span');
-            badge.className = 'chat-badge';
-            badge.innerText = '✔';
-            usernameSpan.appendChild(badge);
-        }
-        div.innerText = `${msg.username}${msg.username === 'Tr3vN0x' ? ' ✔' : ''}: ${msg.message}`;
+        div.innerText = `${msg.username}${msg.username==='Tr3vN0x' ? ' ✔':''}: ${msg.message}`;
         chatMessagesContainer.appendChild(div);
     });
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
@@ -288,8 +276,8 @@ function handleSendMessage(){
 }
 
 sendButton.addEventListener('click', handleSendMessage);
-chatInput.addEventListener('keypress', e=>{ if(e.key === 'Enter') handleSendMessage(); });
-</script>
+chatInput.addEventListener('keypress', e=>{ if(e.key==='Enter') handleSendMessage(); });
 
+</script>
 </body>
 </html>
