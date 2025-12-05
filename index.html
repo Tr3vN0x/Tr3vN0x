@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x Dark LED Hub</title>
+<title>Tr3vN0x Official Website</title>
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -11,6 +11,60 @@ body {
     font-family: Arial, sans-serif;
     background: #0a0a0a;
     color: #00ff66;
+}
+
+/* ---------------- SPLASH SCREEN (NEW) ---------------- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    z-index: 1000; /* Highest layer to cover everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* For fading out */
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-logo {
+    max-width: 90%;
+    height: auto;
+    max-height: 120px;
+    margin-bottom: 25px;
+    /* Logo effects */
+    border-radius: 4px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 12px #00ff66;
+    animation: pulse 1.5s infinite alternate; /* Subtle breathing animation */
+}
+
+@keyframes pulse {
+    from { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
+    to { transform: scale(1.05); box-shadow: 0 0 16px #00ff66; }
+}
+
+#loading-percentage {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+}
+
+/* ---------------- MAIN CONTENT WRAPPER (NEW) ---------------- */
+/* The main content starts hidden and fades in */
+#main-content {
+    opacity: 0;
+    transition: opacity 1s ease-in; /* For fading in */
 }
 
 /* ---------------- HEADER ---------------- */
@@ -332,68 +386,132 @@ footer {
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-    <div class="logo-container">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
+<div id="splash-screen">
+    <div class="splash-content">
+        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Tr3vN0x Logo" class="splash-logo">
+        <div id="loading-percentage">0%</div>
+    </div>
+</div>
+
+<main id="main-content">
+
+    <header>
+        <div class="logo-container">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
+        </div>
+
+        <input type="text" class="search-bar" placeholder="Search videos...">
+
+        <div class="profile-btn" id="open-profile">
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
+        </div>
+    </header>
+
+    <div class="row-container">
+        <div class="row-label">Favorites</div>
+        <div class="video-row" id="favorites-row"></div>
     </div>
 
-    <input type="text" class="search-bar" placeholder="Search videos...">
-
-    <div class="profile-btn" id="open-profile">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
+    <div class="row-container">
+        <div class="row-label">Most Viewed</div>
+        <div class="video-row" id="most-viewed-row"></div>
     </div>
-</header>
 
-<!-- ROWS -->
-<div class="row-container">
-    <div class="row-label">Favorites</div>
-    <div class="video-row" id="favorites-row"></div>
-</div>
+    <div class="row-container">
+        <div class="row-label">Older Videos</div>
+        <div class="video-row" id="older-videos-row"></div>
+    </div>
 
-<div class="row-container">
-    <div class="row-label">Most Viewed</div>
-    <div class="video-row" id="most-viewed-row"></div>
-</div>
+    <div class="row-container">
+        <div class="row-label">Watch History</div>
+        <div class="video-row" id="watch-history-row"></div>
+    </div>
 
-<div class="row-container">
-    <div class="row-label">Older Videos</div>
-    <div class="video-row" id="older-videos-row"></div>
-</div>
-
-<div class="row-container">
-    <div class="row-label">Watch History</div>
-    <div class="video-row" id="watch-history-row"></div>
-</div>
-
-<!-- VIDEO MODAL -->
-<div id="video-modal">
-    <div class="close-btn">&times;</div>
-    <iframe src="" allowfullscreen></iframe>
-</div>
-
-<!-- PROFILE MODAL -->
-<div id="profile-modal">
-    <div class="modal-content">
+    <div id="video-modal">
         <div class="close-btn">&times;</div>
-        <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
-        <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
-        <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
-        <button class="follow-btn" id="follow-btn">Follow</button>
-        <div class="links">
-            <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
-            <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
-            <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+        <iframe src="" allowfullscreen></iframe>
+    </div>
+
+    <div id="profile-modal">
+        <div class="modal-content">
+            <div class="close-btn">&times;</div>
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
+            <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
+            <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
+            <button class="follow-btn" id="follow-btn">Follow</button>
+            <div class="links">
+                <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
+                <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
+                <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- FOOTER -->
-<footer>
-    © 2025 Tr3vN0x — All Rights Reserved
-</footer>
+    <footer>
+        © 2025 Tr3vN0x — All Rights Reserved
+    </footer>
+</main>
+
 
 <script>
+// --- NEW LOADING SCRIPT ---
+document.addEventListener('DOMContentLoaded', () => {
+    const splashScreen = document.getElementById('splash-screen');
+    const mainContent = document.getElementById('main-content');
+    const loadingPercentage = document.getElementById('loading-percentage');
+    
+    // Initial setup: hide main content and prevent interaction
+    mainContent.style.opacity = '0';
+    mainContent.style.pointerEvents = 'none';
+
+    // --- Loading Logic ---
+    // Minimum time for the animation (Simulates fast loading, adjust as needed)
+    const MIN_LOAD_TIME_MS = 2000; 
+    const MAX_PERCENTAGE = 100;
+    let currentPercentage = 0;
+    const startTime = Date.now();
+
+    // Function to animate the percentage using requestAnimationFrame for smoothness
+    function animateLoading() {
+        const elapsedTime = Date.now() - startTime;
+        
+        // Calculate percentage based on time elapsed versus the minimum load time
+        let targetPercentage = Math.min(
+            Math.floor((elapsedTime / MIN_LOAD_TIME_MS) * MAX_PERCENTAGE), 
+            MAX_PERCENTAGE
+        );
+
+        if (targetPercentage >= currentPercentage) {
+            currentPercentage = targetPercentage;
+            loadingPercentage.textContent = `${currentPercentage}%`;
+        }
+        
+        if (currentPercentage < MAX_PERCENTAGE) {
+            // Keep animating until 100%
+            requestAnimationFrame(animateLoading);
+        } else {
+            // Percentage hit 100%, now transition to main content
+            setTimeout(() => {
+                // 1. Fade out splash screen
+                splashScreen.style.opacity = '0';
+                
+                // 2. Fade in main content and re-enable interaction
+                mainContent.style.opacity = '1';
+                mainContent.style.pointerEvents = 'auto'; 
+
+                // 3. Remove splash screen from DOM after transition completes (0.5s)
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 500); 
+            }, 300); // Small delay to let user see 100% before transition
+        }
+    }
+
+    // Start the loading animation
+    animateLoading();
+});
+// --- END NEW LOADING SCRIPT ---
+
 // ---------------- DATA ----------------
 const favorites = [];
 const mostViewed = [
@@ -523,4 +641,3 @@ followBtn.addEventListener('click', ()=>{
 
 </body>
 </html>
-
