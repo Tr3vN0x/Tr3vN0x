@@ -4,248 +4,361 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tr3vN0x Streaming</title>
-
-<!-- ✅ Favicon (tab icon) -->
-<link rel="icon" 
-      href="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" 
-      type="image/png">
-
+<link rel="icon" href="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" type="image/png">
 <style>
+/* ---------- GENERAL ---------- */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
+    background: #141414;
     color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    transition: background 0.3s, color 0.3s;
 }
 header {
+    background: #141414;
+    padding: 15px 30px;
     display: flex;
     align-items: center;
-    padding: 15px;
-    background: #111;
-    box-shadow: 0 0 10px #00ffaa80;
+    justify-content: space-between;
 }
-.title-img { width: 120px; margin-right: 15px; }
+header .logo-container { display:flex; align-items:center; gap:12px; }
+header img.icon { width:45px; height:45px; border-radius:50%; }
+header img.title-img { height:65px; filter: drop-shadow(0 0 8px #e50914); }
+header button { margin-left:10px; background:#e50914; border:none; color:white; padding:8px 12px; border-radius:5px; cursor:pointer; transition:0.3s; }
+header button:hover { background:#ff4d4d; }
+
+#featured { position: relative; width: 100%; max-height: 400px; overflow: hidden; margin-bottom: 40px; border-radius:12px; }
+#featured img { width:100%; max-height:400px; object-fit:cover; border-radius:12px; }
+#featured-title { position:absolute; bottom:20px; left:30px; font-size:28px; font-weight:bold; text-shadow: 0 0 10px #000; }
+
 #search-bar {
-    margin-left: auto;
-    padding: 8px;
-    width: 250px;
-    border-radius: 5px;
-    border: none;
+    width: 100%;
+    max-width:500px;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    font-size:16px;
+    margin:20px auto;
+    display:block;
+    background:#1e1e1e;
+    color:#fff;
 }
-#theme-btn, #about-btn {
-    margin-left: 10px;
-    padding: 8px 14px;
-    background: #00ffaa;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.section {
-    padding: 20px;
-}
+
 .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    padding-bottom:10px;
 }
+.video-grid::-webkit-scrollbar { display:none; }
+
+.video-card-container { position: relative; flex: 0 0 220px; }
 .video-card {
-    background: #111;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ffaa50;
-    cursor: pointer;
-    transition: 0.2s;
+    background:#1e1e1e;
+    border-radius:8px;
+    cursor:pointer;
+    overflow:hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.video-card:hover {
-    box-shadow: 0 0 15px #00ffaa;
-    transform: scale(1.03);
+.video-card:hover { transform: scale(1.08); box-shadow: 0 0 20px #e50914; }
+.video-card img.thumb { width:100%; display:block; border-radius:8px; }
+.video-card img.hover-thumb { position:absolute; top:0; left:0; width:100%; border-radius:8px; opacity:0; transition:0.3s; pointer-events:none; }
+.video-card:hover img.hover-thumb { opacity:1; }
+
+.title { margin-top:6px; font-size:16px; }
+.views { font-size:12px; color:#e50914; display:none; }
+.video-card:hover .views { display:block; }
+
+.heart-icon { position:absolute; top:8px; right:8px; font-size:18px; color:white; cursor:pointer; z-index:20; transition:0.2s; }
+.heart-icon.favorited { color:#e50914; transform:scale(1.2); }
+
+.live-badge, .trending-badge {
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#e50914;
+    color:#fff;
+    font-size:12px;
+    font-weight:bold;
+    padding:2px 6px;
+    border-radius:4px;
+    z-index:15;
+    display:none;
 }
-.video-thumb {
-    width: 100%;
-    border-radius: 10px;
+
+h2 { margin:20px 0 10px 20px; }
+
+#player-page, #about-page { display:none; padding:20px; }
+#player iframe { width:100%; aspect-ratio:16/9; border:none; border-radius:12px; }
+#back-btn, #about-back-btn { margin-bottom:20px; padding:10px 20px; background:#e50914; border:none; color:white; border-radius:8px; cursor:pointer; }
+
+body.light { background:#f5f5f5; color:#111; }
+body.light .video-card { background:#ddd; color:#111; }
+body.light .video-card:hover { background:#ccc; }
+body.light header { background:#eee; color:#111; border-bottom:2px solid red; }
+body.light #search-bar { background:#eee; color:#111; }
+
+/* ---------- ABOUT PAGE ---------- */
+#about-page img.profile-pic { width:120px; height:120px; border-radius:50%; border:3px solid #e50914; }
+#about-page h2 { margin:0; display:flex; align-items:center; gap:8px; }
+#about-page .social-links a { text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:6px; transition:0.3s; }
+#about-page .social-links a.youtube{ background:#e50914; color:white; }
+#about-page .social-links a.discord{ background:#5865F2; color:white; }
+#about-page .social-links a.instagram{ background:#C13584; color:white; }
+#about-page .social-links a:hover{ opacity:0.8; }
+
+#about-page .skills span {
+    background:#e50914; color:white; padding:5px 12px; border-radius:20px; margin:4px 0;
 }
-.trending-badge {
-    background: red;
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 12px;
-    position: absolute;
-    margin-top: -30px;
-    margin-left: 5px;
-    display: none;
-}
-#player-page {
-    display: none;
-    padding: 20px;
-}
-#video-player {
-    width: 100%;
-    max-width: 900px;
-}
-.back-btn {
-    padding: 10px 15px;
-    background: #00ffaa;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.light {
-    background: #fff;
-    color: #000;
-}
-.light header {
-    background: #eee;
-}
-.light .video-card {
-    background: #ddd;
-    color: #000;
-}
+#about-page .stats div{ text-align:center; margin-right:20px; }
+#about-page .stats { display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; }
+#about-page .timeline li{ margin-bottom:15px; list-style:none; }
+#about-page .timeline h3{ margin-top:30px; }
 </style>
 </head>
 <body>
 
 <header>
-    <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65">
-    <input id="search-bar" type="text" placeholder="Search...">
-    <button id="theme-btn">🌙</button>
-    <button id="about-btn">About</button>
+    <div class="logo-container">
+        <img class="icon" src="https://scontent-iad3-1.xx.fbcdn.net/v/t39.30808-6/559272795_794290169872684_2807127400178606404_n.jpg" alt="icon"/>
+        <img class="title-img" src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="title"/>
+    </div>
+    <div>
+        <button id="theme-btn">🌙</button>
+        <button id="about-btn">ℹ️ About</button>
+    </div>
 </header>
 
-<div id="home-page">
-    <div id="featured" class="section">
-        <h2>Featured</h2>
-        <div class="video-card" id="featured-card"></div>
-    </div>
+<div class="container" id="home-page">
+    <input type="text" id="search-bar" placeholder="🔍 Search videos...">
+    <div id="featured"></div>
 
-    <div class="section">
-        <h2>Recently Added</h2>
-        <div id="recent-grid" class="video-grid"></div>
-    </div>
+    <h2>🆕 Recent</h2>
+    <div class="video-grid" id="recent-grid"></div>
 
-    <div class="section">
-        <h2>Recommended</h2>
-        <div id="recommended-grid" class="video-grid"></div>
-    </div>
+    <h2>🔥 Recommended</h2>
+    <div class="video-grid" id="recommended-grid"></div>
 
-    <div class="section">
-        <h2>Favorites</h2>
-        <div id="favorites-grid" class="video-grid"></div>
-    </div>
+    <h2>⭐ Fan Favorites</h2>
+    <div class="video-grid" id="favorites-grid"></div>
 
-    <div class="section">
-        <h2>Live</h2>
-        <div id="live-grid" class="video-grid"></div>
-    </div>
+    <h2>📺 Live Stream</h2>
+    <div class="video-grid" id="live-grid"></div>
 
-    <div class="section">
-        <h2>Older Videos</h2>
-        <div id="older-grid" class="video-grid"></div>
-    </div>
+    <h2>📼 Older Videos</h2>
+    <div class="video-grid" id="older-grid"></div>
 </div>
 
 <div id="player-page">
-    <button id="back-btn" class="back-btn">⬅ Back</button>
-    <h2 id="player-title"></h2>
-    <video id="video-player" controls></video>
-    <p id="player-views"></p>
+    <button id="back-btn">← Back</button>
+    <div id="player"></div>
+    <h2 id="video-title"></h2>
 </div>
 
-<div id="about-page" style="display:none; padding:20px;">
-    <button id="about-back-btn" class="back-btn">⬅ Back</button>
-    <h2>About Tr3vN0x</h2>
-    <p>This is a custom streaming platform.</p>
+<!-- ---------- ABOUT PAGE ---------- -->
+<div id="about-page">
+    <button id="about-back-btn">← Back</button>
+
+    <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
+        <img class="profile-pic" src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg" alt="Profile Pic">
+        <div style="max-width:600px;">
+            <h2>
+                Tr3vN0x 
+                <img src="https://cdn-icons-png.flaticon.com/512/10627/10627194.png" style="width:22px;height:22px;" alt="Verified Badge">
+            </h2>
+            <p style="margin-top:10px; font-size:16px; line-height:1.5;">
+                Hello! I am Tr3vN0x (Trevor). Welcome to my streaming hub! Here you can find my latest videos, live streams, and fan favorites. I love gaming, making content, and sharing my passion with all of you.
+            </p>
+
+            <!-- Social Links -->
+            <div class="social-links" style="margin-top:15px; display:flex; gap:10px;">
+                <a href="https://youtube.com/" target="_blank" class="youtube">YouTube</a>
+                <a href="https://discord.com/" target="_blank" class="discord">Discord</a>
+                <a href="https://instagram.com/" target="_blank" class="instagram">Instagram</a>
+            </div>
+
+            <!-- Skills / Interests -->
+            <div class="skills" style="margin-top:25px;">
+                <h3>🎮 Skills & Interests</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                    <span>Roblox</span>
+                    <span>Video Editing</span>
+                    <span>Streaming</span>
+                    <span>Gaming Tutorials</span>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div><div style="font-size:24px;font-weight:bold;">125</div><div>Videos</div></div>
+                <div><div style="font-size:24px;font-weight:bold;">3.2K</div><div>Subscribers</div></div>
+                <div><div style="font-size:24px;font-weight:bold;">15K</div><div>Likes</div></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <h3>📜 My Journey</h3>
+                <ul>
+                    <li><strong>2018:</strong> Started gaming and recording Roblox videos.</li>
+                    <li><strong>2019:</strong> Created YouTube channel “Tr3vN0x”.</li>
+                    <li><strong>2021:</strong> First viral Roblox horror video.</li>
+                    <li><strong>2023:</strong> Streaming live regularly and growing community.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-let videoData=[
-    {id:1,title:"Cyber Rush",src:"videos/video1.mp4",thumb:"thumbs/thumb1.jpg",views:10,category:"recent"},
-    {id:2,title:"Neon Streets",src:"videos/video2.mp4",thumb:"thumbs/thumb2.jpg",views:5,category:"recent"},
-    {id:3,title:"Deep Space",src:"videos/video3.mp4",thumb:"thumbs/thumb3.jpg",views:2,category:"favorites"},
-    {id:4,title:"AI Uprising",src:"videos/video4.mp4",thumb:"thumbs/thumb4.jpg",views:1,category:"recommended"},
-    {id:5,title:"Drone City Live",src:"videos/video5.mp4",thumb:"thumbs/thumb5.jpg",views:20,category:"live"},
-    {id:6,title:"Retro Wave",src:"videos/video6.mp4",thumb:"thumbs/thumb6.jpg",views:3,category:"older"}
+// ---------- VIDEO DATA ----------
+function randomViews(min=10,max=100){ return Math.floor(Math.random()*(max-min+1))+min; }
+let videoData = [
+    { title: "Fan Favorite - Roblox Horror", id: "92y9uaQMIa8", category: "favorites", views: randomViews(), lastViews:0 },
+    { title: "Older Video 1", id: "XqmcBMy3X1k", category: "older", views: randomViews(), lastViews:0 },
+    { title: "Older Video 2", id: "Sn4dyr5v7m0", category: "older", views: randomViews(), lastViews:0 },
+    { title: "Older Video 3", id: "Uwwga_CiFqc", category: "older", views: randomViews(), lastViews:0 },
+    { title: "Older Video 4", id: "J-W0Vfrc26U", category: "older", views: randomViews(), lastViews:0 },
+    { title: "Who Is TR3VN0X?", id: "ZiEd3RoiKtk", category: "older", views: randomViews(), lastViews:0 },
+    { title: "Recent Upload 1", id: "92y9uaQMIa8", category: "recent", views: randomViews(), lastViews:0 },
+    { title: "Recent Upload 2", id: "kNkK_qclihc", category: "recent", views: randomViews(), lastViews:0 }
 ];
+let liveVideo = { title: "LIVE NOW - Playing Roblox High School 2", id: "kNkK_qclihc", views: randomViews(50,150), lastViews:0 };
+let featuredVideo = { title: "I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)", id: "92y9uaQMIa8", views: randomViews(50,200), lastViews:0 };
+function shuffleArray(array){ for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]]; } return array; }
+let recommendedVideos = shuffleArray([...videoData]).slice(0,3);
 
-let featuredVideo = videoData[0];
-
-function createCard(video){
+// ---------- CREATE CARD ----------
+function createCard(v,isLive=false){
     const card=document.createElement("div");
-    card.className="video-card";
-    card.onclick=()=>openPlayer(video.id);
+    card.className="video-card video-card-container";
+    const normalThumb=`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+    const hoverThumb=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+    const favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
+    const isFavorited=favorites.includes(v.id);
 
-    const badge=document.createElement("div");
-    badge.className="trending-badge";
-    badge.innerText="TRENDING";
-    card.appendChild(badge);
+    card.innerHTML=`
+        ${isLive?'<div class="live-badge">LIVE</div>':''}
+        <div class="trending-badge">🔥 Trending</div>
+        <img class='thumb' src="${normalThumb}">
+        <img class='hover-thumb' src="${hoverThumb}">
+        <div class='title'>${v.title}</div>
+        <div class='views'>👁️ ${v.views.toLocaleString()} views</div>
+        <div class="heart-icon ${isFavorited?'favorited':''}">❤️</div>
+    `;
 
-    const img=document.createElement("img");
-    img.src=video.thumb;
-    img.className="video-thumb";
-    card.appendChild(img);
+    const heart=card.querySelector(".heart-icon");
+    heart.onclick=(e)=>{
+        e.stopPropagation();
+        let favorites=JSON.parse(localStorage.getItem("favorites")||"[]");
+        if(favorites.includes(v.id)){ favorites=favorites.filter(id=>id!==v.id); heart.classList.remove("favorited"); }
+        else{ favorites.push(v.id); heart.classList.add("favorited"); }
+        localStorage.setItem("favorites",JSON.stringify(favorites));
+    };
 
-    const title=document.createElement("p");
-    title.className="title";
-    title.innerText=video.title;
-    card.appendChild(title);
-
-    const views=document.createElement("p");
-    views.innerText=video.views+" views";
-    views.style.fontSize="12px";
-    card.appendChild(views);
-
+    card.onclick=()=>openPlayer(v);
     return card;
 }
 
-function loadVideos(){
-    document.getElementById("featured-card").appendChild(createCard(featuredVideo));
-
-    videoData.forEach(v=>{
-        const gridId=v.category+"-grid";
-        const grid=document.getElementById(gridId);
-        if(grid){
-            grid.appendChild(createCard(v));
+// ---------- UPDATE VIEWS ----------
+function updateCardViews(videoId, views){
+    const cards = document.querySelectorAll(".video-card");
+    cards.forEach(card => {
+        const title = card.querySelector(".title").innerText;
+        const v = videoData.find(v => v.id === videoId && v.title === title);
+        if(v){
+            const viewEl = card.querySelector(".views");
+            viewEl.innerText = `👁️ ${views.toLocaleString()} views`;
         }
     });
 }
 
-function openPlayer(id){
-    const v=videoData.find(x=>x.id===id);
+// ---------- LOAD VIDEOS ----------
+function loadVideos(){
+    const featuredDiv=document.getElementById("featured");
+    featuredDiv.innerHTML=`
+        <img src="https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg" alt="Featured">
+        <div id="featured-title">${featuredVideo.title}</div>
+    `;
+    featuredDiv.onclick=()=>openPlayer(featuredVideo);
 
+    const recentGrid=document.getElementById("recent-grid");
+    videoData.filter(v=>v.category==="recent").forEach(v=>recentGrid.appendChild(createCard(v)));
+
+    const rec=document.getElementById("recommended-grid");
+    videoData.forEach(v=>{ if(recommendedVideos.includes(v)) rec.appendChild(createCard(v)); });
+
+    const fav=document.getElementById("favorites-grid");
+    videoData.filter(v=>v.category==="favorites").forEach(v=>fav.appendChild(createCard(v)));
+
+    const live=document.getElementById("live-grid");
+    live.appendChild(createCard(liveVideo,true));
+
+    const old=document.getElementById("older-grid");
+    videoData.filter(v=>v.category==="older").forEach(v=>old.appendChild(createCard(v)));
+}
+
+// ---------- OPEN PLAYER ----------
+function openPlayer(v){
     document.getElementById("home-page").style.display="none";
     document.getElementById("player-page").style.display="block";
+    document.getElementById("player").innerHTML=`<iframe src='https://www.youtube.com/embed/${v.id}' allowfullscreen></iframe>`;
+    document.getElementById("video-title").innerText=v.title;
 
-    const player=document.getElementById("video-player");
-    player.src=v.src;
+    const viewIncrement = setInterval(() => {
+        const increment = Math.floor(Math.random() * 2) + 1;
+        v.views += increment;
+        updateCardViews(v.id, v.views);
+    }, 1000);
 
-    document.getElementById("player-title").innerText=v.title;
-    document.getElementById("player-views").innerText=v.views+" views";
-
-    const viewIncrement=setInterval(()=>{
-        let inc=Math.floor(Math.random()*2)+1;
-        v.views+=inc;
-        document.getElementById("player-views").innerText=v.views+" views";
-    },1000);
-
-    document.getElementById("back-btn").onclick=()=>{
+    document.getElementById("back-btn").onclick = () => {
         clearInterval(viewIncrement);
         document.getElementById("player-page").style.display="none";
         document.getElementById("home-page").style.display="block";
+
+        recommendedVideos = shuffleArray([...videoData]).slice(0,3);
+        document.getElementById("recommended-grid").innerHTML='';
+        videoData.forEach(video => { 
+            if(recommendedVideos.includes(video)) document.getElementById("recommended-grid").appendChild(createCard(video)); 
+        });
     };
 }
 
-document.getElementById("search-bar").addEventListener("input",()=>{
-    const q=document.getElementById("search-bar").value.toLowerCase();
-    document.querySelectorAll(".video-card").forEach(card=>{
-        const t=card.querySelector(".title").innerText.toLowerCase();
-        card.style.display=t.includes(q)?"block":"none";
+// ---------- TRENDING LOGIC ----------
+setInterval(()=>{
+    videoData.forEach(v=>{
+        const cards = Array.from(document.querySelectorAll(".video-card")).filter(c=>c.querySelector(".title").innerText===v.title);
+        cards.forEach(card=>{
+            const badge = card.querySelector(".trending-badge");
+            if(badge){
+                const diff = v.views - (v.lastViews || 0);
+                badge.style.display = (diff >= 5) ? 'block' : 'none';
+                v.lastViews = v.views;
+            }
+        });
     });
+}, 5000);
+
+// ---------- SEARCH ----------
+document.getElementById("search-bar").addEventListener("input",()=>{
+    const query=document.getElementById("search-bar").value.toLowerCase();
+    const grids=["recent-grid","recommended-grid","favorites-grid","live-grid","older-grid"];
+    grids.forEach(gridId=>{
+        const grid=document.getElementById(gridId);
+        Array.from(grid.children).forEach(card=>{
+            const title=card.querySelector(".title").innerText.toLowerCase();
+            card.style.display=title.includes(query)?"block":"none";
+        });
+    });
+    document.getElementById("featured").style.display=featuredVideo.title.toLowerCase().includes(query)?"flex":"none";
 });
 
+// ---------- LIGHT/DARK TOGGLE ----------
 document.getElementById("theme-btn").onclick=()=>{
     document.body.classList.toggle("light");
     document.getElementById("theme-btn").innerText=document.body.classList.contains("light")?"🌑":"🌙";
 };
 
+// ---------- ABOUT TAB ----------
 document.getElementById("about-btn").onclick=()=>{
     document.getElementById("home-page").style.display="none";
     document.getElementById("about-page").style.display="block";
