@@ -41,11 +41,10 @@ body {
     height: auto;
     max-height: 120px;
     margin-bottom: 25px;
-    /* Logo effects */
     border-radius: 4px;
     border: 1px solid #00ff66;
     box-shadow: 0 0 12px #00ff66;
-    animation: pulse 1.5s infinite alternate; /* Subtle breathing animation */
+    animation: pulse 1.5s infinite alternate;
 }
 
 @keyframes pulse {
@@ -60,11 +59,10 @@ body {
     text-shadow: 0 0 10px #00ff66;
 }
 
-/* ---------------- MAIN CONTENT WRAPPER (NEW) ---------------- */
-/* The main content starts hidden and fades in */
+/* ---------------- MAIN CONTENT WRAPPER ---------------- */
 #main-content {
     opacity: 0;
-    transition: opacity 1s ease-in; /* For fading in */
+    transition: opacity 1s ease-in;
 }
 
 /* ---------------- HEADER ---------------- */
@@ -174,6 +172,7 @@ header {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
+    padding-bottom: 8px;
 }
 
 .video-card:hover {
@@ -215,6 +214,15 @@ header {
     color: #00ff66;
     text-shadow: 0 0 4px #00ff66;
     text-align: center;
+}
+
+/* ---------------- VIEW COUNTER ---------------- */
+.video-views {
+    text-align: center;
+    font-size: 14px;
+    color: #00ff66;
+    margin-top: 4px;
+    text-shadow: 0 0 4px #00ff66;
 }
 
 /* Favorites icon */
@@ -452,83 +460,64 @@ footer {
     </footer>
 </main>
 
-
 <script>
-// --- NEW LOADING SCRIPT ---
+// --- LOADING SCRIPT ---
 document.addEventListener('DOMContentLoaded', () => {
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
     const loadingPercentage = document.getElementById('loading-percentage');
     
-    // Initial setup: hide main content and prevent interaction
     mainContent.style.opacity = '0';
     mainContent.style.pointerEvents = 'none';
 
-    // --- Loading Logic ---
-    // Minimum time for the animation (Simulates fast loading, adjust as needed)
     const MIN_LOAD_TIME_MS = 2000; 
     const MAX_PERCENTAGE = 100;
     let currentPercentage = 0;
     const startTime = Date.now();
 
-    // Function to animate the percentage using requestAnimationFrame for smoothness
     function animateLoading() {
         const elapsedTime = Date.now() - startTime;
-        
-        // Calculate percentage based on time elapsed versus the minimum load time
         let targetPercentage = Math.min(
             Math.floor((elapsedTime / MIN_LOAD_TIME_MS) * MAX_PERCENTAGE), 
             MAX_PERCENTAGE
         );
-
         if (targetPercentage >= currentPercentage) {
             currentPercentage = targetPercentage;
             loadingPercentage.textContent = `${currentPercentage}%`;
         }
-        
         if (currentPercentage < MAX_PERCENTAGE) {
-            // Keep animating until 100%
             requestAnimationFrame(animateLoading);
         } else {
-            // Percentage hit 100%, now transition to main content
             setTimeout(() => {
-                // 1. Fade out splash screen
                 splashScreen.style.opacity = '0';
-                
-                // 2. Fade in main content and re-enable interaction
                 mainContent.style.opacity = '1';
                 mainContent.style.pointerEvents = 'auto'; 
-
-                // 3. Remove splash screen from DOM after transition completes (0.5s)
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                }, 500); 
-            }, 300); // Small delay to let user see 100% before transition
+                setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
+            }, 300);
         }
     }
-
-    // Start the loading animation
     animateLoading();
 });
-// --- END NEW LOADING SCRIPT ---
 
 // ---------------- DATA ----------------
 const favorites = [];
 const mostViewed = [
-    {id:"92y9uaQMIa8", title:"Most Viewed 1"},
-    {id:"kNkK_qclihc", title:"Most Viewed 2"},
-    {id:"Sn4dyr5v7m0", title:"Most Viewed 3"}
+    {id:"92y9uaQMIa8", title:"Most Viewed 1", views:0},
+    {id:"kNkK_qclihc", title:"Most Viewed 2", views:0},
+    {id:"Sn4dyr5v7m0", title:"Most Viewed 3", views:0}
 ];
 const olderVideos = [
-    {id:"ZiEd3RoiKtk", title:"Older Video 1"},
-    {id:"J-W0Vfrc26U", title:"Older Video 2"},
-    {id:"Uwwga_CiFqc", title:"Older Video 3"},
-    {id:"Sn4dyr5v7m0", title:"Older Video 4"}
+    {id:"ZiEd3RoiKtk", title:"Older Video 1", views:0},
+    {id:"J-W0Vfrc26U", title:"Older Video 2", views:0},
+    {id:"Uwwga_CiFqc", title:"Older Video 3", views:0},
+    {id:"Sn4dyr5v7m0", title:"Older Video 4", views:0}
 ];
 const watchHistory = [];
 
 // ---------------- VIDEO RENDER ----------------
 function createVideoCard(video) {
+    if(video.views === undefined) video.views = 0;
+
     const card = document.createElement('div');
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
@@ -538,11 +527,12 @@ function createVideoCard(video) {
             <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
         </div>
         <div class="video-title">${video.title}</div>
+        <div class="video-views">Views: ${video.views}</div>
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn">
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
+    const viewsDisplay = card.querySelector('.video-views');
 
-    // Click favorite
     favoriteBtn.addEventListener('click', e=>{
         e.stopPropagation();
         if(!favorites.find(v=>v.id===video.id)){
@@ -557,12 +547,14 @@ function createVideoCard(video) {
         }
     });
 
-    // Click to play
     card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
-        // Add to watch history if not already there
+
+        video.views++;
+        viewsDisplay.textContent = `Views: ${video.views}`;
+
         if(!watchHistory.find(v=>v.id===video.id)){
             watchHistory.push(video);
             renderRow('watch-history-row', watchHistory);
