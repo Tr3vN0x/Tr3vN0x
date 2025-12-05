@@ -461,6 +461,7 @@ let currentDMTarget = null;
 function getUserData(username) {
     const isOwner = username.toLowerCase() === 'tr3vn0x';
     // Retrieve profile data, defaulting to generic if user is new
+    // **KEY FOR SYNCHRONIZATION: Always fetch the latest from storage.**
     const pic = localStorage.getItem(`${username}_pic`) || DEFAULT_AVATAR;
     const bio = localStorage.getItem(`${username}_bio`) || (isOwner ? "Site owner and creator! Thanks for visiting." : "Hello! I am a user on Tr3vN0x's video site.");
     const verified = isOwner;
@@ -520,7 +521,8 @@ function renderChatHistory(){
     
     chatMessagesContainer.innerHTML = '';
     history.slice().reverse().forEach(msg=>{
-        const userData = getUserData(msg.username);
+        // **SYNCHRONIZATION: Always call getUserData here to fetch latest avatar/bio for chat display.**
+        const userData = getUserData(msg.username); 
         const div = document.createElement('div'); 
         div.className='chat-message';
         div.innerHTML = `
@@ -554,7 +556,7 @@ function renderChatHistory(){
     });
 }
 
-// --- DM SYSTEM LOGIC (UNMODIFIED) ---
+// --- DM SYSTEM LOGIC (FIXED) ---
 
 function getDMKey(user1, user2) {
     // Ensure consistent key regardless of order (alphabetical)
@@ -567,6 +569,20 @@ function getDMHistory(targetUsername) {
     return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
+/**
+ * Ensures a conversation pair exists in a user's inbox list.
+ * @param {string} user The user whose inbox is being updated.
+ * @param {string} targetUser The other user in the conversation.
+ */
+function updateInbox(user, targetUser) {
+    let inbox = JSON.parse(localStorage.getItem(`${user}_inbox`) || '[]');
+    if (!inbox.includes(targetUser)) {
+        inbox.push(targetUser);
+        localStorage.setItem(`${user}_inbox`, JSON.stringify(inbox));
+    }
+}
+
+
 function saveDMMessage(targetUsername, messageText) {
     const key = getDMKey(currentUsername, targetUsername);
     const history = getDMHistory(targetUsername);
@@ -578,12 +594,9 @@ function saveDMMessage(targetUsername, messageText) {
     history.push(newMessage);
     localStorage.setItem(key, JSON.stringify(history));
 
-    // Also track the conversation pair in a global inbox list
-    let inbox = JSON.parse(localStorage.getItem(`${currentUsername}_inbox`) || '[]');
-    if (!inbox.includes(targetUsername)) {
-        inbox.push(targetUsername);
-        localStorage.setItem(`${currentUsername}_inbox`, JSON.stringify(inbox));
-    }
+    // **FIX: Update the inbox list for BOTH the sender and the receiver.**
+    updateInbox(currentUsername, targetUsername); // Sender's inbox
+    updateInbox(targetUsername, currentUsername); // Receiver's inbox
 }
 
 function renderDMInbox() {
@@ -599,6 +612,9 @@ function renderDMInbox() {
         inboxView.innerHTML = '<p style="text-align:center; color:#888; padding: 20px;">No conversations yet. Start a DM from a user\'s profile!</p>';
         return;
     }
+
+    // Sort inbox by most recent message (or just by name for simplicity)
+    inboxTargets.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
     inboxTargets.forEach(target => {
         const history = getDMHistory(target);
@@ -649,7 +665,7 @@ function renderDMChatMessages(targetUsername) {
 }
 
 
-// --- PROFILE HANDLERS (UNMODIFIED) ---
+// --- PROFILE HANDLERS (SYNCHRONIZATION CHECKED) ---
 
 function toggleAuthModal(show) {
     document.getElementById('auth-overlay').style.display = show ? 'flex' : 'none';
@@ -673,6 +689,7 @@ function toggleProfileModal(show) {
 }
 
 function openUserProfileModal(username) {
+    // **SYNCHRONIZATION: This call ensures we always get the LATEST profile data.**
     const userData = getUserData(username);
     
     document.getElementById('other-profile-title').innerText = `${username}'s Profile`;
@@ -839,6 +856,8 @@ profileLink.addEventListener('click', (e) => { e.preventDefault(); if (isLoggedI
 document.getElementById('close-profile').addEventListener('click', () => toggleProfileModal(false));
 document.getElementById('edit-profile-button').addEventListener('click', () => { profileView.style.display = 'none'; profileEditForm.style.display = 'block'; });
 document.getElementById('cancel-edit-button').addEventListener('click', () => { profileEditForm.style.display = 'none'; profileView.style.display = 'block'; });
+
+// **UPDATED PROFILE EDIT SUBMIT LISTENER**
 document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const newPicUrl = document.getElementById('edit-pic-url').value.trim();
@@ -853,7 +872,10 @@ document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
     profileEditForm.style.display = 'none';
     profileView.style.display = 'block';
     toggleProfileModal(false); 
+    
+    // **SYNCHRONIZATION FIX 2: Re-render chat immediately to update the user's avatar/username in the chat.**
     renderChatHistory(); 
+    
     alert('Profile updated successfully!');
 });
 
