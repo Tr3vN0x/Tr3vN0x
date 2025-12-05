@@ -5,90 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x - Red & Black Video Site</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #000;
-        color: #fff;
-    }
-    .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
-    h1, h2 { color: #e53935; border-bottom: 2px solid #444; padding-bottom: 5px; margin-top: 30px; }
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background-color: #111;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        position: sticky;
-        top:0;
-        z-index: 100;
-    }
-    .search-container input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #444;
-        border-radius: 4px;
-        background-color: #222;
-        color: #fff;
-    }
-    .floating-auth { padding: 8px 15px; background-color: #e53935; color: white; border-radius: 4px; cursor: pointer; }
-    #featured, .video-card { background-color: #1c1c1c; border-radius: 8px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 8px rgba(255,0,0,0.1); }
-    #featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
-    .featured-player { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 15px; }
-    .featured-player iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:none; }
-    .video-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
-    .video-card { overflow:hidden; cursor:pointer; transition: transform 0.2s, box-shadow 0.2s; }
-    .video-card:hover { transform: translateY(-3px); box-shadow:0 4px 10px rgba(255,0,0,0.4); }
-    .thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background-color:#222; }
-    .thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
-    .video-info { padding:10px; }
-    .video-info h3 { margin:0 0 5px 0; line-height:1.4; color:#fff; font-size:1em; }
-    .video-info p { margin:0; font-size:0.85em; color:#bbb; }
-    #auth-overlay {
-        position: fixed;
-        top:0; left:0; width:100%; height:100%;
-        background-color: rgba(0,0,0,0.8);
-        display:flex; justify-content:center; align-items:center;
-        z-index:1000;
-        display:none;
-    }
-    .auth-modal {
-        background-color:#111; border-radius:8px; width:90%; max-width:400px;
-        box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff;
-    }
-    .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-    .modal-header h3 { margin:0; }
-    .tabs { display:flex; border-bottom:1px solid #444; margin-bottom:15px; }
-    .tab { flex-grow:1; text-align:center; padding:10px 15px; cursor:pointer; font-weight:bold; color:#bbb; }
-    .tab.active { border-bottom:2px solid #e53935; color:#e53935; }
-    .form-group { margin-bottom:15px; }
-    .form-group label { display:block; margin-bottom:5px; font-weight:600; font-size:0.9em; color:#fff; }
-    .form-group input { width:100%; padding:10px; border:1px solid #444; border-radius:4px; background-color:#222; color:#fff; box-sizing:border-box; }
-    .password-container { display:flex; }
-    .password-container input { flex-grow:1; border-right:none; border-radius:4px 0 0 4px; }
-    .password-container button { background-color:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
-    button[type="submit"] { width:100%; padding:10px; background-color:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
+body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; }
+.container { max-width:1200px; margin:20px auto; padding:0 20px; }
+h1,h2 { color:#e53935; border-bottom:2px solid #444; padding-bottom:5px; margin-top:30px; }
+header { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#111; box-shadow:0 2px 4px rgba(0,0,0,0.5); position:sticky; top:0; z-index:100; }
+.search-container input { width:100%; padding:8px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; }
+.floating-auth { padding:8px 15px; background:#e53935; color:white; border-radius:4px; cursor:pointer; }
+#featured, .video-card { background:#1c1c1c; border-radius:8px; padding:20px; margin-top:20px; box-shadow:0 4px 8px rgba(255,0,0,0.1); }
+#featured h2 { margin-top:0; border-bottom:none; font-size:1.5em; }
+.featured-player { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-bottom:15px; }
+.featured-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+.video-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.video-card { overflow:hidden; cursor:pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.video-card:hover { transform:translateY(-3px); box-shadow:0 4px 10px rgba(255,0,0,0.4); }
+.thumbnail-placeholder { position:relative; padding-bottom:56.25%; height:0; background:#222; }
+.thumbnail-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+.video-info { padding:10px; }
+.video-info h3 { margin:0 0 5px 0; line-height:1.4; color:#fff; font-size:1em; }
+.video-info p { margin:0; font-size:0.85em; color:#bbb; }
+#auth-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:1000; display:none; }
+.auth-modal { background:#111; border-radius:8px; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(255,0,0,0.5); padding:20px; color:#fff; }
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.modal-header h3 { margin:0; }
+.tabs { display:flex; border-bottom:1px solid #444; margin-bottom:15px; }
+.tab { flex-grow:1; text-align:center; padding:10px 15px; cursor:pointer; font-weight:bold; color:#bbb; }
+.tab.active { border-bottom:2px solid #e53935; color:#e53935; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:block; margin-bottom:5px; font-weight:600; font-size:0.9em; color:#fff; }
+.form-group input { width:100%; padding:10px; border:1px solid #444; border-radius:4px; background:#222; color:#fff; box-sizing:border-box; }
+.password-container { display:flex; }
+.password-container input { flex-grow:1; border-right:none; border-radius:4px 0 0 4px; }
+.password-container button { background:#333; border:1px solid #444; color:#fff; border-left:none; padding:10px; cursor:pointer; border-radius:0 4px 4px 0; }
+button[type="submit"] { width:100%; padding:10px; background:#e53935; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:1em; margin-top:10px; }
 </style>
 </head>
 <body>
 
 <header>
     <h1>Tr3vN0x</h1>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search videos...">
-    </div>
-    <div class="auth-controls">
-        <div class="floating-auth" id="floating-auth"><span id="floating-auth-text">Login</span></div>
-    </div>
+    <div class="search-container"><input type="text" id="searchInput" placeholder="Search videos..."></div>
+    <div class="auth-controls"><div class="floating-auth" id="floating-auth"><span id="floating-auth-text">Login</span></div></div>
 </header>
 
 <div class="container">
     <section id="featured">
         <h2>Featured: I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY!)</h2>
-        <div class="featured-player">
-            <iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe>
-        </div>
+        <div class="featured-player"><iframe src="https://www.youtube.com/embed/92y9uaQMIa8" allowfullscreen></iframe></div>
     </section>
 
     <section>
@@ -139,6 +101,7 @@
 </div>
 
 <script>
+// Elements
 const overlay = document.getElementById('auth-overlay');
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
@@ -147,21 +110,17 @@ const signupTab = document.getElementById('signup-tab');
 const floatingAuth = document.getElementById('floating-auth');
 const closeAuth = document.getElementById('close-auth');
 
-// Show login/signup overlay
+// Show overlay
 floatingAuth.addEventListener('click', ()=>{ overlay.style.display='flex'; });
-
-// Close overlay
 closeAuth.addEventListener('click', ()=>{ overlay.style.display='none'; });
 
 // Toggle tabs
 loginTab.addEventListener('click', ()=>{
-    loginForm.style.display='block';
-    signupForm.style.display='none';
+    loginForm.style.display='block'; signupForm.style.display='none';
     loginTab.classList.add('active'); signupTab.classList.remove('active');
 });
 signupTab.addEventListener('click', ()=>{
-    signupForm.style.display='block';
-    loginForm.style.display='none';
+    signupForm.style.display='block'; loginForm.style.display='none';
     signupTab.classList.add('active'); loginTab.classList.remove('active');
 });
 
@@ -169,35 +128,49 @@ signupTab.addEventListener('click', ()=>{
 document.querySelectorAll('.toggle-pass').forEach(btn=>{
     btn.addEventListener('click', ()=>{
         const input = document.getElementById(btn.dataset.target);
-        input.type = input.type === 'password' ? 'text':'password';
+        input.type = input.type==='password'?'text':'password';
     });
 });
 
-// Simulated signup/login with localStorage
+// Get users
+function getUsers(){ return JSON.parse(localStorage.getItem('tr3vn0x_users')||'[]'); }
+
+// Signup
 signupForm.addEventListener('submit', e=>{
     e.preventDefault();
-    const email = document.getElementById('signup-email').value;
+    const username = document.getElementById('signup-username').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
     const password = document.getElementById('signup-password').value;
-    const username = document.getElementById('signup-username').value;
-    localStorage.setItem('tr3vn0x_user', JSON.stringify({email,password,username}));
-    alert('Signup successful! Please log in.');
-    signupForm.reset();
-    loginTab.click();
+    if(!username||!email||!password){ alert('All fields required.'); return; }
+    let users = getUsers();
+    if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){ alert('Username already taken.'); return; }
+    if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ alert('Email already registered.'); return; }
+    users.push({username,email,password});
+    localStorage.setItem('tr3vn0x_users', JSON.stringify(users));
+    alert('Signup successful! You can now log in.');
+    signupForm.reset(); loginTab.click();
 });
 
+// Login
 loginForm.addEventListener('submit', e=>{
     e.preventDefault();
-    const email = document.getElementById('login-email').value;
+    const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
-    const user = JSON.parse(localStorage.getItem('tr3vn0x_user'));
-    if(user && user.email===email && user.password===password){
-        alert('Login successful! Welcome '+user.username);
+    const users = getUsers();
+    const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase() && u.password===password);
+    if(user){
+        localStorage.setItem('tr3vn0x_current', JSON.stringify(user));
+        floatingAuth.innerText = 'Signed in as ' + user.username;
         overlay.style.display='none';
-        floatingAuth.innerText = user.username;
+        loginForm.reset();
     } else alert('Invalid email or password.');
 });
 
-// Make video cards playable
+// Check current user on load
+const currentUser = JSON.parse(localStorage.getItem('tr3vn0x_current'));
+if(currentUser){ floatingAuth.innerText = 'Signed in as ' + currentUser.username; }
+
+// Video cards playable
 document.querySelectorAll('.video-card').forEach(card=>{
     card.addEventListener('click', ()=>{
         const videoId = card.dataset.video;
@@ -205,5 +178,6 @@ document.querySelectorAll('.video-card').forEach(card=>{
     });
 });
 </script>
+
 </body>
 </html>
