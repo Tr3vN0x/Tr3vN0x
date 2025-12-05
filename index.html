@@ -236,7 +236,11 @@ let videoData = [
     { title:"Older Video 5", id:"ZiEd3RoiKtk", views:0, category:'older', verified:false }
 ];
 
-// --- FUNCTIONS (kept the same logic) ---
+let isLoggedIn = false;
+let currentUsername = '';
+let isVerified = false; // NEW: State for verified badge in chat
+
+// --- FUNCTIONS ---
 
 function createVideoCard(video){
     const card = document.createElement('div');
@@ -270,13 +274,10 @@ function renderVideoRows(){
     });
 }
 
-renderVideoRows();
-
 // Chat rendering with verified badges
 function renderChatHistory(){
     // Note: Since this is a static HTML/JS structure, I'll simulate some initial chat for display purposes
-    // In a real application, you would fetch this from a server.
-    const initialHistory = [
+    const initialHistory = [
         { username: 'Tr3vN0x', message: 'Welcome to the stream! Smash that like button! 🔥', verified: true },
         { username: 'GamerDude42', message: 'Dead By Daylight is so fun! When are you playing more?', verified: false },
         { username: 'VerifiedFan', message: 'Loving the new site design! Looks clean!', verified: true }
@@ -288,22 +289,17 @@ function renderChatHistory(){
     history.slice().reverse().forEach(msg=>{
         const div = document.createElement('div'); div.className='chat-message';
         div.innerHTML = `<span class='chat-username'>${msg.username}${msg.verified?` <img src='${VERIFIED_ICON}' class='verified-badge'>`:''}</span>: <span class='chat-text'>${msg.message}</span>`;
-        chatMessagesContainer.prepend(div); // Use prepend to keep history flowing top-down, but new messages at bottom
+        chatMessagesContainer.prepend(div); 
     });
     // Scroll to bottom (latest messages)
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
 
-renderChatHistory(); // Render initial chat
-
-// --- AUTH LOGIC (Optional, but included for completeness) ---
-let isLoggedIn = false;
-let currentUsername = '';
+// --- AUTH LOGIC FIXES AND VERIFICATION IMPLEMENTATION ---
 
 function toggleAuthModal(show) {
     overlay.style.display = show ? 'flex' : 'none';
     if (show) {
-        // Reset to login tab when opening
         loginTab.classList.add('active');
         signupTab.classList.remove('active');
         loginForm.style.display = 'block';
@@ -313,54 +309,47 @@ function toggleAuthModal(show) {
 
 function handleLogin(e) {
     e.preventDefault();
-    // Simplified login/signup for static demo
-    const email = document.getElementById('login-email').value;
-    // In a real app: validate credentials with a server
+    // Use the email input to extract a username
+    const email = document.getElementById('login-email').value; 
+    
     isLoggedIn = true;
     currentUsername = email.split('@')[0];
+    
+    // Check for the specific username for verification
+    if (currentUsername.toLowerCase() === 'tr3vn0x') {
+        isVerified = true;
+    } else {
+        isVerified = false;
+    }
+    
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('login-form').reset();
-    alert(`Logged in as ${currentUsername}!`);
+    alert(`Logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
 function handleSignup(e) {
     e.preventDefault();
-    // Simplified login/signup for static demo
     currentUsername = document.getElementById('signup-username').value;
-    // In a real app: create user account on server
+    
+    // Check for the specific username for verification
+    if (currentUsername.toLowerCase() === 'tr3vn0x') {
+        isVerified = true;
+    } else {
+        isVerified = false;
+    }
+    
     isLoggedIn = true;
     updateAuthState();
     toggleAuthModal(false);
     document.getElementById('signup-form').reset();
-    alert(`Account created and logged in as ${currentUsername}!`);
-}
-
-function updateAuthState() {
-    if (isLoggedIn) {
-        floatingAuth.innerText = currentUsername;
-        floatingAuth.className = 'floating-auth logged-in';
-        floatingAuth.removeEventListener('click', openLogin);
-        floatingAuth.addEventListener('click', handleLogout);
-        
-        chatInput.disabled = false;
-        chatInput.placeholder = 'Say something cool...';
-        sendButton.disabled = false;
-    } else {
-        floatingAuth.innerText = 'Login';
-        floatingAuth.className = 'floating-auth logged-out';
-        floatingAuth.removeEventListener('click', handleLogout);
-        floatingAuth.addEventListener('click', openLogin);
-        
-        chatInput.disabled = true;
-        chatInput.placeholder = 'Login to chat...';
-        sendButton.disabled = true;
-    }
+    alert(`Account created and logged in as ${currentUsername}! ${isVerified ? '(Verified)' : ''}`);
 }
 
 function handleLogout() {
     isLoggedIn = false;
     currentUsername = '';
+    isVerified = false; // Reset verification status
     updateAuthState();
     alert('Logged out.');
 }
@@ -369,8 +358,56 @@ function openLogin() {
     toggleAuthModal(true);
 }
 
-// Event Listeners for Auth
-floatingAuth.addEventListener('click', openLogin);
+function updateAuthState() {
+    // Clear existing listeners to prevent duplicates/errors
+    floatingAuth.removeEventListener('click', openLogin);
+    floatingAuth.removeEventListener('click', handleLogout);
+
+    if (isLoggedIn) {
+        floatingAuth.innerText = currentUsername;
+        floatingAuth.className = 'floating-auth logged-in';
+        floatingAuth.addEventListener('click', handleLogout); // Logged in: clicking logs out
+        
+        chatInput.disabled = false;
+        chatInput.placeholder = 'Say something cool...';
+        sendButton.disabled = false;
+    } else {
+        floatingAuth.innerText = 'Login';
+        floatingAuth.className = 'floating-auth logged-out';
+        floatingAuth.addEventListener('click', openLogin); // Logged out: clicking opens modal
+        
+        chatInput.disabled = true;
+        chatInput.placeholder = 'Login to chat...';
+        sendButton.disabled = true;
+    }
+}
+
+
+// Chat Send Logic
+sendButton.addEventListener('click', () => {
+    const messageText = chatInput.value.trim();
+    if (messageText && isLoggedIn) {
+        const newMessage = {
+            username: currentUsername,
+            message: messageText,
+            verified: isVerified // Use the current verification status
+        };
+        
+        // Add to local storage (simulated persistence)
+        const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
+        history.push(newMessage);
+        localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
+        
+        renderChatHistory();
+        chatInput.value = '';
+    }
+});
+
+// --- INITIALIZATION ---
+renderVideoRows();
+renderChatHistory(); // Render initial chat
+
+// Event Listeners for Auth Modal
 closeAuth.addEventListener('click', () => toggleAuthModal(false));
 loginTab.addEventListener('click', () => {
     loginTab.classList.add('active');
@@ -402,34 +439,13 @@ document.querySelectorAll('.toggle-pass').forEach(button => {
     });
 });
 
-// Chat Send Logic
-sendButton.addEventListener('click', () => {
-    const messageText = chatInput.value.trim();
-    if (messageText && isLoggedIn) {
-        const newMessage = {
-            username: currentUsername,
-            message: messageText,
-            verified: false // New users are not verified
-        };
-        
-        // Add to local storage (simulated persistence)
-        const history = JSON.parse(localStorage.getItem('tr3vn0x_chat') || '[]');
-        history.push(newMessage);
-        localStorage.setItem('tr3vn0x_chat', JSON.stringify(history));
-        
-        // Re-render chat (or just append)
-        renderChatHistory();
-        chatInput.value = '';
-    }
-});
-
 chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         sendButton.click();
     }
 });
 
-updateAuthState(); // Initialize auth state on load
+updateAuthState(); // Initialize auth state on load and set up the floating button listener
 </script>
 </body>
 </html>
