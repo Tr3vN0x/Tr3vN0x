@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -551,108 +551,6 @@ header {
 }
 
 
-/* ---------------- GLOBAL CHAT WIDGET (NEW STYLES) ---------------- */
-#chat-widget {
-    position: fixed;
-    bottom: 80px; /* Space above the scroll-to-top button */
-    right: 30px;
-    width: 300px;
-    height: 400px;
-    background: #0a0a0a;
-    border: 2px solid #00ff66;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 102, 0.7);
-    z-index: 95;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-#chat-header {
-    background: #003300;
-    color: white;
-    padding: 10px;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #00ff66;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-#chat-header span {
-    color: #ff00ff;
-}
-
-#chat-body {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 0.9em;
-    line-height: 1.4;
-    background: #000;
-}
-
-/* Scrollbar styling for chat body */
-#chat-body::-webkit-scrollbar {
-    width: 6px;
-}
-#chat-body::-webkit-scrollbar-thumb {
-    background: #00ff66;
-    border-radius: 3px;
-}
-#chat-body::-webkit-scrollbar-track {
-    background: #111;
-}
-
-#chat-input-container {
-    display: flex;
-    border-top: 1px solid #00ff66;
-}
-
-#chat-input {
-    flex-grow: 1;
-    padding: 10px;
-    border: none;
-    background: #0d0d0d;
-    color: #00ff66;
-    font-family: 'Consolas', monospace;
-    outline: none;
-    font-size: 0.9em;
-}
-
-#send-btn {
-    padding: 10px 15px;
-    background: #003300;
-    color: #00ff66;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
-}
-
-#send-btn:hover {
-    background: #005500;
-}
-
-.chat-message {
-    margin-bottom: 8px;
-    word-wrap: break-word;
-}
-.chat-message .user-name {
-    font-weight: bold;
-    color: #33ff99; /* User color */
-}
-.chat-message .bot-name {
-    font-weight: bold;
-    color: #ff00ff; /* Bot color */
-}
-.chat-message .timestamp {
-    font-size: 0.75em;
-    opacity: 0.5;
-    margin-left: 5px;
-}
-
 /* ---------------- SCROLL TO TOP BUTTON ---------------- */
 #scroll-to-top {
     display: none; 
@@ -812,12 +710,6 @@ footer {
         font-size: 1.2em;
         width: 100%;
     }
-    #chat-widget {
-        width: 90%;
-        right: 5%;
-        bottom: 10px;
-        height: 300px;
-    }
 }
 </style>
 </head>
@@ -931,18 +823,6 @@ footer {
         <iframe src="" allowfullscreen></iframe>
     </div>
     
-    <div id="chat-widget">
-        <div id="chat-header" onclick="toggleChat()">
-            GLOBAL CHAT <span>(2 Active)</span>
-        </div>
-        <div id="chat-body">
-            </div>
-        <div id="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Type a message..." maxlength="120">
-            <button id="send-btn">SEND</button>
-        </div>
-    </div>
-    
     <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
 
     <footer>
@@ -951,127 +831,6 @@ footer {
 </main>
 
 <script>
-// ---------------- GLOBAL CHAT LOGIC ----------------
-
-// Function to get the current user's unique identifier (simulated)
-function getChatUsername() {
-    let username = sessionStorage.getItem('chatUsername');
-    if (!username) {
-        // Generate a random ID for this session
-        username = 'Guest_' + Math.floor(Math.random() * 9000 + 1000);
-        sessionStorage.setItem('chatUsername', username);
-    }
-    return username;
-}
-
-const BOT_NAME = 'Tr3vN0x_BOT';
-const CHAT_LOG_KEY = 'globalChatLog';
-const MAX_MESSAGES = 50; 
-
-let chatLog = getPersistentData(CHAT_LOG_KEY, [
-    { name: BOT_NAME, text: 'Welcome to the global node chat! Messages are saved locally.', isBot: true, timestamp: new Date().toLocaleTimeString('en-US') },
-]);
-
-function renderChat() {
-    const chatBody = document.getElementById('chat-body');
-    chatBody.innerHTML = '';
-    
-    chatLog.slice(-MAX_MESSAGES).forEach(msg => {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message';
-        
-        let nameClass = msg.isBot ? 'bot-name' : 'user-name';
-        let name = msg.isBot ? BOT_NAME : getChatUsername();
-        
-        msgDiv.innerHTML = `<span class="${nameClass}">[${name}]</span>: ${msg.text} <span class="timestamp">${msg.timestamp}</span>`;
-        chatBody.appendChild(msgDiv);
-    });
-    
-    // Auto-scroll to the bottom
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function sendMessage() {
-    const chatInput = document.getElementById('chat-input');
-    const messageText = chatInput.value.trim();
-
-    if (messageText === '') return;
-
-    const newMessage = {
-        name: getChatUsername(),
-        text: messageText,
-        isBot: false,
-        timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-    };
-    
-    chatLog.push(newMessage);
-    setPersistentData(CHAT_LOG_KEY, chatLog);
-    renderChat();
-
-    chatInput.value = '';
-    
-    // --- Simulated Bot Reply ---
-    setTimeout(() => {
-        simulateBotReply(messageText);
-    }, Math.floor(Math.random() * 2000) + 1000); // Wait 1-3 seconds for bot
-}
-
-function simulateBotReply(userMessage) {
-    let replyText;
-    const lowerMsg = userMessage.toLowerCase();
-    
-    if (lowerMsg.includes('video') || lowerMsg.includes('watch')) {
-        replyText = "Did you check out the new content? Let me know your favorite!";
-    } else if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
-        replyText = "Greetings, user. Welcome to the Tr3vN0x node.";
-    } else if (lowerMsg.includes('code') || lowerMsg.includes('html')) {
-        replyText = "This entire node is running on pure HTML/CSS/JS. Pretty cool, right?";
-    } else {
-        const responses = [
-            "Processing transmission...",
-            "Thanks for the message! Stand by for the next video upload.",
-            "Protocol engaged. Your message has been noted.",
-            "System analysis complete. Everything operational.",
-            "Query received. Enjoy the website!",
-        ];
-        replyText = responses[Math.floor(Math.random() * responses.length)];
-    }
-
-    const botMessage = {
-        name: BOT_NAME,
-        text: replyText,
-        isBot: true,
-        timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-    };
-
-    chatLog.push(botMessage);
-    setPersistentData(CHAT_LOG_KEY, chatLog);
-    renderChat();
-}
-
-function toggleChat() {
-    const chatBody = document.getElementById('chat-body');
-    const chatInputContainer = document.getElementById('chat-input-container');
-    
-    if (chatBody.style.display === 'none') {
-        chatBody.style.display = 'block';
-        chatInputContainer.style.display = 'flex';
-        document.getElementById('chat-widget').style.height = '400px'; 
-    } else {
-        chatBody.style.display = 'none';
-        chatInputContainer.style.display = 'none';
-        document.getElementById('chat-widget').style.height = '40px'; 
-    }
-}
-
-document.getElementById('send-btn').addEventListener('click', sendMessage);
-document.getElementById('chat-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-
 // ---------------- DATA PERSISTENCE UTILITIES ----------------
 
 function getPersistentData(key, defaultValue = []) {
@@ -1161,7 +920,6 @@ function getRandomVideos(count = 5) {
 
 function updateActiveUserCount() {
     const userCountElement = document.getElementById('active-user-count');
-    const chatHeaderSpan = document.querySelector('#chat-header span');
     const min = 5; 
     const max = 15; 
     
@@ -1178,7 +936,6 @@ function updateActiveUserCount() {
     }
 
     userCountElement.textContent = `Active: ${activeUsers}`;
-    chatHeaderSpan.textContent = `(${Math.max(2, activeUsers - 5)} Active)`; // Simulated chat active users
 }
 
 updateActiveUserCount();
@@ -1424,7 +1181,6 @@ function initialRender() {
     renderRow('older-videos-row', olderVideos);
     renderFavorites(); // Renders persistent favorites
     renderRow('watch-history-row', watchHistory); // Renders persistent history
-    renderChat(); // Renders persistent chat log
 }
 
 // ---------------- SCROLL TO TOP LOGIC ----------------
