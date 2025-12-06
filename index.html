@@ -302,15 +302,22 @@ header {
     padding: 25px;
     border-radius: 12px;
     text-align: center;
-    width: 90%;
-    max-width: 400px;
+    width: 95%; /* Increased width */
+    max-width: 800px; /* Increased max-width for dashboard view */
+    height: 90%;
+    max-height: 650px;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #003300;
     box-shadow: 0 0 20px #00ff66;
 }
 
-#profile-modal h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-direction: column;
 }
 
 .profile-picture {
@@ -382,6 +389,86 @@ header {
     font-weight: bold;
 }
 
+/* --- DASHBOARD STYLES (NEW) --- */
+.dashboard-nav {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #003300;
+    margin-bottom: 15px;
+}
+
+.dashboard-nav button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    color: #00ff66;
+    font-size: 1em;
+    font-family: 'Consolas', monospace;
+    cursor: pointer;
+    transition: 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.dashboard-nav button:hover {
+    color: #33ff99;
+    background-color: #1a1a1a;
+}
+
+.dashboard-nav button.active {
+    border-bottom-color: #00ff66;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #0d0d0d;
+}
+
+.dashboard-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns inside modal */
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.modal-video-card {
+    background: #1a1a1a;
+    border: 1px solid #004400;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-video-card:hover {
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.modal-video-card img {
+    width: 80px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.modal-video-card .title {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #00ff66;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
@@ -430,14 +517,12 @@ footer {
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 1200px) {
-    /* Switch to 3 columns on smaller desktops/large tablets */
     .video-row {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 900px) {
-    /* Switch to 2 columns on tablets */
     .video-row {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -446,7 +531,6 @@ footer {
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: center; }
     .search-bar { width: 90%; }
-    /* Horizontal Layout on Mobile */
     .row-container { flex-direction: column; padding: 15px 10px; }
     .row-label { 
         writing-mode: horizontal-tb; 
@@ -454,12 +538,11 @@ footer {
         min-width: auto; 
         padding-bottom: 5px;
         border-right: none;
-        border-bottom: 2px solid #004400; /* New separator */
+        border-bottom: 2px solid #004400;
         text-align: center;
         margin-bottom: 10px;
     }
     .video-row { 
-        /* Back to horizontal scroll for mobile to keep the cards a decent size */
         display: flex;
         gap: 15px;
         overflow-x: auto;
@@ -467,7 +550,16 @@ footer {
         grid-template-columns: none;
     }
     .video-card {
-        min-width: 240px; /* Fixed width for better horizontal scrolling on mobile */
+        min-width: 240px;
+    }
+    
+    /* Profile modal on mobile */
+    #profile-modal .modal-content {
+        max-width: 90%;
+        padding: 15px;
+    }
+    .dashboard-list {
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
 }
 </style>
@@ -530,15 +622,49 @@ footer {
     <div id="profile-modal">
         <div class="modal-content">
             <div class="close-btn">&times;</div>
-            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
-            <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
-            <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
-            <button class="follow-btn" id="follow-btn">Follow</button>
-            <div class="links">
-                <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
-                <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
-                <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+            
+            <div class="profile-header">
+                <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
+                <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
+                <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
+                <button class="follow-btn" id="follow-btn">Follow</button>
+                <div class="links">
+                    <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
+                    <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
+                    <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
+                </div>
             </div>
+
+            <div class="dashboard-nav">
+                <button class="tab-btn active" data-tab="account">Account</button>
+                <button class="tab-btn" data-tab="favorites">Favorites</button>
+                <button class="tab-btn" data-tab="history">History</button>
+            </div>
+            
+            <div class="dashboard-content">
+                
+                <div id="account-tab" class="tab-pane">
+                    <h3>Account Status: Operational</h3>
+                    <p>User ID: 0xTr3vN0x007</p>
+                    <p>Last Login: 2025-12-06</p>
+                </div>
+                
+                <div id="favorites-tab" class="tab-pane hidden">
+                    <h3>Your Saved Videos:</h3>
+                    <div id="modal-favorites-list" class="dashboard-list">
+                        </div>
+                    <p id="no-favorites-message" style="color:#00ff66; display:none;">No videos in your favorites list.</p>
+                </div>
+                
+                <div id="history-tab" class="tab-pane hidden">
+                    <h3>Recent Watch History:</h3>
+                    <div id="modal-history-list" class="dashboard-list">
+                        </div>
+                    <p id="no-history-message" style="color:#00ff66; display:none;">Your watch history is empty.</p>
+                </div>
+                
+            </div>
+            
         </div>
     </div>
 
@@ -587,20 +713,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ---------------- PERSISTENT VIEW COUNT SIMULATION ----------------
-/**
- * Since a real database cannot be used in static HTML/JS, 
- * this simulates persistent views using localStorage.
- * * @param {string} videoId - The unique ID of the video (including suffix like _dup)
- * @param {number} initialBaseViews - The starting view count if it's the first visit
- * @returns {number} The current persistent view count
- */
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
     let views = localStorage.getItem(key);
     
     if (views === null) {
-        // If first time loading, use the provided baseViews as the starting point
-        views = initialBaseViews;
+        views = initialBaseViews; 
         localStorage.setItem(key, views);
     }
     return parseInt(views);
@@ -614,9 +732,8 @@ function updatePersistentViews(videoId, currentViews) {
 // ---------------- DATA SETUP ----------------
 
 const favorites = [];
+const watchHistory = [];
 
-// .map is used to iterate over the videos and assign the initial view count 
-// Base views are set to simulate realistic initial numbers.
 const newestVideos = [
     {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250},
     {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890},
@@ -626,7 +743,6 @@ const mostViewed = [
     {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000},
     {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000},
     {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000},
-    // Use unique IDs for duplicates to allow individual view tracking
     {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000}, 
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
@@ -640,9 +756,85 @@ const olderVideos = [
     {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200},
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
-const watchHistory = [];
 
-// ---------------- VIDEO RENDER ----------------
+// ---------------- VIDEO RENDER UTILITIES ----------------
+
+/**
+ * Creates a minimal video card for display inside the profile modal.
+ */
+function createModalVideoCard(video) {
+    const card = document.createElement('div');
+    card.className = 'modal-video-card';
+    const thumbnailId = video.id.replace(/_dup$|_old$/, '');
+    
+    card.innerHTML = `
+        <img src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
+        <div class="title">${video.title}</div>
+    `;
+
+    card.addEventListener('click', () => {
+        // Close profile and open video modal
+        document.getElementById('profile-modal').style.display = 'none';
+        
+        const videoModal = document.getElementById('video-modal');
+        // Use the base video ID for the embed URL 
+        videoModal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
+        videoModal.style.display = 'flex';
+
+        // Update view count and history when watched from the modal
+        updateVideoWatchData(video);
+    });
+    
+    return card;
+}
+
+/**
+ * Renders an array of videos into the designated container within the profile modal.
+ */
+function renderModalList(listId, videos) {
+    const list = document.getElementById(listId);
+    list.innerHTML = '';
+    const messageId = listId.includes('favorites') ? 'no-favorites-message' : 'no-history-message';
+    
+    if (videos.length === 0) {
+        document.getElementById(messageId).style.display = 'block';
+    } else {
+        document.getElementById(messageId).style.display = 'none';
+        videos.forEach(v => {
+            list.appendChild(createModalVideoCard(v));
+        });
+    }
+}
+
+/**
+ * Handles view count and watch history updates when a video is played.
+ */
+function updateVideoWatchData(video) {
+     // 1. Update the local video object's view count
+    video.views++;
+    
+    // 2. Update the persistent store (localStorage simulation)
+    updatePersistentViews(video.id, video.views);
+
+    // 3. Update the display on ALL visible cards that show this video ID
+    document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
+        el.textContent = `Views: ${video.views.toLocaleString()}`;
+    });
+    
+    // 4. Update watch history 
+    if(!watchHistory.find(v=>v.id===video.id)){
+        watchHistory.unshift({...video}); // Add a clone to keep the current view count in the history list
+    } else {
+         // Move to the front if already in history
+         const index = watchHistory.findIndex(v=>v.id===video.id);
+         const item = watchHistory.splice(index, 1)[0];
+         watchHistory.unshift(item);
+    }
+    renderRow('watch-history-row', watchHistory);
+}
+
+
+// ---------------- VIDEO CARD RENDERER (Original, slightly modified) ----------------
 function createVideoCard(video) {
     if(video.views === undefined) video.views = 0;
 
@@ -650,7 +842,6 @@ function createVideoCard(video) {
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
     
-    // Clean up ID for thumbnail source: remove simulated suffix if it exists (e.g., _dup, _old)
     const thumbnailId = video.id.replace(/_dup$|_old$/, '');
 
     card.innerHTML = `
@@ -684,7 +875,8 @@ function createVideoCard(video) {
             favorites.splice(index,1);
             favoriteBtn.classList.remove('favorited');
         }
-        renderFavorites(); // Re-render favorites row
+        renderFavorites(); // Re-render main favorites row
+        renderModalList('modal-favorites-list', favorites); // Re-render modal list
         // Update the button state across all copies of this video
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
              if (favorites.find(v => v.id === video.id)) {
@@ -697,28 +889,9 @@ function createVideoCard(video) {
 
     card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
-        // Use the base video ID for the embed URL 
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
         modal.style.display = 'flex';
-
-        // **** PERSISTENT VIEW COUNT LOGIC ****
-        
-        // 1. Update the local video object's view count
-        video.views++;
-        
-        // 2. Update the persistent store (localStorage simulation)
-        updatePersistentViews(video.id, video.views);
-
-        // 3. Update the display on ALL visible cards that show this video ID
-        document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
-            el.textContent = `Views: ${video.views.toLocaleString()}`;
-        });
-        
-        // 4. Update watch history 
-        if(!watchHistory.find(v=>v.id===video.id)){
-            watchHistory.unshift({...video}); // Add a clone to keep the current view count in the history list
-        }
-        renderRow('watch-history-row', watchHistory);
+        updateVideoWatchData(video);
     });
     return card;
 }
@@ -726,16 +899,15 @@ function createVideoCard(video) {
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
-    // Ensure we render the videos with their latest views
     videos.forEach(v=>{
         row.appendChild(createVideoCard(v));
     });
 }
 
 function renderFavorites(){
-    // Re-render the favorites row based on the current favorites array
     renderRow('favorites-row', favorites);
 }
+
 
 // ---------------- INITIAL RENDER ----------------
 renderRow('newest-videos-row', newestVideos);
@@ -744,28 +916,28 @@ renderRow('older-videos-row', olderVideos);
 renderFavorites();
 renderRow('watch-history-row', watchHistory);
 
-// ---------------- MODAL LOGIC ----------------
-const modal = document.getElementById('video-modal');
-modal.querySelector('.close-btn').addEventListener('click', ()=>{
-    modal.querySelector('iframe').src = '';
-    modal.style.display = 'none';
+
+// ---------------- MODAL PLAYER LOGIC ----------------
+const videoModal = document.getElementById('video-modal');
+videoModal.querySelector('.close-btn').addEventListener('click', ()=>{
+    videoModal.querySelector('iframe').src = '';
+    videoModal.style.display = 'none';
 });
-modal.addEventListener('click', e=>{
-    if(e.target === modal){
-        modal.querySelector('iframe').src = '';
-        modal.style.display = 'none';
+videoModal.addEventListener('click', e=>{
+    if(e.target === videoModal){
+        videoModal.querySelector('iframe').src = '';
+        videoModal.style.display = 'none';
     }
 });
 
-// ---------------- SEARCH ----------------
+
+// ---------------- SEARCH LOGIC ----------------
 const searchInput = document.querySelector('.search-bar');
 searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase();
     
-    // Combine all videos for search filtering
     const allVideos = [...newestVideos, ...mostViewed, ...olderVideos, ...favorites, ...watchHistory];
     
-    // Create an object to hold unique video IDs as keys and their corresponding objects
     const uniqueVideosMap = new Map();
     allVideos.forEach(video => {
         if (!uniqueVideosMap.has(video.id)) {
@@ -773,28 +945,21 @@ searchInput.addEventListener('input', () => {
         }
     });
 
-    // Convert map values back to an array for filtering
     const uniqueVideos = Array.from(uniqueVideosMap.values());
     const filteredVideos = uniqueVideos.filter(v=>v.title.toLowerCase().includes(query));
 
-    // For demonstration, we'll only display filtered videos in the 'Most Viewed' row.
-    // In a real app, you might show a dedicated 'Search Results' page.
     if (query.length > 0) {
-        // Hide all rows except the header
         document.querySelectorAll('.row-container').forEach(row => row.style.display = 'none');
         
-        // Temporarily display results in the Most Viewed container
         const searchResultsRow = document.querySelector('.row-container:nth-of-type(2)');
         searchResultsRow.style.display = 'flex';
         searchResultsRow.querySelector('.row-label').textContent = 'Search Results';
         renderRow('most-viewed-row', filteredVideos);
 
     } else {
-        // Show all rows when the search bar is empty
         document.querySelectorAll('.row-container').forEach(row => row.style.display = 'flex');
         document.querySelector('.row-container:nth-of-type(2) .row-label').textContent = 'Most Viewed';
         
-        // Re-render all original rows
         renderRow('newest-videos-row', newestVideos);
         renderRow('most-viewed-row', mostViewed);
         renderRow('older-videos-row', olderVideos);
@@ -804,9 +969,52 @@ searchInput.addEventListener('input', () => {
 });
 
 
-// ---------------- PROFILE MODAL ----------------
+// ---------------- PROFILE MODAL DASHBOARD LOGIC (NEW) ----------------
 const profileModal = document.getElementById('profile-modal');
-document.getElementById('open-profile').addEventListener('click',()=> profileModal.style.display='flex');
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanes = document.querySelectorAll('.tab-pane');
+
+function showTab(tabId) {
+    tabPanes.forEach(pane => {
+        pane.classList.add('hidden');
+        pane.style.display = 'none';
+    });
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+
+    const targetPane = document.getElementById(tabId + '-tab');
+    if (targetPane) {
+        targetPane.classList.remove('hidden');
+        targetPane.style.display = 'block';
+    }
+
+    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+    if (targetBtn) {
+        targetBtn.classList.add('active');
+    }
+    
+    // Rerender lists when switching tabs
+    if (tabId === 'favorites') {
+        renderModalList('modal-favorites-list', favorites);
+    } else if (tabId === 'history') {
+        renderModalList('modal-history-list', watchHistory);
+    }
+}
+
+// Event listeners for tab switching
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        showTab(btn.getAttribute('data-tab'));
+    });
+});
+
+// Opening the profile modal
+document.getElementById('open-profile').addEventListener('click',()=>{
+    profileModal.style.display='flex';
+    // Ensure the default tab is shown on open
+    showTab('account'); 
+});
+
+// Closing logic (unchanged)
 document.querySelector('#profile-modal .close-btn').addEventListener('click',()=> profileModal.style.display='none');
 profileModal.addEventListener('click', e => { if(e.target===profileModal) profileModal.style.display='none'; });
 document.addEventListener('keydown', e => { if(e.key==='Escape' && profileModal.style.display === 'flex') profileModal.style.display='none'; });
