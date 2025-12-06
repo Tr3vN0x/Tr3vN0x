@@ -1,79 +1,9 @@
-Yes, let's fix the search bar\! Adding a functioning search feature will make your video site much more usable.
-
-We will integrate the search bar into the header and implement JavaScript to filter the video rows dynamically based on the user's input.
-
-Here is the complete, updated HTML, CSS, and JavaScript.
-
-## 💻 Code Update: Search Bar Implementation
-
-### 1\. HTML Update
-
-We're replacing the current `<div class="header-actions">` block with one that includes the `<input>` element.
-
-```html
-<header>
-    <div class="logo-container">
-        </div>
-
-    <div class="header-actions">
-        <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
-        <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
-        <input type="text" class="search-bar" id="video-search-bar" placeholder="Search videos...">
-    </div>
-</header>
-```
-
-### 2\. CSS Update
-
-We need to add the styling for the new `search-bar` class, which was previously removed.
-
-```css
-/* --- NEW SEARCH BAR STYLES --- */
-.search-bar {
-    background: #111;
-    border: 1px solid #004400;
-    border-radius: 6px; /* Matches button radius */
-    padding: 10px 14px; /* Matches button padding */
-    width: 200px;
-    color: #00ff66;
-    caret-color: #00ff66;
-    transition: 0.3s;
-    font-family: 'Consolas', monospace;
-    font-size: 1em;
-}
-
-.search-bar::placeholder { color: #004400; }
-.search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
-
-/* Existing .header-actions ensures alignment */
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-```
-
-### 3\. JavaScript Logic
-
-The JavaScript now includes the search filtering logic. When the user types, it:
-
-1.  Collects all unique video data.
-2.  Filters videos whose titles include the search query.
-3.  Hides all existing video rows.
-4.  Renders the filtered results into the "Most Viewed" row, temporarily relabeling it as "**Search Results**."
-5.  If the search is cleared, it restores all original rows.
-
------
-
-## ⚙️ The Complete Code
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x Official Website - Cyber Edition</title>
+<title>Tr3vN0x Official Website<title>
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -179,7 +109,7 @@ header {
     box-shadow: 0 0 8px #00ff66;
 }
 
-/* --- SOCIAL BUTTONS AND SEARCH CONTAINER --- */
+/* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
     display: flex;
     align-items: center;
@@ -205,23 +135,6 @@ header {
     box-shadow: 0 0 10px #00ff66;
     color: #33ff99;
 }
-
-/* --- NEW SEARCH BAR STYLES --- */
-.search-bar {
-    background: #111;
-    border: 1px solid #004400;
-    border-radius: 6px; 
-    padding: 10px 14px; 
-    width: 200px;
-    color: #00ff66;
-    caret-color: #00ff66;
-    transition: 0.3s;
-    font-family: 'Consolas', monospace;
-    font-size: 1em;
-}
-
-.search-bar::placeholder { color: #004400; }
-.search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
 
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
@@ -415,14 +328,11 @@ footer {
         gap: 10px;
         margin-top: 10px;
         width: 100%;
-        justify-content: flex-end; 
+        justify-content: flex-end; /* Keep buttons to the right */
     }
-    .social-button, .search-bar {
+    .social-button {
         padding: 8px 12px;
         font-size: 1em;
-    }
-    .search-bar {
-        width: 150px;
     }
 }
 
@@ -432,7 +342,7 @@ footer {
         order: 3; 
         margin-top: 15px;
         width: 95%;
-        justify-content: space-around; 
+        justify-content: space-around; /* Distribute buttons on mobile */
     }
     .row-container { flex-direction: column; padding: 15px 10px; }
     .row-label { 
@@ -479,31 +389,30 @@ footer {
         <div class="header-actions">
             <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
             <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
-            <input type="text" class="search-bar" id="video-search-bar" placeholder="Search videos...">
         </div>
     </header>
     
-    <div class="row-container" id="newest-row-container">
+    <div class="row-container">
         <div class="row-label">Newest Videos</div>
         <div class="video-row" id="newest-videos-row"></div>
     </div>
 
-    <div class="row-container" id="most-viewed-row-container">
-        <div class="row-label" id="most-viewed-row-label">Most Viewed</div>
+    <div class="row-container">
+        <div class="row-label">Most Viewed</div>
         <div class="video-row" id="most-viewed-row"></div>
     </div>
 
-    <div class="row-container" id="favorites-row-container">
+    <div class="row-container">
         <div class="row-label">Favorites</div>
         <div class="video-row" id="favorites-row"></div>
     </div>
 
-    <div class="row-container" id="older-row-container">
+    <div class="row-container">
         <div class="row-label">Older Videos</div>
         <div class="video-row" id="older-videos-row"></div>
     </div>
 
-    <div class="row-container" id="history-row-container">
+    <div class="row-container">
         <div class="row-label">Watch History</div>
         <div class="video-row" id="watch-history-row"></div>
     </div>
@@ -579,7 +488,6 @@ function updatePersistentViews(videoId, currentViews) {
 const favorites = [];
 const watchHistory = [];
 
-// Video data definitions
 const newestVideos = [
     {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250},
     {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890},
@@ -601,8 +509,6 @@ const olderVideos = [
     {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000},
     {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200},
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
-
-const allVideos = [...newestVideos, ...mostViewed, ...olderVideos];
 
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
@@ -709,14 +615,11 @@ function renderFavorites(){
 
 
 // ---------------- INITIAL RENDER ----------------
-function renderAllRows() {
-    renderRow('newest-videos-row', newestVideos);
-    renderRow('most-viewed-row', mostViewed);
-    renderRow('older-videos-row', olderVideos);
-    renderFavorites();
-    renderRow('watch-history-row', watchHistory);
-}
-renderAllRows();
+renderRow('newest-videos-row', newestVideos);
+renderRow('most-viewed-row', mostViewed);
+renderRow('older-videos-row', olderVideos);
+renderFavorites();
+renderRow('watch-history-row', watchHistory);
 
 
 // ---------------- MODAL PLAYER LOGIC ----------------
@@ -731,47 +634,7 @@ videoModal.addEventListener('click', e=>{
         videoModal.style.display = 'none';
     }
 });
-
-
-// ---------------- SEARCH LOGIC (NEW) ----------------
-const searchInput = document.getElementById('video-search-bar');
-const allRowContainers = document.querySelectorAll('.row-container');
-const mostViewedRowLabel = document.getElementById('most-viewed-row-label');
-const mostViewedRowContainer = document.getElementById('most-viewed-row-container');
-
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-    
-    // Create a map to ensure we only search through unique videos
-    const uniqueVideosMap = new Map();
-    allVideos.forEach(video => {
-        if (!uniqueVideosMap.has(video.id)) {
-            uniqueVideosMap.set(video.id, video);
-        }
-    });
-
-    const uniqueVideos = Array.from(uniqueVideosMap.values());
-    const filteredVideos = uniqueVideos.filter(v => v.title.toLowerCase().includes(query));
-
-    if (query.length > 0) {
-        // HIDE ALL ROWS
-        allRowContainers.forEach(row => row.style.display = 'none');
-        
-        // SHOW SEARCH ROW (using the Most Viewed container)
-        mostViewedRowContainer.style.display = 'flex';
-        mostViewedRowLabel.textContent = 'Search Results';
-        
-        renderRow('most-viewed-row', filteredVideos);
-
-    } else {
-        // RESTORE ALL ROWS
-        allRowContainers.forEach(row => row.style.display = 'flex');
-        mostViewedRowLabel.textContent = 'Most Viewed';
-        renderAllRows(); // Rerender all rows to restore original content
-    }
-});
 </script>
 
 </body>
 </html>
-```
