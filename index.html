@@ -71,7 +71,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px; /* Increased padding */
+    padding: 15px 30px; 
     background: #0d0d0d;
     border-bottom: 2px solid #003300;
     position: sticky;
@@ -86,16 +86,15 @@ header {
     gap: 12px;
 }
 
-/* NEW STYLES FOR THE ADDED IMAGE */
 .side-image {
-    width: 60px; /* Medium size */
-    height: 60px; /* Medium size */
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 50%; /* Make it circular for a cool look */
+    border-radius: 50%; 
     border: 2px solid #00ff66;
-    margin-right: 15px; /* Spacing between the new image and the logo */
+    margin-right: 15px; 
     box-shadow: 0 0 10px #00ff66;
-    animation: rotate 8s linear infinite; /* Optional: adds a cyber feel */
+    animation: rotate 8s linear infinite;
 }
 
 @keyframes rotate {
@@ -110,20 +109,32 @@ header {
     box-shadow: 0 0 8px #00ff66;
 }
 
-.search-bar {
-    background: #111;
-    border: 1px solid #004400;
-    border-radius: 8px;
-    padding: 8px 14px;
-    width: 250px;
-    color: #00ff66;
-    caret-color: #00ff66;
-    transition: 0.3s;
-    margin: 8px 0;
+/* --- NEW SOCIAL/PROFILE BUTTONS CONTAINER --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spacing between buttons */
 }
 
-.search-bar::placeholder { color: #004400; }
-.search-bar:focus { border-color: #00ff66; box-shadow: 0 0 12px #00ff66; outline: none; }
+.social-button {
+    text-decoration: none;
+    color: #00ff66;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: 1px solid #003300;
+    border-radius: 6px;
+    transition: 0.3s;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    background: #111;
+}
+
+.social-button:hover {
+    background: #003300;
+    border-color: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    color: #33ff99;
+}
 
 .profile-btn {
     width: 60px;
@@ -136,6 +147,7 @@ header {
     transition: 0.3s;
     padding: 4px;
     background: #111;
+    border: 1px solid #003300; /* Added border for consistency */
 }
 
 .profile-btn img {
@@ -149,16 +161,17 @@ header {
 .profile-btn:hover {
     background: #003300;
     box-shadow: 0 0 12px #00ff66;
+    border-color: #00ff66;
 }
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
 .row-container {
     display: flex;
     align-items: flex-start;
-    padding: 30px 20px; /* Increased vertical padding for space */
-    gap: 20px; /* Increased gap between label and video row */
-    max-width: 1400px; /* Max width for central content */
-    margin: 0 auto; /* Center the content */
+    padding: 30px 20px;
+    gap: 20px;
+    max-width: 1400px; 
+    margin: 0 auto; 
 }
 
 .row-label {
@@ -173,15 +186,14 @@ header {
     justify-content: center;
     align-items: center;
     padding: 10px 0;
-    border-right: 2px solid #004400; /* Subtle separator */
+    border-right: 2px solid #004400; 
 }
 
 .video-row {
-    /* KEY CHANGE: Use Grid for 4 columns */
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-    gap: 20px; /* Gap between video cards */
-    overflow-x: hidden; /* Remove horizontal scroll on desktop */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    overflow-x: hidden; 
     padding-bottom: 0;
     width: 100%;
 }
@@ -206,15 +218,15 @@ header {
 }
 
 .video-card:hover {
-    transform: translateY(-5px); /* Lift up effect for "cool" */
+    transform: translateY(-5px); 
     box-shadow: 0 5px 20px rgba(0, 255, 102, 0.4);
-    border-color: #00ff66; /* Highlight border */
+    border-color: #00ff66; 
 }
 
 .thumbnail-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%; 
     height: 0;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
@@ -254,7 +266,6 @@ header {
     -webkit-box-orient: vertical;
 }
 
-/* ---------------- VIEW COUNTER ---------------- */
 .video-views {
     text-align: left;
     font-size: 0.85em;
@@ -264,7 +275,6 @@ header {
     text-shadow: none;
 }
 
-/* Favorites icon */
 .favorite-btn {
     position: absolute;
     top: 8px;
@@ -302,8 +312,8 @@ header {
     padding: 25px;
     border-radius: 12px;
     text-align: center;
-    width: 95%; /* Increased width */
-    max-width: 800px; /* Increased max-width for dashboard view */
+    width: 95%; 
+    max-width: 800px; 
     height: 90%;
     max-height: 650px;
     display: flex;
@@ -389,7 +399,7 @@ header {
     font-weight: bold;
 }
 
-/* --- DASHBOARD STYLES (NEW) --- */
+/* --- DASHBOARD STYLES --- */
 .dashboard-nav {
     display: flex;
     justify-content: center;
@@ -430,7 +440,7 @@ header {
 
 .dashboard-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns inside modal */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
     padding: 10px 0;
 }
@@ -526,11 +536,25 @@ footer {
     .video-row {
         grid-template-columns: repeat(2, 1fr);
     }
+    .header-actions {
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .social-button {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: center; }
-    .search-bar { width: 90%; }
+    .header-actions {
+        order: 3; /* Push buttons to the bottom of the column */
+        margin-top: 15px;
+        width: 95%;
+    }
     .row-container { flex-direction: column; padding: 15px 10px; }
     .row-label { 
         writing-mode: horizontal-tb; 
@@ -559,7 +583,7 @@ footer {
         padding: 15px;
     }
     .dashboard-list {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -582,10 +606,13 @@ footer {
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
 
-        <input type="text" class="search-bar" placeholder="Search videos...">
-
-        <div class="profile-btn" id="open-profile">
-            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
+        <div class="header-actions">
+            <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
+            <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
+            
+            <div class="profile-btn" id="open-profile">
+                <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
+            </div>
         </div>
     </header>
     
@@ -624,7 +651,7 @@ footer {
             <div class="close-btn">&times;</div>
             
             <div class="profile-header">
-                <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVv5XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
+                <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVzP_XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
                 <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
                 <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
                 <button class="follow-btn" id="follow-btn">Follow</button>
@@ -834,7 +861,7 @@ function updateVideoWatchData(video) {
 }
 
 
-// ---------------- VIDEO CARD RENDERER (Original, slightly modified) ----------------
+// ---------------- VIDEO CARD RENDERER ----------------
 function createVideoCard(video) {
     if(video.views === undefined) video.views = 0;
 
@@ -931,45 +958,7 @@ videoModal.addEventListener('click', e=>{
 });
 
 
-// ---------------- SEARCH LOGIC ----------------
-const searchInput = document.querySelector('.search-bar');
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    
-    const allVideos = [...newestVideos, ...mostViewed, ...olderVideos, ...favorites, ...watchHistory];
-    
-    const uniqueVideosMap = new Map();
-    allVideos.forEach(video => {
-        if (!uniqueVideosMap.has(video.id)) {
-            uniqueVideosMap.set(video.id, video);
-        }
-    });
-
-    const uniqueVideos = Array.from(uniqueVideosMap.values());
-    const filteredVideos = uniqueVideos.filter(v=>v.title.toLowerCase().includes(query));
-
-    if (query.length > 0) {
-        document.querySelectorAll('.row-container').forEach(row => row.style.display = 'none');
-        
-        const searchResultsRow = document.querySelector('.row-container:nth-of-type(2)');
-        searchResultsRow.style.display = 'flex';
-        searchResultsRow.querySelector('.row-label').textContent = 'Search Results';
-        renderRow('most-viewed-row', filteredVideos);
-
-    } else {
-        document.querySelectorAll('.row-container').forEach(row => row.style.display = 'flex');
-        document.querySelector('.row-container:nth-of-type(2) .row-label').textContent = 'Most Viewed';
-        
-        renderRow('newest-videos-row', newestVideos);
-        renderRow('most-viewed-row', mostViewed);
-        renderRow('older-videos-row', olderVideos);
-        renderFavorites();
-        renderRow('watch-history-row', watchHistory);
-    }
-});
-
-
-// ---------------- PROFILE MODAL DASHBOARD LOGIC (NEW) ----------------
+// ---------------- PROFILE MODAL DASHBOARD LOGIC ----------------
 const profileModal = document.getElementById('profile-modal');
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanes = document.querySelectorAll('.tab-pane');
@@ -992,7 +981,6 @@ function showTab(tabId) {
         targetBtn.classList.add('active');
     }
     
-    // Rerender lists when switching tabs
     if (tabId === 'favorites') {
         renderModalList('modal-favorites-list', favorites);
     } else if (tabId === 'history') {
@@ -1000,21 +988,17 @@ function showTab(tabId) {
     }
 }
 
-// Event listeners for tab switching
 tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         showTab(btn.getAttribute('data-tab'));
     });
 });
 
-// Opening the profile modal
 document.getElementById('open-profile').addEventListener('click',()=>{
     profileModal.style.display='flex';
-    // Ensure the default tab is shown on open
     showTab('account'); 
 });
 
-// Closing logic (unchanged)
 document.querySelector('#profile-modal .close-btn').addEventListener('click',()=> profileModal.style.display='none');
 profileModal.addEventListener('click', e => { if(e.target===profileModal) profileModal.style.display='none'; });
 document.addEventListener('keydown', e => { if(e.key==='Escape' && profileModal.style.display === 'flex') profileModal.style.display='none'; });
