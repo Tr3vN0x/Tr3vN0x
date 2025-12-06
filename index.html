@@ -188,6 +188,15 @@ header {
 
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
+/* Added a new row for search results */
+.search-results-row {
+    display: none; /* Initially hidden */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    padding-bottom: 0;
+    width: 100%;
+}
+
 .row-container {
     display: flex;
     align-items: flex-start;
@@ -365,27 +374,27 @@ footer {
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 1200px) {
-    .video-row {
+    .video-row, .search-results-row {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 900px) {
-    .video-row {
+    .video-row, .search-results-row {
         grid-template-columns: repeat(2, 1fr);
     }
     .header-actions {
         gap: 10px;
         margin-top: 10px;
         width: 100%;
-        justify-content: flex-end; /* Keep buttons to the right */
+        justify-content: flex-end; 
     }
     .social-button {
         padding: 8px 12px;
         font-size: 1em;
     }
     .search-container {
-        max-width: 100%; /* Allows search bar to use more space */
+        max-width: 100%; 
     }
 }
 
@@ -397,7 +406,7 @@ footer {
         order: 3; 
         margin-top: 15px;
         width: 95%;
-        justify-content: space-around; /* Distribute buttons on mobile */
+        justify-content: space-around; 
     }
     .row-container { flex-direction: column; padding: 15px 10px; }
     .row-label { 
@@ -410,7 +419,7 @@ footer {
         text-align: center;
         margin-bottom: 10px;
     }
-    .video-row { 
+    .video-row, .search-results-row { 
         display: flex;
         gap: 15px;
         overflow-x: auto;
@@ -442,40 +451,50 @@ footer {
         </div>
 
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search videos...">
+            <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
             <button id="search-btn" onclick="handleSearch()">GO</button>
         </div>
+
         <div class="header-actions">
             <div class="social-button" onclick="shareWebsite()">Share</div>
             <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
             <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
         </div>
     </header>
-    
-    <div class="row-container">
-        <div class="row-label">Newest Videos</div>
-        <div class="video-row" id="newest-videos-row"></div>
+
+    <div class="row-container" id="search-container-row">
+        <div class="row-label" id="search-label">Search Results</div>
+        <div class="search-results-row" id="search-results-row">
+            </div>
+        <div class="row-label" id="no-results-message" style="display:none; color: #ff0000; font-size: 1.5em; text-align: center; width: 100%;">No videos found matching your search.</div>
+    </div>
+    <div class="original-rows" id="original-rows">
+        <div class="row-container">
+            <div class="row-label">Newest Videos</div>
+            <div class="video-row" id="newest-videos-row"></div>
+        </div>
+
+        <div class="row-container">
+            <div class="row-label">Most Viewed</div>
+            <div class="video-row" id="most-viewed-row"></div>
+        </div>
+
+        <div class="row-container">
+            <div class="row-label">Favorites</div>
+            <div class="video-row" id="favorites-row"></div>
+        </div>
+
+        <div class="row-container">
+            <div class="row-label">Older Videos</div>
+            <div class="video-row" id="older-videos-row"></div>
+        </div>
+
+        <div class="row-container">
+            <div class="row-label">Watch History</div>
+            <div class="video-row" id="watch-history-row"></div>
+        </div>
     </div>
 
-    <div class="row-container">
-        <div class="row-label">Most Viewed</div>
-        <div class="video-row" id="most-viewed-row"></div>
-    </div>
-
-    <div class="row-container">
-        <div class="row-label">Favorites</div>
-        <div class="video-row" id="favorites-row"></div>
-    </div>
-
-    <div class="row-container">
-        <div class="row-label">Older Videos</div>
-        <div class="video-row" id="older-videos-row"></div>
-    </div>
-
-    <div class="row-container">
-        <div class="row-label">Watch History</div>
-        <div class="video-row" id="watch-history-row"></div>
-    </div>
 
     <div id="video-modal">
         <div class="close-btn">&times;</div>
@@ -488,16 +507,84 @@ footer {
 </main>
 
 <script>
-// --- SEARCH HANDLER ---
+// ---------------- DATA SETUP (Consolidated for search) ----------------
+
+function getPersistentViews(videoId, initialBaseViews) {
+    const key = `views_${videoId}`;
+    let views = localStorage.getItem(key);
+    if (views === null) {
+        views = initialBaseViews; 
+        localStorage.setItem(key, views);
+    }
+    return parseInt(views);
+}
+
+const favorites = [];
+const watchHistory = [];
+
+const allVideos = [
+    // Newest
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
+    // Most Viewed
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk_dup", title:"TR3VN0X FUNNY MOMENTS COMPILATION", baseViews: 99000, category: 'most_viewed'}, 
+    // Older Videos
+    {id:"ZiEd3RoiKtk_old", title:"A VETERAN'S GUIDE TO ROBLOX", baseViews: 99000, category: 'older'},
+    {id:"J-W0Vfrc26U_old", title:"My First Day on YouTube!", baseViews: 52000, category: 'older'},
+    {id:"Uwwga_CiFqc_old", title:"I Tried To Make A Viral TikTok", baseViews: 75000, category: 'older'},
+    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
+    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
+    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
+    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
+
+const newestVideos = allVideos.filter(v => v.category === 'newest');
+const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
+const olderVideos = allVideos.filter(v => v.category === 'older');
+
+
+// --- SEARCH HANDLER (Functional!) ---
 function handleSearch() {
-    const query = document.getElementById('search-input').value.trim();
-    if (query) {
-        // Placeholder functionality: In a real app, you would filter your video data here.
-        alert(`Searching for: "${query}"\n\n(Note: This is a placeholder function. In a full application, this would filter the videos.)`);
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const searchResultsRow = document.getElementById('search-results-row');
+    const searchContainerRow = document.getElementById('search-container-row');
+    const originalRows = document.getElementById('original-rows');
+    const noResultsMessage = document.getElementById('no-results-message');
+
+    if (query.length > 0) {
+        // 1. Hide original rows and show search row
+        originalRows.style.display = 'none';
+        searchContainerRow.style.display = 'flex';
+        searchResultsRow.style.display = 'grid'; // Use grid for results
+
+        // 2. Filter videos based on the query
+        const filteredVideos = allVideos.filter(video => 
+            video.title.toLowerCase().includes(query)
+        );
+
+        // 3. Render results
+        if (filteredVideos.length > 0) {
+            renderRow('search-results-row', filteredVideos);
+            noResultsMessage.style.display = 'none';
+        } else {
+            // No results found
+            renderRow('search-results-row', []);
+            noResultsMessage.style.display = 'block';
+        }
     } else {
-        alert("Please enter a search term.");
+        // If the query is empty, hide search results and show original rows
+        searchContainerRow.style.display = 'none';
+        originalRows.style.display = 'block';
+        searchResultsRow.style.display = 'none';
+        noResultsMessage.style.display = 'none';
+        // Re-render the original rows to ensure everything is visible
+        initialRender();
     }
 }
+
 document.getElementById('search-input').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         handleSearch();
@@ -561,50 +648,6 @@ async function shareWebsite() {
         alert("To share, please copy the link in your browser's address bar.");
     }
 }
-
-// ---------------- PERSISTENT VIEW COUNT SIMULATION ----------------
-function getPersistentViews(videoId, initialBaseViews) {
-    const key = `views_${videoId}`;
-    let views = localStorage.getItem(key);
-    
-    if (views === null) {
-        views = initialBaseViews; 
-        localStorage.setItem(key, views);
-    }
-    return parseInt(views);
-}
-
-function updatePersistentViews(videoId, currentViews) {
-    const key = `views_${videoId}`;
-    localStorage.setItem(key, currentViews);
-}
-
-// ---------------- DATA SETUP ----------------
-
-const favorites = [];
-const watchHistory = [];
-
-const newestVideos = [
-    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250},
-    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890},
-].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
-
-const mostViewed = [
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000},
-    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000}, 
-].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
-
-const olderVideos = [
-    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000},
-    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000},
-    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000},
-    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000},
-    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500},
-    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000},
-    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200},
-].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
@@ -709,13 +752,16 @@ function renderFavorites(){
     renderRow('favorites-row', favorites);
 }
 
+function initialRender() {
+    renderRow('newest-videos-row', newestVideos);
+    renderRow('most-viewed-row', mostViewed);
+    renderRow('older-videos-row', olderVideos);
+    renderFavorites();
+    renderRow('watch-history-row', watchHistory);
+}
 
 // ---------------- INITIAL RENDER ----------------
-renderRow('newest-videos-row', newestVideos);
-renderRow('most-viewed-row', mostViewed);
-renderRow('older-videos-row', olderVideos);
-renderFavorites();
-renderRow('watch-history-row', watchHistory);
+initialRender();
 
 
 // ---------------- MODAL PLAYER LOGIC ----------------
