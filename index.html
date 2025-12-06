@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -13,109 +13,7 @@ body {
     background: #0a0a0a;
     color: #00ff66;
     scroll-behavior: smooth;
-}
-
-/* ---------------- SPLASH SCREEN ---------------- */
-#splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    transition: opacity 0.7s ease-out;
-}
-
-.splash-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    border: 2px solid #00ff66;
-    box-shadow: 0 0 30px rgba(0, 255, 102, 0.7);
-    background: #0d0d0d;
-}
-
-/* Typing Effect Container */
-#loading-console {
-    width: 100%;
-    height: 100px;
-    border: 1px solid #003300;
-    background: #000;
-    padding: 15px;
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    overflow: hidden;
-    white-space: pre-wrap; /* Allows line breaks */
-}
-
-/* Typing Effect Cursor */
-#loading-console::after {
-    content: '_';
-    opacity: 1;
-    animation: blink-cursor 0.7s step-end infinite;
-    font-weight: bold;
-}
-
-@keyframes blink-cursor {
-    from, to { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Progress Bar Container */
-#progress-bar-container {
-    width: 100%;
-    height: 15px;
-    background: #1a1a1a;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 5px #00ff66;
-    margin-bottom: 15px;
-}
-
-#loading-bar {
-    height: 100%;
-    width: 0%;
-    background: #00ff66;
-    transition: width 0.1s linear;
-}
-
-/* Percentage Display */
-#loading-percentage {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #00ff66;
-    text-shadow: 0 0 10px #00ff66;
-}
-
-.splash-logo {
-    max-width: 90%;
-    height: auto;
-    max-height: 120px;
-    margin-bottom: 25px;
-    border-radius: 4px;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 12px #00ff66;
-    animation: pulse 1.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); box-shadow: 0 0 8px #00ff66; }
-    to { transform: scale(1.05); box-shadow: 0 0 16px #00ff66; }
-}
-
-
-/* ---------------- MAIN CONTENT WRAPPER ---------------- */
-#main-content {
-    opacity: 0;
-    transition: opacity 1s ease-in;
+    /* Main content is now visible immediately */
 }
 
 /* ---------------- HEADER ---------------- */
@@ -715,19 +613,7 @@ footer {
 </head>
 <body>
 
-<div id="splash-screen">
-    <div class="splash-content">
-        <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Tr3vN0x Logo" class="splash-logo">
-        <div id="loading-console"></div>
-        <div id="progress-bar-container">
-            <div id="loading-bar"></div>
-        </div>
-        <div id="loading-percentage">0%</div>
-    </div>
-</div>
-
 <main id="main-content">
-
     <header>
         <div class="active-users-container">
             <div class="active-dot"></div>
@@ -984,81 +870,9 @@ document.getElementById('search-input').addEventListener('keypress', function (e
     }
 });
 
-// ---------------- ADVANCED LOADING SCRIPT ----------------
+// ---------------- ADVANCED LOADING SCRIPT (REMOVED) ----------------
+// The loading script is now replaced with a simple initialRender call below.
 
-const LOADING_MESSAGES = [
-    "INITIATING CORE SYSTEM ACCESS...",
-    "ACCESSING DATASTREAM: TR3VN0X_VIDEOS...",
-    "DECRYPTING CRYPTO KEY: 0x00FF66...",
-    "ESTABLISHING SECURE CONNECTION...",
-    "LOADING CACHED DATA: FAVORITES & HISTORY...",
-    "RENDERING UI GRID STRUCTURE...",
-    "SYNC COMPLETE. PROCEED TO MAIN INTERFACE.",
-];
-
-function runAdvancedLoading() {
-    const splashScreen = document.getElementById('splash-screen');
-    const mainContent = document.getElementById('main-content');
-    const loadingConsole = document.getElementById('loading-console');
-    const loadingPercentage = document.getElementById('loading-percentage');
-    const loadingBar = document.getElementById('loading-bar');
-    
-    mainContent.style.opacity = '0';
-    mainContent.style.pointerEvents = 'none';
-
-    const TOTAL_STEPS = LOADING_MESSAGES.length;
-    let currentStep = 0;
-    const TIME_PER_STEP = 500; // Time in ms for each message
-    
-    function typeMessage(message) {
-        return new Promise(resolve => {
-            const delay = 50; // typing speed
-            let i = 0;
-            loadingConsole.textContent = loadingConsole.textContent.trim() + '\n\n>> ';
-            
-            function typeChar() {
-                if (i < message.length) {
-                    loadingConsole.textContent += message.charAt(i);
-                    i++;
-                    setTimeout(typeChar, delay);
-                } else {
-                    resolve();
-                }
-            }
-            typeChar();
-        });
-    }
-
-    async function processSteps() {
-        for (let i = 0; i < TOTAL_STEPS; i++) {
-            await typeMessage(LOADING_MESSAGES[i]);
-            currentStep = i + 1;
-            const percent = Math.floor((currentStep / TOTAL_STEPS) * 100);
-            
-            // Update bar and percentage
-            loadingBar.style.width = `${percent}%`;
-            loadingPercentage.textContent = `${percent}%`;
-            
-            // Ensure console only shows last 4-5 lines
-            const lines = loadingConsole.textContent.split('\n');
-            if (lines.length > 5) {
-                loadingConsole.textContent = lines.slice(-5).join('\n');
-            }
-
-            await new Promise(r => setTimeout(r, TIME_PER_STEP)); 
-        }
-
-        // Final transition
-        setTimeout(() => {
-            splashScreen.style.opacity = '0';
-            mainContent.style.opacity = '1';
-            mainContent.style.pointerEvents = 'auto'; 
-            setTimeout(() => { splashScreen.style.display = 'none'; }, 700);
-        }, 300);
-    }
-    
-    processSteps();
-}
 
 // --- SHARE FUNCTION ---
 async function shareWebsite() {
@@ -1181,6 +995,10 @@ function initialRender() {
     renderRow('older-videos-row', olderVideos);
     renderFavorites(); // Renders persistent favorites
     renderRow('watch-history-row', watchHistory); // Renders persistent history
+    
+    // Ensure main content is visible now that splash screen is gone
+    document.getElementById('main-content').style.opacity = '1';
+    document.getElementById('main-content').style.pointerEvents = 'auto'; 
 }
 
 // ---------------- SCROLL TO TOP LOGIC ----------------
@@ -1204,7 +1022,6 @@ function scrollFunction() {
 
 // ---------------- INITIALIZATION ----------------
 initialRender();
-runAdvancedLoading();
 
 
 // ---------------- MODAL PLAYER LOGIC ----------------
