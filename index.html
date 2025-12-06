@@ -654,7 +654,7 @@ footer {
     <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
 
     <footer>
-        © 2025 Tr3vN0x — All Rights Reserved
+        &copy; 2025 Tr3vN0x — All Rights Reserved
     </footer>
 </main>
 
@@ -698,8 +698,12 @@ function setPersistentViews(videoId, views) {
 // ---------------- TIMEZONE CYCLING UTILITY (Updated) ----------------
 
 const timeZones = [
-    { label: 'EST', tz: 'America/New_York' },
-    { label: 'PST', tz: 'America/Los_Angeles' }
+    { label: 'EST', tz: 'America/New_York' },      // Eastern Time
+    { label: 'CST', tz: 'America/Chicago' },       // Central Time
+    { label: 'MST', tz: 'America/Denver' },        // Mountain Time
+    { label: 'PST', tz: 'America/Los_Angeles' },   // Pacific Time
+    { label: 'UTC', tz: 'UTC' },                   // Universal Time
+    { label: 'JST', tz: 'Asia/Tokyo' }             // Japan Standard Time
 ];
 
 let currentZoneIndex = 0;
@@ -726,19 +730,18 @@ function setClockDisplay(zoneIndex) {
 
     // Immediately update and set the 1-second interval for the active zone
     updateActiveZoneTime();
+    // Clear existing interval before returning the new one, as a safeguard
+    if (activeClockInterval) {
+        clearInterval(activeClockInterval);
+    }
     return setInterval(updateActiveZoneTime, 1000);
 }
 
 function startClockCycle() {
-    // 1. Clear any existing 1-second interval from the previous zone
-    if (activeClockInterval) {
-        clearInterval(activeClockInterval);
-    }
-    
-    // 2. Set the new 1-second interval for the current zone
+    // 1. Set the new 1-second interval for the current zone
     activeClockInterval = setClockDisplay(currentZoneIndex);
     
-    // 3. Advance to the next zone for the next cycle
+    // 2. Advance to the next zone for the next cycle
     currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
 }
 
