@@ -167,6 +167,8 @@ header {
     gap: 20px;
     max-width: 1400px; 
     margin: 0 auto; 
+    /* Required for highlighting */
+    transition: all 0.5s ease-in-out; 
 }
 
 .row-label {
@@ -182,7 +184,27 @@ header {
     align-items: center;
     padding: 10px 0;
     border-right: 2px solid #004400; 
+    /* Transition for highlighting */
+    transition: all 0.5s ease-in-out; 
 }
+
+/* --- HIGHLIGHTING STYLES --- */
+.highlight-row {
+    animation: pulseGlow 0.5s 4 alternate; /* Pulse 4 times over 2 seconds */
+    border-color: #ff00ff !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.8) !important;
+}
+
+@keyframes pulseGlow {
+    from { border-color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+    to { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 1); }
+}
+
+.highlight-row .row-label {
+    color: #ff00ff;
+    text-shadow: 0 0 8px #ff00ff;
+}
+
 
 /* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
 #no-results-message {
@@ -650,7 +672,7 @@ footer {
         </div>
         
         <div class="logo-container">
-            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00" class="side-image">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L7511ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00" class="side-image">
             
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
@@ -667,7 +689,7 @@ footer {
         </div>
     </header>
 
-    <div class="row-container">
+    <div class="row-container" id="recommended-row-container">
         <div class="row-label">Top Recommended</div>
         <div class="video-row" id="recommended-videos-row"></div>
     </div>
@@ -692,7 +714,7 @@ footer {
         </div>
     </div>
     <div class="original-rows" id="original-rows">
-        <div class="row-container" id="newest-row">
+        <div class="row-container" id="newest-row-container">
             <div class="row-label">Newest Videos</div>
             <div class="video-row" id="newest-videos-row"></div>
         </div>
@@ -790,12 +812,12 @@ function setPersistentViews(videoId, views) {
 // ---------------- TIMEZONE CYCLING UTILITY ----------------
 
 const timeZones = [
-    { label: 'EST', tz: 'America/New_York' },      // Eastern Time
-    { label: 'CST', tz: 'America/Chicago' },       // Central Time
-    { label: 'MST', tz: 'America/Denver' },        // Mountain Time
-    { label: 'PST', tz: 'America/Los_Angeles' },   // Pacific Time
-    { label: 'UTC', tz: 'UTC' },                   // Universal Time
-    { label: 'JST', tz: 'Asia/Tokyo' }             // Japan Standard Time
+    { label: 'EST', tz: 'America/New_York' },      
+    { label: 'CST', tz: 'America/Chicago' },       
+    { label: 'MST', tz: 'America/Denver' },        
+    { label: 'PST', tz: 'America/Los_Angeles' },   
+    { label: 'UTC', tz: 'UTC' },                   
+    { label: 'JST', tz: 'Asia/Tokyo' }             
 ];
 
 let currentZoneIndex = 0;
@@ -831,12 +853,12 @@ function startClockCycle() {
     currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
 }
 
-// ---------------- TR3VN0X CATEGORY BOT LOGIC (NEW) ----------------
+// ---------------- TR3VN0X CATEGORY BOT LOGIC (HIGHLIGHTING ADDED) ----------------
 
 const categories = {
-    // Keywords map to the ID of the HTML element container for smooth scrolling
-    'newest': 'newest-row',
-    'new': 'newest-row',
+    // Keywords map to the ID of the HTML element container
+    'newest': 'newest-row-container',
+    'new': 'newest-row-container',
     'most viewed': 'most-viewed-row-container',
     'popular': 'most-viewed-row-container',
     'favorites': 'favorites-row-container',
@@ -845,7 +867,7 @@ const categories = {
     'old': 'older-videos-row-container',
     'history': 'watch-history-row-container',
     'watched': 'watch-history-row-container',
-    'recommended': 'recommended-videos-row' // Scrolls to the video row, not the container
+    'recommended': 'recommended-row-container' 
 };
 
 function handleBotCommand() {
@@ -853,7 +875,6 @@ function handleBotCommand() {
     const responseElement = document.getElementById('bot-response');
     const command = inputElement.value.trim().toLowerCase();
 
-    // Check for a match
     const targetId = categories[command];
 
     if (targetId) {
@@ -861,6 +882,12 @@ function handleBotCommand() {
         if (targetElement) {
             // Scroll to the element
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight the entire row container for 5 seconds
+            targetElement.classList.add('highlight-row');
+            setTimeout(() => {
+                targetElement.classList.remove('highlight-row');
+            }, 5000); // Remove the highlight after 5 seconds
             
             // Provide feedback
             responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
@@ -932,7 +959,7 @@ function handleSearch() {
     const searchResultsRow = document.getElementById('search-results-row');
     const searchContainerRow = document.getElementById('search-container-row');
     const originalRows = document.getElementById('original-rows');
-    const recommendedRow = document.getElementById('recommended-videos-row').parentNode;
+    const recommendedRow = document.getElementById('recommended-row-container');
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
@@ -1080,7 +1107,6 @@ function renderFavorites(){
 }
 
 function initialRender() {
-    // Note: Recommended videos row container already has an ID assigned in the HTML for scrolling
     renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
