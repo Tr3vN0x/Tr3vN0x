@@ -510,7 +510,7 @@ footer {
 </main>
 
 <script>
-// ---------------- DATA SETUP (Consolidated for search) ----------------
+// ---------------- DATA SETUP (Reverted to original videos only) ----------------
 
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
@@ -533,11 +533,11 @@ const allVideos = [
     {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
     {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
     {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
-    {id:"ZiEd3RoiKtk_dup", title:"TR3VN0X FUNNY MOMENTS COMPILATION", baseViews: 99000, category: 'most_viewed'}, 
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'}, 
     // Older Videos
-    {id:"ZiEd3RoiKtk_old", title:"A VETERAN'S GUIDE TO ROBLOX", baseViews: 99000, category: 'older'},
-    {id:"J-W0Vfrc26U_old", title:"My First Day on YouTube!", baseViews: 52000, category: 'older'},
-    {id:"Uwwga_CiFqc_old", title:"I Tried To Make A Viral TikTok", baseViews: 75000, category: 'older'},
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'older'},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'older'},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'older'},
     {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
     {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
     {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
@@ -548,47 +548,38 @@ const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
 
-// ---------------- NEW RANDOM VIDEO SELECTOR ----------------
+// ---------------- RANDOM VIDEO SELECTOR ----------------
 
-/**
- * Selects a specified number of unique random videos from the allVideos array.
- * @param {number} count The number of videos to select.
- * @returns {Array} An array of randomly selected video objects.
- */
 function getRandomVideos(count = 5) {
-    // Create a copy of the videos list to modify without affecting the original
     let pool = [...allVideos];
     let result = [];
     
-    // Ensure we don't try to select more videos than available
     count = Math.min(count, pool.length);
 
     for (let i = 0; i < count; i++) {
-        // Generate a random index
         const randomIndex = Math.floor(Math.random() * pool.length);
-        
-        // Add the video at that index to the result
         result.push(pool[randomIndex]);
-        
-        // Remove the selected video from the pool to ensure uniqueness
         pool.splice(randomIndex, 1);
     }
     return result;
 }
 
-// ---------------- SEARCH HANDLER (Functional!) ---
+// ---------------- SEARCH HANDLER ----------------
+
 function handleSearch() {
     const query = document.getElementById('search-input').value.trim().toLowerCase();
     const searchResultsRow = document.getElementById('search-results-row');
     const searchContainerRow = document.getElementById('search-container-row');
     const originalRows = document.getElementById('original-rows');
+    const recommendedRow = document.getElementById('recommended-videos-row').parentNode;
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
-        // 1. Hide original rows and show search row
+        // 1. Hide original and recommended rows, show search row
         originalRows.style.display = 'none';
+        recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
-        searchResultsRow.style.display = 'grid'; // Use grid for results
+        searchResultsRow.style.display = 'grid'; 
 
         // 2. Filter videos based on the query
         const filteredVideos = allVideos.filter(video => 
@@ -600,7 +591,6 @@ function handleSearch() {
             renderRow('search-results-row', filteredVideos);
             noResultsMessage.style.display = 'none';
         } else {
-            // No results found
             renderRow('search-results-row', []);
             noResultsMessage.style.display = 'block';
         }
@@ -608,9 +598,9 @@ function handleSearch() {
         // If the query is empty, hide search results and show original rows
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
+        recommendedRow.style.display = 'flex';
         searchResultsRow.style.display = 'none';
         noResultsMessage.style.display = 'none';
-        // Re-render the original rows to ensure everything is visible (optional, as they usually remain visible)
         initialRender();
     }
 }
@@ -671,10 +661,8 @@ async function shareWebsite() {
             console.log('Website shared successfully');
         } catch (error) {
             console.error('Error sharing website:', error);
-            // Fallback for user dismissing the share box
         }
     } else {
-        // Fallback for browsers that don't support the Web Share API (e.g., older desktop browsers)
         alert("To share, please copy the link in your browser's address bar.");
     }
 }
@@ -682,22 +670,13 @@ async function shareWebsite() {
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
-/**
- * Handles view count and watch history updates when a video is played.
- */
 function updateVideoWatchData(video) {
-    // 1. Update the local video object's view count
     video.views++;
-    
-    // 2. Update the persistent store (localStorage simulation)
     updatePersistentViews(video.id, video.views);
-
-    // 3. Update the display on ALL visible cards that show this video ID
     document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
         el.textContent = `Views: ${video.views.toLocaleString()}`;
     });
     
-    // 4. Update watch history 
     if(!watchHistory.find(v=>v.id===video.id)){
         watchHistory.unshift({...video}); 
     } else {
@@ -732,7 +711,6 @@ function createVideoCard(video) {
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
     
-    // Set initial favorite state
     if (favorites.find(v => v.id === video.id)) {
         favoriteBtn.classList.add('favorited');
     }
@@ -742,16 +720,13 @@ function createVideoCard(video) {
         const index = favorites.findIndex(v=>v.id===video.id);
 
         if(index === -1){
-            // Not favorited, so add it
             favorites.push(video);
             favoriteBtn.classList.add('favorited');
         } else {
-            // Already favorited, so remove it
             favorites.splice(index,1);
             favoriteBtn.classList.remove('favorited');
         }
         renderFavorites(); 
-        // Update the button state across all copies of this video
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
              if (favorites.find(v => v.id === video.id)) {
                 btn.classList.add('favorited');
@@ -783,7 +758,7 @@ function renderFavorites(){
 }
 
 function initialRender() {
-    renderRow('recommended-videos-row', getRandomVideos(5)); // Renders the new recommended row!
+    renderRow('recommended-videos-row', getRandomVideos(5)); 
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
