@@ -79,6 +79,7 @@ header {
     top: 0;
     z-index: 10;
     flex-wrap: wrap;
+    gap: 15px; /* Added gap to header items */
 }
 
 .logo-container {
@@ -110,6 +111,53 @@ header {
     box-shadow: 0 0 8px #00ff66;
 }
 
+/* --- SEARCH BAR STYLES --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 350px;
+}
+
+#search-input {
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 6px 0 0 6px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
+}
+
+#search-input::placeholder {
+    color: #00994c;
+}
+
+#search-input:focus {
+    box-shadow: 0 0 10px #00ff66;
+}
+
+#search-btn {
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #003300;
+    color: #00ff66;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+#search-btn:hover {
+    background: #005500;
+    color: #33ff99;
+}
+
 /* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
     display: flex;
@@ -128,7 +176,7 @@ header {
     transition: 0.3s;
     text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
     background: #111;
-    cursor: pointer; /* Added cursor pointer for all buttons */
+    cursor: pointer;
 }
 
 .social-button:hover {
@@ -336,10 +384,15 @@ footer {
         padding: 8px 12px;
         font-size: 1em;
     }
+    .search-container {
+        max-width: 100%; /* Allows search bar to use more space */
+    }
 }
 
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: center; }
+    .logo-container { order: 1; margin-bottom: 10px; }
+    .search-container { order: 2; max-width: 95%; margin: 0 auto; }
     .header-actions {
         order: 3; 
         margin-top: 15px;
@@ -388,6 +441,10 @@ footer {
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
 
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search videos...">
+            <button id="search-btn" onclick="handleSearch()">GO</button>
+        </div>
         <div class="header-actions">
             <div class="social-button" onclick="shareWebsite()">Share</div>
             <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
@@ -431,6 +488,22 @@ footer {
 </main>
 
 <script>
+// --- SEARCH HANDLER ---
+function handleSearch() {
+    const query = document.getElementById('search-input').value.trim();
+    if (query) {
+        // Placeholder functionality: In a real app, you would filter your video data here.
+        alert(`Searching for: "${query}"\n\n(Note: This is a placeholder function. In a full application, this would filter the videos.)`);
+    } else {
+        alert("Please enter a search term.");
+    }
+}
+document.getElementById('search-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});
+
 // --- LOADING SCRIPT ---
 document.addEventListener('DOMContentLoaded', () => {
     const splashScreen = document.getElementById('splash-screen');
@@ -469,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animateLoading();
 });
 
-// --- NEW SHARE FUNCTION ---
+// --- SHARE FUNCTION ---
 async function shareWebsite() {
     if (navigator.share) {
         try {
@@ -488,6 +561,7 @@ async function shareWebsite() {
         alert("To share, please copy the link in your browser's address bar.");
     }
 }
+
 // ---------------- PERSISTENT VIEW COUNT SIMULATION ----------------
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
