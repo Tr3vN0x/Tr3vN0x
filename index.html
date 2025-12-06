@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNq8A&oe=6939DF7A">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -29,13 +29,70 @@ body {
     align-items: center;
     flex-direction: column;
     opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.7s ease-out;
 }
 
 .splash-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 30px rgba(0, 255, 102, 0.7);
+    background: #0d0d0d;
+}
+
+/* Typing Effect Container */
+#loading-console {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #003300;
+    background: #000;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    overflow: hidden;
+    white-space: pre-wrap; /* Allows line breaks */
+}
+
+/* Typing Effect Cursor */
+#loading-console::after {
+    content: '_';
+    opacity: 1;
+    animation: blink-cursor 0.7s step-end infinite;
+    font-weight: bold;
+}
+
+@keyframes blink-cursor {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Progress Bar Container */
+#progress-bar-container {
+    width: 100%;
+    height: 15px;
+    background: #1a1a1a;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 5px #00ff66;
+    margin-bottom: 15px;
+}
+
+#loading-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ff66;
+    transition: width 0.1s linear;
+}
+
+/* Percentage Display */
+#loading-percentage {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
 }
 
 .splash-logo {
@@ -54,12 +111,6 @@ body {
     to { transform: scale(1.05); box-shadow: 0 0 16px #00ff66; }
 }
 
-#loading-percentage {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #00ff66;
-    text-shadow: 0 0 10px #00ff66;
-}
 
 /* ---------------- MAIN CONTENT WRAPPER ---------------- */
 #main-content {
@@ -81,6 +132,30 @@ header {
     flex-wrap: wrap;
     gap: 15px; 
 }
+
+/* --- NAVIGATION LINKS --- */
+.nav-container {
+    display: flex;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.nav-link {
+    color: #00ff66;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    border-color: #00ff66;
+    background: rgba(0, 255, 102, 0.1);
+    box-shadow: 0 0 8px #00ff66;
+}
+/* ---------------- END NEW NAV STYLES ---------------- */
 
 .logo-container {
     display: flex;
@@ -476,6 +551,108 @@ header {
 }
 
 
+/* ---------------- GLOBAL CHAT WIDGET (NEW STYLES) ---------------- */
+#chat-widget {
+    position: fixed;
+    bottom: 80px; /* Space above the scroll-to-top button */
+    right: 30px;
+    width: 300px;
+    height: 400px;
+    background: #0a0a0a;
+    border: 2px solid #00ff66;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.7);
+    z-index: 95;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chat-header {
+    background: #003300;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #00ff66;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#chat-header span {
+    color: #ff00ff;
+}
+
+#chat-body {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 0.9em;
+    line-height: 1.4;
+    background: #000;
+}
+
+/* Scrollbar styling for chat body */
+#chat-body::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-body::-webkit-scrollbar-thumb {
+    background: #00ff66;
+    border-radius: 3px;
+}
+#chat-body::-webkit-scrollbar-track {
+    background: #111;
+}
+
+#chat-input-container {
+    display: flex;
+    border-top: 1px solid #00ff66;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background: #0d0d0d;
+    color: #00ff66;
+    font-family: 'Consolas', monospace;
+    outline: none;
+    font-size: 0.9em;
+}
+
+#send-btn {
+    padding: 10px 15px;
+    background: #003300;
+    color: #00ff66;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+#send-btn:hover {
+    background: #005500;
+}
+
+.chat-message {
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+.chat-message .user-name {
+    font-weight: bold;
+    color: #33ff99; /* User color */
+}
+.chat-message .bot-name {
+    font-weight: bold;
+    color: #ff00ff; /* Bot color */
+}
+.chat-message .timestamp {
+    font-size: 0.75em;
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
 /* ---------------- SCROLL TO TOP BUTTON ---------------- */
 #scroll-to-top {
     display: none; 
@@ -589,10 +766,11 @@ footer {
     header { flex-direction: column; align-items: center; }
     .logo-container { order: 1; margin-bottom: 10px; }
     .search-container { order: 2; max-width: 95%; margin: 0 auto; }
-    .active-users-container { order: 0; margin-bottom: 10px; } /* Move to top of header on mobile */
-
+    .active-users-container { order: 0; margin-bottom: 10px; } 
+    .nav-container { order: 3; margin-top: 10px; width: 95%; justify-content: space-around; flex-wrap: wrap; }
+    .nav-link { margin: 5px 0; }
     .header-actions {
-        order: 3; 
+        order: 4; 
         margin-top: 15px;
         width: 95%;
         justify-content: space-around; 
@@ -628,12 +806,17 @@ footer {
         font-size: 1.2em;
         padding: 8px 12px;
     }
-    /* Ensure the no results message is correctly oriented on mobile */
     #no-results-message {
         writing-mode: horizontal-tb; 
         transform: none;
         font-size: 1.2em;
         width: 100%;
+    }
+    #chat-widget {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+        height: 300px;
     }
 }
 </style>
@@ -643,6 +826,10 @@ footer {
 <div id="splash-screen">
     <div class="splash-content">
         <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Tr3vN0x Logo" class="splash-logo">
+        <div id="loading-console"></div>
+        <div id="progress-bar-container">
+            <div id="loading-bar"></div>
+        </div>
         <div id="loading-percentage">0%</div>
     </div>
 </div>
@@ -660,7 +847,13 @@ footer {
             
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
-
+        
+        <div class="nav-container">
+            <a href="#recommended-videos-row" class="nav-link">Recommended</a>
+            <a href="#newest-videos-row" class="nav-link">Newest</a>
+            <a href="#favorites-row" class="nav-link">Favorites</a>
+            <a href="#profile-section" class="nav-link">About</a>
+        </div>
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
             <button id="search-btn" onclick="handleSearch()">GO</button>
@@ -695,7 +888,7 @@ footer {
             <div class="video-row" id="most-viewed-row"></div>
         </div>
 
-        <div class="row-container">
+        <div class="row-container" id="favorites-section">
             <div class="row-label">Favorites</div>
             <div class="video-row" id="favorites-row"></div>
         </div>
@@ -711,7 +904,7 @@ footer {
         </div>
     </div>
 
-    <div class="profile-section">
+    <div class="profile-section" id="profile-section">
         <div class="profile-header">
             <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00" alt="Tr3vN0x Profile Picture" class="profile-pic">
             <div class="profile-info">
@@ -728,14 +921,26 @@ footer {
         <p class="profile-message">
             <span>
                 <span class="status-indicator"></span> 
-                <b>STATUS: ONLINE</b>
+                <b>STATUS: ONLINE</b> // PROTOCOL ACTIVE
             </span>
-            Hello everyone, welcome to the Tr3vN0x official website... I am Trevor, or Tr3vN0x. Nice to see you here let me explain more about who I am, so you may get to know me, and understand the reasoning behind this website. I had a dream, and I always wanted to chase building my own website for months now... I seen oppertunity, and I wanted to learn HTML, and CSS so I got to working.... Weeks, and weeks with the help of AI, and myself this website wouldn't be possible... I want to thank everyone, and let everyone know follow you're dreams don't give up even if you feel it's a empty road. Also if any errors, issues please click the Twitter, or YouTube tab and Comment, or DM me.
+            // LOG_ENTRY: GREETINGS, USER. Welcome to the Tr3vN0x Official Node. I am Trevor, alias Tr3vN0x. Initiate file lookup for system background: This entire environment is the result of a long-term goal—chasing a dream to master HTML and CSS. After **[WEEKS]** of dedicated coding and **[AI_ASSISTED_SUPPORT]**, this node is operational. To all future coders: **[NEVER_ABORT_DREAM_CHASE]**. If you encounter any **[SYSTEM_ERRORS]** or **[GLITCHES]**, transmit a report via the linked **[TWITTER/YOUTUBE]** channels. Thank you for linking up.
         </p>
     </div>
     <div id="video-modal">
         <div class="close-btn">&times;</div>
         <iframe src="" allowfullscreen></iframe>
+    </div>
+    
+    <div id="chat-widget">
+        <div id="chat-header" onclick="toggleChat()">
+            GLOBAL CHAT <span>(2 Active)</span>
+        </div>
+        <div id="chat-body">
+            </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message..." maxlength="120">
+            <button id="send-btn">SEND</button>
+        </div>
     </div>
     
     <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
@@ -746,7 +951,146 @@ footer {
 </main>
 
 <script>
-// ---------------- DATA SETUP ----------------
+// ---------------- GLOBAL CHAT LOGIC ----------------
+
+// Function to get the current user's unique identifier (simulated)
+function getChatUsername() {
+    let username = sessionStorage.getItem('chatUsername');
+    if (!username) {
+        // Generate a random ID for this session
+        username = 'Guest_' + Math.floor(Math.random() * 9000 + 1000);
+        sessionStorage.setItem('chatUsername', username);
+    }
+    return username;
+}
+
+const BOT_NAME = 'Tr3vN0x_BOT';
+const CHAT_LOG_KEY = 'globalChatLog';
+const MAX_MESSAGES = 50; 
+
+let chatLog = getPersistentData(CHAT_LOG_KEY, [
+    { name: BOT_NAME, text: 'Welcome to the global node chat! Messages are saved locally.', isBot: true, timestamp: new Date().toLocaleTimeString('en-US') },
+]);
+
+function renderChat() {
+    const chatBody = document.getElementById('chat-body');
+    chatBody.innerHTML = '';
+    
+    chatLog.slice(-MAX_MESSAGES).forEach(msg => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message';
+        
+        let nameClass = msg.isBot ? 'bot-name' : 'user-name';
+        let name = msg.isBot ? BOT_NAME : getChatUsername();
+        
+        msgDiv.innerHTML = `<span class="${nameClass}">[${name}]</span>: ${msg.text} <span class="timestamp">${msg.timestamp}</span>`;
+        chatBody.appendChild(msgDiv);
+    });
+    
+    // Auto-scroll to the bottom
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMessage() {
+    const chatInput = document.getElementById('chat-input');
+    const messageText = chatInput.value.trim();
+
+    if (messageText === '') return;
+
+    const newMessage = {
+        name: getChatUsername(),
+        text: messageText,
+        isBot: false,
+        timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    chatLog.push(newMessage);
+    setPersistentData(CHAT_LOG_KEY, chatLog);
+    renderChat();
+
+    chatInput.value = '';
+    
+    // --- Simulated Bot Reply ---
+    setTimeout(() => {
+        simulateBotReply(messageText);
+    }, Math.floor(Math.random() * 2000) + 1000); // Wait 1-3 seconds for bot
+}
+
+function simulateBotReply(userMessage) {
+    let replyText;
+    const lowerMsg = userMessage.toLowerCase();
+    
+    if (lowerMsg.includes('video') || lowerMsg.includes('watch')) {
+        replyText = "Did you check out the new content? Let me know your favorite!";
+    } else if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+        replyText = "Greetings, user. Welcome to the Tr3vN0x node.";
+    } else if (lowerMsg.includes('code') || lowerMsg.includes('html')) {
+        replyText = "This entire node is running on pure HTML/CSS/JS. Pretty cool, right?";
+    } else {
+        const responses = [
+            "Processing transmission...",
+            "Thanks for the message! Stand by for the next video upload.",
+            "Protocol engaged. Your message has been noted.",
+            "System analysis complete. Everything operational.",
+            "Query received. Enjoy the website!",
+        ];
+        replyText = responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    const botMessage = {
+        name: BOT_NAME,
+        text: replyText,
+        isBot: true,
+        timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    };
+
+    chatLog.push(botMessage);
+    setPersistentData(CHAT_LOG_KEY, chatLog);
+    renderChat();
+}
+
+function toggleChat() {
+    const chatBody = document.getElementById('chat-body');
+    const chatInputContainer = document.getElementById('chat-input-container');
+    
+    if (chatBody.style.display === 'none') {
+        chatBody.style.display = 'block';
+        chatInputContainer.style.display = 'flex';
+        document.getElementById('chat-widget').style.height = '400px'; 
+    } else {
+        chatBody.style.display = 'none';
+        chatInputContainer.style.display = 'none';
+        document.getElementById('chat-widget').style.height = '40px'; 
+    }
+}
+
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+document.getElementById('chat-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+
+// ---------------- DATA PERSISTENCE UTILITIES ----------------
+
+function getPersistentData(key, defaultValue = []) {
+    try {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : defaultValue;
+    } catch (e) {
+        console.error(`Error loading data for key ${key}:`, e);
+        return defaultValue;
+    }
+}
+
+function setPersistentData(key, data) {
+    try {
+        localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+        console.error(`Error saving data for key ${key}:`, e);
+    }
+}
 
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
@@ -758,10 +1102,13 @@ function getPersistentViews(videoId, initialBaseViews) {
     return parseInt(views);
 }
 
-const favorites = [];
-const watchHistory = [];
+function setPersistentViews(videoId, views) {
+    localStorage.setItem(`views_${videoId}`, views);
+}
 
-const allVideos = [
+// ---------------- VIDEO DATA SETUP ----------------
+
+const allVideosData = [
     // Newest
     {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
     {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
@@ -780,9 +1127,19 @@ const allVideos = [
     {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
+// Map video data back to objects using their stored views
+const allVideos = allVideosData.map(video => {
+    return {...video, views: getPersistentViews(video.id, video.baseViews)};
+});
+
+
 const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
+
+// Use IDs to check against the full video list, ensuring we don't save redundant data
+let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
+let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
 
 // ---------------- RANDOM VIDEO SELECTOR ----------------
 
@@ -804,30 +1161,28 @@ function getRandomVideos(count = 5) {
 
 function updateActiveUserCount() {
     const userCountElement = document.getElementById('active-user-count');
-    const min = 5; // Minimum simulated users
-    const max = 15; // Maximum simulated users
+    const chatHeaderSpan = document.querySelector('#chat-header span');
+    const min = 5; 
+    const max = 15; 
     
-    // Check for existing session count, otherwise generate a new random number
     let activeUsers = sessionStorage.getItem('activeUsers');
     
     if (!activeUsers) {
-        // Generate a random initial number between min and max
         activeUsers = Math.floor(Math.random() * (max - min + 1)) + min;
         sessionStorage.setItem('activeUsers', activeUsers);
     } else {
-        // Simulate minor fluctuation (increase or decrease by 0 or 1)
         activeUsers = parseInt(activeUsers);
-        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        const change = Math.floor(Math.random() * 3) - 1; 
         activeUsers = Math.max(min, Math.min(max, activeUsers + change));
         sessionStorage.setItem('activeUsers', activeUsers);
     }
 
     userCountElement.textContent = `Active: ${activeUsers}`;
+    chatHeaderSpan.textContent = `(${Math.max(2, activeUsers - 5)} Active)`; // Simulated chat active users
 }
 
-// Update the counter immediately and then every 3-7 seconds
 updateActiveUserCount();
-setInterval(updateActiveUserCount, Math.floor(Math.random() * 5000) + 3000); // Between 3000ms and 8000ms
+setInterval(updateActiveUserCount, Math.floor(Math.random() * 5000) + 3000); 
 
 // ---------------- SEARCH HANDLER ----------------
 
@@ -840,28 +1195,24 @@ function handleSearch() {
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
-        // Hide original and recommended rows, show search row
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
 
-        // Filter videos based on the query
         const filteredVideos = allVideos.filter(video => 
             video.title.toLowerCase().includes(query)
         );
 
-        // Render results
         if (filteredVideos.length > 0) {
             renderRow('search-results-row', filteredVideos);
             searchResultsRow.style.display = 'grid'; 
             noResultsMessage.style.display = 'none';
         } else {
             renderRow('search-results-row', []);
-            searchResultsRow.style.display = 'none'; // Hide empty grid
-            noResultsMessage.style.display = 'block'; // Show horizontal message
+            searchResultsRow.style.display = 'none'; 
+            noResultsMessage.style.display = 'block'; 
         }
     } else {
-        // If the query is empty, hide search results and show original rows
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
         recommendedRow.style.display = 'flex';
@@ -876,43 +1227,81 @@ document.getElementById('search-input').addEventListener('keypress', function (e
     }
 });
 
-// --- LOADING SCRIPT ---
-document.addEventListener('DOMContentLoaded', () => {
+// ---------------- ADVANCED LOADING SCRIPT ----------------
+
+const LOADING_MESSAGES = [
+    "INITIATING CORE SYSTEM ACCESS...",
+    "ACCESSING DATASTREAM: TR3VN0X_VIDEOS...",
+    "DECRYPTING CRYPTO KEY: 0x00FF66...",
+    "ESTABLISHING SECURE CONNECTION...",
+    "LOADING CACHED DATA: FAVORITES & HISTORY...",
+    "RENDERING UI GRID STRUCTURE...",
+    "SYNC COMPLETE. PROCEED TO MAIN INTERFACE.",
+];
+
+function runAdvancedLoading() {
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
+    const loadingConsole = document.getElementById('loading-console');
     const loadingPercentage = document.getElementById('loading-percentage');
+    const loadingBar = document.getElementById('loading-bar');
     
     mainContent.style.opacity = '0';
     mainContent.style.pointerEvents = 'none';
 
-    const MIN_LOAD_TIME_MS = 2000;  
-    const MAX_PERCENTAGE = 100;
-    let currentPercentage = 0;
-    const startTime = Date.now();
-
-    function animateLoading() {
-        const elapsedTime = Date.now() - startTime;
-        let targetPercentage = Math.min(
-            Math.floor((elapsedTime / MIN_LOAD_TIME_MS) * MAX_PERCENTAGE), 
-            MAX_PERCENTAGE
-        );
-        if (targetPercentage >= currentPercentage) {
-            currentPercentage = targetPercentage;
-            loadingPercentage.textContent = `${currentPercentage}%`;
-        }
-        if (currentPercentage < MAX_PERCENTAGE) {
-            requestAnimationFrame(animateLoading);
-        } else {
-            setTimeout(() => {
-                splashScreen.style.opacity = '0';
-                mainContent.style.opacity = '1';
-                mainContent.style.pointerEvents = 'auto'; 
-                setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
-            }, 300);
-        }
+    const TOTAL_STEPS = LOADING_MESSAGES.length;
+    let currentStep = 0;
+    const TIME_PER_STEP = 500; // Time in ms for each message
+    
+    function typeMessage(message) {
+        return new Promise(resolve => {
+            const delay = 50; // typing speed
+            let i = 0;
+            loadingConsole.textContent = loadingConsole.textContent.trim() + '\n\n>> ';
+            
+            function typeChar() {
+                if (i < message.length) {
+                    loadingConsole.textContent += message.charAt(i);
+                    i++;
+                    setTimeout(typeChar, delay);
+                } else {
+                    resolve();
+                }
+            }
+            typeChar();
+        });
     }
-    animateLoading();
-});
+
+    async function processSteps() {
+        for (let i = 0; i < TOTAL_STEPS; i++) {
+            await typeMessage(LOADING_MESSAGES[i]);
+            currentStep = i + 1;
+            const percent = Math.floor((currentStep / TOTAL_STEPS) * 100);
+            
+            // Update bar and percentage
+            loadingBar.style.width = `${percent}%`;
+            loadingPercentage.textContent = `${percent}%`;
+            
+            // Ensure console only shows last 4-5 lines
+            const lines = loadingConsole.textContent.split('\n');
+            if (lines.length > 5) {
+                loadingConsole.textContent = lines.slice(-5).join('\n');
+            }
+
+            await new Promise(r => setTimeout(r, TIME_PER_STEP)); 
+        }
+
+        // Final transition
+        setTimeout(() => {
+            splashScreen.style.opacity = '0';
+            mainContent.style.opacity = '1';
+            mainContent.style.pointerEvents = 'auto'; 
+            setTimeout(() => { splashScreen.style.display = 'none'; }, 700);
+        }, 300);
+    }
+    
+    processSteps();
+}
 
 // --- SHARE FUNCTION ---
 async function shareWebsite() {
@@ -921,7 +1310,7 @@ async function shareWebsite() {
             await navigator.share({
                 title: 'Tr3vN0x Official Website',
                 text: 'Check out the latest videos from Tr3vN0x!',
-                url: window.location.href, // This gets the current page URL
+                url: window.location.href, 
             });
             console.log('Website shared successfully');
         } catch (error) {
@@ -935,24 +1324,22 @@ async function shareWebsite() {
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
-function updatePersistentViews(videoId, views) {
-    localStorage.setItem(`views_${videoId}`, views);
-}
-
 function updateVideoWatchData(video) {
+    // 1. Update Views
     video.views++;
-    updatePersistentViews(video.id, video.views);
+    setPersistentViews(video.id, video.views);
     document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
         el.textContent = `Views: ${video.views.toLocaleString()}`;
     });
     
-    if(!watchHistory.find(v=>v.id===video.id)){
-        watchHistory.unshift({...video}); 
-    } else {
-        const index = watchHistory.findIndex(v=>v.id===video.id);
-        const item = watchHistory.splice(index, 1)[0];
-        watchHistory.unshift(item);
-    }
+    // 2. Update Watch History (Maintain LIFO order and persistence)
+    const index = watchHistory.findIndex(v=>v.id===video.id);
+    if(index !== -1) {
+        watchHistory.splice(index, 1); // Remove old position
+    } 
+    watchHistory.unshift(video); // Add to the front
+    setPersistentData('watchHistory', watchHistory.map(v => v.id));
+
     renderRow('watch-history-row', watchHistory);
 }
 
@@ -967,6 +1354,9 @@ function createVideoCard(video) {
     
     const thumbnailId = video.id.replace(/_dup$|_old$/, '');
 
+    // Check if the video is currently favorited (using the ID)
+    const isFavorited = favorites.some(fav => fav.id === video.id);
+
     card.innerHTML = `
         <div class="thumbnail-container">
             <img class="thumb" src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
@@ -976,14 +1366,10 @@ function createVideoCard(video) {
             <div class="video-title">${video.title}</div>
             <div class="video-views">Views: ${video.views.toLocaleString()}</div>
         </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn" alt="Favorite button">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
     
-    if (favorites.find(v => v.id === video.id)) {
-        favoriteBtn.classList.add('favorited');
-    }
-
     favoriteBtn.addEventListener('click', e=>{
         e.stopPropagation();
         const index = favorites.findIndex(v=>v.id===video.id);
@@ -995,7 +1381,12 @@ function createVideoCard(video) {
             favorites.splice(index,1);
             favoriteBtn.classList.remove('favorited');
         }
+        
+        // Save and re-render favorites across all cards
+        setPersistentData('favorites', favorites.map(v => v.id));
         renderFavorites(); 
+
+        // Update all cards globally to reflect the favorite status change
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
              if (favorites.find(v => v.id === video.id)) {
                 btn.classList.add('favorited');
@@ -1031,21 +1422,20 @@ function initialRender() {
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
-    renderFavorites();
-    renderRow('watch-history-row', watchHistory);
+    renderFavorites(); // Renders persistent favorites
+    renderRow('watch-history-row', watchHistory); // Renders persistent history
+    renderChat(); // Renders persistent chat log
 }
 
 // ---------------- SCROLL TO TOP LOGIC ----------------
 
 const scrollToTopBtn = document.getElementById('scroll-to-top');
 
-// Function to smoothly scroll to the top
 function scrollToTop() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0; 
 }
 
-// Function to show/hide the button based on scroll position
 window.onscroll = function() { scrollFunction() };
 
 function scrollFunction() {
@@ -1056,8 +1446,9 @@ function scrollFunction() {
     }
 }
 
-// ---------------- INITIAL RENDER ----------------
+// ---------------- INITIALIZATION ----------------
 initialRender();
+runAdvancedLoading();
 
 
 // ---------------- MODAL PLAYER LOGIC ----------------
@@ -1076,4 +1467,3 @@ videoModal.addEventListener('click', e=>{
 
 </body>
 </html>
-
