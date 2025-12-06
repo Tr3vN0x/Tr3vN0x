@@ -30,7 +30,7 @@ header {
     gap: 15px; 
 }
 
-/* --- EST CLOCK STYLES (New) --- */
+/* --- EST CLOCK STYLES (Now Cycling Clock) --- */
 .est-clock-container {
     display: flex;
     align-items: center;
@@ -44,10 +44,6 @@ header {
     color: #00ff66;
     white-space: nowrap; /* Prevent wrapping */
 }
-
-/* --- NAVIGATION LINKS (Removed) --- 
-.nav-container { display: none; } 
-*/
 
 .logo-container {
     display: flex;
@@ -281,8 +277,6 @@ header {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-
-/* Removed .video-views styles */
 
 
 .favorite-btn {
@@ -571,7 +565,7 @@ footer {
     
     <header>
         <div class="est-clock-container">
-            <span id="est-time-display">Loading EST...</span>
+            <span id="est-time-display">Loading Time...</span>
         </div>
         
         <div class="logo-container">
@@ -701,25 +695,52 @@ function setPersistentViews(videoId, views) {
     localStorage.setItem(`views_${videoId}`, views);
 }
 
-// ---------------- EST CLOCK UTILITY (New) ----------------
+// ---------------- TIMEZONE CYCLING UTILITY (Updated) ----------------
 
-function updateEstClock() {
+const timeZones = [
+    { label: 'EST', tz: 'America/New_York' },
+    { label: 'PST', tz: 'America/Los_Angeles' }
+];
+
+let currentZoneIndex = 0;
+let activeClockInterval = null; // Variable to hold the 1-second interval ID
+
+function setClockDisplay(zoneIndex) {
     const clockElement = document.getElementById('est-time-display');
     if (!clockElement) return;
 
-    // Create a date object and format it for EST (America/New_York)
-    const now = new Date();
-    const estTime = now.toLocaleTimeString('en-US', {
-        timeZone: 'America/New_York',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-    });
+    const currentZone = timeZones[zoneIndex];
     
-    clockElement.textContent = `EST: ${estTime}`;
+    // Function to update the time for the current zone every second
+    function updateActiveZoneTime() {
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString('en-US', {
+            timeZone: currentZone.tz,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockElement.textContent = `${currentZone.label}: ${formattedTime}`;
+    }
+
+    // Immediately update and set the 1-second interval for the active zone
+    updateActiveZoneTime();
+    return setInterval(updateActiveZoneTime, 1000);
 }
 
+function startClockCycle() {
+    // 1. Clear any existing 1-second interval from the previous zone
+    if (activeClockInterval) {
+        clearInterval(activeClockInterval);
+    }
+    
+    // 2. Set the new 1-second interval for the current zone
+    activeClockInterval = setClockDisplay(currentZoneIndex);
+    
+    // 3. Advance to the next zone for the next cycle
+    currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
+}
 
 // ---------------- VIDEO DATA SETUP ----------------
 
@@ -944,9 +965,10 @@ function scrollFunction() {
 
 // ---------------- INITIALIZATION ----------------
 
-// 1. Initialize clock and set interval
-updateEstClock();
-setInterval(updateEstClock, 1000); // Update every second
+// 1. Start the time zone cycling clock
+startClockCycle();
+// Set the 10-second interval to switch time zones
+window.cycleInterval = setInterval(startClockCycle, 10000); // 10000 ms = 10 seconds
 
 // 2. Render content
 initialRender();
@@ -968,4 +990,3 @@ videoModal.addEventListener('click', e=>{
 
 </body>
 </html>
-
