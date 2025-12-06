@@ -188,7 +188,6 @@ header {
 
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
-/* Added a new row for search results */
 .search-results-row {
     display: none; /* Initially hidden */
     grid-template-columns: repeat(4, 1fr);
@@ -462,7 +461,11 @@ footer {
         </div>
     </header>
 
-    <div class="row-container" id="search-container-row">
+    <div class="row-container">
+        <div class="row-label">Top Recommended</div>
+        <div class="video-row" id="recommended-videos-row"></div>
+    </div>
+    <div class="row-container" id="search-container-row" style="display:none;">
         <div class="row-label" id="search-label">Search Results</div>
         <div class="search-results-row" id="search-results-row">
             </div>
@@ -545,8 +548,35 @@ const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
 
+// ---------------- NEW RANDOM VIDEO SELECTOR ----------------
 
-// --- SEARCH HANDLER (Functional!) ---
+/**
+ * Selects a specified number of unique random videos from the allVideos array.
+ * @param {number} count The number of videos to select.
+ * @returns {Array} An array of randomly selected video objects.
+ */
+function getRandomVideos(count = 5) {
+    // Create a copy of the videos list to modify without affecting the original
+    let pool = [...allVideos];
+    let result = [];
+    
+    // Ensure we don't try to select more videos than available
+    count = Math.min(count, pool.length);
+
+    for (let i = 0; i < count; i++) {
+        // Generate a random index
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        
+        // Add the video at that index to the result
+        result.push(pool[randomIndex]);
+        
+        // Remove the selected video from the pool to ensure uniqueness
+        pool.splice(randomIndex, 1);
+    }
+    return result;
+}
+
+// ---------------- SEARCH HANDLER (Functional!) ---
 function handleSearch() {
     const query = document.getElementById('search-input').value.trim().toLowerCase();
     const searchResultsRow = document.getElementById('search-results-row');
@@ -580,7 +610,7 @@ function handleSearch() {
         originalRows.style.display = 'block';
         searchResultsRow.style.display = 'none';
         noResultsMessage.style.display = 'none';
-        // Re-render the original rows to ensure everything is visible
+        // Re-render the original rows to ensure everything is visible (optional, as they usually remain visible)
         initialRender();
     }
 }
@@ -753,6 +783,7 @@ function renderFavorites(){
 }
 
 function initialRender() {
+    renderRow('recommended-videos-row', getRandomVideos(5)); // Renders the new recommended row!
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
