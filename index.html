@@ -9,7 +9,7 @@
 /* ---------------- GLOBAL ---------------- */
 body {
     margin: 0;
-    font-family: 'Consolas', 'Courier New', monospace; 
+    font-family: 'Consolas', 'Courier New', monospace; /* Cooler Monospace Font */
     background: #0a0a0a;
     color: #00ff66;
     scroll-behavior: smooth;
@@ -30,7 +30,7 @@ header {
     gap: 15px; 
 }
 
-/* --- EST CLOCK STYLES --- */
+/* --- EST CLOCK STYLES (New) --- */
 .est-clock-container {
     display: flex;
     align-items: center;
@@ -42,8 +42,12 @@ header {
     font-size: 1em;
     font-weight: bold;
     color: #00ff66;
-    white-space: nowrap; 
+    white-space: nowrap; /* Prevent wrapping */
 }
+
+/* --- NAVIGATION LINKS (Removed) --- 
+.nav-container { display: none; } 
+*/
 
 .logo-container {
     display: flex;
@@ -122,7 +126,7 @@ header {
 }
 
 
-/* --- SOCIAL BUTTONS CONTAINER --- */
+/* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
     display: flex;
     align-items: center;
@@ -141,7 +145,6 @@ header {
     text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
     background: #111;
     cursor: pointer;
-    white-space: nowrap; 
 }
 
 .social-button:hover {
@@ -185,7 +188,7 @@ header {
     border-right: 2px solid #004400; 
 }
 
-/* --- STYLE FOR NO RESULTS MESSAGE --- */
+/* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
 #no-results-message {
     display: none; 
     color: #ff0000; 
@@ -266,14 +269,8 @@ header {
     opacity: 1;
 }
 
-.video-info-wrapper {
-    padding: 10px 15px;
-    display: flex;
-    flex-direction: column;
-}
-
 .video-title {
-    margin: 0;
+    margin: 10px 8px 10px; /* Reduced bottom margin slightly since views are removed */
     font-weight: bold;
     font-size: 1.1em;
     color: #00ff66;
@@ -285,11 +282,27 @@ header {
     -webkit-box-orient: vertical;
 }
 
-.video-meta {
-    font-size: 0.8em;
-    color: #66ff99;
-    margin-top: 5px;
+/* Removed .video-views styles */
+
+
+.favorite-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    z-index: 5;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px #00ff66);
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 50%;
+    padding: 3px;
 }
+
+.favorite-btn.favorited {
+    filter: drop-shadow(0 0 6px #ff00ff);
+}
+
 
 /* ---------------- PROFILE SECTION STYLES ---------------- */
 .profile-section {
@@ -309,107 +322,88 @@ header {
 .profile-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    border: 3px solid #00ff66;
     object-fit: cover;
-    margin-right: 20px;
+    border: 4px solid #00ff66;
     box-shadow: 0 0 15px #00ff66;
 }
 
+.profile-info {
+    margin-left: 20px;
+    text-align: left;
+}
+
 .profile-username {
-    font-size: 2em;
-    font-weight: 900;
+    font-size: 2.5em;
+    font-weight: bold;
     color: #33ff99;
-    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00ff66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 0;
 }
 
 .badge {
+    padding: 4px 10px;
     background: #ff00ff;
-    color: #000;
-    padding: 3px 8px;
+    color: #0a0a0a;
     border-radius: 4px;
     font-size: 0.6em;
-    font-weight: bold;
-    vertical-align: super;
-    margin-left: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: none;
+    border: 1px solid #0a0a0a;
     box-shadow: 0 0 5px #ff00ff;
 }
 
-.profile-message {
-    font-size: 1em;
-    line-height: 1.6;
-    text-align: left;
-    white-space: pre-wrap;
-    padding: 15px;
-    background: #000;
-    border: 1px dashed #00ff66;
-    border-radius: 8px;
-}
-
+/* --- Status Indicator Styles --- */
 .status-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
     border-radius: 50%;
-    background: #00ff66;
-    box-shadow: 0 0 8px #00ff66;
+    box-shadow: 0 0 5px #00ff66;
     margin-right: 5px;
-    animation: pulse 1.5s infinite;
+    animation: pulsate 1.5s infinite alternate;
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 8px #00ff66; }
-    50% { box-shadow: 0 0 15px #00ff66; }
-    100% { box-shadow: 0 0 8px #00ff66; }
+@keyframes pulsate {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0.7; }
 }
 
-
-/* ---------------- VIDEO MODAL ---------------- */
-#video-modal {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 1000;
-    justify-content: center;
+.profile-message {
+    margin-top: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #00cc55;
+    background: #001a00;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ff66;
+    text-align: left;
+    display: flex; 
+    flex-direction: column; 
+}
+.profile-message span {
+    display: flex;
     align-items: center;
+    margin-bottom: 5px; 
 }
-
-#video-modal iframe {
-    width: 80%;
-    height: 80%;
-    max-width: 1280px;
-    max-height: 720px;
-    border: 5px solid #00ff66;
-    box-shadow: 0 0 30px rgba(0, 255, 102, 0.8);
-    border-radius: 10px;
-}
-
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
+.profile-message b {
     color: #00ff66;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    text-shadow: 0 0 10px #00ff66;
-    transition: color 0.3s;
+    margin-left: 5px;
 }
 
-.close-btn:hover {
-    color: #ff00ff;
-}
 
 /* ---------------- SCROLL TO TOP BUTTON ---------------- */
 #scroll-to-top {
@@ -432,18 +426,54 @@ header {
 }
 
 #scroll-to-top:hover {
-    background: rgba(0, 85, 0, 0.9);
+    background: #003300;
     transform: translateY(-2px);
 }
 
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
-    padding: 20px;
-    border-top: 1px solid #003300;
-    color: #00994c;
-    font-size: 0.9em;
-    margin-top: 40px;
+    padding: 25px;
+    background: #0d0d0d;
+    border-top: 2px solid #003300;
+    color: #00ff66;
+    font-weight: bold;
+    text-shadow: 0 0 4px #00ff66;
+    margin-top: 20px;
+}
+
+/* ---------------- MODAL PLAYER ---------------- */
+#video-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+#video-modal iframe {
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border:none;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #00ff66;
+}
+
+#video-modal .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
@@ -457,54 +487,80 @@ footer {
     .video-row, .search-results-row {
         grid-template-columns: repeat(2, 1fr);
     }
-}
-
-@media (max-width: 768px) {
-    header { 
-        flex-direction: column; 
-        align-items: center; 
-        padding: 15px;
+    .header-actions {
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-end; 
+    }
+    .social-button {
+        padding: 8px 12px;
+        font-size: 1em;
     }
     .search-container {
-        width: 100%;
-        max-width: 100%;
-        margin: 10px 0;
-    }
-    .video-row, .search-results-row {
-        grid-template-columns: 1fr;
-    }
-    .row-container {
-        padding: 20px 10px;
-        flex-direction: column;
-    }
-    .row-label {
-        writing-mode: horizontal-tb;
-        transform: none;
-        min-width: auto;
-        border-right: none;
-        border-bottom: 2px solid #004400;
-        padding: 5px 0 10px;
-        margin-bottom: 10px;
-    }
-    .logo-container {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-    }
-    .side-image {
-        margin-right: 0;
-        width: 50px;
-        height: 50px;
-    }
-    .est-clock-container {
-        order: -1; 
-        margin-bottom: 10px;
+        max-width: 100%; 
     }
     .profile-header {
         flex-direction: column;
+        text-align: center;
     }
-    .profile-pic {
-        margin: 0 0 15px 0;
+    .profile-info {
+        margin-left: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .profile-username {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header { flex-direction: column; align-items: center; }
+    .logo-container { order: 1; margin-bottom: 10px; }
+    .search-container { order: 2; max-width: 95%; margin: 0 auto; }
+    .est-clock-container { order: 0; margin-bottom: 10px; } /* New order for clock */
+    .header-actions {
+        order: 4; 
+        margin-top: 15px;
+        width: 95%;
+        justify-content: space-around; 
+    }
+    .row-container { flex-direction: column; padding: 15px 10px; }
+    .row-label { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+        min-width: auto; 
+        padding-bottom: 5px;
+        border-right: none;
+        border-bottom: 2px solid #004400;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .video-row, .search-results-row { 
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        grid-template-columns: none;
+    }
+    .video-card {
+        min-width: 240px;
+    }
+    .profile-section {
+        margin: 30px 10px;
+        padding: 20px;
+    }
+    #scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.2em;
+        padding: 8px 12px;
+    }
+    #no-results-message {
+        writing-mode: horizontal-tb; 
+        transform: none;
+        font-size: 1.2em;
+        width: 100%;
     }
 }
 </style>
@@ -536,7 +592,7 @@ footer {
         </div>
     </header>
 
-    <div class="row-container" id="recommended-row-container">
+    <div class="row-container">
         <div class="row-label">Top Recommended</div>
         <div class="video-row" id="recommended-videos-row"></div>
     </div>
@@ -558,9 +614,19 @@ footer {
             <div class="video-row" id="most-viewed-row"></div>
         </div>
 
+        <div class="row-container" id="favorites-section">
+            <div class="row-label">Favorites</div>
+            <div class="video-row" id="favorites-row"></div>
+        </div>
+
         <div class="row-container">
             <div class="row-label">Older Videos</div>
             <div class="video-row" id="older-videos-row"></div>
+        </div>
+
+        <div class="row-container">
+            <div class="row-label">Watch History</div>
+            <div class="video-row" id="watch-history-row"></div>
         </div>
     </div>
 
@@ -601,10 +667,29 @@ footer {
 <script>
 // ---------------- DATA PERSISTENCE UTILITIES ----------------
 
-// Global view count persistence (not per user)
+function getPersistentData(key, defaultValue = []) {
+    try {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : defaultValue;
+    } catch (e) {
+        console.error(`Error loading data for key ${key}:`, e);
+        return defaultValue;
+    }
+}
+
+function setPersistentData(key, data) {
+    try {
+        localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+        console.error(`Error saving data for key ${key}:`, e);
+    }
+}
+
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
     let views = localStorage.getItem(key);
+    // Removed view-specific persistence for this version to align with the new request,
+    // but the function remains for data consistency (returning initial views only).
     if (views === null) {
         views = initialBaseViews; 
         localStorage.setItem(key, views);
@@ -616,12 +701,13 @@ function setPersistentViews(videoId, views) {
     localStorage.setItem(`views_${videoId}`, views);
 }
 
-// ---------------- EST CLOCK UTILITY ----------------
+// ---------------- EST CLOCK UTILITY (New) ----------------
 
 function updateEstClock() {
     const clockElement = document.getElementById('est-time-display');
     if (!clockElement) return;
 
+    // Create a date object and format it for EST (America/New_York)
     const now = new Date();
     const estTime = now.toLocaleTimeString('en-US', {
         timeZone: 'America/New_York',
@@ -638,12 +724,15 @@ function updateEstClock() {
 // ---------------- VIDEO DATA SETUP ----------------
 
 const allVideosData = [
+    // Newest
     {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
     {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
+    // Most Viewed
     {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
     {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
     {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
     {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'}, 
+    // Older Videos
     {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'older'},
     {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'older'},
     {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'older'},
@@ -651,15 +740,21 @@ const allVideosData = [
     {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
     {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
     {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
-];
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
+// Map video data back to objects using their stored views
 const allVideos = allVideosData.map(video => {
     return {...video, views: getPersistentViews(video.id, video.baseViews)};
 });
 
+
 const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
+
+// Use IDs to check against the full video list, ensuring we don't save redundant data
+let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
+let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
 
 
 // ---------------- SEARCH HANDLER ----------------
@@ -669,12 +764,13 @@ function handleSearch() {
     const searchResultsRow = document.getElementById('search-results-row');
     const searchContainerRow = document.getElementById('search-container-row');
     const originalRows = document.getElementById('original-rows');
-    const recommendedRowContainer = document.getElementById('recommended-row-container');
+    const recommendedRow = document.getElementById('recommended-videos-row').parentNode;
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
+        // Hide original rows
         originalRows.style.display = 'none';
-        recommendedRowContainer.style.display = 'none';
+        recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
 
         const filteredVideos = allVideos.filter(video => 
@@ -691,9 +787,10 @@ function handleSearch() {
             noResultsMessage.style.display = 'block'; 
         }
     } else {
+        // Show original rows
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
-        recommendedRowContainer.style.display = 'flex';
+        recommendedRow.style.display = 'flex';
         noResultsMessage.style.display = 'none';
         initialRender();
     }
@@ -705,6 +802,7 @@ document.getElementById('search-input').addEventListener('keypress', function (e
     }
 });
 
+
 // --- SHARE FUNCTION ---
 async function shareWebsite() {
     if (navigator.share) {
@@ -714,6 +812,7 @@ async function shareWebsite() {
                 text: 'Check out the latest videos from Tr3vN0x!',
                 url: window.location.href, 
             });
+            console.log('Website shared successfully');
         } catch (error) {
             console.error('Error sharing website:', error);
         }
@@ -726,26 +825,32 @@ async function shareWebsite() {
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
 function updateVideoWatchData(video) {
-    // Only updates the global view count
+    // 1. Update Views (Still updating persistence, but not showing it)
     video.views++;
     setPersistentViews(video.id, video.views);
-    // Note: No watch history or favorites logic remains here
+    
+    // 2. Update Watch History (Maintain LIFO order and persistence)
+    const index = watchHistory.findIndex(v=>v.id===video.id);
+    if(index !== -1) {
+        watchHistory.splice(index, 1); // Remove old position
+    } 
+    watchHistory.unshift(video); // Add to the front
+    setPersistentData('watchHistory', watchHistory.map(v => v.id));
+
+    renderRow('watch-history-row', watchHistory);
 }
 
 
 // ---------------- VIDEO CARD RENDERER ----------------
 function createVideoCard(video) {
-    if(video.views === undefined) video.views = 0;
-
     const card = document.createElement('div');
-    card.className = `video-card`;
+    card.className = 'video-card';
     card.setAttribute('data-video', video.id);
     
-    // Uses a cleaned ID for the thumbnail link
     const thumbnailId = video.id.replace(/_dup$|_old$/, '');
 
-    // Formats the view count for display
-    const formattedViews = new Intl.NumberFormat().format(video.views);
+    // Check if the video is currently favorited (using the ID)
+    const isFavorited = favorites.some(fav => fav.id === video.id);
 
     card.innerHTML = `
         <div class="thumbnail-container">
@@ -754,9 +859,36 @@ function createVideoCard(video) {
         </div>
         <div class="video-info-wrapper">
             <div class="video-title">${video.title}</div>
-            <div class="video-meta">${formattedViews} views</div>
-        </div>
+            </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
     `;
+    const favoriteBtn = card.querySelector('.favorite-btn');
+    
+    favoriteBtn.addEventListener('click', e=>{
+        e.stopPropagation();
+        const index = favorites.findIndex(v=>v.id===video.id);
+
+        if(index === -1){
+            favorites.push(video);
+            favoriteBtn.classList.add('favorited');
+        } else {
+            favorites.splice(index,1);
+            favoriteBtn.classList.remove('favorited');
+        }
+        
+        // Save and re-render favorites across all cards
+        setPersistentData('favorites', favorites.map(v => v.id));
+        renderFavorites(); 
+
+        // Update all cards globally to reflect the favorite status change
+        document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
+             if (favorites.find(v => v.id === video.id)) {
+                btn.classList.add('favorited');
+            } else {
+                btn.classList.remove('favorited');
+            }
+        });
+    });
 
     card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
@@ -770,20 +902,22 @@ function createVideoCard(video) {
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
-    
     videos.forEach(v=>{
         row.appendChild(createVideoCard(v));
     });
 }
 
+function renderFavorites(){
+    renderRow('favorites-row', favorites);
+}
 
 function initialRender() {
-    
-    // Always render all global rows
-    renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
+    renderRow('recommended-videos-row', allVideos.slice(0, 5)); // Just take the first 5 for recommended now
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
+    renderFavorites(); // Renders persistent favorites
+    renderRow('watch-history-row', watchHistory); // Renders persistent history
     
     document.getElementById('main-content').style.opacity = '1';
     document.getElementById('main-content').style.pointerEvents = 'auto'; 
@@ -810,9 +944,11 @@ function scrollFunction() {
 
 // ---------------- INITIALIZATION ----------------
 
+// 1. Initialize clock and set interval
 updateEstClock();
-setInterval(updateEstClock, 1000); 
+setInterval(updateEstClock, 1000); // Update every second
 
+// 2. Render content
 initialRender();
 
 
