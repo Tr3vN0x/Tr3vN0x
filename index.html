@@ -298,6 +298,87 @@ header {
 }
 
 
+/* ---------------- BOT SECTION STYLES ---------------- */
+
+.bot-section {
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #1a1a1a; /* Darker background for contrast */
+    border: 2px solid #33ff99;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(51, 255, 153, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bot-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 5px #33ff99;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #004400;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.bot-input-container {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 15px;
+}
+
+#bot-input {
+    padding: 12px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 8px 0 0 8px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1.1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
+}
+
+#bot-input:focus {
+    box-shadow: 0 0 10px #00ff66;
+}
+
+#bot-send-btn {
+    padding: 12px 20px;
+    border: 1px solid #00ff66;
+    background: #006600;
+    color: #fff;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+#bot-send-btn:hover {
+    background: #008800;
+}
+
+#bot-response {
+    min-height: 40px;
+    padding: 10px 15px;
+    background: #002200;
+    border: 1px solid #003300;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    font-size: 1em;
+    color: #99ffbb;
+    text-align: left;
+}
+
 /* ---------------- PROFILE SECTION STYLES ---------------- */
 .profile-section {
     max-width: 1000px;
@@ -590,6 +671,19 @@ footer {
         <div class="row-label">Top Recommended</div>
         <div class="video-row" id="recommended-videos-row"></div>
     </div>
+    
+    <div class="bot-section">
+        <div class="bot-header">
+            🤖 Tr3vN0x Category Bot
+        </div>
+        <div id="bot-response">
+            Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.
+        </div>
+        <div class="bot-input-container">
+            <input type="text" id="bot-input" placeholder="Ask for a category...">
+            <button id="bot-send-btn" onclick="handleBotCommand()">GO</button>
+        </div>
+    </div>
     <div class="row-container" id="search-container-row" style="display:none;">
         <div class="row-label" id="search-label">Search Results</div>
         <div class="search-results-row" id="search-results-row"></div>
@@ -598,27 +692,27 @@ footer {
         </div>
     </div>
     <div class="original-rows" id="original-rows">
-        <div class="row-container">
+        <div class="row-container" id="newest-row">
             <div class="row-label">Newest Videos</div>
             <div class="video-row" id="newest-videos-row"></div>
         </div>
 
-        <div class="row-container">
+        <div class="row-container" id="most-viewed-row-container">
             <div class="row-label">Most Viewed</div>
             <div class="video-row" id="most-viewed-row"></div>
         </div>
 
-        <div class="row-container" id="favorites-section">
+        <div class="row-container" id="favorites-row-container">
             <div class="row-label">Favorites</div>
             <div class="video-row" id="favorites-row"></div>
         </div>
 
-        <div class="row-container">
+        <div class="row-container" id="older-videos-row-container">
             <div class="row-label">Older Videos</div>
             <div class="video-row" id="older-videos-row"></div>
         </div>
 
-        <div class="row-container">
+        <div class="row-container" id="watch-history-row-container">
             <div class="row-label">Watch History</div>
             <div class="video-row" id="watch-history-row"></div>
         </div>
@@ -682,8 +776,6 @@ function setPersistentData(key, data) {
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
     let views = localStorage.getItem(key);
-    // Removed view-specific persistence for this version to align with the new request,
-    // but the function remains for data consistency (returning initial views only).
     if (views === null) {
         views = initialBaseViews; 
         localStorage.setItem(key, views);
@@ -695,7 +787,7 @@ function setPersistentViews(videoId, views) {
     localStorage.setItem(`views_${videoId}`, views);
 }
 
-// ---------------- TIMEZONE CYCLING UTILITY (Updated) ----------------
+// ---------------- TIMEZONE CYCLING UTILITY ----------------
 
 const timeZones = [
     { label: 'EST', tz: 'America/New_York' },      // Eastern Time
@@ -707,7 +799,7 @@ const timeZones = [
 ];
 
 let currentZoneIndex = 0;
-let activeClockInterval = null; // Variable to hold the 1-second interval ID
+let activeClockInterval = null; 
 
 function setClockDisplay(zoneIndex) {
     const clockElement = document.getElementById('est-time-display');
@@ -715,7 +807,6 @@ function setClockDisplay(zoneIndex) {
 
     const currentZone = timeZones[zoneIndex];
     
-    // Function to update the time for the current zone every second
     function updateActiveZoneTime() {
         const now = new Date();
         const formattedTime = now.toLocaleTimeString('en-US', {
@@ -728,9 +819,7 @@ function setClockDisplay(zoneIndex) {
         clockElement.textContent = `${currentZone.label}: ${formattedTime}`;
     }
 
-    // Immediately update and set the 1-second interval for the active zone
     updateActiveZoneTime();
-    // Clear existing interval before returning the new one, as a safeguard
     if (activeClockInterval) {
         clearInterval(activeClockInterval);
     }
@@ -738,12 +827,67 @@ function setClockDisplay(zoneIndex) {
 }
 
 function startClockCycle() {
-    // 1. Set the new 1-second interval for the current zone
     activeClockInterval = setClockDisplay(currentZoneIndex);
-    
-    // 2. Advance to the next zone for the next cycle
     currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
 }
+
+// ---------------- TR3VN0X CATEGORY BOT LOGIC (NEW) ----------------
+
+const categories = {
+    // Keywords map to the ID of the HTML element container for smooth scrolling
+    'newest': 'newest-row',
+    'new': 'newest-row',
+    'most viewed': 'most-viewed-row-container',
+    'popular': 'most-viewed-row-container',
+    'favorites': 'favorites-row-container',
+    'favs': 'favorites-row-container',
+    'older videos': 'older-videos-row-container',
+    'old': 'older-videos-row-container',
+    'history': 'watch-history-row-container',
+    'watched': 'watch-history-row-container',
+    'recommended': 'recommended-videos-row' // Scrolls to the video row, not the container
+};
+
+function handleBotCommand() {
+    const inputElement = document.getElementById('bot-input');
+    const responseElement = document.getElementById('bot-response');
+    const command = inputElement.value.trim().toLowerCase();
+
+    // Check for a match
+    const targetId = categories[command];
+
+    if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // Scroll to the element
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Provide feedback
+            responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
+            inputElement.value = ''; // Clear input
+        } else {
+            responseElement.textContent = `❌ Error: The category "${command.toUpperCase()}" exists but its section is missing.`;
+        }
+    } else if (command === '') {
+        responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
+    } else {
+        // No match found
+        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', or 'most viewed'.`;
+    }
+
+    // Set a timeout to reset the response message after a few seconds
+    setTimeout(() => {
+        responseElement.textContent = "Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.";
+    }, 5000);
+}
+
+// Add event listener for Enter key press on the bot input
+document.getElementById('bot-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleBotCommand();
+    }
+});
+
 
 // ---------------- VIDEO DATA SETUP ----------------
 
@@ -936,7 +1080,8 @@ function renderFavorites(){
 }
 
 function initialRender() {
-    renderRow('recommended-videos-row', allVideos.slice(0, 5)); // Just take the first 5 for recommended now
+    // Note: Recommended videos row container already has an ID assigned in the HTML for scrolling
+    renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
