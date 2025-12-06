@@ -86,6 +86,23 @@ header {
     gap: 12px;
 }
 
+/* NEW STYLES FOR THE ADDED IMAGE */
+.side-image {
+    width: 60px; /* Medium size */
+    height: 60px; /* Medium size */
+    object-fit: cover;
+    border-radius: 50%; /* Make it circular for a cool look */
+    border: 2px solid #00ff66;
+    margin-right: 15px; /* Spacing between the new image and the logo */
+    box-shadow: 0 0 10px #00ff66;
+    animation: rotate 8s linear infinite; /* Optional: adds a cyber feel */
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 .logo-container img {
     height: 50px;
     border-radius: 4px;
@@ -468,6 +485,8 @@ footer {
 
     <header>
         <div class="logo-container">
+            <img src="blob:https://gemini.google.com/a5c74700-5893-4017-99f8-1c43375610fc" alt="Side Decoration" class="side-image">
+            
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
 
@@ -567,32 +586,57 @@ document.addEventListener('DOMContentLoaded', () => {
     animateLoading();
 });
 
-// ---------------- DATA (UPDATED) ----------------
+// ---------------- PERSISTENT VIEW COUNT SIMULATION ----------------
+/**
+ * Since a real database cannot be used in static HTML/JS, 
+ * this simulates persistent views using localStorage.
+ */
+function getPersistentViews(videoId) {
+    const key = `views_${videoId}`;
+    let views = localStorage.getItem(key);
+    
+    if (views === null) {
+        // If first time loading, generate a random starting view count (simulating an existing database)
+        views = Math.floor(Math.random() * 5000) + 100;
+        localStorage.setItem(key, views);
+    }
+    return parseInt(views);
+}
+
+function updatePersistentViews(videoId, currentViews) {
+    const key = `views_${videoId}`;
+    localStorage.setItem(key, currentViews);
+}
+
+// ---------------- DATA SETUP ----------------
+
+// Initial Data structure (views are initialized from localStorage/randomized)
 const favorites = [];
 
-// Newest Videos (Moved from Most Viewed for demonstration)
+// .map is used to iterate over the videos and assign the initial view count 
 const newestVideos = [
-    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", views:0},
-    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", views:0},
-];
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)"},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)"},
+].map(v => ({...v, views: getPersistentViews(v.id)}));
 
-// Updated Most Viewed
 const mostViewed = [
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", views:0},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", views:0},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0}, // Duplicate to fill 4 columns
-];
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"},
+    // Use unique IDs for duplicates to allow individual view tracking
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"}, 
+].map(v => ({...v, views: getPersistentViews(v.id)}));
 
 const olderVideos = [
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", views:0},
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", views:0},
-    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", views:0},
-    {id:"XqmcBMy3X1k", title:"I'm taking a break...", views:0},
-    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", views:0},
-    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", views:0},
-];
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},
+    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT"},
+    {id:"XqmcBMy3X1k", title:"I'm taking a break..."},
+    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety..."},
+    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*"},
+].map(v => ({...v, views: getPersistentViews(v.id)}));
+
 const watchHistory = [];
 
 // ---------------- VIDEO RENDER ----------------
@@ -602,10 +646,14 @@ function createVideoCard(video) {
     const card = document.createElement('div');
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
+    
+    // Clean up ID for thumbnail source: remove simulated suffix if it exists (e.g., _dup, _old)
+    const thumbnailId = video.id.replace(/_dup$|_old$/, '');
+
     card.innerHTML = `
         <div class="thumbnail-container">
-            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title} thumbnail">
-            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title} high quality thumbnail">
+            <img class="thumb" src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
+            <img class="hover-thumb" src="https://img.youtube.com/vi/${thumbnailId}/hqdefault.jpg" alt="${video.title} high quality thumbnail">
         </div>
         <div class="video-info-wrapper">
             <div class="video-title">${video.title}</div>
@@ -614,8 +662,7 @@ function createVideoCard(video) {
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn" alt="Favorite button">
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
-    const viewsDisplay = card.querySelector('.video-views');
-
+    
     // Set initial favorite state
     if (favorites.find(v => v.id === video.id)) {
         favoriteBtn.classList.add('favorited');
@@ -635,7 +682,7 @@ function createVideoCard(video) {
             favoriteBtn.classList.remove('favorited');
         }
         renderFavorites(); // Re-render favorites row
-        // Also update the button state across all copies of this video
+        // Update the button state across all copies of this video
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
              if (favorites.find(v => v.id === video.id)) {
                 btn.classList.add('favorited');
@@ -647,16 +694,26 @@ function createVideoCard(video) {
 
     card.addEventListener('click',()=>{
         const modal = document.getElementById('video-modal');
-        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
+        // Use the base video ID for the embed URL 
+        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
         modal.style.display = 'flex';
 
-        // Update views locally
-        video.views++;
-        viewsDisplay.textContent = `Views: ${video.views}`;
+        // **** PERSISTENT VIEW COUNT LOGIC ****
         
-        // Update watch history
+        // 1. Update the local video object's view count
+        video.views++;
+        
+        // 2. Update the persistent store (localStorage simulation)
+        updatePersistentViews(video.id, video.views);
+
+        // 3. Update the display on ALL visible cards that show this video ID
+        document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
+            el.textContent = `Views: ${video.views}`;
+        });
+        
+        // 4. Update watch history 
         if(!watchHistory.find(v=>v.id===video.id)){
-            watchHistory.unshift(video); // Add to front
+            watchHistory.unshift({...video}); // Add a clone to keep the current view count in the history list
         }
         renderRow('watch-history-row', watchHistory);
     });
@@ -666,17 +723,19 @@ function createVideoCard(video) {
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
     row.innerHTML = '';
+    // Ensure we render the videos with their latest views
     videos.forEach(v=>{
         row.appendChild(createVideoCard(v));
     });
 }
 
 function renderFavorites(){
+    // Re-render the favorites row based on the current favorites array
     renderRow('favorites-row', favorites);
 }
 
 // ---------------- INITIAL RENDER ----------------
-renderRow('newest-videos-row', newestVideos); // RENDER NEW ROW
+renderRow('newest-videos-row', newestVideos);
 renderRow('most-viewed-row', mostViewed);
 renderRow('older-videos-row', olderVideos);
 renderFavorites();
@@ -700,23 +759,46 @@ const searchInput = document.querySelector('.search-bar');
 searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase();
     
-    // Combine all unique videos into one array for comprehensive search
-    const allVideos = [...newestVideos, ...mostViewed, ...olderVideos];
-    const uniqueVideos = Array.from(new Map(allVideos.map(v => [v.id, v])).values());
-
-    const allRows = [
-        {id: 'newest-videos-row', videos: newestVideos}, // Include new row
-        {id: 'most-viewed-row', videos: mostViewed},
-        {id: 'older-videos-row', videos: olderVideos},
-        {id: 'favorites-row', videos: favorites},
-        {id: 'watch-history-row', videos: watchHistory}
-    ];
-
-    allRows.forEach(rowObj => {
-        const filtered = rowObj.videos.filter(v=>v.title.toLowerCase().includes(query));
-        renderRow(rowObj.id, filtered);
+    // Combine all videos for search filtering
+    const allVideos = [...newestVideos, ...mostViewed, ...olderVideos, ...favorites, ...watchHistory];
+    
+    // Create an object to hold unique video IDs as keys and their corresponding objects
+    const uniqueVideosMap = new Map();
+    allVideos.forEach(video => {
+        if (!uniqueVideosMap.has(video.id)) {
+            uniqueVideosMap.set(video.id, video);
+        }
     });
+
+    // Convert map values back to an array for filtering
+    const uniqueVideos = Array.from(uniqueVideosMap.values());
+    const filteredVideos = uniqueVideos.filter(v=>v.title.toLowerCase().includes(query));
+
+    // For demonstration, we'll only display filtered videos in the 'Most Viewed' row.
+    // In a real app, you might show a dedicated 'Search Results' page.
+    if (query.length > 0) {
+        // Hide all rows except the header
+        document.querySelectorAll('.row-container').forEach(row => row.style.display = 'none');
+        
+        // Temporarily display results in the Most Viewed container
+        document.querySelector('.row-container:nth-of-type(2)').style.display = 'flex';
+        document.querySelector('.row-container:nth-of-type(2) .row-label').textContent = 'Search Results';
+        renderRow('most-viewed-row', filteredVideos);
+
+    } else {
+        // Show all rows when the search bar is empty
+        document.querySelectorAll('.row-container').forEach(row => row.style.display = 'flex');
+        document.querySelector('.row-container:nth-of-type(2) .row-label').textContent = 'Most Viewed';
+        
+        // Re-render all original rows
+        renderRow('newest-videos-row', newestVideos);
+        renderRow('most-viewed-row', mostViewed);
+        renderRow('older-videos-row', olderVideos);
+        renderFavorites();
+        renderRow('watch-history-row', watchHistory);
+    }
 });
+
 
 // ---------------- PROFILE MODAL ----------------
 const profileModal = document.getElementById('profile-modal');
