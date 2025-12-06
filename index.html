@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x Official Website - Cyber Edition</title>
+<title>Tr3vN0x Official Website</title>
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -109,11 +109,11 @@ header {
     box-shadow: 0 0 8px #00ff66;
 }
 
-/* --- NEW SOCIAL/PROFILE BUTTONS CONTAINER --- */
+/* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 15px; /* Spacing between buttons */
+    gap: 15px; 
 }
 
 .social-button {
@@ -136,33 +136,6 @@ header {
     color: #33ff99;
 }
 
-.profile-btn {
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    padding: 4px;
-    background: #111;
-    border: 1px solid #003300; /* Added border for consistency */
-}
-
-.profile-btn img {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px #00ff66);
-}
-
-.profile-btn:hover {
-    background: #003300;
-    box-shadow: 0 0 12px #00ff66;
-    border-color: #00ff66;
-}
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
 .row-container {
@@ -293,191 +266,6 @@ header {
     filter: drop-shadow(0 0 6px #ff00ff);
 }
 
-/* ---------------- PROFILE MODAL ---------------- */
-#profile-modal {
-    display: none;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.95);
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-#profile-modal .modal-content {
-    background: #111;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    width: 95%; 
-    max-width: 800px; 
-    height: 90%;
-    max-height: 650px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #003300;
-    box-shadow: 0 0 20px #00ff66;
-}
-
-.profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-direction: column;
-}
-
-.profile-picture {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #00ff66;
-    margin-bottom: 12px;
-}
-
-.verified-badge {
-    background: #00ff66;
-    color: #0a0a0a;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 8px;
-}
-
-.followers {
-    margin: 10px 0;
-}
-
-.follow-btn {
-    padding: 8px 16px;
-    background: #111;
-    border: 1px solid #00ff66;
-    color: #00ff66;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    transition: 0.3s;
-}
-
-.follow-btn:hover {
-    background: #003300;
-    box-shadow: 0 0 10px #00ff66;
-}
-
-.follow-btn:disabled {
-    background: #002200;
-    color: #00aa00;
-    cursor: default;
-    box-shadow: none;
-}
-
-.links a {
-    display: inline-block;
-    margin: 5px 10px;
-    color: #00ff66;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.links a:hover {
-    text-decoration: underline;
-}
-
-#profile-modal .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    color: #00ff66;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* --- DASHBOARD STYLES --- */
-.dashboard-nav {
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #003300;
-    margin-bottom: 15px;
-}
-
-.dashboard-nav button {
-    background: none;
-    border: none;
-    padding: 10px 20px;
-    color: #00ff66;
-    font-size: 1em;
-    font-family: 'Consolas', monospace;
-    cursor: pointer;
-    transition: 0.3s;
-    border-bottom: 3px solid transparent;
-}
-
-.dashboard-nav button:hover {
-    color: #33ff99;
-    background-color: #1a1a1a;
-}
-
-.dashboard-nav button.active {
-    border-bottom-color: #00ff66;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff66;
-}
-
-.dashboard-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #0d0d0d;
-}
-
-.dashboard-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 15px;
-    padding: 10px 0;
-}
-
-.modal-video-card {
-    background: #1a1a1a;
-    border: 1px solid #004400;
-    border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.modal-video-card:hover {
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-}
-
-.modal-video-card img {
-    width: 80px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.modal-video-card .title {
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #00ff66;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-}
-
 
 /* ---------------- FOOTER ---------------- */
 footer {
@@ -540,7 +328,7 @@ footer {
         gap: 10px;
         margin-top: 10px;
         width: 100%;
-        justify-content: space-around;
+        justify-content: flex-end; /* Keep buttons to the right */
     }
     .social-button {
         padding: 8px 12px;
@@ -551,9 +339,10 @@ footer {
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: center; }
     .header-actions {
-        order: 3; /* Push buttons to the bottom of the column */
+        order: 3; 
         margin-top: 15px;
         width: 95%;
+        justify-content: space-around; /* Distribute buttons on mobile */
     }
     .row-container { flex-direction: column; padding: 15px 10px; }
     .row-label { 
@@ -575,15 +364,6 @@ footer {
     }
     .video-card {
         min-width: 240px;
-    }
-    
-    /* Profile modal on mobile */
-    #profile-modal .modal-content {
-        max-width: 90%;
-        padding: 15px;
-    }
-    .dashboard-list {
-        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -609,10 +389,6 @@ footer {
         <div class="header-actions">
             <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
             <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
-            
-            <div class="profile-btn" id="open-profile">
-                <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
-            </div>
         </div>
     </header>
     
@@ -644,55 +420,6 @@ footer {
     <div id="video-modal">
         <div class="close-btn">&times;</div>
         <iframe src="" allowfullscreen></iframe>
-    </div>
-
-    <div id="profile-modal">
-        <div class="modal-content">
-            <div class="close-btn">&times;</div>
-            
-            <div class="profile-header">
-                <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/590086895_835846532383714_4499501150848421010_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8&_nc_ohc=Kjd5106wWUUQ7kNvwGY4KdI&_nc_oc=Adn-ZpH21jojHfsJiONHnGqW2-PZfGjDnHtpv7AALDDAhE8LBXTvIe1Yze_i45z-s66KSXnu8kk0XVzP_XkfG95AC&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=ZLmUJVBql1dhtmAYTmclXQ&oh=00_AfnUki9lotlZWgh6nkZf0VzKWY0Hy4rXxzTpOPP8CY1yJQ&oe=69387882" alt="Profile Picture" class="profile-picture">
-                <h2>Tr3vN0x <span class="verified-badge">Verified</span></h2>
-                <div class="followers">Followers: <span id="followers-count">0</span> | Following: 0</div>
-                <button class="follow-btn" id="follow-btn">Follow</button>
-                <div class="links">
-                    <p>Hey, you found me! I want to thank you so much for the support, but also you mean alot to everyone around you. Yeah life may get tough motivate yourself, and live the dreams you want. Not everyday will be easy, but belive and you will achieve greatness...</p>
-                    <a href="https://x.com/@Tr3vN0x" target="_blank">Twitter</a>
-                    <a href="https://youtube.com/@Tr3vN0x" target="_blank">YouTube</a>
-                </div>
-            </div>
-
-            <div class="dashboard-nav">
-                <button class="tab-btn active" data-tab="account">Account</button>
-                <button class="tab-btn" data-tab="favorites">Favorites</button>
-                <button class="tab-btn" data-tab="history">History</button>
-            </div>
-            
-            <div class="dashboard-content">
-                
-                <div id="account-tab" class="tab-pane">
-                    <h3>Account Status: Operational</h3>
-                    <p>User ID: 0xTr3vN0x007</p>
-                    <p>Last Login: 2025-12-06</p>
-                </div>
-                
-                <div id="favorites-tab" class="tab-pane hidden">
-                    <h3>Your Saved Videos:</h3>
-                    <div id="modal-favorites-list" class="dashboard-list">
-                        </div>
-                    <p id="no-favorites-message" style="color:#00ff66; display:none;">No videos in your favorites list.</p>
-                </div>
-                
-                <div id="history-tab" class="tab-pane hidden">
-                    <h3>Recent Watch History:</h3>
-                    <div id="modal-history-list" class="dashboard-list">
-                        </div>
-                    <p id="no-history-message" style="color:#00ff66; display:none;">Your watch history is empty.</p>
-                </div>
-                
-            </div>
-            
-        </div>
     </div>
 
     <footer>
@@ -787,53 +514,6 @@ const olderVideos = [
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
 /**
- * Creates a minimal video card for display inside the profile modal.
- */
-function createModalVideoCard(video) {
-    const card = document.createElement('div');
-    card.className = 'modal-video-card';
-    const thumbnailId = video.id.replace(/_dup$|_old$/, '');
-    
-    card.innerHTML = `
-        <img src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
-        <div class="title">${video.title}</div>
-    `;
-
-    card.addEventListener('click', () => {
-        // Close profile and open video modal
-        document.getElementById('profile-modal').style.display = 'none';
-        
-        const videoModal = document.getElementById('video-modal');
-        // Use the base video ID for the embed URL 
-        videoModal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
-        videoModal.style.display = 'flex';
-
-        // Update view count and history when watched from the modal
-        updateVideoWatchData(video);
-    });
-    
-    return card;
-}
-
-/**
- * Renders an array of videos into the designated container within the profile modal.
- */
-function renderModalList(listId, videos) {
-    const list = document.getElementById(listId);
-    list.innerHTML = '';
-    const messageId = listId.includes('favorites') ? 'no-favorites-message' : 'no-history-message';
-    
-    if (videos.length === 0) {
-        document.getElementById(messageId).style.display = 'block';
-    } else {
-        document.getElementById(messageId).style.display = 'none';
-        videos.forEach(v => {
-            list.appendChild(createModalVideoCard(v));
-        });
-    }
-}
-
-/**
  * Handles view count and watch history updates when a video is played.
  */
 function updateVideoWatchData(video) {
@@ -850,9 +530,8 @@ function updateVideoWatchData(video) {
     
     // 4. Update watch history 
     if(!watchHistory.find(v=>v.id===video.id)){
-        watchHistory.unshift({...video}); // Add a clone to keep the current view count in the history list
+        watchHistory.unshift({...video}); 
     } else {
-         // Move to the front if already in history
          const index = watchHistory.findIndex(v=>v.id===video.id);
          const item = watchHistory.splice(index, 1)[0];
          watchHistory.unshift(item);
@@ -902,8 +581,7 @@ function createVideoCard(video) {
             favorites.splice(index,1);
             favoriteBtn.classList.remove('favorited');
         }
-        renderFavorites(); // Re-render main favorites row
-        renderModalList('modal-favorites-list', favorites); // Re-render modal list
+        renderFavorites(); 
         // Update the button state across all copies of this video
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
              if (favorites.find(v => v.id === video.id)) {
@@ -954,66 +632,6 @@ videoModal.addEventListener('click', e=>{
     if(e.target === videoModal){
         videoModal.querySelector('iframe').src = '';
         videoModal.style.display = 'none';
-    }
-});
-
-
-// ---------------- PROFILE MODAL DASHBOARD LOGIC ----------------
-const profileModal = document.getElementById('profile-modal');
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanes = document.querySelectorAll('.tab-pane');
-
-function showTab(tabId) {
-    tabPanes.forEach(pane => {
-        pane.classList.add('hidden');
-        pane.style.display = 'none';
-    });
-    tabBtns.forEach(btn => btn.classList.remove('active'));
-
-    const targetPane = document.getElementById(tabId + '-tab');
-    if (targetPane) {
-        targetPane.classList.remove('hidden');
-        targetPane.style.display = 'block';
-    }
-
-    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
-    if (targetBtn) {
-        targetBtn.classList.add('active');
-    }
-    
-    if (tabId === 'favorites') {
-        renderModalList('modal-favorites-list', favorites);
-    } else if (tabId === 'history') {
-        renderModalList('modal-history-list', watchHistory);
-    }
-}
-
-tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        showTab(btn.getAttribute('data-tab'));
-    });
-});
-
-document.getElementById('open-profile').addEventListener('click',()=>{
-    profileModal.style.display='flex';
-    showTab('account'); 
-});
-
-document.querySelector('#profile-modal .close-btn').addEventListener('click',()=> profileModal.style.display='none');
-profileModal.addEventListener('click', e => { if(e.target===profileModal) profileModal.style.display='none'; });
-document.addEventListener('keydown', e => { if(e.key==='Escape' && profileModal.style.display === 'flex') profileModal.style.display='none'; });
-
-// ---------------- FOLLOW BUTTON ----------------
-const followBtn = document.getElementById('follow-btn');
-const followersCount = document.getElementById('followers-count');
-let followers = 0;
-
-followBtn.addEventListener('click', ()=>{
-    if (!followBtn.disabled) {
-        followers++;
-        followersCount.textContent = followers;
-        followBtn.disabled = true;
-        followBtn.textContent = 'Following';
     }
 });
 </script>
