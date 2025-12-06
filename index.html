@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -13,7 +13,6 @@ body {
     background: #0a0a0a;
     color: #00ff66;
     scroll-behavior: smooth;
-    /* Main content is now visible immediately */
 }
 
 /* ---------------- HEADER ---------------- */
@@ -31,29 +30,24 @@ header {
     gap: 15px; 
 }
 
-/* --- NAVIGATION LINKS --- */
-.nav-container {
+/* --- EST CLOCK STYLES (New) --- */
+.est-clock-container {
     display: flex;
-    gap: 15px;
-    margin-left: 20px;
-}
-
-.nav-link {
-    color: #00ff66;
-    text-decoration: none;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 6px;
+    background: #001a00;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+    font-size: 1em;
     font-weight: bold;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    transition: all 0.2s;
+    color: #00ff66;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
-.nav-link:hover {
-    border-color: #00ff66;
-    background: rgba(0, 255, 102, 0.1);
-    box-shadow: 0 0 8px #00ff66;
-}
-/* ---------------- END NEW NAV STYLES ---------------- */
+/* --- NAVIGATION LINKS (Removed) --- 
+.nav-container { display: none; } 
+*/
 
 .logo-container {
     display: flex;
@@ -131,38 +125,6 @@ header {
     color: #33ff99;
 }
 
-/* --- ACTIVE USER COUNTER STYLES --- */
-.active-users-container {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    border: 1px solid #00ff66;
-    border-radius: 6px;
-    background: #001a00;
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
-}
-
-.active-dot {
-    width: 10px;
-    height: 10px;
-    background-color: #00ff66;
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 5px #00ff66, 0 0 10px #00ff66;
-    animation: pulsate-active 1.2s infinite ease-out;
-}
-
-@keyframes pulsate-active {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.active-users-text {
-    font-size: 1em;
-    font-weight: bold;
-    color: #00ff66;
-}
 
 /* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
@@ -308,7 +270,7 @@ header {
 }
 
 .video-title {
-    margin: 10px 8px 4px;
+    margin: 10px 8px 10px; /* Reduced bottom margin slightly since views are removed */
     font-weight: bold;
     font-size: 1.1em;
     color: #00ff66;
@@ -320,14 +282,8 @@ header {
     -webkit-box-orient: vertical;
 }
 
-.video-views {
-    text-align: left;
-    font-size: 0.85em;
-    color: #00ff66;
-    margin: 0 8px 10px;
-    opacity: 0.7;
-    text-shadow: none;
-}
+/* Removed .video-views styles */
+
 
 .favorite-btn {
     position: absolute;
@@ -562,9 +518,7 @@ footer {
     header { flex-direction: column; align-items: center; }
     .logo-container { order: 1; margin-bottom: 10px; }
     .search-container { order: 2; max-width: 95%; margin: 0 auto; }
-    .active-users-container { order: 0; margin-bottom: 10px; } 
-    .nav-container { order: 3; margin-top: 10px; width: 95%; justify-content: space-around; flex-wrap: wrap; }
-    .nav-link { margin: 5px 0; }
+    .est-clock-container { order: 0; margin-bottom: 10px; } /* New order for clock */
     .header-actions {
         order: 4; 
         margin-top: 15px;
@@ -614,10 +568,10 @@ footer {
 <body>
 
 <main id="main-content">
+    
     <header>
-        <div class="active-users-container">
-            <div class="active-dot"></div>
-            <div class="active-users-text" id="active-user-count">Active: 0</div>
+        <div class="est-clock-container">
+            <span id="est-time-display">Loading EST...</span>
         </div>
         
         <div class="logo-container">
@@ -626,12 +580,6 @@ footer {
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
         </div>
         
-        <div class="nav-container">
-            <a href="#recommended-videos-row" class="nav-link">Recommended</a>
-            <a href="#newest-videos-row" class="nav-link">Newest</a>
-            <a href="#favorites-row" class="nav-link">Favorites</a>
-            <a href="#profile-section" class="nav-link">About</a>
-        </div>
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
             <button id="search-btn" onclick="handleSearch()">GO</button>
@@ -740,6 +688,8 @@ function setPersistentData(key, data) {
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
     let views = localStorage.getItem(key);
+    // Removed view-specific persistence for this version to align with the new request,
+    // but the function remains for data consistency (returning initial views only).
     if (views === null) {
         views = initialBaseViews; 
         localStorage.setItem(key, views);
@@ -750,6 +700,26 @@ function getPersistentViews(videoId, initialBaseViews) {
 function setPersistentViews(videoId, views) {
     localStorage.setItem(`views_${videoId}`, views);
 }
+
+// ---------------- EST CLOCK UTILITY (New) ----------------
+
+function updateEstClock() {
+    const clockElement = document.getElementById('est-time-display');
+    if (!clockElement) return;
+
+    // Create a date object and format it for EST (America/New_York)
+    const now = new Date();
+    const estTime = now.toLocaleTimeString('en-US', {
+        timeZone: 'America/New_York',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+    
+    clockElement.textContent = `EST: ${estTime}`;
+}
+
 
 // ---------------- VIDEO DATA SETUP ----------------
 
@@ -786,46 +756,6 @@ const olderVideos = allVideos.filter(v => v.category === 'older');
 let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
 let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
 
-// ---------------- RANDOM VIDEO SELECTOR ----------------
-
-function getRandomVideos(count = 5) {
-    let pool = [...allVideos];
-    let result = [];
-    
-    count = Math.min(count, pool.length);
-
-    for (let i = 0; i < count; i++) {
-        const randomIndex = Math.floor(Math.random() * pool.length);
-        result.push(pool[randomIndex]);
-        pool.splice(randomIndex, 1);
-    }
-    return result;
-}
-
-// ---------------- ACTIVE USER SIMULATOR ----------------
-
-function updateActiveUserCount() {
-    const userCountElement = document.getElementById('active-user-count');
-    const min = 5; 
-    const max = 15; 
-    
-    let activeUsers = sessionStorage.getItem('activeUsers');
-    
-    if (!activeUsers) {
-        activeUsers = Math.floor(Math.random() * (max - min + 1)) + min;
-        sessionStorage.setItem('activeUsers', activeUsers);
-    } else {
-        activeUsers = parseInt(activeUsers);
-        const change = Math.floor(Math.random() * 3) - 1; 
-        activeUsers = Math.max(min, Math.min(max, activeUsers + change));
-        sessionStorage.setItem('activeUsers', activeUsers);
-    }
-
-    userCountElement.textContent = `Active: ${activeUsers}`;
-}
-
-updateActiveUserCount();
-setInterval(updateActiveUserCount, Math.floor(Math.random() * 5000) + 3000); 
 
 // ---------------- SEARCH HANDLER ----------------
 
@@ -838,6 +768,7 @@ function handleSearch() {
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
+        // Hide original rows
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
@@ -856,6 +787,7 @@ function handleSearch() {
             noResultsMessage.style.display = 'block'; 
         }
     } else {
+        // Show original rows
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
         recommendedRow.style.display = 'flex';
@@ -869,9 +801,6 @@ document.getElementById('search-input').addEventListener('keypress', function (e
         handleSearch();
     }
 });
-
-// ---------------- ADVANCED LOADING SCRIPT (REMOVED) ----------------
-// The loading script is now replaced with a simple initialRender call below.
 
 
 // --- SHARE FUNCTION ---
@@ -896,12 +825,9 @@ async function shareWebsite() {
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
 function updateVideoWatchData(video) {
-    // 1. Update Views
+    // 1. Update Views (Still updating persistence, but not showing it)
     video.views++;
     setPersistentViews(video.id, video.views);
-    document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
-        el.textContent = `Views: ${video.views.toLocaleString()}`;
-    });
     
     // 2. Update Watch History (Maintain LIFO order and persistence)
     const index = watchHistory.findIndex(v=>v.id===video.id);
@@ -917,8 +843,6 @@ function updateVideoWatchData(video) {
 
 // ---------------- VIDEO CARD RENDERER ----------------
 function createVideoCard(video) {
-    if(video.views === undefined) video.views = 0;
-
     const card = document.createElement('div');
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
@@ -935,8 +859,7 @@ function createVideoCard(video) {
         </div>
         <div class="video-info-wrapper">
             <div class="video-title">${video.title}</div>
-            <div class="video-views">Views: ${video.views.toLocaleString()}</div>
-        </div>
+            </div>
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
@@ -989,14 +912,13 @@ function renderFavorites(){
 }
 
 function initialRender() {
-    renderRow('recommended-videos-row', getRandomVideos(5)); 
+    renderRow('recommended-videos-row', allVideos.slice(0, 5)); // Just take the first 5 for recommended now
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
     renderFavorites(); // Renders persistent favorites
     renderRow('watch-history-row', watchHistory); // Renders persistent history
     
-    // Ensure main content is visible now that splash screen is gone
     document.getElementById('main-content').style.opacity = '1';
     document.getElementById('main-content').style.pointerEvents = 'auto'; 
 }
@@ -1021,6 +943,12 @@ function scrollFunction() {
 }
 
 // ---------------- INITIALIZATION ----------------
+
+// 1. Initialize clock and set interval
+updateEstClock();
+setInterval(updateEstClock, 1000); // Update every second
+
+// 2. Render content
 initialRender();
 
 
