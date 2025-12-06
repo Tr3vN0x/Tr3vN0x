@@ -325,6 +325,79 @@ header {
 }
 
 
+/* ---------------- PROFILE SECTION STYLES ---------------- */
+.profile-section {
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #111;
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #00ff66;
+    box-shadow: 0 0 15px #00ff66;
+}
+
+.profile-info {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.profile-username {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 8px #00ff66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.badge {
+    padding: 4px 10px;
+    background: #ff00ff;
+    color: #0a0a0a;
+    border-radius: 4px;
+    font-size: 0.6em;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: none;
+    border: 1px solid #0a0a0a;
+    box-shadow: 0 0 5px #ff00ff;
+}
+
+.profile-message {
+    margin-top: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #00cc55;
+    background: #001a00;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ff66;
+    text-align: left;
+}
+
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
@@ -395,6 +468,18 @@ footer {
     .search-container {
         max-width: 100%; 
     }
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-info {
+        margin-left: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .profile-username {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -427,6 +512,10 @@ footer {
     }
     .video-card {
         min-width: 240px;
+    }
+    .profile-section {
+        margin: 30px 10px;
+        padding: 20px;
     }
 }
 </style>
@@ -498,7 +587,25 @@ footer {
         </div>
     </div>
 
-
+    <div class="profile-section">
+        <div class="profile-header">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00" alt="Tr3vN0x Profile Picture" class="profile-pic">
+            <div class="profile-info">
+                <p class="profile-username">
+                    Tr3vN0x
+                    <span class="badge">OWNER</span>
+                </p>
+                <div class="social-links-small" style="margin-top:5px;">
+                    <a href="https://youtube.com/@Tr3vN0x" target="_blank" style="color:red; text-decoration:none; margin-right: 10px;">YouTube</a>
+                    <a href="https://x.com/@Tr3vN0x" target="_blank" style="color:#00acee; text-decoration:none;">Twitter/X</a>
+                </div>
+            </div>
+        </div>
+        <p class="profile-message">
+            **SYSTEM STATUS: ONLINE**<br>
+            Hello everyone! I'm Tr3vN0x, the creator behind this website and the videos you see here. This site is a dedicated hub for all my content, from the latest uploads to the fan-favorite classics. Thanks for stopping by and supporting the channel! Let's keep gaming!
+        </p>
+    </div>
     <div id="video-modal">
         <div class="close-btn">&times;</div>
         <iframe src="" allowfullscreen></iframe>
@@ -510,7 +617,7 @@ footer {
 </main>
 
 <script>
-// ---------------- DATA SETUP (Reverted to original videos only) ----------------
+// ---------------- DATA SETUP ----------------
 
 function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
@@ -575,18 +682,18 @@ function handleSearch() {
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
-        // 1. Hide original and recommended rows, show search row
+        // Hide original and recommended rows, show search row
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
         searchResultsRow.style.display = 'grid'; 
 
-        // 2. Filter videos based on the query
+        // Filter videos based on the query
         const filteredVideos = allVideos.filter(video => 
             video.title.toLowerCase().includes(query)
         );
 
-        // 3. Render results
+        // Render results
         if (filteredVideos.length > 0) {
             renderRow('search-results-row', filteredVideos);
             noResultsMessage.style.display = 'none';
@@ -669,6 +776,10 @@ async function shareWebsite() {
 
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
+
+function updatePersistentViews(videoId, views) {
+    localStorage.setItem(`views_${videoId}`, views);
+}
 
 function updateVideoWatchData(video) {
     video.views++;
