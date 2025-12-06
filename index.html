@@ -877,7 +877,7 @@ const categories = {
     'history': 'watch-history-row-container',
     'watched': 'watch-history-row-container',
     'recommended': 'recommended-row-container',
-    'shorts': 'shorts-row-container', // <-- NEW BOT COMMAND
+    'shorts': 'shorts-row-container', 
     'short videos': 'shorts-row-container',
     'quick clips': 'shorts-row-container',
     'about': 'about-me' // Adding a bot command for the About section just in case
@@ -964,7 +964,7 @@ const allVideos = allVideosData.map(video => {
 const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
-const shortsVideos = allVideos.filter(v => v.category === 'short'); // <-- NEW SHORTS ARRAY
+const shortsVideos = allVideos.filter(v => v.category === 'short'); // <-- SHORTS ARRAY
 
 // Use IDs to check against the full video list, ensuring we don't save redundant data
 let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
@@ -1131,7 +1131,7 @@ function renderFavorites(){
 
 function initialRender() {
     renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
-    renderRow('shorts-videos-row', shortsVideos); // <-- NEW RENDER CALL
+    renderRow('shorts-videos-row', shortsVideos); // <-- SHORTS RENDER CALL
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
