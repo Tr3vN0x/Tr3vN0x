@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4v1C-jmNHN6Q_wR4pCcdBBss5wdCNq8A&oe=6939DF7A">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u1C-jmNHN6Q_wR4pCcdBBss5wdCNq8A&oe=6939DF7A">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -79,7 +79,7 @@ header {
     top: 0;
     z-index: 10;
     flex-wrap: wrap;
-    gap: 15px; /* Added gap to header items */
+    gap: 15px; 
 }
 
 .logo-container {
@@ -189,7 +189,7 @@ header {
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
 .search-results-row {
-    display: none; /* Initially hidden */
+    display: none; 
     grid-template-columns: repeat(4, 1fr);
     gap: 20px; 
     padding-bottom: 0;
@@ -219,6 +219,26 @@ header {
     padding: 10px 0;
     border-right: 2px solid #004400; 
 }
+
+/* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
+#no-results-message {
+    /* Existing Styles: display:none, color, font-size, text-align, width:100% */
+    /* Key addition: Ensure it takes up space in the flex container horizontally */
+    display: none; /* Controlled by JS */
+    color: #ff0000; 
+    font-size: 1.5em; 
+    text-align: center; 
+    width: 100%; /* Force it to stretch across the row content area */
+    writing-mode: horizontal-tb; /* Ensure text is horizontal */
+    transform: none; /* Ensure no rotation is applied */
+    padding: 20px;
+    background: #110000;
+    border: 1px solid #ff0000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 10px; /* Space from search bar */
+}
+
 
 .video-row {
     display: grid;
@@ -411,21 +431,23 @@ header {
     border-radius: 8px;
     border-left: 5px solid #00ff66;
     text-align: left;
-    display: flex; /* Added flex to align status icon and text */
-    flex-wrap: wrap;
-    align-items: center;
+    display: flex; 
+    flex-direction: column; /* Changed to column to ensure text wraps correctly */
 }
 .profile-message span {
-    margin-right: 8px; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; /* Added slight separation from the main message */
 }
 .profile-message b {
     color: #00ff66;
+    margin-left: 5px;
 }
 
 
 /* ---------------- SCROLL TO TOP BUTTON ---------------- */
 #scroll-to-top {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -573,6 +595,13 @@ footer {
         font-size: 1.2em;
         padding: 8px 12px;
     }
+    /* Ensure the no results message is correctly oriented on mobile */
+    #no-results-message {
+        writing-mode: horizontal-tb; 
+        transform: none;
+        font-size: 1.2em;
+        width: 100%;
+    }
 }
 </style>
 </head>
@@ -612,9 +641,10 @@ footer {
     </div>
     <div class="row-container" id="search-container-row" style="display:none;">
         <div class="row-label" id="search-label">Search Results</div>
-        <div class="search-results-row" id="search-results-row">
-            </div>
-        <div class="row-label" id="no-results-message" style="display:none; color: #ff0000; font-size: 1.5em; text-align: center; width: 100%;">No videos found matching your search.</div>
+        <div class="search-results-row" id="search-results-row"></div>
+        <div class="row-content" style="width: 100%;">
+             <div id="no-results-message">No videos found matching your search.</div>
+        </div>
     </div>
     <div class="original-rows" id="original-rows">
         <div class="row-container">
@@ -658,8 +688,10 @@ footer {
             </div>
         </div>
         <p class="profile-message">
-            <span class="status-indicator"></span> 
-            <b>STATUS: ONLINE</b><br>
+            <span>
+                <span class="status-indicator"></span> 
+                <b>STATUS: ONLINE</b>
+            </span>
             Hello everyone! I'm Tr3vN0x, the creator behind this website and the videos you see here. This site is a dedicated hub for all my content, from the latest uploads to the fan-favorite classics. Thanks for stopping by and supporting the channel! Let's keep gaming!
         </p>
     </div>
@@ -745,7 +777,6 @@ function handleSearch() {
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
         searchContainerRow.style.display = 'flex';
-        searchResultsRow.style.display = 'grid'; 
 
         // Filter videos based on the query
         const filteredVideos = allVideos.filter(video => 
@@ -755,17 +786,18 @@ function handleSearch() {
         // Render results
         if (filteredVideos.length > 0) {
             renderRow('search-results-row', filteredVideos);
+            searchResultsRow.style.display = 'grid'; 
             noResultsMessage.style.display = 'none';
         } else {
             renderRow('search-results-row', []);
-            noResultsMessage.style.display = 'block';
+            searchResultsRow.style.display = 'none'; // Hide empty grid
+            noResultsMessage.style.display = 'block'; // Show horizontal message
         }
     } else {
         // If the query is empty, hide search results and show original rows
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
         recommendedRow.style.display = 'flex';
-        searchResultsRow.style.display = 'none';
         noResultsMessage.style.display = 'none';
         initialRender();
     }
