@@ -158,6 +158,39 @@ header {
     color: #33ff99;
 }
 
+/* --- ACTIVE USER COUNTER STYLES --- */
+.active-users-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 6px;
+    background: #001a00;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+}
+
+.active-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px #00ff66, 0 0 10px #00ff66;
+    animation: pulsate-active 1.2s infinite ease-out;
+}
+
+@keyframes pulsate-active {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.active-users-text {
+    font-size: 1em;
+    font-weight: bold;
+    color: #00ff66;
+}
+
 /* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
     display: flex;
@@ -222,21 +255,19 @@ header {
 
 /* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
 #no-results-message {
-    /* Existing Styles: display:none, color, font-size, text-align, width:100% */
-    /* Key addition: Ensure it takes up space in the flex container horizontally */
-    display: none; /* Controlled by JS */
+    display: none; 
     color: #ff0000; 
     font-size: 1.5em; 
     text-align: center; 
-    width: 100%; /* Force it to stretch across the row content area */
-    writing-mode: horizontal-tb; /* Ensure text is horizontal */
-    transform: none; /* Ensure no rotation is applied */
+    width: 100%; 
+    writing-mode: horizontal-tb; 
+    transform: none; 
     padding: 20px;
     background: #110000;
     border: 1px solid #ff0000;
     border-radius: 8px;
     box-sizing: border-box;
-    margin-top: 10px; /* Space from search bar */
+    margin-top: 10px; 
 }
 
 
@@ -432,12 +463,12 @@ header {
     border-left: 5px solid #00ff66;
     text-align: left;
     display: flex; 
-    flex-direction: column; /* Changed to column to ensure text wraps correctly */
+    flex-direction: column; 
 }
 .profile-message span {
     display: flex;
     align-items: center;
-    margin-bottom: 5px; /* Added slight separation from the main message */
+    margin-bottom: 5px; 
 }
 .profile-message b {
     color: #00ff66;
@@ -558,6 +589,8 @@ footer {
     header { flex-direction: column; align-items: center; }
     .logo-container { order: 1; margin-bottom: 10px; }
     .search-container { order: 2; max-width: 95%; margin: 0 auto; }
+    .active-users-container { order: 0; margin-bottom: 10px; } /* Move to top of header on mobile */
+
     .header-actions {
         order: 3; 
         margin-top: 15px;
@@ -617,6 +650,11 @@ footer {
 <main id="main-content">
 
     <header>
+        <div class="active-users-container">
+            <div class="active-dot"></div>
+            <div class="active-users-text" id="active-user-count">Active: 0</div>
+        </div>
+        
         <div class="logo-container">
             <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00" class="side-image">
             
@@ -761,6 +799,35 @@ function getRandomVideos(count = 5) {
     }
     return result;
 }
+
+// ---------------- ACTIVE USER SIMULATOR ----------------
+
+function updateActiveUserCount() {
+    const userCountElement = document.getElementById('active-user-count');
+    const min = 5; // Minimum simulated users
+    const max = 15; // Maximum simulated users
+    
+    // Check for existing session count, otherwise generate a new random number
+    let activeUsers = sessionStorage.getItem('activeUsers');
+    
+    if (!activeUsers) {
+        // Generate a random initial number between min and max
+        activeUsers = Math.floor(Math.random() * (max - min + 1)) + min;
+        sessionStorage.setItem('activeUsers', activeUsers);
+    } else {
+        // Simulate minor fluctuation (increase or decrease by 0 or 1)
+        activeUsers = parseInt(activeUsers);
+        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        activeUsers = Math.max(min, Math.min(max, activeUsers + change));
+        sessionStorage.setItem('activeUsers', activeUsers);
+    }
+
+    userCountElement.textContent = `Active: ${activeUsers}`;
+}
+
+// Update the counter immediately and then every 3-7 seconds
+updateActiveUserCount();
+setInterval(updateActiveUserCount, Math.floor(Math.random() * 5000) + 3000); // Between 3000ms and 8000ms
 
 // ---------------- SEARCH HANDLER ----------------
 
