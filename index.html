@@ -51,28 +51,18 @@ header {
     gap: 12px;
 }
 
-/* --- NEW LOGO STYLES (No Spin, Square, Pulse) --- */
+/* --- STATIC SQUARE LOGO STYLES (No Animation) --- */
 .side-image {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: 4px; /* Square edges */
+    border-radius: 4px; /* Square corners */
     border: 2px solid #00ff66;
     box-shadow: 0 0 10px #00ff66;
-    animation: logoPulse 2s infinite alternate; /* New pulse animation */
+    /* REMOVED ANIMATION */
 }
 
-/* REMOVED @keyframes rotate */
-@keyframes logoPulse {
-    0% {
-        box-shadow: 0 0 5px rgba(0, 255, 102, 0.7);
-        border-color: #00ff66;
-    }
-    100% {
-        box-shadow: 0 0 20px #33ff99; /* Brighter, more intense glow */
-        border-color: #33ff99;
-    }
-}
+/* REMOVED @keyframes logoPulse */
 
 
 .logo-container img:not(.side-image) { /* Target the main logo */
