@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x Official Website<title>
-<style>
+<title>Tr3vN0x Official Website</title> <style>
 /* ---------------- GLOBAL ---------------- */
 body {
     margin: 0;
@@ -517,7 +516,7 @@ const olderVideos = [
  * Handles view count and watch history updates when a video is played.
  */
 function updateVideoWatchData(video) {
-     // 1. Update the local video object's view count
+    // 1. Update the local video object's view count
     video.views++;
     
     // 2. Update the persistent store (localStorage simulation)
@@ -532,9 +531,9 @@ function updateVideoWatchData(video) {
     if(!watchHistory.find(v=>v.id===video.id)){
         watchHistory.unshift({...video}); 
     } else {
-         const index = watchHistory.findIndex(v=>v.id===video.id);
-         const item = watchHistory.splice(index, 1)[0];
-         watchHistory.unshift(item);
+        const index = watchHistory.findIndex(v=>v.id===video.id);
+        const item = watchHistory.splice(index, 1)[0];
+        watchHistory.unshift(item);
     }
     renderRow('watch-history-row', watchHistory);
 }
