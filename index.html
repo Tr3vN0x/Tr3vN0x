@@ -590,14 +590,17 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Since a real database cannot be used in static HTML/JS, 
  * this simulates persistent views using localStorage.
+ * * @param {string} videoId - The unique ID of the video (including suffix like _dup)
+ * @param {number} initialBaseViews - The starting view count if it's the first visit
+ * @returns {number} The current persistent view count
  */
-function getPersistentViews(videoId) {
+function getPersistentViews(videoId, initialBaseViews) {
     const key = `views_${videoId}`;
     let views = localStorage.getItem(key);
     
     if (views === null) {
-        // If first time loading, generate a random starting view count (simulating an existing database)
-        views = Math.floor(Math.random() * 5000) + 100;
+        // If first time loading, use the provided baseViews as the starting point
+        views = initialBaseViews;
         localStorage.setItem(key, views);
     }
     return parseInt(views);
@@ -610,32 +613,32 @@ function updatePersistentViews(videoId, currentViews) {
 
 // ---------------- DATA SETUP ----------------
 
-// Initial Data structure (views are initialized from localStorage/randomized)
 const favorites = [];
 
 // .map is used to iterate over the videos and assign the initial view count 
+// Base views are set to simulate realistic initial numbers.
 const newestVideos = [
-    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)"},
-    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)"},
-].map(v => ({...v, views: getPersistentViews(v.id)}));
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890},
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 const mostViewed = [
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"},
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000},
     // Use unique IDs for duplicates to allow individual view tracking
-    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"}, 
-].map(v => ({...v, views: getPersistentViews(v.id)}));
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000}, 
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 const olderVideos = [
-    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)"},
-    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)"},
-    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥"},
-    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT"},
-    {id:"XqmcBMy3X1k", title:"I'm taking a break..."},
-    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety..."},
-    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*"},
-].map(v => ({...v, views: getPersistentViews(v.id)}));
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000},
+    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000},
+    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500},
+    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000},
+    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200},
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 const watchHistory = [];
 
@@ -657,7 +660,7 @@ function createVideoCard(video) {
         </div>
         <div class="video-info-wrapper">
             <div class="video-title">${video.title}</div>
-            <div class="video-views">Views: ${video.views}</div>
+            <div class="video-views">Views: ${video.views.toLocaleString()}</div>
         </div>
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn" alt="Favorite button">
     `;
@@ -708,7 +711,7 @@ function createVideoCard(video) {
 
         // 3. Update the display on ALL visible cards that show this video ID
         document.querySelectorAll(`.video-card[data-video="${video.id}"] .video-views`).forEach(el => {
-            el.textContent = `Views: ${video.views}`;
+            el.textContent = `Views: ${video.views.toLocaleString()}`;
         });
         
         // 4. Update watch history 
@@ -781,8 +784,9 @@ searchInput.addEventListener('input', () => {
         document.querySelectorAll('.row-container').forEach(row => row.style.display = 'none');
         
         // Temporarily display results in the Most Viewed container
-        document.querySelector('.row-container:nth-of-type(2)').style.display = 'flex';
-        document.querySelector('.row-container:nth-of-type(2) .row-label').textContent = 'Search Results';
+        const searchResultsRow = document.querySelector('.row-container:nth-of-type(2)');
+        searchResultsRow.style.display = 'flex';
+        searchResultsRow.querySelector('.row-label').textContent = 'Search Results';
         renderRow('most-viewed-row', filteredVideos);
 
     } else {
@@ -824,4 +828,3 @@ followBtn.addEventListener('click', ()=>{
 
 </body>
 </html>
-
