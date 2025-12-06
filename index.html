@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
 <link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=zhgjpqeK6CROh1Ea3HKz0w&oh=00_Afl_eCItV7QcUu4u4u1C-jmNHN6Q_wR4pCcdBBss5wdCNc8A&oe=6939DF7A">
+
+<meta property="og:title" content="Tr3vN0x Official Webiste | Latest Videos & Info">
+<meta property="og:description" content="Welcome to the home of Tr3vN0x! Watch the newest videos, catch up on history, and see the most viewed clips.">
+<meta property="og:image" content="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg?stp=c142.157.732.731a_dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_ohc=TZjP9DC4yXIQ7kNvwFEcY_x&_nc_oc=AdlXCvH1Xc6OtBrkXSWPLBU6L751ZvM61n3S7NwmKzua-aeulDmjQ2t_MI1B-sXtRN_x57v0LAV2h5Cn1fUqYMoT&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=zM9e1vkNGeRNIUfsHkDVoA&oh=00_AfkVNvtwYSd4uOnADbDaRB7cLJm0mphwfYnpm8nridyEug&oe=6939DC00">
+<meta property="og:url" content="https://tr3vn0x.github.io/Tr3vN0x/">
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
@@ -814,7 +819,7 @@ const timeZones = [
     { label: 'CST', tz: 'America/Chicago' },       
     { label: 'MST', tz: 'America/Denver' },        
     { label: 'PST', tz: 'America/Los_Angeles' },   
-    { label: 'UTC', tz: 'UTC' },                   
+    { label: 'UTC', tz: 'UTC' } ,                  
     { label: 'JST', tz: 'Asia/Tokyo' }             
 ];
 
@@ -866,7 +871,7 @@ const categories = {
     'history': 'watch-history-row-container',
     'watched': 'watch-history-row-container',
     'recommended': 'recommended-row-container',
-    // The profile section is not managed by the bot, but keeping the bot logic clean.
+    'about': 'about-me' // Adding a bot command for the About section just in case
 };
 
 function handleBotCommand() {
@@ -1002,8 +1007,8 @@ async function shareWebsite() {
     if (navigator.share) {
         try {
             await navigator.share({
-                title: 'Tr3vN0x Official Website',
-                text: 'Check out the latest videos from Tr3vN0x!',
+                title: 'Tr3vN0x Official Webiste | Latest Videos & Info',
+                text: 'Check out the latest videos, history, and info from Tr3vN0x!',
                 url: window.location.href, 
             });
             console.log('Website shared successfully');
@@ -1011,6 +1016,7 @@ async function shareWebsite() {
             console.error('Error sharing website:', error);
         }
     } else {
+        // Fallback for desktop/non-supporting browsers
         alert("To share, please copy the link in your browser's address bar.");
     }
 }
