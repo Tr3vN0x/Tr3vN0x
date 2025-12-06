@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tr3vN0x Official Website</title>
+<title>Tr3vN0x Official Website - Cyber Edition</title>
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Consolas', 'Courier New', monospace; /* Cooler Monospace Font */
     background: #0a0a0a;
     color: #00ff66;
+    scroll-behavior: smooth;
 }
 
-/* ---------------- SPLASH SCREEN (NEW) ---------------- */
+/* ---------------- SPLASH SCREEN ---------------- */
 #splash-screen {
     position: fixed;
     top: 0;
@@ -21,13 +22,13 @@ body {
     width: 100%;
     height: 100%;
     background: #0a0a0a;
-    z-index: 1000; /* Highest layer to cover everything */
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     opacity: 1;
-    transition: opacity 0.5s ease-out; /* For fading out */
+    transition: opacity 0.5s ease-out;
 }
 
 .splash-content {
@@ -70,7 +71,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 15px 30px; /* Increased padding */
     background: #0d0d0d;
     border-bottom: 2px solid #003300;
     position: sticky;
@@ -133,31 +134,39 @@ header {
     box-shadow: 0 0 12px #00ff66;
 }
 
-/* ---------------- ROWS ---------------- */
+/* ---------------- ROWS - FIXED LAYOUT ---------------- */
 .row-container {
     display: flex;
     align-items: flex-start;
-    padding: 20px;
-    gap: 10px;
+    padding: 30px 20px; /* Increased vertical padding for space */
+    gap: 20px; /* Increased gap between label and video row */
+    max-width: 1400px; /* Max width for central content */
+    margin: 0 auto; /* Center the content */
 }
 
 .row-label {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
+    letter-spacing: 2px;
     color: #00ff66;
-    min-width: 100px;
+    min-width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 0;
+    border-right: 2px solid #004400; /* Subtle separator */
 }
 
 .video-row {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    /* KEY CHANGE: Use Grid for 4 columns */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: 20px; /* Gap between video cards */
+    overflow-x: hidden; /* Remove horizontal scroll on desktop */
+    padding-bottom: 0;
+    width: 100%;
 }
 
 .video-row::-webkit-scrollbar {
@@ -168,27 +177,36 @@ header {
     background: #111;
     border: 1px solid #003300;
     border-radius: 12px;
-    min-width: 220px;
+    min-width: 100%;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     position: relative;
-    padding-bottom: 8px;
+    padding-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .video-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 12px #00ff66;
+    transform: translateY(-5px); /* Lift up effect for "cool" */
+    box-shadow: 0 5px 20px rgba(0, 255, 102, 0.4);
+    border-color: #00ff66; /* Highlight border */
 }
 
 .thumbnail-container {
     position: relative;
     width: 100%;
-    height: 120px;
-    border-radius: 10px;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
 
 .thumbnail-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -196,9 +214,6 @@ header {
 }
 
 .thumbnail-container .hover-thumb {
-    position: absolute;
-    top: 0;
-    left: 0;
     opacity: 0;
     pointer-events: none;
     transition: 0.3s;
@@ -209,31 +224,42 @@ header {
 }
 
 .video-title {
-    margin-top: 8px;
+    margin: 10px 8px 4px;
     font-weight: bold;
+    font-size: 1.1em;
     color: #00ff66;
-    text-shadow: 0 0 4px #00ff66;
-    text-align: center;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* ---------------- VIEW COUNTER ---------------- */
 .video-views {
-    text-align: center;
-    font-size: 14px;
+    text-align: left;
+    font-size: 0.85em;
     color: #00ff66;
-    margin-top: 4px;
-    text-shadow: 0 0 4px #00ff66;
+    margin: 0 8px 10px;
+    opacity: 0.7;
+    text-shadow: none;
 }
 
 /* Favorites icon */
 .favorite-btn {
     position: absolute;
-    top: 6px;
-    right: 6px;
+    top: 8px;
+    right: 8px;
     width: 28px;
     height: 28px;
+    z-index: 5;
     cursor: pointer;
     filter: drop-shadow(0 0 4px #00ff66);
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 50%;
+    padding: 3px;
 }
 
 .favorite-btn.favorited {
@@ -262,6 +288,7 @@ header {
     width: 90%;
     max-width: 400px;
     border: 1px solid #003300;
+    box-shadow: 0 0 20px #00ff66;
 }
 
 #profile-modal h2 {
@@ -301,11 +328,19 @@ header {
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 15px;
+    transition: 0.3s;
 }
 
 .follow-btn:hover {
     background: #003300;
     box-shadow: 0 0 10px #00ff66;
+}
+
+.follow-btn:disabled {
+    background: #002200;
+    color: #00aa00;
+    cursor: default;
+    box-shadow: none;
 }
 
 .links a {
@@ -333,12 +368,13 @@ header {
 /* ---------------- FOOTER ---------------- */
 footer {
     text-align: center;
-    padding: 18px;
+    padding: 25px;
     background: #0d0d0d;
     border-top: 2px solid #003300;
     color: #00ff66;
     font-weight: bold;
     text-shadow: 0 0 4px #00ff66;
+    margin-top: 20px;
 }
 
 /* ---------------- MODAL PLAYER ---------------- */
@@ -361,6 +397,7 @@ footer {
     aspect-ratio: 16/9;
     border:none;
     border-radius: 10px;
+    box-shadow: 0 0 25px #00ff66;
 }
 
 #video-modal .close-btn {
@@ -371,24 +408,50 @@ footer {
     color: #00ff66;
     cursor: pointer;
     font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1200px) {
+    /* Switch to 3 columns on smaller desktops/large tablets */
+    .video-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    /* Switch to 2 columns on tablets */
+    .video-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     header { flex-direction: column; align-items: center; }
     .search-bar { width: 90%; }
-    .logo-container img { height: 40px; }
-    .profile-btn { width: 50px; height: 50px; margin: 5px 0; }
-    .row-container { flex-direction: column; }
-    .row-label { writing-mode: horizontal-tb; transform: none; min-width: auto; padding-bottom: 5px;}
-    .video-row { overflow-x: auto; }
-}
-
-@media (max-width: 480px) {
-    .logo-container img { height: 35px; }
-    .profile-btn { width: 45px; height: 45px; }
-    .thumbnail-container { height: 100px; }
-    .search-bar { width: 95%; }
+    /* Horizontal Layout on Mobile */
+    .row-container { flex-direction: column; padding: 15px 10px; }
+    .row-label { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+        min-width: auto; 
+        padding-bottom: 5px;
+        border-right: none;
+        border-bottom: 2px solid #004400; /* New separator */
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .video-row { 
+        /* Back to horizontal scroll for mobile to keep the cards a decent size */
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        grid-template-columns: none;
+    }
+    .video-card {
+        min-width: 240px; /* Fixed width for better horizontal scrolling on mobile */
+    }
 }
 </style>
 </head>
@@ -414,15 +477,20 @@ footer {
             <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/UHJvZmlsZQ/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Profile Icon">
         </div>
     </header>
-
+    
     <div class="row-container">
-        <div class="row-label">Favorites</div>
-        <div class="video-row" id="favorites-row"></div>
+        <div class="row-label">Newest Videos</div>
+        <div class="video-row" id="newest-videos-row"></div>
     </div>
 
     <div class="row-container">
         <div class="row-label">Most Viewed</div>
         <div class="video-row" id="most-viewed-row"></div>
+    </div>
+
+    <div class="row-container">
+        <div class="row-label">Favorites</div>
+        <div class="video-row" id="favorites-row"></div>
     </div>
 
     <div class="row-container">
@@ -470,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainContent.style.opacity = '0';
     mainContent.style.pointerEvents = 'none';
 
-    const MIN_LOAD_TIME_MS = 2000; 
+    const MIN_LOAD_TIME_MS = 2000;  
     const MAX_PERCENTAGE = 100;
     let currentPercentage = 0;
     const startTime = Date.now();
@@ -499,15 +567,23 @@ document.addEventListener('DOMContentLoaded', () => {
     animateLoading();
 });
 
-// ---------------- DATA ----------------
+// ---------------- DATA (UPDATED) ----------------
 const favorites = [];
-const mostViewed = [
+
+// Newest Videos (Moved from Most Viewed for demonstration)
+const newestVideos = [
     {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", views:0},
     {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", views:0},
+];
+
+// Updated Most Viewed
+const mostViewed = [
     {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", views:0},
     {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", views:0},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0}
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0}, // Duplicate to fill 4 columns
 ];
+
 const olderVideos = [
     {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", views:0},
     {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", views:0},
@@ -528,28 +604,45 @@ function createVideoCard(video) {
     card.setAttribute('data-video', video.id);
     card.innerHTML = `
         <div class="thumbnail-container">
-            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
-            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+            <img class="thumb" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title} thumbnail">
+            <img class="hover-thumb" src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title} high quality thumbnail">
         </div>
-        <div class="video-title">${video.title}</div>
-        <div class="video-views">Views: ${video.views}</div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn">
+        <div class="video-info-wrapper">
+            <div class="video-title">${video.title}</div>
+            <div class="video-views">Views: ${video.views}</div>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn" alt="Favorite button">
     `;
     const favoriteBtn = card.querySelector('.favorite-btn');
     const viewsDisplay = card.querySelector('.video-views');
 
+    // Set initial favorite state
+    if (favorites.find(v => v.id === video.id)) {
+        favoriteBtn.classList.add('favorited');
+    }
+
     favoriteBtn.addEventListener('click', e=>{
         e.stopPropagation();
-        if(!favorites.find(v=>v.id===video.id)){
+        const index = favorites.findIndex(v=>v.id===video.id);
+
+        if(index === -1){
+            // Not favorited, so add it
             favorites.push(video);
             favoriteBtn.classList.add('favorited');
-            renderFavorites();
         } else {
-            const index = favorites.findIndex(v=>v.id===video.id);
+            // Already favorited, so remove it
             favorites.splice(index,1);
             favoriteBtn.classList.remove('favorited');
-            renderFavorites();
         }
+        renderFavorites(); // Re-render favorites row
+        // Also update the button state across all copies of this video
+        document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
+             if (favorites.find(v => v.id === video.id)) {
+                btn.classList.add('favorited');
+            } else {
+                btn.classList.remove('favorited');
+            }
+        });
     });
 
     card.addEventListener('click',()=>{
@@ -557,13 +650,15 @@ function createVideoCard(video) {
         modal.querySelector('iframe').src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
         modal.style.display = 'flex';
 
+        // Update views locally
         video.views++;
         viewsDisplay.textContent = `Views: ${video.views}`;
-
+        
+        // Update watch history
         if(!watchHistory.find(v=>v.id===video.id)){
-            watchHistory.push(video);
-            renderRow('watch-history-row', watchHistory);
+            watchHistory.unshift(video); // Add to front
         }
+        renderRow('watch-history-row', watchHistory);
     });
     return card;
 }
@@ -581,12 +676,13 @@ function renderFavorites(){
 }
 
 // ---------------- INITIAL RENDER ----------------
+renderRow('newest-videos-row', newestVideos); // RENDER NEW ROW
 renderRow('most-viewed-row', mostViewed);
 renderRow('older-videos-row', olderVideos);
 renderFavorites();
 renderRow('watch-history-row', watchHistory);
 
-// ---------------- VIDEO MODAL ----------------
+// ---------------- MODAL LOGIC ----------------
 const modal = document.getElementById('video-modal');
 modal.querySelector('.close-btn').addEventListener('click', ()=>{
     modal.querySelector('iframe').src = '';
@@ -603,10 +699,16 @@ modal.addEventListener('click', e=>{
 const searchInput = document.querySelector('.search-bar');
 searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase();
+    
+    // Combine all unique videos into one array for comprehensive search
+    const allVideos = [...newestVideos, ...mostViewed, ...olderVideos];
+    const uniqueVideos = Array.from(new Map(allVideos.map(v => [v.id, v])).values());
+
     const allRows = [
-        {id: 'favorites-row', videos: favorites},
+        {id: 'newest-videos-row', videos: newestVideos}, // Include new row
         {id: 'most-viewed-row', videos: mostViewed},
         {id: 'older-videos-row', videos: olderVideos},
+        {id: 'favorites-row', videos: favorites},
         {id: 'watch-history-row', videos: watchHistory}
     ];
 
@@ -621,7 +723,7 @@ const profileModal = document.getElementById('profile-modal');
 document.getElementById('open-profile').addEventListener('click',()=> profileModal.style.display='flex');
 document.querySelector('#profile-modal .close-btn').addEventListener('click',()=> profileModal.style.display='none');
 profileModal.addEventListener('click', e => { if(e.target===profileModal) profileModal.style.display='none'; });
-document.addEventListener('keydown', e => { if(e.key==='Escape') profileModal.style.display='none'; });
+document.addEventListener('keydown', e => { if(e.key==='Escape' && profileModal.style.display === 'flex') profileModal.style.display='none'; });
 
 // ---------------- FOLLOW BUTTON ----------------
 const followBtn = document.getElementById('follow-btn');
@@ -629,14 +731,14 @@ const followersCount = document.getElementById('followers-count');
 let followers = 0;
 
 followBtn.addEventListener('click', ()=>{
-    followers++;
-    followersCount.textContent = followers;
-    followBtn.disabled = true;
-    followBtn.textContent = 'Following';
+    if (!followBtn.disabled) {
+        followers++;
+        followersCount.textContent = followers;
+        followBtn.disabled = true;
+        followBtn.textContent = 'Following';
+    }
 });
 </script>
 
 </body>
 </html>
-
-
