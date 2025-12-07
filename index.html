@@ -21,6 +21,20 @@ body {
     scroll-behavior: smooth;
 }
 
+/* ---------------- WELCOME BANNER (NEW) ---------------- */
+#welcome-banner {
+    padding: 15px 30px;
+    background: #004400; /* Dark green background */
+    color: #ffffff; /* White text for contrast */
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 2px solid #00ff66;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.2);
+}
+
 /* ---------------- HEADER ---------------- */
 header {
     display: flex;
@@ -782,6 +796,9 @@ footer {
         </div>
     </header>
 
+    <div id="welcome-banner">
+        Hello user, welcome to the Tr3vN0x official website!
+    </div>
     <div class="row-container" id="store-row-container">
         <div class="row-label">Store 🛒</div>
         <div class="video-row" id="store-videos-row">
@@ -1094,6 +1111,7 @@ function handleSearch() {
     const shortsRow = document.getElementById('shorts-row-container'); 
     const storeRow = document.getElementById('store-row-container'); 
     const noResultsMessage = document.getElementById('no-results-message');
+    const welcomeBanner = document.getElementById('welcome-banner'); // Reference the banner
 
     if (query.length > 0) {
         // Hide original rows
@@ -1101,6 +1119,7 @@ function handleSearch() {
         recommendedRow.style.display = 'none';
         shortsRow.style.display = 'none'; 
         storeRow.style.display = 'none'; 
+        welcomeBanner.style.display = 'none'; // Hide banner during search
         searchContainerRow.style.display = 'flex';
 
         const filteredVideos = allVideos.filter(video => 
@@ -1123,6 +1142,7 @@ function handleSearch() {
         recommendedRow.style.display = 'flex';
         shortsRow.style.display = 'flex'; 
         storeRow.style.display = 'flex'; 
+        welcomeBanner.style.display = 'block'; // Show banner when search is cleared
         noResultsMessage.style.display = 'none';
         initialRender();
     }
