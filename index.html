@@ -260,7 +260,7 @@ header {
 
 /* --- STORE PRODUCT CARD STYLES (NEW) --- */
 .product-card {
-    grid-column: span 2; /* Span two columns to be prominent but not full width */
+    grid-column: span 2; /* Span two columns to fit two cards in a 4-column grid */
     background: #1a1a1a; 
     border: 3px solid #ffcc00; 
     box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); 
@@ -284,7 +284,7 @@ header {
     max-width: 100%;
     width: 250px; 
     height: auto;
-    border: 2px solid #ffcc00;
+    /* REMOVED: border: 2px solid #ffcc00; for transparent image */
     border-radius: 6px;
     margin-bottom: 15px;
 }
@@ -781,11 +781,18 @@ footer {
     <div class="row-container" id="store-row-container">
         <div class="row-label">Store 🛒</div>
         <div class="video-row" id="store-videos-row">
-            <a href="https://www.bonfire.com/store/tr3vn0x-merch-store-placeholder/" target="_blank" class="product-card" id="store-product-link">
-                <div class="product-name">Tr3vN0x Official T-Shirt</div>
-                <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x T-Shirt" class="product-image">
-                <div class="product-price">$19.99</div> </a>
-            </div>
+            <a href="https://www.bonfire.com/tr3vn0x-new-logo-and-background/" target="_blank" class="product-card">
+                <div class="product-name">Tr3vN0x Retro T-Shirt</div>
+                <img src="https://dynamic.bonfireassets.com/mockups/74832bd7-057c-4f80-a170-b264603892cb/black/standard.png" alt="Tr3vN0x Retro T-Shirt" class="product-image">
+                <div class="product-price">$19.99</div> 
+            </a>
+            
+            <a href="https://www.bonfire.com/tr3vn0x-new-logo-tee/" target="_blank" class="product-card">
+                <div class="product-name">Tr3vN0x Logo T-Shirt</div>
+                <img src="https://dynamic.bonfireassets.com/thumb/design-image/ae5a78fb-6d56-42ab-b191-21e94ebda50d/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x Logo T-Shirt" class="product-image">
+                <div class="product-price">$19.99</div> 
+            </a>
+        </div>
     </div>
     
     <div class="row-container" id="recommended-row-container">
