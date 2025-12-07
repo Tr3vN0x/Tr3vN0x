@@ -65,7 +65,6 @@ header {
     border-radius: 4px; /* Square corners */
     border: 2px solid #00ff66;
     box-shadow: 0 0 10px #00ff66;
-    /* REMOVED ANIMATION */
 }
 
 .logo-container img:not(.side-image) { /* Target the main logo */
@@ -259,49 +258,56 @@ header {
     border-color: #00ff66; 
 }
 
-/* --- STORE PORTAL STYLES (NEW) --- */
-.store-portal-card {
-    background: #5500aa; /* Purple/store-like color */
-    border: 5px solid #ffcc00; /* Gold border */
-    box-shadow: 0 0 30px rgba(255, 204, 0, 0.9); 
-    grid-column: span 4; /* Make it span all 4 columns */
+/* --- STORE PRODUCT CARD STYLES (NEW) --- */
+.product-card {
+    grid-column: span 2; /* Span two columns to be prominent but not full width */
+    background: #1a1a1a; 
+    border: 3px solid #ffcc00; 
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 30px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px;
 }
 
-.store-portal-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 40px #ffcc00, 0 0 15px #ff00ff;
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(255, 204, 0, 0.8), 0 0 10px #ff00ff;
 }
 
-.store-portal-card img {
-    max-width: 300px;
+.product-card .product-image {
+    max-width: 100%;
+    width: 250px; 
     height: auto;
-    border: 3px solid #ffcc00;
-    border-radius: 8px;
+    border: 2px solid #ffcc00;
+    border-radius: 6px;
     margin-bottom: 15px;
 }
 
-.store-portal-card .portal-title {
-    font-size: 2.5em;
-    font-weight: 900;
+.product-card .product-name {
+    font-size: 1.5em;
+    font-weight: bold;
     color: #ffcc00;
-    text-shadow: 0 0 10px #fff;
-    letter-spacing: 2px;
-    margin: 10px 0;
+    text-shadow: 0 0 5px #fff;
+    margin: 5px 0;
 }
 
-.store-portal-card .portal-subtitle {
-    font-size: 1.2em;
-    color: #fff;
+.product-card .product-price {
+    font-size: 1.8em;
+    font-weight: 900;
+    color: #00ff66;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 4px;
+    background: #003300;
 }
-/* --- END STORE PORTAL STYLES --- */
+/* --- END STORE PRODUCT CARD STYLES --- */
 
 
 .thumbnail-container {
@@ -632,14 +638,12 @@ footer {
     .video-row, .search-results-row {
         grid-template-columns: repeat(3, 1fr);
     }
-    .store-portal-card {
-         grid-column: span 3;
+    .product-card {
+        grid-column: span 3; /* Still make it large */
+        max-width: 400px;
     }
-    .store-portal-card img {
-        max-width: 250px;
-    }
-    .store-portal-card .portal-title {
-        font-size: 2em;
+    .product-card .product-image {
+        width: 150px; 
     }
 }
 
@@ -647,14 +651,12 @@ footer {
     .video-row, .search-results-row {
         grid-template-columns: repeat(2, 1fr);
     }
-    .store-portal-card {
-         grid-column: span 2;
+    .product-card {
+        grid-column: span 2;
+        max-width: 350px;
     }
-    .store-portal-card img {
-        max-width: 200px;
-    }
-    .store-portal-card .portal-title {
-        font-size: 1.8em;
+    .product-card .product-image {
+        width: 120px;
     }
     .header-actions {
         gap: 10px;
@@ -711,19 +713,23 @@ footer {
         overflow-x: auto;
         padding-bottom: 10px;
         grid-template-columns: none;
+        justify-content: flex-start; /* Important for horizontal scrolling */
     }
     .video-card {
         min-width: 240px;
     }
-    .store-portal-card {
-         grid-column: span 1; /* Reset for small screens, as it uses flex overflow */
-         min-width: 300px;
-         max-width: 300px;
+    .product-card {
+         grid-column: span 1; 
+         min-width: 250px;
+         max-width: 250px;
     }
-    .store-portal-card img {
-        max-width: 150px;
+    .product-card .product-image {
+        width: 100px;
     }
-    .store-portal-card .portal-title {
+    .product-card .product-name {
+        font-size: 1.2em;
+    }
+    .product-card .product-price {
         font-size: 1.5em;
     }
     .profile-section {
@@ -773,13 +779,12 @@ footer {
     </header>
 
     <div class="row-container" id="store-row-container">
-        <div class="row-label">Store Portal 🛍️</div>
+        <div class="row-label">Store 🛒</div>
         <div class="video-row" id="store-videos-row">
-            <a href="#" target="_blank" class="store-portal-card" id="store-portal-link">
-                <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x T-Shirt">
-                <div class="portal-title">NEW MERCH STORE!</div>
-                <div class="portal-subtitle">Click to support Tr3vN0x and grab your exclusive tee!</div>
-            </a>
+            <a href="https://www.bonfire.com/store/tr3vn0x-merch-store-placeholder/" target="_blank" class="product-card" id="store-product-link">
+                <div class="product-name">Tr3vN0x Official T-Shirt</div>
+                <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x T-Shirt" class="product-image">
+                <div class="product-price">$19.99</div> </a>
             </div>
     </div>
     
@@ -970,8 +975,9 @@ const categories = {
     'shorts': 'shorts-row-container', 
     'short videos': 'shorts-row-container',
     'quick clips': 'shorts-row-container',
-    'store': 'store-row-container', // <-- ADDED STORE COMMAND
-    'merch': 'store-row-container', // <-- ADDED MERCH COMMAND
+    'store': 'store-row-container', 
+    'merch': 'store-row-container', 
+    'shop': 'store-row-container', 
     'about': 'about-me' 
 };
 
@@ -1062,13 +1068,6 @@ const shortsVideos = allVideos.filter(v => v.category === 'short');
 let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
 let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
 
-// ---------------- STORE LOGIC (NEW) ----------------
-const storeLinkElement = document.getElementById('store-portal-link');
-if(storeLinkElement) {
-    // Note: The actual Bonfire store link needs to be added here for it to work.
-    // For now, it links to '#' as a placeholder.
-    storeLinkElement.href = "https://www.bonfire.com/store/tr3vn0x-merch-store-placeholder/"; 
-}
 
 // ---------------- SEARCH HANDLER ----------------
 
@@ -1079,7 +1078,7 @@ function handleSearch() {
     const originalRows = document.getElementById('original-rows');
     const recommendedRow = document.getElementById('recommended-row-container');
     const shortsRow = document.getElementById('shorts-row-container'); 
-    const storeRow = document.getElementById('store-row-container'); // <-- Include store row
+    const storeRow = document.getElementById('store-row-container'); 
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
@@ -1087,7 +1086,7 @@ function handleSearch() {
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
         shortsRow.style.display = 'none'; 
-        storeRow.style.display = 'none'; // <-- Hide store row during search
+        storeRow.style.display = 'none'; 
         searchContainerRow.style.display = 'flex';
 
         const filteredVideos = allVideos.filter(video => 
@@ -1109,7 +1108,7 @@ function handleSearch() {
         originalRows.style.display = 'block';
         recommendedRow.style.display = 'flex';
         shortsRow.style.display = 'flex'; 
-        storeRow.style.display = 'flex'; // <-- Show store row
+        storeRow.style.display = 'flex'; 
         noResultsMessage.style.display = 'none';
         initialRender();
     }
@@ -1225,7 +1224,7 @@ function createVideoCard(video) {
 
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
-    // Ensure the Store row is not overwritten by video cards
+    // Ensure the Store row is not overwritten by video cards, as it's static HTML now
     if (rowId === 'store-videos-row') {
         return; 
     }
@@ -1242,7 +1241,7 @@ function renderFavorites(){
 function initialRender() {
     renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
     renderRow('shorts-videos-row', shortsVideos); 
-    // Store row is static HTML, so no renderRow call here
+    // Store row is static HTML, no renderRow call here
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
