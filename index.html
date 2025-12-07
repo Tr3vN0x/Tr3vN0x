@@ -1057,11 +1057,14 @@ const allVideosData = [
     {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
     {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
     {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
+    
     // --- Shorts Videos ---
-    {id:"exampleShortID1", title:"Quick Rant on Roblox Updates", baseViews: 4500, category: 'short'},
-    {id:"exampleShortID2", title:"TR3VN0x Epic Fail Compilation", baseViews: 8200, category: 'short'},
-    {id:"exampleShortID3", title:"Best Headshot in 10 Seconds!", baseViews: 1500, category: 'short'},
-    // --- End Shorts Videos ---
+    // Short 1: https://www.youtube.com/shorts/nivxDEV8nMc
+    {id:"nivxDEV8nMc_s1", title:"Website Announcement Short (I have officially made a website…)", baseViews: 4000, category: 'short'},
+    // Short 2 (Duplicate ID requested): https://www.youtube.com/shorts/nivxDEV8nMc
+    {id:"nivxDEV8nMc_s2", title:"Website Short 2 (Very Exciting)", baseViews: 3500, category: 'short'},
+    // Short 3: www.youtube.com/shorts/-_K7e-I5iGY
+    {id:"-_K7e-I5iGY_s3", title:"Roblox Gaming Short (Title Unavailable)", baseViews: 2800, category: 'short'},
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 // Map video data back to objects using their stored views
@@ -1177,7 +1180,7 @@ function createVideoCard(video) {
     card.className = 'video-card';
     card.setAttribute('data-video', video.id);
     
-    const thumbnailId = video.id.replace(/_dup$|_old$/, '');
+    const thumbnailId = video.id.replace(/_dup$|_old$|_s1$|_s2$|_s3$/, ''); // Added suffixes for Shorts
 
     // Check if the video is currently favorited (using the ID)
     const isFavorited = favorites.some(fav => fav.id === video.id);
