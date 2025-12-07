@@ -10,955 +10,1008 @@
 <meta property="og:description" content="Welcome to the home of Tr3vN0x! Watch the newest videos, catch up on history, and see the most viewed clips.">
 <meta property="og:image" content="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg">
 <meta property="og:url" content="https://tr3vn0x.github.io/Tr3vN0x/">
-<meta name="twitter:card" content="summary_large_image"> 
+<meta name="twitter:card" content="summary_large_image"> 
 <style>
 /* ---------------- GLOBAL ---------------- */
 body {
-    margin: 0;
-    font-family: 'Consolas', 'Courier New', monospace; /* Cooler Monospace Font */
-    background: #0a0a0a;
-    color: #00ff66;
-    scroll-behavior: smooth;
+    margin: 0;
+    font-family: 'Consolas', 'Courier New', monospace; /* Cooler Monospace Font */
+    background: #0a0a0a;
+    color: #00ff66;
+    scroll-behavior: smooth;
 }
 
 /* ---------------- HEADER ---------------- */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px; 
-    background: #0d0d0d;
-    border-bottom: 2px solid #003300;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    gap: 15px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px; 
+    background: #0d0d0d;
+    border-bottom: 2px solid #003300;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+    gap: 15px; 
 }
 
 /* --- EST CLOCK STYLES (Now Cycling Clock) --- */
 .est-clock-container {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    border: 1px solid #00ff66;
-    border-radius: 6px;
-    background: #001a00;
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
-    font-size: 1em;
-    font-weight: bold;
-    color: #00ff66;
-    white-space: nowrap; /* Prevent wrapping */
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 6px;
+    background: #001a00;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+    font-size: 1em;
+    font-weight: bold;
+    color: #00ff66;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 /* --- STATIC SQUARE LOGO STYLES (No Animation) --- */
 .side-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 4px; /* Square corners */
-    border: 2px solid #00ff66;
-    box-shadow: 0 0 10px #00ff66;
-    /* REMOVED ANIMATION */
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px; /* Square corners */
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    /* REMOVED ANIMATION */
 }
 
 /* REMOVED @keyframes logoPulse */
 
 
 .logo-container img:not(.side-image) { /* Target the main logo */
-    height: 50px;
-    border-radius: 4px;
-    border: 1px solid #00ff66;
-    box-shadow: 0 0 8px #00ff66;
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 8px #00ff66;
 }
 
 /* --- SEARCH BAR STYLES --- */
 .search-container {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    max-width: 350px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 350px;
 }
 
 #search-input {
-    padding: 10px 15px;
-    border: 1px solid #00ff66;
-    background: #000;
-    color: #00ff66;
-    border-radius: 6px 0 0 6px;
-    flex-grow: 1;
-    font-family: 'Consolas', monospace;
-    font-size: 1em;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
-    transition: box-shadow 0.3s;
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 6px 0 0 6px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
 }
 
 #search-input::placeholder {
-    color: #00994c;
+    color: #00994c;
 }
 
 #search-input:focus {
-    box-shadow: 0 0 10px #00ff66;
+    box-shadow: 0 0 10px #00ff66;
 }
 
 #search-btn {
-    padding: 10px 15px;
-    border: 1px solid #00ff66;
-    background: #003300;
-    color: #00ff66;
-    border-radius: 0 6px 6px 0;
-    cursor: pointer;
-    font-family: 'Consolas', monospace;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #003300;
+    color: #00ff66;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
 }
 
 #search-btn:hover {
-    background: #005500;
-    color: #33ff99;
+    background: #005500;
+    color: #33ff99;
 }
 
 
 /* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px; 
+    display: flex;
+    align-items: center;
+    gap: 15px; 
 }
 
 .social-button {
-    text-decoration: none;
-    color: #00ff66;
-    font-weight: bold;
-    font-size: 1.1em;
-    padding: 10px 15px;
-    border: 1px solid #003300;
-    border-radius: 6px;
-    transition: 0.3s;
-    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
-    background: #111;
-    cursor: pointer;
+    text-decoration: none;
+    color: #00ff66;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: 1px solid #003300;
+    border-radius: 6px;
+    transition: 0.3s;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    background: #111;
+    cursor: pointer;
 }
 
 .social-button:hover {
-    background: #003300;
-    border-color: #00ff66;
-    box-shadow: 0 0 10px #00ff66;
-    color: #33ff99;
+    background: #003300;
+    border-color: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    color: #33ff99;
 }
 
 
 /* ---------------- ROWS - FIXED LAYOUT ---------------- */
 .search-results-row {
-    display: none; 
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px; 
-    padding-bottom: 0;
-    width: 100%;
+    display: none; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    padding-bottom: 0;
+    width: 100%;
 }
 
 .row-container {
-    display: flex;
-    align-items: flex-start;
-    padding: 30px 20px;
-    gap: 20px;
-    max-width: 1400px; 
-    margin: 0 auto; 
-    /* Required for highlighting */
-    transition: all 0.5s ease-in-out; 
+    display: flex;
+    align-items: flex-start;
+    padding: 30px 20px;
+    gap: 20px;
+    max-width: 1400px; 
+    margin: 0 auto; 
+    /* Required for highlighting */
+    transition: all 0.5s ease-in-out; 
 }
 
 .row-label {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: #00ff66;
-    min-width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    border-right: 2px solid #004400; 
-    /* Transition for highlighting */
-    transition: all 0.5s ease-in-out; 
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #00ff66;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-right: 2px solid #004400; 
+    /* Transition for highlighting */
+    transition: all 0.5s ease-in-out; 
 }
 
 /* --- HIGHLIGHTING STYLES --- */
 .highlight-row {
-    animation: pulseGlow 0.5s 4 alternate; /* Pulse 4 times over 2 seconds */
-    border-color: #ff00ff !important;
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.8) !important;
+    animation: pulseGlow 0.5s 4 alternate; /* Pulse 4 times over 2 seconds */
+    border-color: #ff00ff !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.8) !important;
 }
 
 @keyframes pulseGlow {
-    from { border-color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
-    to { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 1); }
+    from { border-color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+    to { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 1); }
 }
 
 .highlight-row .row-label {
-    color: #ff00ff;
-    text-shadow: 0 0 8px #ff00ff;
+    color: #ff00ff;
+    text-shadow: 0 0 8px #ff00ff;
 }
 
 
 /* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
 #no-results-message {
-    display: none; 
-    color: #ff0000; 
-    font-size: 1.5em; 
-    text-align: center; 
-    width: 100%; 
-    writing-mode: horizontal-tb; 
-    transform: none; 
-    padding: 20px;
-    background: #110000;
-    border: 1px solid #ff0000;
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin-top: 10px; 
+    display: none; 
+    color: #ff0000; 
+    font-size: 1.5em; 
+    text-align: center; 
+    width: 100%; 
+    writing-mode: horizontal-tb; 
+    transform: none; 
+    padding: 20px;
+    background: #110000;
+    border: 1px solid #ff0000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 10px; 
 }
 
 
 .video-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px; 
-    overflow-x: hidden; 
-    padding-bottom: 0;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    overflow-x: hidden; 
+    padding-bottom: 0;
+    width: 100%;
 }
 
 .video-row::-webkit-scrollbar {
-    display: none;
+    display: none;
 }
 
 .video-card {
-    background: #111;
-    border: 1px solid #003300;
-    border-radius: 12px;
-    min-width: 100%;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    position: relative;
-    padding-bottom: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: #111;
+    border: 1px solid #003300;
+    border-radius: 12px;
+    min-width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    padding-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .video-card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 5px 20px rgba(0, 255, 102, 0.4);
-    border-color: #00ff66; 
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 20px rgba(0, 255, 102, 0.4);
+    border-color: #00ff66; 
 }
 
 .thumbnail-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; 
-    height: 0;
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; 
+    height: 0;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
 }
 
 .thumbnail-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .thumbnail-container .hover-thumb {
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
 }
 
 .thumbnail-container:hover .hover-thumb {
-    opacity: 1;
+    opacity: 1;
 }
 
 .video-title {
-    margin: 10px 8px 10px; /* Reduced bottom margin slightly since views are removed */
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #00ff66;
-    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    margin: 10px 8px 10px; /* Reduced bottom margin slightly since views are removed */
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #00ff66;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 
 .favorite-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
-    z-index: 5;
-    cursor: pointer;
-    filter: drop-shadow(0 0 4px #00ff66);
-    background-color: rgba(17, 17, 17, 0.8);
-    border-radius: 50%;
-    padding: 3px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    z-index: 5;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px #00ff66);
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 50%;
+    padding: 3px;
 }
 
 .favorite-btn.favorited {
-    filter: drop-shadow(0 0 6px #ff00ff);
+    filter: drop-shadow(0 0 6px #ff00ff);
 }
 
 
 /* ---------------- BOT SECTION STYLES ---------------- */
 
 .bot-section {
-    max-width: 1000px;
-    margin: 50px auto 30px;
-    padding: 30px;
-    background: #1a1a1a; /* Darker background for contrast */
-    border: 2px solid #33ff99;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(51, 255, 153, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #1a1a1a; /* Darker background for contrast */
+    border: 2px solid #33ff99;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(51, 255, 153, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .bot-header {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #33ff99;
-    text-shadow: 0 0 5px #33ff99;
-    margin-bottom: 20px;
-    border-bottom: 2px dashed #004400;
-    padding-bottom: 10px;
-    width: 100%;
-    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 5px #33ff99;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #004400;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 .bot-input-container {
-    display: flex;
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 15px;
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 15px;
 }
 
 #bot-input {
-    padding: 12px 15px;
-    border: 1px solid #00ff66;
-    background: #000;
-    color: #00ff66;
-    border-radius: 8px 0 0 8px;
-    flex-grow: 1;
-    font-family: 'Consolas', monospace;
-    font-size: 1.1em;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
-    transition: box-shadow 0.3s;
+    padding: 12px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 8px 0 0 8px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1.1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
 }
 
 #bot-input:focus {
-    box-shadow: 0 0 10px #00ff66;
+    box-shadow: 0 0 10px #00ff66;
 }
 
 #bot-send-btn {
-    padding: 12px 20px;
-    border: 1px solid #00ff66;
-    background: #006600;
-    color: #fff;
-    border-radius: 0 8px 8px 0;
-    cursor: pointer;
-    font-family: 'Consolas', monospace;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
+    padding: 12px 20px;
+    border: 1px solid #00ff66;
+    background: #006600;
+    color: #fff;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
 }
 
 #bot-send-btn:hover {
-    background: #008800;
+    background: #008800;
 }
 
 #bot-response {
-    min-height: 40px;
-    padding: 10px 15px;
-    background: #002200;
-    border: 1px solid #003300;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 600px;
-    font-size: 1em;
-    color: #99ffbb;
-    text-align: left;
+    min-height: 40px;
+    padding: 10px 15px;
+    background: #002200;
+    border: 1px solid #003300;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    font-size: 1em;
+    color: #99ffbb;
+    text-align: left;
 }
+
+/* ---------------- STORE SECTION STYLES ---------------- */
+.store-section {
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #111;
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.store-header {
+    font-size: 2em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 8px #00ff66;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #004400;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.store-link-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.store-link-img:hover {
+    border-color: #33ff99;
+    box-shadow: 0 0 30px rgba(0, 255, 102, 0.9); /* Green Glow Effect */
+}
+
 
 /* ---------------- PROFILE SECTION STYLES ---------------- */
 .profile-section {
-    max-width: 1000px;
-    margin: 50px auto 30px;
-    padding: 30px;
-    background: #111;
-    border: 2px solid #00ff66;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(0, 255, 102, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #111;
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #00ff66;
-    box-shadow: 0 0 15px #00ff66;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #00ff66;
+    box-shadow: 0 0 15px #00ff66;
 }
 
 .profile-info {
-    margin-left: 20px;
-    text-align: left;
+    margin-left: 20px;
+    text-align: left;
 }
 
 .profile-username {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #33ff99;
-    text-shadow: 0 0 8px #00ff66;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 8px #00ff66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
 }
 
 .badge {
-    padding: 4px 10px;
-    background: #ff00ff;
-    color: #0a0a0a;
-    border-radius: 4px;
-    font-size: 0.6em;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: none;
-    border: 1px solid #0a0a0a;
-    box-shadow: 0 0 5px #ff00ff;
+    padding: 4px 10px;
+    background: #ff00ff;
+    color: #0a0a0a;
+    border-radius: 4px;
+    font-size: 0.6em;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: none;
+    border: 1px solid #0a0a0a;
+    box-shadow: 0 0 5px #ff00ff;
 }
 
 /* --- Status Indicator Styles --- */
 .status-indicator {
-    width: 12px;
-    height: 12px;
-    background-color: #00ff66;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #00ff66;
-    margin-right: 5px;
-    animation: pulsate 1.5s infinite alternate;
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #00ff66;
+    margin-right: 5px;
+    animation: pulsate 1.5s infinite alternate;
 }
 
 @keyframes pulsate {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.3); opacity: 0.7; }
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0.7; }
 }
 
 .profile-message {
-    margin-top: 15px;
-    font-size: 1.2em;
-    line-height: 1.5;
-    color: #00cc55;
-    background: #001a00;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 5px solid #00ff66;
-    text-align: left;
-    display: flex; 
-    flex-direction: column; 
+    margin-top: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #00cc55;
+    background: #001a00;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ff66;
+    text-align: left;
+    display: flex; 
+    flex-direction: column; 
 }
 .profile-message span {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
 }
 .profile-message b {
-    color: #00ff66;
-    margin-left: 5px;
+    color: #00ff66;
+    margin-left: 5px;
 }
 
 
 /* ---------------- SCROLL TO TOP BUTTON ---------------- */
 #scroll-to-top {
-    display: none; 
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 90;
-    padding: 10px 15px;
-    font-size: 1.5em;
-    background: rgba(0, 51, 0, 0.8);
-    color: #00ff66;
-    border: 2px solid #00ff66;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
-    transition: opacity 0.3s, background 0.3s, transform 0.3s;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff66;
+    display: none; 
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 90;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    background: rgba(0, 51, 0, 0.8);
+    color: #00ff66;
+    border: 2px solid #00ff66;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+    transition: opacity 0.3s, background 0.3s, transform 0.3s;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
 }
 
 #scroll-to-top:hover {
-    background: #003300;
-    transform: translateY(-2px);
+    background: #003300;
+    transform: translateY(-2px);
 }
 
 /* ---------------- FOOTER ---------------- */
 footer {
-    text-align: center;
-    padding: 25px;
-    background: #0d0d0d;
-    border-top: 2px solid #003300;
-    color: #00ff66;
-    font-weight: bold;
-    text-shadow: 0 0 4px #00ff66;
-    margin-top: 20px;
+    text-align: center;
+    padding: 25px;
+    background: #0d0d0d;
+    border-top: 2px solid #003300;
+    color: #00ff66;
+    font-weight: bold;
+    text-shadow: 0 0 4px #00ff66;
+    margin-top: 20px;
 }
 
 /* ---------------- MODAL PLAYER ---------------- */
 #video-modal {
-    display: none;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 99;
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
 }
 
 #video-modal iframe {
-    width: 90%;
-    max-width: 800px;
-    aspect-ratio: 16/9;
-    border:none;
-    border-radius: 10px;
-    box-shadow: 0 0 25px #00ff66;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border:none;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #00ff66;
 }
 
 #video-modal .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 28px;
-    color: #00ff66;
-    cursor: pointer;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ff66;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 1200px) {
-    .video-row, .search-results-row {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .video-row, .search-results-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 900px) {
-    .video-row, .search-results-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .header-actions {
-        gap: 10px;
-        margin-top: 10px;
-        width: 100%;
-        justify-content: flex-end; 
-    }
-    .social-button {
-        padding: 8px 12px;
-        font-size: 1em;
-    }
-    .search-container {
-        max-width: 100%; 
-    }
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    .profile-info {
-        margin-left: 0;
-        margin-top: 15px;
-        text-align: center;
-    }
-    .profile-username {
-        justify-content: center;
-    }
+    .video-row, .search-results-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .header-actions {
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-end; 
+    }
+    .social-button {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
+    .search-container {
+        max-width: 100%; 
+    }
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-info {
+        margin-left: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .profile-username {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
-    header { flex-direction: column; align-items: center; }
-    .logo-container { order: 1; margin-bottom: 10px; }
-    .search-container { order: 2; max-width: 95%; margin: 0 auto; }
-    .est-clock-container { order: 0; margin-bottom: 10px; } /* New order for clock */
-    .header-actions {
-        order: 4; 
-        margin-top: 15px;
-        width: 95%;
-        justify-content: space-around; 
-    }
-    .row-container { flex-direction: column; padding: 15px 10px; }
-    .row-label { 
-        writing-mode: horizontal-tb; 
-        transform: none; 
-        min-width: auto; 
-        padding-bottom: 5px;
-        border-right: none;
-        border-bottom: 2px solid #004400;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    .video-row, .search-results-row { 
-        display: flex;
-        gap: 15px;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        grid-template-columns: none;
-    }
-    .video-card {
-        min-width: 240px;
-    }
-    .profile-section {
-        margin: 30px 10px;
-        padding: 20px;
-    }
-    #scroll-to-top {
-        bottom: 15px;
-        right: 15px;
-        font-size: 1.2em;
-        padding: 8px 12px;
-    }
-    #no-results-message {
-        writing-mode: horizontal-tb; 
-        transform: none;
-        font-size: 1.2em;
-        width: 100%;
-    }
+    header { flex-direction: column; align-items: center; }
+    .logo-container { order: 1; margin-bottom: 10px; }
+    .search-container { order: 2; max-width: 95%; margin: 0 auto; }
+    .est-clock-container { order: 0; margin-bottom: 10px; } /* New order for clock */
+    .header-actions {
+        order: 4; 
+        margin-top: 15px;
+        width: 95%;
+        justify-content: space-around; 
+    }
+    .row-container { flex-direction: column; padding: 15px 10px; }
+    .row-label { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+        min-width: auto; 
+        padding-bottom: 5px;
+        border-right: none;
+        border-bottom: 2px solid #004400;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .video-row, .search-results-row { 
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        grid-template-columns: none;
+    }
+    .video-card {
+        min-width: 240px;
+    }
+    .profile-section {
+        margin: 30px 10px;
+        padding: 20px;
+    }
+    #scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.2em;
+        padding: 8px 12px;
+    }
+    #no-results-message {
+        writing-mode: horizontal-tb; 
+        transform: none;
+        font-size: 1.2em;
+        width: 100%;
+    }
 }
 </style>
 </head>
 <body>
 
 <main id="main-content">
-    
-    <header>
-        <div class="est-clock-container">
-            <span id="est-time-display">Loading Time...</span>
-        </div>
-        
-        <div class="logo-container">
-            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=u6hh5Gtt28TV0q0Pz2wDvA&oh=00_AfngI7hlpOBNy6lv7GI84PQeN-fsETkdkmmRAEj4_K6NUQ&oe=693A4FFA" class="side-image" alt="Profile Image">
-            
-            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
-        </div>
-        
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
-            <button id="search-btn" onclick="handleSearch()">GO</button>
-        </div>
+    
+    <header>
+        <div class="est-clock-container">
+            <span id="est-time-display">Loading Time...</span>
+        </div>
+        
+        <div class="logo-container">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=u6hh5Gtt28TV0q0Pz2wDvA&oh=00_AfngI7hlpOBNy6lv7GI84PQeN-fsETkdkmmRAEj4_K6NUQ&oe=693A4FFA" class="side-image" alt="Profile Image">
+            
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
+            <button id="search-btn" onclick="handleSearch()">GO</button>
+        </div>
 
-        <div class="header-actions">
-            <div class="social-button" onclick="shareWebsite()">Share</div>
-            <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
-            <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
-        </div>
-    </header>
+        <div class="header-actions">
+            <div class="social-button" onclick="shareWebsite()">Share</div>
+            <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
+            <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
+        </div>
+    </header>
 
-    <div class="row-container" id="recommended-row-container">
-        <div class="row-label">Top Recommended</div>
-        <div class="video-row" id="recommended-videos-row"></div>
-    </div>
-    
-    <div class="row-container" id="shorts-row-container">
-        <div class="row-label">Shorts Corner 🎬</div>
-        <div class="video-row" id="shorts-videos-row"></div>
-    </div>
+    <div class="row-container" id="recommended-row-container">
+        <div class="row-label">Top Recommended</div>
+        <div class="video-row" id="recommended-videos-row"></div>
+    </div>
+    
+    <div class="row-container" id="shorts-row-container">
+        <div class="row-label">Shorts Corner 🎬</div>
+        <div class="video-row" id="shorts-videos-row"></div>
+    </div>
 
-    <div class="bot-section">
-        <div class="bot-header">
-            🤖 Tr3vN0x Category Bot
-        </div>
-        <div id="bot-response">
-            Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.
-        </div>
-        <div class="bot-input-container">
-            <input type="text" id="bot-input" placeholder="Ask for a category...">
-            <button id="bot-send-btn" onclick="handleBotCommand()">GO</button>
-        </div>
-    </div>
-    <div class="row-container" id="search-container-row" style="display:none;">
-        <div class="row-label" id="search-label">Search Results</div>
-        <div class="search-results-row" id="search-results-row"></div>
-        <div class="row-content" style="width: 100%;">
-             <div id="no-results-message">No videos found matching your search.</div>
-        </div>
-    </div>
-    <div class="original-rows" id="original-rows">
-        <div class="row-container" id="newest-row-container">
-            <div class="row-label">Newest Videos</div>
-            <div class="video-row" id="newest-videos-row"></div>
-        </div>
+    <div class="bot-section">
+        <div class="bot-header">
+            🤖 Tr3vN0x Category Bot
+        </div>
+        <div id="bot-response">
+            Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.
+        </div>
+        <div class="bot-input-container">
+            <input type="text" id="bot-input" placeholder="Ask for a category...">
+            <button id="bot-send-btn" onclick="handleBotCommand()">GO</button>
+        </div>
+    </div>
+    <div class="row-container" id="search-container-row" style="display:none;">
+        <div class="row-label" id="search-label">Search Results</div>
+        <div class="search-results-row" id="search-results-row"></div>
+        <div class="row-content" style="width: 100%;">
+             <div id="no-results-message">No videos found matching your search.</div>
+        </div>
+    </div>
+    <div class="original-rows" id="original-rows">
+        <div class="row-container" id="newest-row-container">
+            <div class="row-label">Newest Videos</div>
+            <div class="video-row" id="newest-videos-row"></div>
+        </div>
 
-        <div class="row-container" id="most-viewed-row-container">
-            <div class="row-label">Most Viewed</div>
-            <div class="video-row" id="most-viewed-row"></div>
-        </div>
+        <div class="row-container" id="most-viewed-row-container">
+            <div class="row-label">Most Viewed</div>
+            <div class="video-row" id="most-viewed-row"></div>
+        </div>
 
-        <div class="row-container" id="favorites-row-container">
-            <div class="row-label">Favorites</div>
-            <div class="video-row" id="favorites-row"></div>
-        </div>
+        <div class="row-container" id="favorites-row-container">
+            <div class="row-label">Favorites</div>
+            <div class="video-row" id="favorites-row"></div>
+        </div>
 
-        <div class="row-container" id="older-videos-row-container">
-            <div class="row-label">Older Videos</div>
-            <div class="video-row" id="older-videos-row"></div>
-        </div>
+        <div class="row-container" id="older-videos-row-container">
+            <div class="row-label">Older Videos</div>
+            <div class="video-row" id="older-videos-row"></div>
+        </div>
 
-        <div class="row-container" id="watch-history-row-container">
-            <div class="row-label">Watch History</div>
-            <div class="video-row" id="watch-history-row"></div>
-        </div>
-    </div>
+        <div class="row-container" id="watch-history-row-container">
+            <div class="row-label">Watch History</div>
+            <div class="video-row" id="watch-history-row"></div>
+        </div>
+    </div>
 
-    <div class="profile-section" id="about-me"> 
-        <div class="profile-header">
-            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=u6hh5Gtt28TV0q0Pz2wDvA&oh=00_AfngI7hlpOBNy6lv7GI84PQeN-fsETkdkmmRAEj4_K6NUQ&oe=693A4FFA" class="profile-pic">
-            <div class="profile-info">
-                <p class="profile-username">
-                    Tr3vN0x
-                    <span class="badge">OWNER</span>
-                </p>
-                <div class="social-links-small" style="margin-top:5px;">
-                    <a href="https://youtube.com/@Tr3vN0x" target="_blank" style="color:red; text-decoration:none; margin-right: 10px;">YouTube</a>
-                    <a href="https://x.com/@Tr3vN0x" target="_blank" style="color:#00acee; text-decoration:none;">Twitter/X</a>
-                </div>
-            </div>
-        </div>
-        <p class="profile-message">
-            <span>
-                <span class="status-indicator"></span> 
-                <b>STATUS: ONLINE</b> // PROTOCOL ACTIVE
-            </span>
-          Hello, and welcome to my website! I am Trevor, or people call me Tr3vN0x... I am a YouTuber remember to share this website with friends, and subscribe, and follow my twitter click the "TOP" button if you get stuck down here, Categories are on the side enjjoy your visit.
-        </p>
-    </div>
-    <div id="video-modal">
-        <div class="close-btn">&times;</div>
-        <iframe src="" allowfullscreen></iframe>
-    </div>
-    
-    <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
+        <div class="store-section" id="store-section">
+        <div class="store-header">
+            🛍️ Store
+        </div>
+        <a href="https://www.bonfire.com/tr3vn0x-new-logo-and-background/" target="_blank">
+            <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" class="store-link-img" alt="Tr3vN0x New Logo and Background Merch">
+        </a>
+    </div>
+        <div class="profile-section" id="about-me"> 
+        <div class="profile-header">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=u6hh5Gtt28TV0q0Pz2wDvA&oh=00_AfngI7hlpOBNy6lv7GI84PQeN-fsETkdkmmRAEj4_K6NUQ&oe=693A4FFA" class="profile-pic">
+            <div class="profile-info">
+                <p class="profile-username">
+                    Tr3vN0x
+                    <span class="badge">OWNER</span>
+                </p>
+                <div class="social-links-small" style="margin-top:5px;">
+                    <a href="https://youtube.com/@Tr3vN0x" target="_blank" style="color:red; text-decoration:none; margin-right: 10px;">YouTube</a>
+                    <a href="https://x.com/@Tr3vN0x" target="_blank" style="color:#00acee; text-decoration:none;">Twitter/X</a>
+                </div>
+            </div>
+        </div>
+        <p class="profile-message">
+            <span>
+                <span class="status-indicator"></span> 
+                <b>STATUS: ONLINE</b> // PROTOCOL ACTIVE
+            </span>
+          Hello, and welcome to my website! I am Trevor, or people call me Tr3vN0x... I am a YouTuber remember to share this website with friends, and subscribe, and follow my twitter click the "TOP" button if you get stuck down here, Categories are on the side enjjoy your visit.
+        </p>
+    </div>
+    <div id="video-modal">
+        <div class="close-btn">&times;</div>
+        <iframe src="" allowfullscreen></iframe>
+    </div>
+    
+    <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
 
-    <footer>
-        &copy; 2025 Tr3vN0x — All Rights Reserved
-    </footer>
+    <footer>
+        &copy; 2025 Tr3vN0x — All Rights Reserved
+    </footer>
 </main>
 
 <script>
 // ---------------- DATA PERSISTENCE UTILITIES ----------------
 
 function getPersistentData(key, defaultValue = []) {
-    try {
-        const storedData = localStorage.getItem(key);
-        return storedData ? JSON.parse(storedData) : defaultValue;
-    } catch (e) {
-        console.error(`Error loading data for key ${key}:`, e);
-        return defaultValue;
-    }
+    try {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : defaultValue;
+    } catch (e) {
+        console.error(`Error loading data for key ${key}:`, e);
+        return defaultValue;
+    }
 }
 
 function setPersistentData(key, data) {
-    try {
-        localStorage.setItem(key, JSON.stringify(data));
-    } catch (e) {
-        console.error(`Error saving data for key ${key}:`, e);
-    }
+    try {
+        localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+        console.error(`Error saving data for key ${key}:`, e);
+    }
 }
 
 function getPersistentViews(videoId, initialBaseViews) {
-    const key = `views_${videoId}`;
-    let views = localStorage.getItem(key);
-    if (views === null) {
-        views = initialBaseViews; 
-        localStorage.setItem(key, views);
-    }
-    return parseInt(views);
+    const key = `views_${videoId}`;
+    let views = localStorage.getItem(key);
+    if (views === null) {
+        views = initialBaseViews; 
+        localStorage.setItem(key, views);
+    }
+    return parseInt(views);
 }
 
 function setPersistentViews(videoId, views) {
-    localStorage.setItem(`views_${videoId}`, views);
+    localStorage.setItem(`views_${videoId}`, views);
 }
 
 // ---------------- TIMEZONE CYCLING UTILITY ----------------
 
 const timeZones = [
-    { label: 'EST', tz: 'America/New_York' },      
-    { label: 'CST', tz: 'America/Chicago' },       
-    { label: 'MST', tz: 'America/Denver' },        
-    { label: 'PST', tz: 'America/Los_Angeles' },   
-    { label: 'UTC', tz: 'UTC' } ,                  
-    { label: 'JST', tz: 'Asia/Tokyo' }             
+    { label: 'EST', tz: 'America/New_York' },      
+    { label: 'CST', tz: 'America/Chicago' },       
+    { label: 'MST', tz: 'America/Denver' },        
+    { label: 'PST', tz: 'America/Los_Angeles' },   
+    { label: 'UTC', tz: 'UTC' } ,                  
+    { label: 'JST', tz: 'Asia/Tokyo' }             
 ];
 
 let currentZoneIndex = 0;
-let activeClockInterval = null; 
+let activeClockInterval = null; 
 
 function setClockDisplay(zoneIndex) {
-    const clockElement = document.getElementById('est-time-display');
-    if (!clockElement) return;
+    const clockElement = document.getElementById('est-time-display');
+    if (!clockElement) return;
 
-    const currentZone = timeZones[zoneIndex];
-    
-    function updateActiveZoneTime() {
-        const now = new Date();
-        const formattedTime = now.toLocaleTimeString('en-US', {
-            timeZone: currentZone.tz,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true
-        });
-        clockElement.textContent = `${currentZone.label}: ${formattedTime}`;
-    }
+    const currentZone = timeZones[zoneIndex];
+    
+    function updateActiveZoneTime() {
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString('en-US', {
+            timeZone: currentZone.tz,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockElement.textContent = `${currentZone.label}: ${formattedTime}`;
+    }
 
-    updateActiveZoneTime();
-    if (activeClockInterval) {
-        clearInterval(activeClockInterval);
-    }
-    return setInterval(updateActiveZoneTime, 1000);
+    updateActiveZoneTime();
+    if (activeClockInterval) {
+        clearInterval(activeClockInterval);
+    }
+    return setInterval(updateActiveZoneTime, 1000);
 }
 
 function startClockCycle() {
-    activeClockInterval = setClockDisplay(currentZoneIndex);
-    currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
+    activeClockInterval = setClockDisplay(currentZoneIndex);
+    currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
 }
 
 // ---------------- TR3VN0x CATEGORY BOT LOGIC (HIGHLIGHTING ADDED) ----------------
 
 const categories = {
-    // Keywords map to the ID of the HTML element container
-    'newest': 'newest-row-container',
-    'new': 'newest-row-container',
-    'most viewed': 'most-viewed-row-container',
-    'popular': 'most-viewed-row-container',
-    'favorites': 'favorites-row-container',
-    'favs': 'favorites-row-container',
-    'older videos': 'older-videos-row-container',
-    'old': 'older-videos-row-container',
-    'history': 'watch-history-row-container',
-    'watched': 'watch-history-row-container',
-    'recommended': 'recommended-row-container',
-    'shorts': 'shorts-row-container', 
-    'short videos': 'shorts-row-container',
-    'quick clips': 'shorts-row-container',
-    'about': 'about-me' // Adding a bot command for the About section just in case
+    // Keywords map to the ID of the HTML element container
+    'newest': 'newest-row-container',
+    'new': 'newest-row-container',
+    'most viewed': 'most-viewed-row-container',
+    'popular': 'most-viewed-row-container',
+    'favorites': 'favorites-row-container',
+    'favs': 'favorites-row-container',
+    'older videos': 'older-videos-row-container',
+    'old': 'older-videos-row-container',
+    'history': 'watch-history-row-container',
+    'watched': 'watch-history-row-container',
+    'recommended': 'recommended-row-container',
+    'shorts': 'shorts-row-container', 
+    'short videos': 'shorts-row-container',
+    'quick clips': 'shorts-row-container',
+    'about': 'about-me', // Adding a bot command for the About section just in case
+    'store': 'store-section', // ADDED STORE BOT COMMAND
+    'merch': 'store-section' // ADDED MERCH BOT COMMAND
 };
 
 function handleBotCommand() {
-    const inputElement = document.getElementById('bot-input');
-    const responseElement = document.getElementById('bot-response');
-    const command = inputElement.value.trim().toLowerCase();
+    const inputElement = document.getElementById('bot-input');
+    const responseElement = document.getElementById('bot-response');
+    const command = inputElement.value.trim().toLowerCase();
 
-    const targetId = categories[command];
+    const targetId = categories[command];
 
-    if (targetId) {
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            // Scroll to the element
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Highlight the entire row container for 5 seconds
-            targetElement.classList.add('highlight-row');
-            setTimeout(() => {
-                targetElement.classList.remove('highlight-row');
-            }, 5000); // Remove the highlight after 5 seconds
-            
-            // Provide feedback
-            responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
-            inputElement.value = ''; // Clear input
-        } else {
-            responseElement.textContent = `❌ Error: The category "${command.toUpperCase()}" exists but its section is missing.`;
-        }
-    } else if (command === '') {
-        responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
-    } else {
-        // No match found
-        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', or 'most viewed'.`;
-    }
+    if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // Scroll to the element
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight the entire row container for 5 seconds
+            targetElement.classList.add('highlight-row');
+            setTimeout(() => {
+                targetElement.classList.remove('highlight-row');
+            }, 5000); // Remove the highlight after 5 seconds
+            
+            // Provide feedback
+            responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
+            inputElement.value = ''; // Clear input
+        } else {
+            responseElement.textContent = `❌ Error: The category "${command.toUpperCase()}" exists but its section is missing.`;
+        }
+    } else if (command === '') {
+        responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
+    } else {
+        // No match found
+        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', or 'most viewed'.`;
+    }
 
-    // Set a timeout to reset the response message after a few seconds
-    setTimeout(() => {
-        responseElement.textContent = "Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.";
-    }, 5000);
+    // Set a timeout to reset the response message after a few seconds
+    setTimeout(() => {
+        responseElement.textContent = "Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.";
+    }, 5000);
 }
 
 // Add event listener for Enter key press on the bot input
 document.getElementById('bot-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        handleBotCommand();
-    }
+    if (e.key === 'Enter') {
+        handleBotCommand();
+    }
 });
 
 
 // ---------------- VIDEO DATA SETUP ----------------
 
 const allVideosData = [
-    // Newest
-    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
-    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
-    {id:"EyQe-XAN-jE", title:"I have built a website...", baseViews: 890, category: 'newest'},
-    // Most Viewed
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
-    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'}, 
-    // Older Videos
-    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'older'},
-    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'older'},
-    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'older'},
-    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
-    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
-    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
-    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
-    // --- Shorts Videos ---
-    {id:"9nO2xAi_w0g", title:"I’m just like that… 🏈 #roblox #footballfusion2 #ultimatefootball #robloxfootball", baseViews: 4500, category: 'short'},
-    {id:"-_K7e-I5iGY", title:"What a play…. 🏈 #roblox #footballfusion2 ultimatefootball #robloxfootball", baseViews: 1500, category: 'short'},
-     {id:"nivxDEV8nMc", title:"I have officially made a website… (Very Exciting) #website #capcut #shorts", baseViews: 1500, category: 'short'}
-    // --- End Shorts Videos ---
+    // Newest
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
+    {id:"EyQe-XAN-jE", title:"I have built a website...", baseViews: 890, category: 'newest'},
+    // Most Viewed
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'}, 
+    // Older Videos
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'older'},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'older'},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'older'},
+    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
+    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
+    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
+    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
+    // --- Shorts Videos ---
+    {id:"9nO2xAi_w0g", title:"I’m just like that… 🏈 #roblox #footballfusion2 #ultimatefootball #robloxfootball", baseViews: 4500, category: 'short'},
+    {id:"-_K7e-I5iGY", title:"What a play…. 🏈 #roblox #footballfusion2 ultimatefootball #robloxfootball", baseViews: 1500, category: 'short'},
+     {id:"nivxDEV8nMc", title:"I have officially made a website… (Very Exciting) #website #capcut #shorts", baseViews: 1500, category: 'short'}
+    // --- End Shorts Videos ---
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 // Map video data back to objects using their stored views
 const allVideos = allVideosData.map(video => {
-    return {...video, views: getPersistentViews(video.id, video.baseViews)};
+    return {...video, views: getPersistentViews(video.id, video.baseViews)};
 });
 
 
@@ -975,222 +1028,230 @@ let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.fin
 // ---------------- SEARCH HANDLER ----------------
 
 function handleSearch() {
-    const query = document.getElementById('search-input').value.trim().toLowerCase();
-    const searchResultsRow = document.getElementById('search-results-row');
-    const searchContainerRow = document.getElementById('search-container-row');
-    const originalRows = document.getElementById('original-rows');
-    const recommendedRow = document.getElementById('recommended-row-container');
-    const shortsRow = document.getElementById('shorts-row-container'); // <-- Include shorts row
-    const noResultsMessage = document.getElementById('no-results-message');
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const searchResultsRow = document.getElementById('search-results-row');
+    const searchContainerRow = document.getElementById('search-container-row');
+    const originalRows = document.getElementById('original-rows');
+    const recommendedRow = document.getElementById('recommended-row-container');
+    const shortsRow = document.getElementById('shorts-row-container'); // <-- Include shorts row
+    const noResultsMessage = document.getElementById('no-results-message');
+    const storeSection = document.getElementById('store-section'); // ADDED STORE SECTION
 
-    if (query.length > 0) {
-        // Hide original rows
-        originalRows.style.display = 'none';
-        recommendedRow.style.display = 'none';
-        shortsRow.style.display = 'none'; // <-- Hide shorts row during search
-        searchContainerRow.style.display = 'flex';
+    if (query.length > 0) {
+        // Hide original rows
+        originalRows.style.display = 'none';
+        recommendedRow.style.display = 'none';
+        shortsRow.style.display = 'none'; // <-- Hide shorts row during search
+        storeSection.style.display = 'none'; // HIDE STORE SECTION
+        searchContainerRow.style.display = 'flex';
 
-        const filteredVideos = allVideos.filter(video => 
-            video.title.toLowerCase().includes(query)
-        );
+        const filteredVideos = allVideos.filter(video => 
+            video.title.toLowerCase().includes(query)
+        );
 
-        if (filteredVideos.length > 0) {
-            renderRow('search-results-row', filteredVideos);
-            searchResultsRow.style.display = 'grid'; 
-            noResultsMessage.style.display = 'none';
-        } else {
-            renderRow('search-results-row', []);
-            searchResultsRow.style.display = 'none'; 
-            noResultsMessage.style.display = 'block'; 
-        }
-    } else {
-        // Show original rows
-        searchContainerRow.style.display = 'none';
-        originalRows.style.display = 'block';
-        recommendedRow.style.display = 'flex';
-        shortsRow.style.display = 'flex'; // <-- Show shorts row
-        noResultsMessage.style.display = 'none';
-        initialRender();
-    }
+        if (filteredVideos.length > 0) {
+            renderRow('search-results-row', filteredVideos);
+            searchResultsRow.style.display = 'grid'; 
+            noResultsMessage.style.display = 'none';
+        } else {
+            renderRow('search-results-row', []);
+            searchResultsRow.style.display = 'none'; 
+            noResultsMessage.style.display = 'block'; 
+        }
+    } else {
+        // Show original rows
+        searchContainerRow.style.display = 'none';
+        originalRows.style.display = 'block';
+        recommendedRow.style.display = 'flex';
+        shortsRow.style.display = 'flex'; // <-- Show shorts row
+        storeSection.style.display = 'flex'; // SHOW STORE SECTION
+        noResultsMessage.style.display = 'none';
+        initialRender();
+    }
 }
 
 document.getElementById('search-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        handleSearch();
-    }
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
 });
 
 
 // --- SHARE FUNCTION ---
 async function shareWebsite() {
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                title: 'Tr3vN0x Official Webiste | Latest Videos & Info',
-                text: 'Check out the latest videos, history, and info from Tr3vN0x!',
-                url: window.location.href, 
-            });
-            console.log('Website shared successfully');
-        } catch (error) {
-            console.error('Error sharing website:', error);
-        }
-    } else {
-        // Fallback for desktop/non-supporting browsers
-        alert("To ensure the cool preview works, copy the link and add '?refresh=1' to the end. (e.g., https://tr3vn0x.github.io/Tr3vN0x/?refresh=1)");
-    }
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Tr3vN0x Official Webiste | Latest Videos & Info',
+                text: 'Check out the latest videos, history, and info from Tr3vN0x!',
+                url: window.location.href, 
+            });
+            console.log('Website shared successfully');
+        } catch (error) {
+            console.error('Error sharing website:', error);
+        }
+    } else {
+        // Fallback for desktop/non-supporting browsers
+        alert("To ensure the cool preview works, copy the link and add '?refresh=1' to the end. (e.g., https://tr3vn0x.github.io/Tr3vN0x/?refresh=1)");
+    }
 }
 
 
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
 function updateVideoWatchData(video) {
-    // 1. Update Views (Still updating persistence, but not showing it)
-    video.views++;
-    setPersistentViews(video.id, video.views);
-    
-    // 2. Update Watch History (Maintain LIFO order and persistence)
-    const index = watchHistory.findIndex(v=>v.id===video.id);
-    if(index !== -1) {
-        watchHistory.splice(index, 1); // Remove old position
-    } 
-    watchHistory.unshift(video); // Add to the front
-    setPersistentData('watchHistory', watchHistory.map(v => v.id));
+    // 1. Update Views (Still updating persistence, but not showing it)
+    video.views++
+    setPersistentViews(video.id, video.views);
 
-    renderRow('watch-history-row', watchHistory);
+    // 2. Update Watch History (Add to front)
+    watchHistory = watchHistory.filter(v => v.id !== video.id); // Remove existing
+    watchHistory.unshift(video); // Add to front
+    watchHistory = watchHistory.slice(0, 10); // Keep only top 10
+    setPersistentData('watchHistory', watchHistory.map(v => v.id));
+
+    // Re-render the history row specifically to show the updated list
+    renderRow('watch-history-row', watchHistory);
+}
+
+function createVideoCardHTML(video) {
+    // Check if the video is in favorites (using a set for faster lookup if the list was huge, but an array check is fine here)
+    const isFavorited = favorites.some(fav => fav.id === video.id);
+    const favoriteIconSrc = isFavorited ? 'https://static.thenounproject.com/png/5084920-200.png' : 'https://static.thenounproject.com/png/5084922-200.png';
+    const favoritedClass = isFavorited ? 'favorited' : '';
+
+    // Fallback URL generation: Regular video thumbnail, but try to use a higher quality one
+    let thumbnailUrl = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+    let hoverThumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+
+    // Shorts check and handling
+    const isShort = video.category === 'short';
+    if (isShort) {
+        // For shorts, we often can't rely on the standard thumbnail quality, but we still try
+        thumbnailUrl = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+        hoverThumbnailUrl = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+    }
+
+    return `
+        <div class="video-card" data-video-id="${video.id}" onclick="openModal('${video.id}', ${isShort})">
+            <img src="${favoriteIconSrc}" class="favorite-btn ${favoritedClass}" onclick="toggleFavorite(event, '${video.id}')" alt="Favorite">
+            <div class="thumbnail-container">
+                <img src="${thumbnailUrl}" alt="${video.title} Thumbnail" class="main-thumb">
+                <img src="${hoverThumbnailUrl}" alt="${video.title} Hover Thumbnail" class="hover-thumb">
+            </div>
+            <div class="video-title">${video.title}</div>
+        </div>
+    `;
+}
+
+function renderRow(containerId, videoArray) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = videoArray.map(createVideoCardHTML).join('');
 }
 
 
-// ---------------- VIDEO CARD RENDERER ----------------
-function createVideoCard(video) {
-    const card = document.createElement('div');
-    card.className = 'video-card';
-    card.setAttribute('data-video', video.id);
-    
-    const thumbnailId = video.id.replace(/_dup$|_old$/, '');
+// ---------------- MODAL AND FAVORITE LOGIC ----------------
 
-    // Check if the video is currently favorited (using the ID)
-    const isFavorited = favorites.some(fav => fav.id === video.id);
+function openModal(videoId, isShort) {
+    const modal = document.getElementById('video-modal');
+    const iframe = modal.querySelector('iframe');
+    
+    // Construct the embed URL
+    let embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
-    card.innerHTML = `
-        <div class="thumbnail-container">
-            <img class="thumb" src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
-            <img class="hover-thumb" src="https://img.youtube.com/vi/${thumbnailId}/hqdefault.jpg" alt="${video.title} high quality thumbnail">
-        </div>
-        <div class="video-info-wrapper">
-            <div class="video-title">${video.title}</div>
-            </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
-    `;
-    const favoriteBtn = card.querySelector('.favorite-btn');
-    
-    favoriteBtn.addEventListener('click', e=>{
-        e.stopPropagation();
-        const index = favorites.findIndex(v=>v.id===video.id);
+    // If it's a short, try to use a Shorts-optimized embed URL (though aspect ratio remains key)
+    if (isShort) {
+        // YouTube shorts still display best in the standard 16:9 player for embedded links
+        // The player itself handles the presentation based on the video's properties.
+        // We don't change the iframe's URL structure for shorts, only the original is needed.
+    }
 
-        if(index === -1){
-            favorites.push(video);
-            favoriteBtn.classList.add('favorited');
-        } else {
-            favorites.splice(index,1);
-            favoriteBtn.classList.remove('favorited');
-        }
-        
-        // Save and re-render favorites across all cards
-        setPersistentData('favorites', favorites.map(v => v.id));
-        renderFavorites(); 
+    iframe.src = embedUrl;
+    modal.style.display = 'flex';
 
-        // Update all cards globally to reflect the favorite status change
-        document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
-             if (favorites.find(v => v.id === video.id)) {
-                btn.classList.add('favorited');
-            } else {
-                btn.classList.remove('favorited');
-            }
-        });
-    });
-
-    card.addEventListener('click',()=>{
-        const modal = document.getElementById('video-modal');
-        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
-        modal.style.display = 'flex';
-        updateVideoWatchData(video);
-    });
-    return card;
+    // Update views and history
+    const video = allVideos.find(v => v.id === videoId);
+    if (video) {
+        updateVideoWatchData(video);
+    }
 }
 
-function renderRow(rowId, videos){
-    const row = document.getElementById(rowId);
-    row.innerHTML = '';
-    videos.forEach(v=>{
-        row.appendChild(createVideoCard(v));
-    });
+function closeModal() {
+    const modal = document.getElementById('video-modal');
+    const iframe = modal.querySelector('iframe');
+    iframe.src = ''; // Stop the video
+    modal.style.display = 'none';
 }
 
-function renderFavorites(){
-    renderRow('favorites-row', favorites);
+document.querySelector('#video-modal .close-btn').onclick = closeModal;
+window.onclick = function(event) {
+    if (event.target == document.getElementById('video-modal')) {
+        closeModal();
+    }
+};
+
+
+function toggleFavorite(event, videoId) {
+    event.stopPropagation(); 
+    const video = allVideos.find(v => v.id === videoId);
+    if (!video) return;
+
+    const index = favorites.findIndex(fav => fav.id === videoId);
+
+    if (index === -1) {
+        // Add to favorites
+        favorites.unshift(video);
+    } else {
+        // Remove from favorites
+        favorites.splice(index, 1);
+    }
+
+    // Update persistent storage (only storing IDs)
+    setPersistentData('favorites', favorites.map(v => v.id));
+
+    // Re-render rows to update the favorite icon
+    initialRender();
 }
 
-function initialRender() {
-    renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
-    renderRow('shorts-videos-row', shortsVideos); // <-- SHORTS RENDER CALL
-    renderRow('newest-videos-row', newestVideos);
-    renderRow('most-viewed-row', mostViewed);
-    renderRow('older-videos-row', olderVideos);
-    renderFavorites(); // Renders persistent favorites
-    renderRow('watch-history-row', watchHistory); // Renders persistent history
-    
-    document.getElementById('main-content').style.opacity = '1';
-    document.getElementById('main-content').style.pointerEvents = 'auto'; 
-}
 
-// ---------------- SCROLL TO TOP LOGIC ----------------
+// ---------------- SCROLL AND INITIALIZATION ----------------
 
-const scrollToTopBtn = document.getElementById('scroll-to-top');
+window.onscroll = function() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        document.getElementById("scroll-to-top").style.display = "block";
+    } else {
+        document.getElementById("scroll-to-top").style.display = "none";
+    }
+};
 
 function scrollToTop() {
-    document.body.scrollTop = 0; 
-    document.documentElement.scrollTop = 0; 0
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-window.onscroll = function() { scrollFunction() };
-
-function scrollFunction() {
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        scrollToTopBtn.style.display = "block";
-    } else {
-        scrollToTopBtn.style.display = "none";
-    }
+// Initial page render
+function initialRender() {
+    renderRow('recommended-videos-row', newestVideos.slice(0, 4)); 
+    renderRow('shorts-videos-row', shortsVideos);
+    renderRow('newest-videos-row', newestVideos);
+    renderRow('most-viewed-row', mostViewed);
+    renderRow('favorites-row', favorites);
+    renderRow('older-videos-row', olderVideos);
+    renderRow('watch-history-row', watchHistory);
 }
 
-// ---------------- INITIALIZATION ----------------
 
-// 1. Start the time zone cycling clock
-startClockCycle();
-// Set the 10-second interval to switch time zones
-window.cycleInterval = setInterval(startClockCycle, 10000); // 10000 ms = 10 seconds
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+    // Start the clock cycling
+    startClockCycle(); // Initial call
+    setInterval(startClockCycle, 5000); // Cycle every 5 seconds
 
-// 2. Render content
-initialRender();
-
-
-// ---------------- MODAL PLAYER LOGIC ----------------
-const videoModal = document.getElementById('video-modal');
-videoModal.querySelector('.close-btn').addEventListener('click', ()=>{
-    videoModal.querySelector('iframe').src = '';
-    videoModal.style.display = 'none';
-});
-videoModal.addEventListener('click', e=>{
-    if(e.target === videoModal){
-        videoModal.querySelector('iframe').src = '';
-        videoModal.style.display = 'none';
-    }
+    // Render all video rows
+    initialRender();
 });
 </script>
-
 </body>
 </html>
-
-
-
-
-
