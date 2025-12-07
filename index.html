@@ -828,13 +828,13 @@ footer {
 
     <div class="bot-section">
         <div class="bot-header">
-            🤖 Tr3vN0x Category Bot
+            🤖 Tr3vN0x AI Assistant
         </div>
         <div id="bot-response">
-            Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.
+            Hello! I am the Tr3vN0x AI. I can help you navigate this website. Try asking me "who are you?" or entering a command like "newest" or "clear history".
         </div>
         <div class="bot-input-container">
-            <input type="text" id="bot-input" placeholder="Ask for a category...">
+            <input type="text" id="bot-input" placeholder="Ask me anything...">
             <button id="bot-send-btn" onclick="handleBotCommand()">GO</button>
         </div>
     </div>
@@ -985,7 +985,7 @@ function startClockCycle() {
     currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
 }
 
-// ---------------- TR3VN0x CATEGORY BOT LOGIC (HIGHLIGHTING ADDED) ----------------
+// ---------------- TR3VN0x AI ASSISTANT LOGIC ----------------
 
 const categories = {
     // Keywords map to the ID of the HTML element container
@@ -1009,11 +1009,94 @@ const categories = {
     'about': 'about-me' 
 };
 
+const smartResponses = {
+    greetings: ["hello", "hi", "hey", "sup"],
+    who: ["who are you", "what are you", "your name"],
+    status: ["how are you", "whats up", "are you good"],
+    thanks: ["thanks", "thank you", "ty"],
+    help: ["help", "commands", "list commands"],
+    
+    // Category Definitions
+    'favorites': "The Favorites section displays videos you have personally marked with the 'heart' icon. It's your curated list!",
+    'history': "The Watch History section is a local log of every video you've clicked on and played during your visits. Type 'clear history' if you wish to reset it.",
+    'newest': "The Newest Videos section contains the latest uploads and content from Tr3vN0x.",
+    'most viewed': "Most Viewed features the top trending and highest-viewed videos across the whole channel.",
+    'store': "The Store section is where you can find official merchandise, like the latest T-shirts, to support Tr3vN0x.",
+    'about': "The About section contains a personal message and background information from Tr3vN0x himself, Trevor."
+};
+
+function resetBotResponse() {
+    const responseElement = document.getElementById('bot-response');
+    responseElement.textContent = "Hello! I am the Tr3vN0x AI. I can help you navigate this website. Try asking me \"who are you?\" or entering a command like \"newest\" or \"clear history\".";
+}
+
 function handleBotCommand() {
     const inputElement = document.getElementById('bot-input');
     const responseElement = document.getElementById('bot-response');
     const command = inputElement.value.trim().toLowerCase();
+    
+    // Default response reset timer
+    setTimeout(resetBotResponse, 15000); // Reset after 15 seconds
 
+    if (command === '') {
+        responseElement.textContent = "Please provide input. You can ask for a category, 'help', or just say 'hello'.";
+        return;
+    }
+    
+    // --- 1. HANDLE SPECIAL COMMANDS (Non-Scroll) ---
+    
+    if (command.includes('clear history')) {
+        setPersistentData('watchHistory', []);
+        watchHistory = [];
+        renderRow('watch-history-row', watchHistory);
+        responseElement.textContent = "✅ Watch history has been successfully cleared from your local browser storage. History will begin tracking again upon the next video play.";
+        inputElement.value = '';
+        return;
+    }
+
+    if (smartResponses.help.some(keyword => command.includes(keyword))) {
+        responseElement.innerHTML = "I can execute direct commands (scroll) or define sections for you. <br><br> **Direct Commands:** " + Object.keys(categories).join(', ') + "<br><br> **Utility Commands:** `clear history`, `who are you`, `how are you`";
+        inputElement.value = '';
+        return;
+    }
+
+    // --- 2. HANDLE SMART TALK/DEFINITIONS ---
+    
+    if (smartResponses.greetings.some(keyword => command.includes(keyword))) {
+        responseElement.textContent = "Hello there! I detect a friendly greeting. How may I assist you with the Tr3vN0x site today?";
+        inputElement.value = '';
+        return;
+    }
+
+    if (smartResponses.who.some(keyword => command.includes(keyword))) {
+        responseElement.textContent = "I am the Tr3vN0x AI Assistant, an autonomous program designed to help you navigate this website, answer common questions, and manage local data like your watch history and favorites.";
+        inputElement.value = '';
+        return;
+    }
+
+    if (smartResponses.status.some(keyword => command.includes(keyword))) {
+        responseElement.textContent = "I am operating at peak efficiency. All site protocols are stable. Thank you for asking!";
+        inputElement.value = '';
+        return;
+    }
+    
+    if (smartResponses.thanks.some(keyword => command.includes(keyword))) {
+        responseElement.textContent = "You're welcome! Happy to be of assistance. Let me know if anything else comes up.";
+        inputElement.value = '';
+        return;
+    }
+
+    // Check if the command is a definition request
+    const definitionKeys = Object.keys(smartResponses).filter(key => !Array.isArray(smartResponses[key]));
+    for (const key of definitionKeys) {
+        if (command.includes(key)) {
+            responseElement.textContent = smartResponses[key];
+            inputElement.value = '';
+            return;
+        }
+    }
+
+    // --- 3. HANDLE SCROLL COMMANDS ---
     const targetId = categories[command];
 
     if (targetId) {
@@ -1022,29 +1105,22 @@ function handleBotCommand() {
             // Scroll to the element
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
-            // Highlight the entire row container for 5 seconds
+            // Highlight the entire row container
             targetElement.classList.add('highlight-row');
             setTimeout(() => {
                 targetElement.classList.remove('highlight-row');
             }, 5000); // Remove the highlight after 5 seconds
             
             // Provide feedback
-            responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
+            responseElement.textContent = `✅ Executing Scroll: Redirecting you to the "${command.toUpperCase()}" section.`;
             inputElement.value = ''; // Clear input
         } else {
-            responseElement.textContent = `❌ Error: The category "${command.toUpperCase()}" exists but its section is missing.`;
+            responseElement.textContent = `❌ System Error: The category "${command.toUpperCase()}" exists, but the target element is missing.`;
         }
-    } else if (command === '') {
-        responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
     } else {
-        // No match found
-        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', 'store', or 'most viewed'.`; // Updated bot suggestion
+        // No match found for scroll or smart talk
+        responseElement.textContent = `❌ Command Not Found. I cannot process "${command}". Try asking for a category, 'help', or saying 'hello'.`;
     }
-
-    // Set a timeout to reset the response message after a few seconds
-    setTimeout(() => {
-        responseElement.textContent = "Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.";
-    }, 5000);
 }
 
 // Add event listener for Enter key press on the bot input
@@ -1309,26 +1385,3 @@ function scrollFunction() {
 
 // 1. Start the time zone cycling clock
 startClockCycle();
-// Set the 10-second interval to switch time zones
-window.cycleInterval = setInterval(startClockCycle, 10000); // 10000 ms = 10 seconds
-
-// 2. Render content
-initialRender();
-
-
-// ---------------- MODAL PLAYER LOGIC ----------------
-const videoModal = document.getElementById('video-modal');
-videoModal.querySelector('.close-btn').addEventListener('click', ()=>{
-    videoModal.querySelector('iframe').src = '';
-    videoModal.style.display = 'none';
-});
-videoModal.addEventListener('click', e=>{
-    if(e.target === videoModal){
-        videoModal.querySelector('iframe').src = '';
-        videoModal.style.display = 'none';
-    }
-});
-</script>
-
-</body>
-</html>
