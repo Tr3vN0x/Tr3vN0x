@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tr3vN0x Official Website</title>
-<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg">
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A">
 
 <meta property="og:title" content="Tr3vN0x Official Webiste | Latest Videos & Info">
 <meta property="og:description" content="Welcome to the home of Tr3vN0x! Watch the newest videos, catch up on history, and see the most viewed clips.">
-<meta property="og:image" content="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/596009832_838710972097270_9022730636766278745_n.jpg">
+<meta property="og:image" content="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A">
 <meta property="og:url" content="https://tr3vn0x.github.io/Tr3vN0x/">
 <meta name="twitter:card" content="summary_large_image"> 
 <style>
@@ -67,9 +67,6 @@ header {
     box-shadow: 0 0 10px #00ff66;
     /* REMOVED ANIMATION */
 }
-
-/* REMOVED @keyframes logoPulse */
-
 
 .logo-container img:not(.side-image) { /* Target the main logo */
     height: 50px;
@@ -262,6 +259,51 @@ header {
     border-color: #00ff66; 
 }
 
+/* --- STORE PORTAL STYLES (NEW) --- */
+.store-portal-card {
+    background: #5500aa; /* Purple/store-like color */
+    border: 5px solid #ffcc00; /* Gold border */
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.9); 
+    grid-column: span 4; /* Make it span all 4 columns */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.store-portal-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px #ffcc00, 0 0 15px #ff00ff;
+}
+
+.store-portal-card img {
+    max-width: 300px;
+    height: auto;
+    border: 3px solid #ffcc00;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.store-portal-card .portal-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #fff;
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+
+.store-portal-card .portal-subtitle {
+    font-size: 1.2em;
+    color: #fff;
+}
+/* --- END STORE PORTAL STYLES --- */
+
+
 .thumbnail-container {
     position: relative;
     width: 100%;
@@ -292,7 +334,7 @@ header {
 }
 
 .video-title {
-    margin: 10px 8px 10px; /* Reduced bottom margin slightly since views are removed */
+    margin: 10px 8px 0; /* Adjusted to make space for views */
     font-weight: bold;
     font-size: 1.1em;
     color: #00ff66;
@@ -302,6 +344,14 @@ header {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+/* --- NEW STYLE FOR VIDEO VIEWS (ADDED) --- */
+.video-views {
+    margin: 5px 8px 10px; /* Aligns with title padding and adds space */
+    font-size: 0.9em;
+    color: #66ff99;
+    font-weight: normal;
 }
 
 
@@ -582,11 +632,29 @@ footer {
     .video-row, .search-results-row {
         grid-template-columns: repeat(3, 1fr);
     }
+    .store-portal-card {
+         grid-column: span 3;
+    }
+    .store-portal-card img {
+        max-width: 250px;
+    }
+    .store-portal-card .portal-title {
+        font-size: 2em;
+    }
 }
 
 @media (max-width: 900px) {
     .video-row, .search-results-row {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .store-portal-card {
+         grid-column: span 2;
+    }
+    .store-portal-card img {
+        max-width: 200px;
+    }
+    .store-portal-card .portal-title {
+        font-size: 1.8em;
     }
     .header-actions {
         gap: 10px;
@@ -619,7 +687,7 @@ footer {
     header { flex-direction: column; align-items: center; }
     .logo-container { order: 1; margin-bottom: 10px; }
     .search-container { order: 2; max-width: 95%; margin: 0 auto; }
-    .est-clock-container { order: 0; margin-bottom: 10px; } /* New order for clock */
+    .est-clock-container { order: 0; margin-bottom: 10px; } 
     .header-actions {
         order: 4; 
         margin-top: 15px;
@@ -646,6 +714,17 @@ footer {
     }
     .video-card {
         min-width: 240px;
+    }
+    .store-portal-card {
+         grid-column: span 1; /* Reset for small screens, as it uses flex overflow */
+         min-width: 300px;
+         max-width: 300px;
+    }
+    .store-portal-card img {
+        max-width: 150px;
+    }
+    .store-portal-card .portal-title {
+        font-size: 1.5em;
     }
     .profile-section {
         margin: 30px 10px;
@@ -693,6 +772,17 @@ footer {
         </div>
     </header>
 
+    <div class="row-container" id="store-row-container">
+        <div class="row-label">Store Portal 🛍️</div>
+        <div class="video-row" id="store-videos-row">
+            <a href="#" target="_blank" class="store-portal-card" id="store-portal-link">
+                <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x T-Shirt">
+                <div class="portal-title">NEW MERCH STORE!</div>
+                <div class="portal-subtitle">Click to support Tr3vN0x and grab your exclusive tee!</div>
+            </a>
+            </div>
+    </div>
+    
     <div class="row-container" id="recommended-row-container">
         <div class="row-label">Top Recommended</div>
         <div class="video-row" id="recommended-videos-row"></div>
@@ -880,7 +970,9 @@ const categories = {
     'shorts': 'shorts-row-container', 
     'short videos': 'shorts-row-container',
     'quick clips': 'shorts-row-container',
-    'about': 'about-me' // Adding a bot command for the About section just in case
+    'store': 'store-row-container', // <-- ADDED STORE COMMAND
+    'merch': 'store-row-container', // <-- ADDED MERCH COMMAND
+    'about': 'about-me' 
 };
 
 function handleBotCommand() {
@@ -912,7 +1004,7 @@ function handleBotCommand() {
         responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
     } else {
         // No match found
-        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', or 'most viewed'.`;
+        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', 'store', or 'most viewed'.`; // Updated bot suggestion
     }
 
     // Set a timeout to reset the response message after a few seconds
@@ -964,12 +1056,19 @@ const allVideos = allVideosData.map(video => {
 const newestVideos = allVideos.filter(v => v.category === 'newest');
 const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
 const olderVideos = allVideos.filter(v => v.category === 'older');
-const shortsVideos = allVideos.filter(v => v.category === 'short'); // <-- SHORTS ARRAY
+const shortsVideos = allVideos.filter(v => v.category === 'short'); 
 
 // Use IDs to check against the full video list, ensuring we don't save redundant data
 let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
 let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
 
+// ---------------- STORE LOGIC (NEW) ----------------
+const storeLinkElement = document.getElementById('store-portal-link');
+if(storeLinkElement) {
+    // Note: The actual Bonfire store link needs to be added here for it to work.
+    // For now, it links to '#' as a placeholder.
+    storeLinkElement.href = "https://www.bonfire.com/store/tr3vn0x-merch-store-placeholder/"; 
+}
 
 // ---------------- SEARCH HANDLER ----------------
 
@@ -979,14 +1078,16 @@ function handleSearch() {
     const searchContainerRow = document.getElementById('search-container-row');
     const originalRows = document.getElementById('original-rows');
     const recommendedRow = document.getElementById('recommended-row-container');
-    const shortsRow = document.getElementById('shorts-row-container'); // <-- Include shorts row
+    const shortsRow = document.getElementById('shorts-row-container'); 
+    const storeRow = document.getElementById('store-row-container'); // <-- Include store row
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (query.length > 0) {
         // Hide original rows
         originalRows.style.display = 'none';
         recommendedRow.style.display = 'none';
-        shortsRow.style.display = 'none'; // <-- Hide shorts row during search
+        shortsRow.style.display = 'none'; 
+        storeRow.style.display = 'none'; // <-- Hide store row during search
         searchContainerRow.style.display = 'flex';
 
         const filteredVideos = allVideos.filter(video => 
@@ -1007,7 +1108,8 @@ function handleSearch() {
         searchContainerRow.style.display = 'none';
         originalRows.style.display = 'block';
         recommendedRow.style.display = 'flex';
-        shortsRow.style.display = 'flex'; // <-- Show shorts row
+        shortsRow.style.display = 'flex'; 
+        storeRow.style.display = 'flex'; // <-- Show store row
         noResultsMessage.style.display = 'none';
         initialRender();
     }
@@ -1043,7 +1145,7 @@ async function shareWebsite() {
 // ---------------- VIDEO RENDER UTILITIES ----------------
 
 function updateVideoWatchData(video) {
-    // 1. Update Views (Still updating persistence, but not showing it)
+    // 1. Update Views
     video.views++;
     setPersistentViews(video.id, video.views);
     
@@ -1070,6 +1172,7 @@ function createVideoCard(video) {
     // Check if the video is currently favorited (using the ID)
     const isFavorited = favorites.some(fav => fav.id === video.id);
 
+    // --- CARD INNER HTML ---
     card.innerHTML = `
         <div class="thumbnail-container">
             <img class="thumb" src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
@@ -1077,9 +1180,12 @@ function createVideoCard(video) {
         </div>
         <div class="video-info-wrapper">
             <div class="video-title">${video.title}</div>
-            </div>
+            <div class="video-views">${video.views.toLocaleString()} views</div>
+        </div>
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
     `;
+    // --- END CARD INNER HTML ---
+    
     const favoriteBtn = card.querySelector('.favorite-btn');
     
     favoriteBtn.addEventListener('click', e=>{
@@ -1119,6 +1225,10 @@ function createVideoCard(video) {
 
 function renderRow(rowId, videos){
     const row = document.getElementById(rowId);
+    // Ensure the Store row is not overwritten by video cards
+    if (rowId === 'store-videos-row') {
+        return; 
+    }
     row.innerHTML = '';
     videos.forEach(v=>{
         row.appendChild(createVideoCard(v));
@@ -1131,12 +1241,13 @@ function renderFavorites(){
 
 function initialRender() {
     renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
-    renderRow('shorts-videos-row', shortsVideos); // <-- SHORTS RENDER CALL
+    renderRow('shorts-videos-row', shortsVideos); 
+    // Store row is static HTML, so no renderRow call here
     renderRow('newest-videos-row', newestVideos);
     renderRow('most-viewed-row', mostViewed);
     renderRow('older-videos-row', olderVideos);
-    renderFavorites(); // Renders persistent favorites
-    renderRow('watch-history-row', watchHistory); // Renders persistent history
+    renderFavorites(); 
+    renderRow('watch-history-row', watchHistory); 
     
     document.getElementById('main-content').style.opacity = '1';
     document.getElementById('main-content').style.pointerEvents = 'auto'; 
@@ -1188,4 +1299,3 @@ videoModal.addEventListener('click', e=>{
 
 </body>
 </html>
-
