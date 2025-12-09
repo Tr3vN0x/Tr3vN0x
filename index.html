@@ -1059,17 +1059,18 @@ document.getElementById('bot-input').addEventListener('keypress', function (e) {
 
 const allVideosData = [
     // Newest
-    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 1250, category: 'newest'},
-    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 890, category: 'newest'},
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 0, category: 'newest'},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 0, category: 'newest'},
+    {id:"EyQe-XAN-jE", title:"I have built a website...", baseViews: 890, category: 'newest'},
     // Most Viewed
-    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'most_viewed'},
-    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'most_viewed'},
-    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'},
-    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'most_viewed'}, 
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 0, category: 'most_viewed'},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 0, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'most_viewed'}, 
     // Older Videos
-    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 99000, category: 'older'},
-    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 52000, category: 'older'},
-    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 75000, category: 'older'},
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'older'},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 0, category: 'older'},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 0, category: 'older'},
     {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
     {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
     {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
@@ -1077,11 +1078,11 @@ const allVideosData = [
     
     // --- Shorts Videos ---
     // Short 1: https://www.youtube.com/shorts/nivxDEV8nMc
-    {id:"nivxDEV8nMc_s1", title:"Website Announcement Short (I have officially made a website…)", baseViews: 4000, category: 'short'},
+    {id:"nivxDEV8nMc", title:"I have officially made a website… (Very Exciting)", baseViews: 0, category: 'short'},
     // Short 2 (Duplicate ID requested): https://www.youtube.com/shorts/nivxDEV8nMc
-    {id:"nivxDEV8nMc_s2", title:"Website Short 2 (Very Exciting)", baseViews: 3500, category: 'short'},
+    {id:"9nO2xAi_w0g", title:"I’m just like that… 🏈", baseViews: 0, category: 'short'},
     // Short 3: www.youtube.com/shorts/-_K7e-I5iGY
-    {id:"-_K7e-I5iGY_s3", title:"Roblox Gaming Short (Title Unavailable)", baseViews: 2800, category: 'short'},
+    {id:"-_K7e-I5iGY", title:"What a play…. 🏈", baseViews: 2800, category: 'short'},
 ].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
 
 // Map video data back to objects using their stored views
@@ -1332,3 +1333,4 @@ videoModal.addEventListener('click', e=>{
 
 </body>
 </html>
+
