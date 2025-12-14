@@ -1,161 +1,1335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUO Up - Cyberpunk Neon Theme</title>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* --- Body & Background --- */
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(270deg, #0D0D0D, #1A1A1A, #0D0D0D);
-      background-size: 600% 600%;
-      animation: gradientAnimation 15s ease infinite;
-      color: white;
-      display: flex;
-      height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tr3vN0x Official Website</title>
+<link rel="icon" type="image/jpg" href="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A">
 
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+<meta property="og:title" content="Tr3vN0x Official Webiste | Latest Videos & Info">
+<meta property="og:description" content="Welcome to the home of Tr3vN0x! Watch the newest videos, catch up on history, and see the most viewed clips.">
+<meta property="og:image" content="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A">
+<meta property="og:url" content="https://tr3vn0x.github.io/Tr3vN0x/">
+<meta name="twitter:card" content="summary_large_image"> 
+<style>
+/* ---------------- GLOBAL ---------------- */
+body {
+    margin: 0;
+    font-family: 'Consolas', 'Courier New', monospace; /* Cooler Monospace Font */
+    background: #0a0a0a;
+    color: #00ff66;
+    scroll-behavior: smooth;
+}
 
-    /* --- Sidebar --- */
-    .sidebar {
-      width: 80px;
-      background-color: #0D0D0D;
-      border-right: 2px solid #00FFFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-    }
-    .sidebar h1 {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-family: 'Orbitron', sans-serif;
-      color: #00FFFF;
-      text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-      margin-bottom: 40px;
-    }
-    .sidebar .icon {
-      font-size: 24px;
-      color: #00FFFF;
-      margin: 20px 0;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .sidebar .icon:hover {
-      color: #FF00FF;
-      text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
-    }
+/* ---------------- WELCOME BANNER (NEW) ---------------- */
+#welcome-banner {
+    padding: 15px 30px;
+    background: #004400; /* Dark green background */
+    color: #ffffff; /* White text for contrast */
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 2px solid #00ff66;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.2);
+}
 
-    /* --- Main Content --- */
-    .main {
-      flex: 1;
-      padding: 40px;
-      overflow-y: auto;
-    }
-    .main h1 {
-      font-size: 3em;
-      margin-bottom: 40px;
-      color: #00FFFF;
-      text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px #00FFFF;
-    }
+/* ---------------- HEADER ---------------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px; 
+    background: #0d0d0d;
+    border-bottom: 2px solid #003300;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+    gap: 15px; 
+}
 
-    /* --- Neon Cards --- */
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .card {
-      background-color: #1A1A1A;
-      border: 2px solid #00FFFF;
-      border-radius: 16px;
-      padding: 20px;
-      width: 300px;
-      box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-      transition: all 0.3s;
-    }
-    .card:hover {
-      border-color: #FF00FF;
-      box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
-    }
-    .card h3 {
-      font-family: 'Audiowide', sans-serif;
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      color: #00FFFF;
-    }
-    .card p {
-      font-size: 1em;
-      margin-bottom: 15px;
-    }
+/* --- EST CLOCK STYLES (Now Cycling Clock) --- */
+.est-clock-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 6px;
+    background: #001a00;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+    font-size: 1em;
+    font-weight: bold;
+    color: #00ff66;
+    white-space: nowrap; /* Prevent wrapping */
+}
 
-    /* --- Neon Buttons --- */
-    .neon-btn {
-      padding: 10px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: bold;
-      font-size: 1em;
-      color: white;
-      background: transparent;
-      border: 2px solid #00FFFF;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-      transition: all 0.3s;
-      margin-right: 10px;
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* --- STATIC SQUARE LOGO STYLES (No Animation) --- */
+.side-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px; /* Square corners */
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+}
+
+.logo-container img:not(.side-image) { /* Target the main logo */
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 8px #00ff66;
+}
+
+/* --- SEARCH BAR STYLES --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 350px;
+}
+
+#search-input {
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 6px 0 0 6px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
+}
+
+#search-input::placeholder {
+    color: #00994c;
+}
+
+#search-input:focus {
+    box-shadow: 0 0 10px #00ff66;
+}
+
+#search-btn {
+    padding: 10px 15px;
+    border: 1px solid #00ff66;
+    background: #003300;
+    color: #00ff66;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+#search-btn:hover {
+    background: #005500;
+    color: #33ff99;
+}
+
+
+/* --- SOCIAL BUTTONS CONTAINER (Simplified) --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.social-button {
+    text-decoration: none;
+    color: #00ff66;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: 1px solid #003300;
+    border-radius: 6px;
+    transition: 0.3s;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    background: #111;
+    cursor: pointer;
+}
+
+.social-button:hover {
+    background: #003300;
+    border-color: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    color: #33ff99;
+}
+
+
+/* ---------------- ROWS - FIXED LAYOUT ---------------- */
+.search-results-row {
+    display: none; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.row-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 30px 20px;
+    gap: 20px;
+    max-width: 1400px; 
+    margin: 0 auto; 
+    /* Required for highlighting */
+    transition: all 0.5s ease-in-out; 
+}
+
+.row-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #00ff66;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-right: 2px solid #004400; 
+    /* Transition for highlighting */
+    transition: all 0.5s ease-in-out; 
+}
+
+/* --- HIGHLIGHTING STYLES --- */
+.highlight-row {
+    animation: pulseGlow 0.5s 4 alternate; /* Pulse 4 times over 2 seconds */
+    border-color: #ff00ff !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.8) !important;
+}
+
+@keyframes pulseGlow {
+    from { border-color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+    to { border-color: #ff00ff; box-shadow: 0 0 25px rgba(255, 0, 255, 1); }
+}
+
+.highlight-row .row-label {
+    color: #ff00ff;
+    text-shadow: 0 0 8px #ff00ff;
+}
+
+
+/* --- NEW STYLE FOR NO RESULTS MESSAGE --- */
+#no-results-message {
+    display: none; 
+    color: #ff0000; 
+    font-size: 1.5em; 
+    text-align: center; 
+    width: 100%; 
+    writing-mode: horizontal-tb; 
+    transform: none; 
+    padding: 20px;
+    background: #110000;
+    border: 1px solid #ff0000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 10px; 
+}
+
+
+.video-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
+    overflow-x: hidden; 
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.video-row::-webkit-scrollbar {
+    display: none;
+}
+
+.video-card {
+    background: #111;
+    border: 1px solid #003300;
+    border-radius: 12px;
+    min-width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    padding-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.video-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 20px rgba(0, 255, 102, 0.4);
+    border-color: #00ff66; 
+}
+
+/* --- STORE PRODUCT CARD STYLES (NEW) --- */
+.product-card {
+    grid-column: span 2; /* Span two columns to fit two cards in a 4-column grid */
+    background: #1a1a1a; 
+    border: 3px solid #ffcc00; 
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.6); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 12px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(255, 204, 0, 0.8), 0 0 10px #ff00ff;
+}
+
+.product-card .product-image {
+    max-width: 100%;
+    width: 250px; 
+    height: auto;
+    /* REMOVED: border: 2px solid #ffcc00; for transparent image */
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.product-card .product-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffcc00;
+    text-shadow: 0 0 5px #fff;
+    margin: 5px 0;
+}
+
+.product-card .product-price {
+    font-size: 1.8em;
+    font-weight: 900;
+    color: #00ff66;
+    margin-top: 10px;
+    padding: 5px 15px;
+    border: 1px solid #00ff66;
+    border-radius: 4px;
+    background: #003300;
+}
+/* --- END STORE PRODUCT CARD STYLES --- */
+
+
+.thumbnail-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; 
+    height: 0;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+.thumbnail-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.thumbnail-container .hover-thumb {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.thumbnail-container:hover .hover-thumb {
+    opacity: 1;
+}
+
+.video-title {
+    margin: 10px 8px 0; /* Adjusted to make space for views */
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #00ff66;
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* --- NEW STYLE FOR VIDEO VIEWS (ADDED) --- */
+.video-views {
+    margin: 5px 8px 10px; /* Aligns with title padding and adds space */
+    font-size: 0.9em;
+    color: #66ff99;
+    font-weight: normal;
+}
+
+
+.favorite-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    z-index: 5;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px #00ff66);
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.favorite-btn.favorited {
+    filter: drop-shadow(0 0 6px #ff00ff);
+}
+
+
+/* ---------------- BOT SECTION STYLES ---------------- */
+
+.bot-section {
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #1a1a1a; /* Darker background for contrast */
+    border: 2px solid #33ff99;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(51, 255, 153, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bot-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 5px #33ff99;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #004400;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.bot-input-container {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 15px;
+}
+
+#bot-input {
+    padding: 12px 15px;
+    border: 1px solid #00ff66;
+    background: #000;
+    color: #00ff66;
+    border-radius: 8px 0 0 8px;
+    flex-grow: 1;
+    font-family: 'Consolas', monospace;
+    font-size: 1.1em;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+    transition: box-shadow 0.3s;
+}
+
+#bot-input:focus {
+    box-shadow: 0 0 10px #00ff66;
+}
+
+#bot-send-btn {
+    padding: 12px 20px;
+    border: 1px solid #00ff66;
+    background: #006600;
+    color: #fff;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+#bot-send-btn:hover {
+    background: #008800;
+}
+
+#bot-response {
+    min-height: 40px;
+    padding: 10px 15px;
+    background: #002200;
+    border: 1px solid #003300;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    font-size: 1em;
+    color: #99ffbb;
+    text-align: left;
+}
+
+/* ---------------- PROFILE SECTION STYLES ---------------- */
+.profile-section {
+    max-width: 1000px;
+    margin: 50px auto 30px;
+    padding: 30px;
+    background: #111;
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #00ff66;
+    box-shadow: 0 0 15px #00ff66;
+}
+
+.profile-info {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.profile-username {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #33ff99;
+    text-shadow: 0 0 8px #00ff66;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.badge {
+    padding: 4px 10px;
+    background: #ff00ff;
+    color: #0a0a0a;
+    border-radius: 4px;
+    font-size: 0.6em;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: none;
+    border: 1px solid #0a0a0a;
+    box-shadow: 0 0 5px #ff00ff;
+}
+
+/* --- Status Indicator Styles --- */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #00ff66;
+    margin-right: 5px;
+    animation: pulsate 1.5s infinite alternate;
+}
+
+@keyframes pulsate {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.profile-message {
+    margin-top: 15px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #00cc55;
+    background: #001a00;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ff66;
+    text-align: left;
+    display: flex; 
+    flex-direction: column; 
+}
+.profile-message span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+.profile-message b {
+    color: #00ff66;
+    margin-left: 5px;
+}
+
+
+/* ---------------- SCROLL TO TOP BUTTON ---------------- */
+#scroll-to-top {
+    display: none; 
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 90;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    background: rgba(0, 51, 0, 0.8);
+    color: #00ff66;
+    border: 2px solid #00ff66;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+    transition: opacity 0.3s, background 0.3s, transform 0.3s;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
+}
+
+#scroll-to-top:hover {
+    background: #003300;
+    transform: translateY(-2px);
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #0d0d0d;
+    border-top: 2px solid #003300;
+    color: #00ff66;
+    font-weight: bold;
+    text-shadow: 0 0 4px #00ff66;
+    margin-top: 20px;
+}
+
+/* ---------------- MODAL PLAYER ---------------- */
+#video-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+#video-modal iframe {
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border:none;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #00ff66;
+}
+
+#video-modal .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    color: #00ff66;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ff66;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1200px) {
+    .video-row, .search-results-row {
+        grid-template-columns: repeat(3, 1fr);
     }
-    .neon-btn:hover {
-      border-color: #FF00FF;
-      box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+    .product-card {
+        grid-column: span 3; /* Still make it large */
+        max-width: 400px;
     }
-  </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    .product-card .product-image {
+        width: 150px; 
+    }
+}
+
+@media (max-width: 900px) {
+    .video-row, .search-results-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-card {
+        grid-column: span 2;
+        max-width: 350px;
+    }
+    .product-card .product-image {
+        width: 120px;
+    }
+    .header-actions {
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-end; 
+    }
+    .social-button {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
+    .search-container {
+        max-width: 100%; 
+    }
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-info {
+        margin-left: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .profile-username {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header { flex-direction: column; align-items: center; }
+    .logo-container { order: 1; margin-bottom: 10px; }
+    .search-container { order: 2; max-width: 95%; margin: 0 auto; }
+    .est-clock-container { order: 0; margin-bottom: 10px; } 
+    .header-actions {
+        order: 4; 
+        margin-top: 15px;
+        width: 95%;
+        justify-content: space-around; 
+    }
+    .social-button {
+        padding: 8px 12px;
+        font-size: 1em;
+    }
+    .row-container { flex-direction: column; padding: 15px 10px; }
+    .row-label { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+        min-width: auto; 
+        padding-bottom: 5px;
+        border-right: none;
+        border-bottom: 2px solid #004400;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .video-row, .search-results-row { 
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        grid-template-columns: none;
+        justify-content: flex-start; /* Important for horizontal scrolling */
+    }
+    .video-card {
+        min-width: 240px;
+    }
+    .product-card {
+         grid-column: span 1; 
+         min-width: 250px;
+         max-width: 250px;
+    }
+    .product-card .product-image {
+        width: 100px;
+    }
+    .product-card .product-name {
+        font-size: 1.2em;
+    }
+    .product-card .product-price {
+        font-size: 1.5em;
+    }
+    .profile-section {
+        margin: 30px 10px;
+        padding: 20px;
+    }
+    #scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+        font-size: 1.2em;
+        padding: 8px 12px;
+    }
+    #no-results-message {
+        writing-mode: horizontal-tb; 
+        transform: none;
+        font-size: 1.2em;
+        width: 100%;
+    }
+}
+</style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h1>DUO UP</h1>
-    <i class="fas fa-home icon"></i>
-    <i class="fas fa-users icon"></i>
-    <i class="fas fa-comments icon"></i>
-    <i class="fas fa-user icon"></i>
-  </div>
 
-  <!-- Main Content -->
-  <div class="main">
-    <h1>Welcome to DUO Up</h1>
+<main id="main-content">
+    
+    <header>
+        <div class="est-clock-container">
+            <span id="est-time-display">Loading Time...</span>
+        </div>
+        
+        <div class="logo-container">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A" class="side-image" alt="Profile Image">
+            
+            <img src="https://see.fontimg.com/api/rf5/vXL4/YTM3ZmYyMWFkMzNiNGY5MGEwY2ZmZTZmNDhiZGI4NzkudHRm/VHIzdk4weA/chimpanzee-website-report.png?r=fs&h=65&w=1000&fg=E8E4E4&bg=27E2A1&tb=1&s=65" alt="Site Logo">
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search videos..." oninput="handleSearch()">
+            <button id="search-btn" onclick="handleSearch()">GO</button>
+        </div>
 
-    <div class="card-container">
-      <!-- Friend Request Card -->
-      <div class="card">
-        <h3>Friend Request</h3>
-        <p>PlayerX wants to duo with you in Overwatch.</p>
-        <button class="neon-btn" onclick="alert('Accepted!')">Accept</button>
-        <button class="neon-btn" onclick="alert('Rejected!')">Reject</button>
-      </div>
+        <div class="header-actions">
+            <div class="social-button" onclick="shareWebsite()">Share</div>
+            <a href="https://youtube.com/@Tr3vN0x" target="_blank" class="social-button">YouTube</a>
+            <a href="https://x.com/@Tr3vN0x" target="_blank" class="social-button">Twitter</a>
+        </div>
+    </header>
 
-      <!-- Suggested Duo Card -->
-      <div class="card">
-        <h3>Suggested Duo</h3>
-        <p>PlayerY also plays Valorant. Send a friend request?</p>
-        <button class="neon-btn" onclick="alert('Request sent!')">Send Request</button>
-      </div>
-
-      <!-- Active Duo Card -->
-      <div class="card">
-        <h3>Active Duo</h3>
-        <p>PlayerZ is online in Fortnite. Start chat?</p>
-        <button class="neon-btn" onclick="alert('Chat opened!')">Chat Now</button>
-      </div>
+    <div id="welcome-banner">
+        Hello user, welcome to the Tr3vN0x official website!
     </div>
-  </div>
+    <div class="row-container" id="store-row-container">
+        <div class="row-label">Store 🛒</div>
+        <div class="video-row" id="store-videos-row">
+            <a href="https://www.bonfire.com/tr3vn0x-new-logo-and-background/" target="_blank" class="product-card">
+                <div class="product-name">Tr3vN0x Retro T-Shirt</div>
+                <img src="https://dynamic.bonfireassets.com/thumb/design-image/74832bd7-057c-4f80-a170-b264603892cb/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x Retro T-Shirt" class="product-image">
+                <div class="product-price">$19.99</div> 
+            </a>
+            
+            <a href="https://www.bonfire.com/tr3vn0x-new-logo-tee/" target="_blank" class="product-card">
+                <div class="product-name">Tr3vN0x Logo T-Shirt</div>
+                <img src="https://dynamic.bonfireassets.com/thumb/design-image/ae5a78fb-6d56-42ab-b191-21e94ebda50d/7329f207-b69c-4f7e-8322-9f628fd81358/900/" alt="Tr3vN0x Logo T-Shirt" class="product-image">
+                <div class="product-price">$19.99</div> 
+            </a>
+        </div>
+    </div>
+    
+    <div class="row-container" id="recommended-row-container">
+        <div class="row-label">Top Recommended</div>
+        <div class="video-row" id="recommended-videos-row"></div>
+    </div>
+    
+    <div class="row-container" id="shorts-row-container">
+        <div class="row-label">Shorts Corner 🎬</div>
+        <div class="video-row" id="shorts-videos-row"></div>
+    </div>
+
+    <div class="bot-section">
+        <div class="bot-header">
+            🤖 Tr3vN0x Category Bot
+        </div>
+        <div id="bot-response">
+            Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.
+        </div>
+        <div class="bot-input-container">
+            <input type="text" id="bot-input" placeholder="Ask for a category...">
+            <button id="bot-send-btn" onclick="handleBotCommand()">GO</button>
+        </div>
+    </div>
+    <div class="row-container" id="search-container-row" style="display:none;">
+        <div class="row-label" id="search-label">Search Results</div>
+        <div class="search-results-row" id="search-results-row"></div>
+        <div class="row-content" style="width: 100%;">
+             <div id="no-results-message">No videos found matching your search.</div>
+        </div>
+    </div>
+    <div class="original-rows" id="original-rows">
+        <div class="row-container" id="newest-row-container">
+            <div class="row-label">Newest Videos</div>
+            <div class="video-row" id="newest-videos-row"></div>
+        </div>
+
+        <div class="row-container" id="most-viewed-row-container">
+            <div class="row-label">Most Viewed</div>
+            <div class="video-row" id="most-viewed-row"></div>
+        </div>
+
+        <div class="row-container" id="favorites-row-container">
+            <div class="row-label">Favorites</div>
+            <div class="video-row" id="favorites-row"></div>
+        </div>
+
+        <div class="row-container" id="older-videos-row-container">
+            <div class="row-label">Older Videos</div>
+            <div class="video-row" id="older-videos-row"></div>
+        </div>
+
+        <div class="row-container" id="watch-history-row-container">
+            <div class="row-label">Watch History</div>
+            <div class="video-row" id="watch-history-row"></div>
+        </div>
+    </div>
+
+    <div class="profile-section" id="about-me"> 
+        <div class="profile-header">
+            <img src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/596009832_838710972097270_9022730636766278745_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TZjP9DC4yXIQ7kNvwHdpFg7&_nc_oc=AdnBmq-TZowH6YRcFRCd3Jivz_VCUa2-xgSohFxWykjbNuzrqYHW_6gne7eslaL4ZFCdK9cEG8NpB5VG555CxO6q&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=tSIEeMfSeNSk__07eF_UGA&oh=00_Afm8Xz1VR1MYenel-chWfd3ajWnOdho-IvK1TEyO-duDuA&oe=693AC07A" alt="Tr3vN0x Profile Picture" class="profile-pic">
+            <div class="profile-info">
+                <p class="profile-username">
+                    Tr3vN0x
+                    <span class="badge">OWNER</span>
+                </p>
+                <div class="social-links-small" style="margin-top:5px;">
+                    <a href="https://youtube.com/@Tr3vN0x" target="_blank" style="color:red; text-decoration:none; margin-right: 10px;">YouTube</a>
+                    <a href="https://x.com/@Tr3vN0x" target="_blank" style="color:#00acee; text-decoration:none;">Twitter/X</a>
+                </div>
+            </div>
+        </div>
+        <p class="profile-message">
+            <span>
+                <span class="status-indicator"></span> 
+                <b>STATUS: ONLINE</b> // PROTOCOL ACTIVE
+            </span>
+          Hello, and welcome to my website! I am Trevor, or people call me Tr3vN0x... I am a YouTuber remember to share this website with friends, and subscribe, and follow my twitter click the "TOP" button if you get stuck down here, Categories are on the side enjjoy your visit.
+        </p>
+    </div>
+    <div id="video-modal">
+        <div class="close-btn">&times;</div>
+        <iframe src="" allowfullscreen></iframe>
+    </div>
+    
+    <button id="scroll-to-top" onclick="scrollToTop()">▲ TOP</button>
+
+    <footer>
+        &copy; 2025 Tr3vN0x — All Rights Reserved
+    </footer>
+</main>
+
+<script>
+// ---------------- DATA PERSISTENCE UTILITIES ----------------
+
+function getPersistentData(key, defaultValue = []) {
+    try {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : defaultValue;
+    } catch (e) {
+        console.error(`Error loading data for key ${key}:`, e);
+        return defaultValue;
+    }
+}
+
+function setPersistentData(key, data) {
+    try {
+        localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+        console.error(`Error saving data for key ${key}:`, e);
+    }
+}
+
+function getPersistentViews(videoId, initialBaseViews) {
+    const key = `views_${videoId}`;
+    let views = localStorage.getItem(key);
+    if (views === null) {
+        views = initialBaseViews; 
+        localStorage.setItem(key, views);
+    }
+    return parseInt(views);
+}
+
+function setPersistentViews(videoId, views) {
+    localStorage.setItem(`views_${videoId}`, views);
+}
+
+// ---------------- TIMEZONE CYCLING UTILITY ----------------
+
+const timeZones = [
+    { label: 'EST', tz: 'America/New_York' },      
+    { label: 'CST', tz: 'America/Chicago' },       
+    { label: 'MST', tz: 'America/Denver' },        
+    { label: 'PST', tz: 'America/Los_Angeles' },   
+    { label: 'UTC', tz: 'UTC' } ,                  
+    { label: 'JST', tz: 'Asia/Tokyo' }             
+];
+
+let currentZoneIndex = 0;
+let activeClockInterval = null; 
+
+function setClockDisplay(zoneIndex) {
+    const clockElement = document.getElementById('est-time-display');
+    if (!clockElement) return;
+
+    const currentZone = timeZones[zoneIndex];
+    
+    function updateActiveZoneTime() {
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString('en-US', {
+            timeZone: currentZone.tz,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clockElement.textContent = `${currentZone.label}: ${formattedTime}`;
+    }
+
+    updateActiveZoneTime();
+    if (activeClockInterval) {
+        clearInterval(activeClockInterval);
+    }
+    return setInterval(updateActiveZoneTime, 1000);
+}
+
+function startClockCycle() {
+    activeClockInterval = setClockDisplay(currentZoneIndex);
+    currentZoneIndex = (currentZoneIndex + 1) % timeZones.length;
+}
+
+// ---------------- TR3VN0x CATEGORY BOT LOGIC (HIGHLIGHTING ADDED) ----------------
+
+const categories = {
+    // Keywords map to the ID of the HTML element container
+    'newest': 'newest-row-container',
+    'new': 'newest-row-container',
+    'most viewed': 'most-viewed-row-container',
+    'popular': 'most-viewed-row-container',
+    'favorites': 'favorites-row-container',
+    'favs': 'favorites-row-container',
+    'older videos': 'older-videos-row-container',
+    'old': 'older-videos-row-container',
+    'history': 'watch-history-row-container',
+    'watched': 'watch-history-row-container',
+    'recommended': 'recommended-row-container',
+    'shorts': 'shorts-row-container', 
+    'short videos': 'shorts-row-container',
+    'quick clips': 'shorts-row-container',
+    'store': 'store-row-container', 
+    'merch': 'store-row-container', 
+    'shop': 'store-row-container', 
+    'about': 'about-me' 
+};
+
+function handleBotCommand() {
+    const inputElement = document.getElementById('bot-input');
+    const responseElement = document.getElementById('bot-response');
+    const command = inputElement.value.trim().toLowerCase();
+
+    const targetId = categories[command];
+
+    if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // Scroll to the element
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight the entire row container for 5 seconds
+            targetElement.classList.add('highlight-row');
+            setTimeout(() => {
+                targetElement.classList.remove('highlight-row');
+            }, 5000); // Remove the highlight after 5 seconds
+            
+            // Provide feedback
+            responseElement.textContent = `✅ Redirecting you to the "${command.toUpperCase()}" section!`;
+            inputElement.value = ''; // Clear input
+        } else {
+            responseElement.textContent = `❌ Error: The category "${command.toUpperCase()}" exists but its section is missing.`;
+        }
+    } else if (command === '') {
+        responseElement.textContent = "Please enter a category name like 'newest' or 'favorites'.";
+    } else {
+        // No match found
+        responseElement.textContent = `❌ Category not found. Try 'newest', 'favorites', 'store', or 'most viewed'.`; // Updated bot suggestion
+    }
+
+    // Set a timeout to reset the response message after a few seconds
+    setTimeout(() => {
+        responseElement.textContent = "Hello! I can instantly scroll you to a section. Try saying 'newest', 'favorites', 'history', or 'most viewed'.";
+    }, 5000);
+}
+
+// Add event listener for Enter key press on the bot input
+document.getElementById('bot-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleBotCommand();
+    }
+});
+
+
+// ---------------- VIDEO DATA SETUP ----------------
+
+const allVideosData = [
+    // Newest
+    {id:"92y9uaQMIa8", title:"I PLAYED ROBLOX DEAD BY DAYLIGHT (IT WAS SCARY)", baseViews: 0, category: 'newest'},
+    {id:"RODulIl7-gg", title:"I JOINED THE ROBLOX FOOTBALL LEAGUE (IT WENT TERRIBLE)", baseViews: 0, category: 'newest'},
+    {id:"EyQe-XAN-jE", title:"I have built a website...", baseViews: 890, category: 'newest'},
+    // Most Viewed
+    {id:"Uwwga_CiFqc", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 0, category: 'most_viewed'},
+    {id:"J-W0Vfrc26U", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 0, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'most_viewed'},
+    {id:"ZiEd3RoiKtk_dup", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'most_viewed'}, 
+    // Older Videos
+    {id:"ZiEd3RoiKtk_old", title:"Who Is TR3VN0X? (Roblox’s Funniest New YouTuber 💀)", baseViews: 0, category: 'older'},
+    {id:"J-W0Vfrc26U_old", title:"Nobody Could Stop Me… (Sniper Only Challenge 💀)", baseViews: 0, category: 'older'},
+    {id:"Uwwga_CiFqc_old", title:"Why Is Flee the Facility THIS Stressful?! 😤🔥", baseViews: 0, category: 'older'},
+    {id:"Sn4dyr5v7m0", title:"ROBLOX BREAKING POINT", baseViews: 15000, category: 'older'},
+    {id:"XqmcBMy3X1k", title:"I'm taking a break...", baseViews: 8500, category: 'older'},
+    {id:"c5QYm0cxlqE", title:"My struggle wih anxiety...", baseViews: 12000, category: 'older'},
+    {id:"kNkK_qclihc", title:"ROBLOXIAN HIGHSCHOOL *LIVE*", baseViews: 3200, category: 'older'},
+    
+    // --- Shorts Videos ---
+    // Short 1: https://www.youtube.com/shorts/nivxDEV8nMc
+    {id:"nivxDEV8nMc", title:"I have officially made a website… (Very Exciting)", baseViews: 0, category: 'short'},
+    // Short 2 (Duplicate ID requested): https://www.youtube.com/shorts/nivxDEV8nMc
+    {id:"9nO2xAi_w0g", title:"I’m just like that… 🏈", baseViews: 0, category: 'short'},
+    // Short 3: www.youtube.com/shorts/-_K7e-I5iGY
+    {id:"-_K7e-I5iGY", title:"What a play…. 🏈", baseViews: 2800, category: 'short'},
+].map(v => ({...v, views: getPersistentViews(v.id, v.baseViews)}));
+
+// Map video data back to objects using their stored views
+const allVideos = allVideosData.map(video => {
+    return {...video, views: getPersistentViews(video.id, video.baseViews)};
+});
+
+
+const newestVideos = allVideos.filter(v => v.category === 'newest');
+const mostViewed = allVideos.filter(v => v.category === 'most_viewed');
+const olderVideos = allVideos.filter(v => v.category === 'older');
+const shortsVideos = allVideos.filter(v => v.category === 'short'); 
+
+// Use IDs to check against the full video list, ensuring we don't save redundant data
+let favorites = getPersistentData('favorites').map(favId => allVideos.find(v => v.id === favId)).filter(Boolean);
+let watchHistory = getPersistentData('watchHistory').map(histId => allVideos.find(v => v.id === histId)).filter(Boolean);
+
+
+// ---------------- SEARCH HANDLER ----------------
+
+function handleSearch() {
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const searchResultsRow = document.getElementById('search-results-row');
+    const searchContainerRow = document.getElementById('search-container-row');
+    const originalRows = document.getElementById('original-rows');
+    const recommendedRow = document.getElementById('recommended-row-container');
+    const shortsRow = document.getElementById('shorts-row-container'); 
+    const storeRow = document.getElementById('store-row-container'); 
+    const noResultsMessage = document.getElementById('no-results-message');
+    const welcomeBanner = document.getElementById('welcome-banner'); // Reference the banner
+
+    if (query.length > 0) {
+        // Hide original rows
+        originalRows.style.display = 'none';
+        recommendedRow.style.display = 'none';
+        shortsRow.style.display = 'none'; 
+        storeRow.style.display = 'none'; 
+        welcomeBanner.style.display = 'none'; // Hide banner during search
+        searchContainerRow.style.display = 'flex';
+
+        const filteredVideos = allVideos.filter(video => 
+            video.title.toLowerCase().includes(query)
+        );
+
+        if (filteredVideos.length > 0) {
+            renderRow('search-results-row', filteredVideos);
+            searchResultsRow.style.display = 'grid'; 
+            noResultsMessage.style.display = 'none';
+        } else {
+            renderRow('search-results-row', []);
+            searchResultsRow.style.display = 'none'; 
+            noResultsMessage.style.display = 'block'; 
+        }
+    } else {
+        // Show original rows
+        searchContainerRow.style.display = 'none';
+        originalRows.style.display = 'block';
+        recommendedRow.style.display = 'flex';
+        shortsRow.style.display = 'flex'; 
+        storeRow.style.display = 'flex'; 
+        welcomeBanner.style.display = 'block'; // Show banner when search is cleared
+        noResultsMessage.style.display = 'none';
+        initialRender();
+    }
+}
+
+document.getElementById('search-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});
+
+
+// --- SHARE FUNCTION ---
+async function shareWebsite() {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Tr3vN0x Official Webiste | Latest Videos & Info',
+                text: 'Check out the latest videos, history, and info from Tr3vN0x!',
+                url: window.location.href, 
+            });
+            console.log('Website shared successfully');
+        } catch (error) {
+            console.error('Error sharing website:', error);
+        }
+    } else {
+        // Fallback for desktop/non-supporting browsers
+        alert("To ensure the cool preview works, copy the link and add '?refresh=1' to the end. (e.g., https://tr3vn0x.github.io/Tr3vN0x/?refresh=1)");
+    }
+}
+
+
+// ---------------- VIDEO RENDER UTILITIES ----------------
+
+function updateVideoWatchData(video) {
+    // 1. Update Views
+    video.views++;
+    setPersistentViews(video.id, video.views);
+    
+    // 2. Update Watch History (Maintain LIFO order and persistence)
+    const index = watchHistory.findIndex(v=>v.id===video.id);
+    if(index !== -1) {
+        watchHistory.splice(index, 1); // Remove old position
+    } 
+    watchHistory.unshift(video); // Add to the front
+    setPersistentData('watchHistory', watchHistory.map(v => v.id));
+
+    renderRow('watch-history-row', watchHistory);
+}
+
+
+// ---------------- VIDEO CARD RENDERER ----------------
+function createVideoCard(video) {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.setAttribute('data-video', video.id);
+    
+    const thumbnailId = video.id.replace(/_dup$|_old$|_s1$|_s2$|_s3$/, ''); // Added suffixes for Shorts
+
+    // Check if the video is currently favorited (using the ID)
+    const isFavorited = favorites.some(fav => fav.id === video.id);
+
+    // --- CARD INNER HTML ---
+    card.innerHTML = `
+        <div class="thumbnail-container">
+            <img class="thumb" src="https://img.youtube.com/vi/${thumbnailId}/mqdefault.jpg" alt="${video.title} thumbnail">
+            <img class="hover-thumb" src="https://img.youtube.com/vi/${thumbnailId}/hqdefault.jpg" alt="${video.title} high quality thumbnail">
+        </div>
+        <div class="video-info-wrapper">
+            <div class="video-title">${video.title}</div>
+            <div class="video-views">${video.views.toLocaleString()} views</div>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" class="favorite-btn ${isFavorited ? 'favorited' : ''}" alt="Favorite button">
+    `;
+    // --- END CARD INNER HTML ---
+    
+    const favoriteBtn = card.querySelector('.favorite-btn');
+    
+    favoriteBtn.addEventListener('click', e=>{
+        e.stopPropagation();
+        const index = favorites.findIndex(v=>v.id===video.id);
+
+        if(index === -1){
+            favorites.push(video);
+            favoriteBtn.classList.add('favorited');
+        } else {
+            favorites.splice(index,1);
+            favoriteBtn.classList.remove('favorited');
+        }
+        
+        // Save and re-render favorites across all cards
+        setPersistentData('favorites', favorites.map(v => v.id));
+        renderFavorites(); 
+
+        // Update all cards globally to reflect the favorite status change
+        document.querySelectorAll(`.video-card[data-video="${video.id}"] .favorite-btn`).forEach(btn => {
+             if (favorites.find(v => v.id === video.id)) {
+                btn.classList.add('favorited');
+            } else {
+                btn.classList.remove('favorited');
+            }
+        });
+    });
+
+    card.addEventListener('click',()=>{
+        const modal = document.getElementById('video-modal');
+        modal.querySelector('iframe').src = `https://www.youtube.com/embed/${thumbnailId}?autoplay=1`;
+        modal.style.display = 'flex';
+        updateVideoWatchData(video);
+    });
+    return card;
+}
+
+function renderRow(rowId, videos){
+    const row = document.getElementById(rowId);
+    // Ensure the Store row is not overwritten by video cards, as it's static HTML now
+    if (rowId === 'store-videos-row') {
+        return; 
+    }
+    row.innerHTML = '';
+    videos.forEach(v=>{
+        row.appendChild(createVideoCard(v));
+    });
+}
+
+function renderFavorites(){
+    renderRow('favorites-row', favorites);
+}
+
+function initialRender() {
+    renderRow('recommended-videos-row', allVideos.slice(0, 5)); 
+    renderRow('shorts-videos-row', shortsVideos); 
+    // Store row is static HTML, no renderRow call here
+    renderRow('newest-videos-row', newestVideos);
+    renderRow('most-viewed-row', mostViewed);
+    renderRow('older-videos-row', olderVideos);
+    renderFavorites(); 
+    renderRow('watch-history-row', watchHistory); 
+    
+    document.getElementById('main-content').style.opacity = '1';
+    document.getElementById('main-content').style.pointerEvents = 'auto'; 
+}
+
+// ---------------- SCROLL TO TOP LOGIC ----------------
+
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+function scrollToTop() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0; 0
+}
+
+window.onscroll = function() { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+        scrollToTopBtn.style.display = "block";
+    } else {
+        scrollToTopBtn.style.display = "none";
+    }
+}
+
+// ---------------- INITIALIZATION ----------------
+
+// 1. Start the time zone cycling clock
+startClockCycle();
+// Set the 10-second interval to switch time zones
+window.cycleInterval = setInterval(startClockCycle, 10000); // 10000 ms = 10 seconds
+
+// 2. Render content
+initialRender();
+
+
+// ---------------- MODAL PLAYER LOGIC ----------------
+const videoModal = document.getElementById('video-modal');
+videoModal.querySelector('.close-btn').addEventListener('click', ()=>{
+    videoModal.querySelector('iframe').src = '';
+    videoModal.style.display = 'none';
+});
+videoModal.addEventListener('click', e=>{
+    if(e.target === videoModal){
+        videoModal.querySelector('iframe').src = '';
+        videoModal.style.display = 'none';
+    }
+});
+</script>
+
 </body>
 </html>
